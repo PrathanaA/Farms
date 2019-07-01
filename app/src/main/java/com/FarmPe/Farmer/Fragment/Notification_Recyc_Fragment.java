@@ -52,7 +52,7 @@ public class Notification_Recyc_Fragment extends Fragment {
     JSONObject lngObject;
     String location;
    public static List<String> list;
-   TextView switchCompat;
+   TextView switchCompat,enable_all;
 
     public static Notification_Recyc_Fragment newInstance() {
         Notification_Recyc_Fragment fragment = new Notification_Recyc_Fragment();
@@ -67,6 +67,7 @@ public class Notification_Recyc_Fragment extends Fragment {
         toolbar_title=view.findViewById(R.id.toolbar_title);
         back_feed=view.findViewById(R.id.back_feed);
         switchCompat=view.findViewById(R.id.switch1);
+        enable_all=view.findViewById(R.id.enable);
 
         sessionManager = new SessionManager(getActivity());
         try {
@@ -139,13 +140,60 @@ public class Notification_Recyc_Fragment extends Fragment {
 
         notification_status();
 
-
+          enable_all();
 
 
 
 
 
         return view;
+    }
+
+    private void enable_all() {
+
+        try{
+
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject post_object1 = new JSONObject();
+
+            jsonObject1.put("NotificationTypeId"," ");
+            jsonObject1.put("Id",sessionManager.getRegId("userId"));
+            post_object1.put("objUser",jsonObject1);
+
+
+            Crop_Post.crop_posting(getActivity(), Urls.UPDATEUSERNOTIFICATIONSETTING, post_object1, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.println("notification_status" + result);
+
+                    try{
+
+                       /* JSONObject jsonObject1 = result.getJSONObject("user");
+                        String ProfileName1 = jsonObject1.getString("NotificationTypeId");
+                        System.out.println("notification_status" + ProfileName1);
+
+
+                        list = new ArrayList<String>(Arrays.asList(ProfileName1.split(",")));
+                        getnot();
+*/
+
+
+
+
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -196,6 +244,10 @@ public class Notification_Recyc_Fragment extends Fragment {
 
 
     }
+
+
+
+
 
 public void  getnot(){
     try{
@@ -248,6 +300,7 @@ public void  getnot(){
     }catch (Exception e){
         e.printStackTrace();
     }
+
 
 
 
