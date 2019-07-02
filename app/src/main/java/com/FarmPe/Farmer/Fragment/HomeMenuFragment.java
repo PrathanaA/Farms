@@ -51,6 +51,7 @@ Fragment selectedFragment;
     JSONObject lngObject;
      static boolean fragloaded;
    public static SearchView searchView;
+   LinearLayout linearLayout;
 
    static Fragment myloadingfragment;
     public static NestedScrollView scrollView;
@@ -70,6 +71,7 @@ Fragment selectedFragment;
 
         menu=view.findViewById(R.id.menu);
         searchView=view.findViewById(R.id.search1);
+        linearLayout=view.findViewById(R.id.search);
        //scrollView=view.findViewById(R.id.scroll);
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
@@ -104,26 +106,30 @@ Fragment selectedFragment;
        // searchView.setBackgroundColor(Color.parseColor("#1ba261"));
 
 
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // back_feed.setVisibility(View.GONE);
-               // title.setVisibility(View.GONE);
-                searchView.setMaxWidth(Integer.MAX_VALUE);
-                searchView.setBackgroundColor(Color.WHITE);
-            }
-        });
 
 
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-               // back_feed.setVisibility(View.VISIBLE);
-                //title.setVisibility(View.VISIBLE);
-                searchView.setBackgroundColor(Color.parseColor("#000000"));
-                return false;
-            }
-        });
+                searchView.setOnSearchClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // back_feed.setVisibility(View.GONE);
+                        // title.setVisibility(View.GONE);
+                        searchView.setMaxWidth(Integer.MAX_VALUE);
+                        searchView.setBackgroundColor(Color.WHITE);
+                    }
+                });
+
+
+                searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                    @Override
+                    public boolean onClose() {
+                        // back_feed.setVisibility(View.VISIBLE);
+                        //title.setVisibility(View.VISIBLE);
+                        searchView.setBackgroundColor(Color.parseColor("#000000"));
+                        return false;
+                    }
+                });
+
+
 
        user_name_menu.setText(sessionManager.getRegId("name"));
       phone_no.setText(sessionManager.getRegId("phone"));

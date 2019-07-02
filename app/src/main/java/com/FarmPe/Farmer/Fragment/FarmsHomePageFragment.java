@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.FarmPe.Farmer.Adapter.FarmsHomeAdapter;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
 import com.FarmPe.Farmer.R;
+import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Login_post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
@@ -39,6 +40,7 @@ public class FarmsHomePageFragment extends Fragment {
 
     boolean canLoadMoreData = true; // make this variable false while your web service call is going on.
     int count1 = 1;
+    SessionManager sessionManager;
 
     public static FarmsHomePageFragment newInstance() {
         FarmsHomePageFragment fragment = new FarmsHomePageFragment();
@@ -55,6 +57,7 @@ public class FarmsHomePageFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         recyclerView.setNestedScrollingEnabled(false);
+        sessionManager=new SessionManager(getActivity());
         FarmsList();
 
 
@@ -162,13 +165,13 @@ public class FarmsHomePageFragment extends Fragment {
             newOrderBeansList.clear();
 
             JSONObject userRequestjsonObject = new JSONObject();
+            userRequestjsonObject.put("UserId",sessionManager.getRegId("userId"));
 
 
-            JSONObject postjsonObject = new JSONObject();
-            postjsonObject.put("objCropDetails", userRequestjsonObject);
 
 
-            Login_post.login_posting(getActivity(), Urls.GetFarmDetailsList,userRequestjsonObject,new VoleyJsonObjectCallback() {
+
+            Login_post.login_posting(getActivity(), Urls.GetFarmsListByUserId,userRequestjsonObject,new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
                     System.out.println("cropsresult"+result);

@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.FarmPe.Farmer.Adapter.FarmsImageAdapter;
+import com.FarmPe.Farmer.Adapter.NotificationAdapter;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
 import com.FarmPe.Farmer.R;
+import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
+import com.FarmPe.Farmer.Volly_class.Crop_Post;
 import com.FarmPe.Farmer.Volly_class.Login_post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 
@@ -37,6 +40,7 @@ public class LookingForFragment extends Fragment {
     public static FarmsImageAdapter farmadapter;
     boolean doubleBackToExitPressedOnce = false;
     String location;
+    SessionManager sessionManager;
 
 
     public static LookingForFragment newInstance() {
@@ -52,6 +56,8 @@ public class LookingForFragment extends Fragment {
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager_farm);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        sessionManager = new SessionManager(getActivity());
       // System.out.println("bbbbbbbbbbbbbbbbb"+ "+1-333-444-5678".replaceAll("[^\\d\\+]", "").replaceAll("\\d(?=\\d{4})", "*"));
        System.out.println("bbbbbbbbbbbbbbbbb"+ "+1-333-444-5678".replaceAll("\\d{4}(?=\\d)", "*"));
       // System.out.println("bbbbbbbbbbbbbbbbbbbb"+ "+1-333-444-5678".replaceAll("\\d{4}(?=\\d)", "*"));
@@ -115,15 +121,88 @@ public class LookingForFragment extends Fragment {
     }
     private void LookingForList() {
 
+        try{
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId",sessionManager.getRegId("userId"));
+            System.out.println("aaaaaaaaaaaaadddd" + sessionManager.getRegId("userId"));
+
+            Crop_Post.crop_posting(getActivity(), Urls.YourRequest, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.println("YourRequestttttttttttttttttt"+result);
+                    JSONArray cropsListArray=null;
+
+                    try {
+                        cropsListArray=result.getJSONArray("LookingForList");
+                        System.out.println("e     e e ddd"+cropsListArray.length());
+                        for (int i=0;i<cropsListArray.length();i++){
+                            JSONObject jsonObject1=cropsListArray.getJSONObject(i);
+                            JSONObject jsonObject2=jsonObject1.getJSONObject("Address");
+
+                            String model=jsonObject1.getString("Model");
+                            String purchaseTimeline=jsonObject1.getString("PurchaseTimeline");
+                            String image=jsonObject1.getString("ModelImage");
+                            String id=jsonObject1.getString("CreatedBy");
+                            String name=jsonObject2.getString("Name");
+                            String city=jsonObject2.getString("City");
+                            String state=jsonObject2.getString("State");
+                            String hp_range=jsonObject1.getString("HorsePowerRange");
+                            location=city+", "+state;
+
+                         /*   if (city.equals("")){
+                                location="Bangalore"+", "+state;
+                            }else{
+                                location=city+", "+state;
+                            }
+*/
+
+
+                            System.out.println("madelslistt"+newOrderBeansList.size());
+
+                            FarmsImageBean crops = new FarmsImageBean(image,"Tractor Price",model,hp_range,purchaseTimeline,name,location,id);
+                            newOrderBeansList.add(crops);
+
+
+
+                          /*  if(!latts.equals("") | !langgs.equals("")) {
+
+                                CropListBean crops = new CropListBean(cropName, crop_variety, location, crop_grade,
+                                        crop_quantity, crop_uom, crop_price, id, farmerId,
+                                        UserName,latts,langgs,CropImg,category);
+                                newOrderBeansList.add(crops);
+                            }*/
+                        }
+                        farmadapter=new FarmsImageAdapter(getActivity(),newOrderBeansList);
+                        recyclerView.setAdapter(farmadapter);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
+
+/*
+
         try {
             newOrderBeansList.clear();
 
             JSONObject userRequestjsonObject = new JSONObject();
 
 
-          /*  JSONObject postjsonObject = new JSONObject();
+          */
+/*  JSONObject postjsonObject = new JSONObject();
             postjsonObject.put("objCropDetails", userRequestjsonObject);
-*/
+*//*
+
             System.out.println("postObj"+userRequestjsonObject.toString());
 
             Login_post.login_posting(getActivity(), Urls.GetLookingForList,userRequestjsonObject,new VoleyJsonObjectCallback() {
@@ -163,13 +242,15 @@ public class LookingForFragment extends Fragment {
 
 
 
-                          /*  if(!latts.equals("") | !langgs.equals("")) {
+                          */
+/*  if(!latts.equals("") | !langgs.equals("")) {
 
                                 CropListBean crops = new CropListBean(cropName, crop_variety, location, crop_grade,
                                         crop_quantity, crop_uom, crop_price, id, farmerId,
                                         UserName,latts,langgs,CropImg,category);
                                 newOrderBeansList.add(crops);
-                            }*/
+                            }*//*
+
                         }
                         farmadapter=new FarmsImageAdapter(getActivity(),newOrderBeansList);
                         recyclerView.setAdapter(farmadapter);
@@ -181,6 +262,7 @@ public class LookingForFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+*/
 
     }
 

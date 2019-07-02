@@ -95,6 +95,7 @@
                         >-->
 
                         <LinearLayout
+                           android:id="@+id/search"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="55"
@@ -131,6 +132,7 @@
                                 android:animateLayoutChanges="true"
                                 android:gravity="right"
                                 app:searchIcon="@drawable/ic_search_filled"
+                                app:iconifiedByDefault="true"
                                 app:queryHint="Search" />
 
 

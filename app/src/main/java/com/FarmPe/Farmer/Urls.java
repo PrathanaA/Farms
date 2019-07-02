@@ -3,7 +3,7 @@ package com.FarmPe.Farmer;
 public class Urls {
 
 
-   private static final String ROOT_URL = "http://3.17.6.57:8686/api/";///DEV
+   private static final String ROOT_URL = "http://3.17.6.57:9393/api/";///DEV
    // private static final String ROOT_URL = "http://3.17.6.57:8888//api/";//PRO
 
     public static final String Add_New_Address = ROOT_URL+"MasterTable/AddUserAddress";
@@ -28,6 +28,7 @@ public class Urls {
     public static final String Get_New_Address = ROOT_URL+"MasterTable/GetUserAddress";
     // Wallet
     public static final String GetFarmDetailsList = ROOT_URL+"MasterTable/GetFarmsList";
+    public static final String GetFarmsListByUserId = "http://3.17.6.57:9393/api/MasterTable/GetFarmsListByUserId";
 
 
     // Refer n Earn

@@ -41,15 +41,15 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.dashboard_main, container, false);
         looking_for=view.findViewById(R.id.looking_for);
         farms=view.findViewById(R.id.farms);
-        farmer=view.findViewById(R.id.farmer);
+       // farmer=view.findViewById(R.id.farmer);
         looking_view=view.findViewById(R.id.looking_view);
         farms_view=view.findViewById(R.id.farms_view);
 
        // farm1=view.findViewById(R.id.farms_view);
-        farmer_view=view.findViewById(R.id.farmer_view);
+        //farmer_view=view.findViewById(R.id.farmer_view);
         looking_for1 = view.findViewById(R.id.looking_for1);
         farms1 = view.findViewById(R.id.farms1);
-        farmer1 = view.findViewById(R.id.farmer1);
+        //farmer1 = view.findViewById(R.id.farmer1);
         sessionManager = new SessionManager(getActivity());
 
 //
@@ -61,9 +61,9 @@ public class DashboardFragment extends Fragment {
        scrollView=view.findViewById(R.id.scroll);
 
         farms_view.setVisibility(View.INVISIBLE);
-        farmer_view.setVisibility(View.INVISIBLE);
+       // farmer_view.setVisibility(View.INVISIBLE);
         farms1.setTextColor(Color.parseColor("#8c8c8c"));
-        farmer1.setTextColor(Color.parseColor("#8c8c8c"));
+       // farmer1.setTextColor(Color.parseColor("#8c8c8c"));
 
 
      /*  scrollView.post(new Runnable() {
@@ -80,14 +80,13 @@ public class DashboardFragment extends Fragment {
         transaction.commit();
 
 
-
-        try {
+       /* try {
 
             lngObject = new JSONObject(sessionManager.getRegId("language"));
 
             looking_for1.setText(lngObject.getString("Lookingfor"));
             farms1.setText(lngObject.getString("Farms"));
-            farmer1.setText(lngObject.getString("Farmer"));
+           // farmer1.setText(lngObject.getString("Farmer"));
 
 
 
@@ -95,24 +94,26 @@ public class DashboardFragment extends Fragment {
             e.printStackTrace();
         }
 
-
+*/
 
         looking_for.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 farms_view.setVisibility(View.INVISIBLE);
-                farmer_view.setVisibility(View.INVISIBLE);
+               // farmer_view.setVisibility(View.INVISIBLE);
                 looking_view.setVisibility(View.VISIBLE);
 
 
                 farms1.setTextColor(Color.parseColor("#8c8c8c"));
-                farmer1.setTextColor(Color.parseColor("#8c8c8c"));
+                //farmer1.setTextColor(Color.parseColor("#8c8c8c"));
                 looking_for1.setTextColor(Color.parseColor("#ffffff"));
 
                 selectedFragment = LookingForFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_dashboard, selectedFragment);
                 transaction.commit();
+
+
             }
         });
 
@@ -120,10 +121,10 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 looking_view.setVisibility(View.INVISIBLE);
-                farmer_view.setVisibility(View.INVISIBLE);
+                //farmer_view.setVisibility(View.INVISIBLE);
                 farms_view.setVisibility(View.VISIBLE);
                 looking_for1.setTextColor(Color.parseColor("#8c8c8c"));
-                farmer1.setTextColor(Color.parseColor("#8c8c8c"));
+               // farmer1.setTextColor(Color.parseColor("#8c8c8c"));
                 farms1.setTextColor(Color.parseColor("#ffffff"));
 
 
@@ -135,7 +136,7 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        farmer.setOnClickListener(new View.OnClickListener() {
+        /*farmer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 farms_view.setVisibility(View.INVISIBLE);
@@ -153,7 +154,7 @@ public class DashboardFragment extends Fragment {
                 transaction.commit();
             }
         });
-
+*/
         return view;
     }
 

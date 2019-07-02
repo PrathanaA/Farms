@@ -42,7 +42,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:gravity="center_horizontal"
-                            android:text="Looking for"
+                            android:text="My Request"
                             android:textColor="#fff"
                             android:textStyle="bold"
                             android:textSize="14dp" />
@@ -63,7 +63,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="20">
+                        android:layout_weight="30">
 
                         <TextView
                             android:id="@+id/farms1"
@@ -71,10 +71,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:gravity="center_horizontal"
-                            android:text="Farms"
-                            android:textStyle="bold"
+                            android:text="My Farms"
                             android:textColor="#fff"
-                            android:textSize="14dp" />
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
                         <View
                             android:id="@+id/farms_view"
@@ -86,7 +86,7 @@
                             />
                     </LinearLayout>
 
-                    <LinearLayout
+                  <!--  <LinearLayout
                         android:id="@+id/farmer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                             android:layout_marginRight="20dp"
                             android:background="#FFF83628" />
 
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                 </LinearLayout>
 
