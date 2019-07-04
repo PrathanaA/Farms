@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.FarmPe.Farmer.Adapter.AddFirstLookingForAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
@@ -33,6 +34,7 @@ public class AddFirstLookingFor extends Fragment {
     public static AddFirstLookingForAdapter farmadapter;
     LinearLayout back_feed;
     Fragment selectedFragment;
+    TextView toolbar_title;
 
 
     public static AddFirstLookingFor newInstance() {
@@ -45,6 +47,9 @@ public class AddFirstLookingFor extends Fragment {
         View view = inflater.inflate(R.layout.add_first_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_what_looking);
         back_feed=view.findViewById(R.id.back_feed);
+        toolbar_title=view.findViewById(R.id.toolbar_title);
+
+        toolbar_title.setText("Select Category");
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override

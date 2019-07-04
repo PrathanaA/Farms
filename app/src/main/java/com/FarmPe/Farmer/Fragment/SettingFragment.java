@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -17,7 +18,11 @@ import android.widget.TextView;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
+import com.FarmPe.Farmer.Urls;
+import com.FarmPe.Farmer.Volly_class.Crop_Post;
+import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +37,8 @@ public class SettingFragment extends Fragment {
     TextView notificatn,change_language,your_addresss,acc_info1,refer_ern,feedbk,help_1,abt_frmpe,polic_1,logot,setting_tittle;
     SessionManager sessionManager;
     JSONObject lngObject;
+    JSONArray get_address_array;
+    String pickUPFrom;
     public static SettingFragment newInstance() {
         SettingFragment fragment = new SettingFragment();
         return fragment;
@@ -47,11 +54,9 @@ public class SettingFragment extends Fragment {
         feedback=view.findViewById(R.id.feedback);
         change_lang=view.findViewById(R.id.change_lang);
         policy=view.findViewById(R.id.policy);
-        setting_tittle=view.findViewById(R.id.setting_tittle);
+       // setting_tittle=view.findViewById(R.id.setting_tittle);
         acc_info=view.findViewById(R.id.acc_info);
         your_address=view.findViewById(R.id.ur_address);
-
-
 
         notificatn=view.findViewById(R.id.notificatn);
         change_language=view.findViewById(R.id.change_language);
@@ -72,12 +77,8 @@ public class SettingFragment extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = HomeMenuFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
-                transaction.commit();
-
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack ("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
 
@@ -90,16 +91,9 @@ public class SettingFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
-                //    getFragmentManager().popBackStack("home_menu", android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    selectedFragment = HomeMenuFragment.newInstance();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.commit();
-
-                    return  true;
-                    /*FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack ("home_m", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    return true;*/
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack ("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
                 }
                 return false;
             }
@@ -111,7 +105,7 @@ public class SettingFragment extends Fragment {
 
             lngObject = new JSONObject(sessionManager.getRegId("language"));
 
-            setting_tittle.setText(lngObject.getString("Settings"));
+         //   setting_tittle.setText(lngObject.getString("Settings"));
             acc_info1.setText(lngObject.getString("AccountInfo"));
             your_addresss.setText(lngObject.getString("YourAddress"));
             refer_ern.setText(lngObject.getString("Refer_Earn"));
@@ -168,15 +162,20 @@ public class SettingFragment extends Fragment {
                yes1 =  dialog.findViewById(R.id.yes_1);
                no1 =  dialog.findViewById(R.id.no_1);
                popup_headingtxt =  dialog.findViewById(R.id.popup_heading);
+
+
                try {
                    lngObject = new JSONObject(sessionManager.getRegId("language"));
                    text_desctxt.setText(lngObject.getString("AreyousureyouwanttoLogout"));
                    yes1.setText(lngObject.getString("Confirm"));
                    no1.setText(lngObject.getString("Cancel"));
                    popup_headingtxt.setText(lngObject.getString("Logout"));
+
                } catch (JSONException e) {
                    e.printStackTrace();
                }
+
+
                close_layout =  dialog.findViewById(R.id.close_layout);
                no1.setOnClickListener(new View.OnClickListener() {
 
@@ -206,6 +205,7 @@ public class SettingFragment extends Fragment {
 
            }
        });
+
         help_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,11 +293,54 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                selectedFragment = You_Address_Fragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("setting");
-                transaction.commit();
+                try{
+                    final JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("UserId",sessionManager.getRegId("userId"));
+                    jsonObject.put("PickUpFrom",pickUPFrom);
+                    System.out.println("aaaaaaaaaaaaadddd" + sessionManager.getRegId("userId"));
+
+                    Crop_Post.crop_posting(getActivity(), Urls.Get_New_Address, jsonObject, new VoleyJsonObjectCallback() {
+                        @Override
+                        public void onSuccessResponse(JSONObject result) {
+                            System.out.println("ggggggggggaaaaaaa"+result);
+
+                            try{
+                                get_address_array = result.getJSONArray("UserAddressDetails");
+
+                                if(get_address_array.length()== 0){
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("navigation_from","SETTING_FRAG");
+                                    selectedFragment = Add_New_Address_Fragment.newInstance();
+                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    selectedFragment.setArguments(bundle);
+                                    transaction.replace(R.id.frame_layout, selectedFragment);
+                                    transaction.addToBackStack("setting");
+                                    transaction.commit();
+
+                                }else {
+
+                                    selectedFragment = You_Address_Fragment.newInstance();
+                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                                    transaction.replace(R.id.frame_layout, selectedFragment);
+                                    transaction.addToBackStack("setting");
+                                    transaction.commit();
+
+                                }
+
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         });
         return view;

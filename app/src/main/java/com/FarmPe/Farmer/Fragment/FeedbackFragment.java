@@ -25,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -50,9 +52,10 @@ public class FeedbackFragment extends Fragment {
     SessionManager sessionManager;
     EditText feedback_title,feedback_description;
     JSONObject lngObject;
-    String fedback_title,feedtype,feeddesc,fd_sucess,fd_failure;
+    String fedback_title,feedtype,feeddesc,fd_sucess,fd_failure,enterallfields;
     public static String refer_code;
-
+    RadioGroup fdType;
+    String stat="3";
 
     private Context context;
 
@@ -72,6 +75,7 @@ public class FeedbackFragment extends Fragment {
         feedback_type=view.findViewById(R.id.fd_type);
         submit=view.findViewById(R.id.submit);
         linearLayout=view.findViewById(R.id.main_layout);
+        fdType=view.findViewById(R.id.radio_group);
 
         feedbacktxt=view.findViewById(R.id.toolbar_title);
         //clickcopyurltxt=view.findViewById(R.id.clickcopyurl);
@@ -112,7 +116,35 @@ public class FeedbackFragment extends Fragment {
             }
         });
 
-        feedback_type.setOnClickListener(new View.OnClickListener() {
+        fdType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                RadioButton radioButton = group.findViewById(checkedId);
+
+                if (radioButton.getTag().toString().equals("1")) {
+                    stat = "1";
+
+
+                } else if (radioButton.getTag().toString().equals("2")) {
+                    stat = "2";
+
+
+                }  else if (radioButton.getTag().toString().equals("3")) {
+                    stat = "3";
+
+
+                }else{
+
+
+                }
+
+
+            }
+
+        });
+
+
+        /*feedback_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -182,13 +214,23 @@ public class FeedbackFragment extends Fragment {
 
 
             }
-        });
+        });*/
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(feedback_type.getText().toString().equals("")){
+                if(feedback_type.getText().toString().equals("")&& feedback_title.getText().toString().equals("")&& feedback_description.getText().toString().equals("")){
+                    //Toast.makeText(getActivity(), "Select Feedback Type", Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, enterallfields, Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    snackbar.show();
+
+                }else if(feedback_type.getText().toString().equals("")){
                     //Toast.makeText(getActivity(), "Select Feedback Type", Toast.LENGTH_SHORT).show();
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, feedtype, Snackbar.LENGTH_LONG);
@@ -241,6 +283,8 @@ public class FeedbackFragment extends Fragment {
             feeddesc=lngObject.getString("Enterfeedbackdescription");
             fd_sucess=lngObject.getString("Feedbacksubmitttedsuccessfully");
             fd_failure=lngObject.getString("YourFeedbacknotSubmitted");
+            enterallfields=lngObject.getString("EnterAllTextFields");
+
 
         } catch (
                 JSONException e) {
@@ -292,7 +336,7 @@ public class FeedbackFragment extends Fragment {
         try{
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("FeedbackType",feedback_type.getText().toString());
+            jsonObject.put("FeedbackType",stat);
             jsonObject.put("FeedbackTitle",feedback_title.getText().toString());
             jsonObject.put("FeedbackDescription",feedback_description.getText().toString());
             jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
@@ -366,13 +410,3 @@ public class FeedbackFragment extends Fragment {
 
 
 }
-
-//"FeedbackType":"Other",
-//
-//"FeedbackTitle":"Test",
-//
-//"FeedbackDescription":"Not working",
-//
-//"CreatedBy":1
-
-//{"Status":"4","Message":"Feedback submitted Successfully."}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="#000"
+        android:gravity="left"
+        android:layout_gravity="left"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="10dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/back_feed1"-->
+            <!--android:layout_width="35dp"-->
+            <!--android:layout_height="50dp"-->
+
+            <!--&gt;-->
+
+
+            <!--<ImageView-->
+                <!--android:id="@+id/b_arrow"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:src="@drawable/ic_left_arrow_white"-->
+                <!--style="@style/SelectableItemBackground"-->
+                <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+
+
+                <!--/>-->
+
+        <!--</LinearLayout>-->
+
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/nandi_farmpe"/>
+
+
+
+</LinearLayout>

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.FarmPe.Farmer.Adapter.SelectLanguageAdapter;
 import com.FarmPe.Farmer.Bean.SelectLanguageBean;
 import com.FarmPe.Farmer.R;
@@ -130,7 +129,7 @@ public class ChangeLanguageFragment extends Fragment {
             Login_post.login_posting(getActivity(), Urls.Languages,postjsonObject,new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
-                    System.out.println("statussssss"+result);
+                    System.out.println("statussssscccs"+result);
                     JSONObject jsonObject;
                     try {
                         JSONArray jsonArray=result.getJSONArray("LanguagesList");

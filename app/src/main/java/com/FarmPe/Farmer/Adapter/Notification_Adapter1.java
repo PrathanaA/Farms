@@ -1,7 +1,6 @@
 package com.FarmPe.Farmer.Adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.FarmPe.Farmer.Bean.Notification_recy_bean;
-import com.FarmPe.Farmer.Fragment.Notification_Recyc_Fragment;
+
 import com.FarmPe.Farmer.R;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -68,13 +67,23 @@ public class Notification_Adapter1 extends RecyclerView.Adapter<Notification_Ada
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Notification_recy_bean products = productList.get(position);
 
+
+
+
         holder.actninfo.setText(products.getNoti_txt());
+
+
+
 
         holder.switch1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                FirebaseMessaging.getInstance().subscribeToTopic("one");
                 if (holder.switch1.isChecked()){
-                    FirebaseMessaging.getInstance().subscribeToTopic(products.getNoti_code());
+                    FirebaseMessaging.getInstance().subscribeToTopic(products.getNoti_code());// to register in topic(subcribe)
+
 
                 }else {
 

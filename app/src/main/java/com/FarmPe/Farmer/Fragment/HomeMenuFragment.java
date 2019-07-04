@@ -1,4 +1,3 @@
-
 package com.FarmPe.Farmer.Fragment;
 
 import android.graphics.Color;
@@ -43,14 +42,15 @@ Fragment selectedFragment;
     LinearLayout update_acc_layout,near_by,linear_connection;
     SessionManager sessionManager;
       CircleImageView prod_img,prod_img1;
+      String mob_no;
     String userid;
     TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm;
-    public static TextView cart_count_text,user_name_menu,phone_no;
+    public static TextView your_farms,cart_count_text,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
     JSONObject lngObject;
      static boolean fragloaded;
-   public static SearchView searchView;
+ //  public static SearchView searchView;
    LinearLayout linearLayout;
 
    static Fragment myloadingfragment;
@@ -70,18 +70,18 @@ Fragment selectedFragment;
         final View view = inflater.inflate(R.layout.activity_navigation_menu_home, container, false);
 
         menu=view.findViewById(R.id.menu);
-        searchView=view.findViewById(R.id.search1);
-        linearLayout=view.findViewById(R.id.search);
+       // searchView=view.findViewById(R.id.search1);
+       // linearLayout=view.findViewById(R.id.search);
        //scrollView=view.findViewById(R.id.scroll);
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
-        linear_connection = view.findViewById(R.id.linear_connection);
+        //linear_connection = view.findViewById(R.id.linear_connection);
         //map=view.findViewById(R.id.map);
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
         settings=view.findViewById(R.id.settings);
         prod_img=view.findViewById(R.id.prod_img);
-        prod_img1=view.findViewById(R.id.prod_img1);
+      //  prod_img1=view.findViewById(R.id.prod_img1);
        /* looking_for=view.findViewById(R.id.looking_for);
         farms=view.findViewById(R.id.farms);phone_no
         farmer=view.findViewById(R.id.farmer);*/
@@ -89,50 +89,57 @@ Fragment selectedFragment;
         farms_view=view.findViewById(R.id.farms_view);
         farmer_view=view.findViewById(R.id.farmer_view);
 
-        connections=view.findViewById(R.id.connections);
-        connection_nw=view.findViewById(R.id.connection_nw);
+     //   connections=view.findViewById(R.id.connections);
+        your_farms=view.findViewById(R.id.your_farms);
         your_requests=view.findViewById(R.id.your_requests);
         list_farm=view.findViewById(R.id.list_farm);
 
-        nw_request=view.findViewById(R.id.nw_request);
-        nearby=view.findViewById(R.id.nearby);
+       // nw_request=view.findViewById(R.id.nw_request);
+        //nearby=view.findViewById(R.id.nearby);
 
         plus_sign_add=view.findViewById(R.id.plus_sign_add);
         user_name_menu=view.findViewById(R.id.user_name_menu);
-        near_by=view.findViewById(R.id.near_by);
+       // near_by=view.findViewById(R.id.near_by);
         sessionManager = new SessionManager(getActivity());
         userid=sessionManager.getRegId("userId");
+
+  //      ComingSoonFragment.backfeed.setVisibility(View.GONE);
 
        // searchView.setBackgroundColor(Color.parseColor("#1ba261"));
 
 
 
 
-                searchView.setOnSearchClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // back_feed.setVisibility(View.GONE);
-                        // title.setVisibility(View.GONE);
-                        searchView.setMaxWidth(Integer.MAX_VALUE);
-                        searchView.setBackgroundColor(Color.WHITE);
-                    }
-                });
+//                searchView.setOnSearchClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        // back_feed.setVisibility(View.GONE);
+//                        // title.setVisibility(View.GONE);
+//                        searchView.setMaxWidth(Integer.MAX_VALUE);
+//                        searchView.setBackgroundColor(Color.WHITE);
+//                    }
+//                });
+
+//
+//                searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+//                    @Override
+//                    public boolean onClose() {
+//                        // back_feed.setVisibility(View.VISIBLE);
+//                        //title.setVisibility(View.VISIBLE);
+//                        searchView.setBackgroundColor(Color.parseColor("#000000"));
+//                        return false;
+//                    }
+//                });
 
 
-                searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-                    @Override
-                    public boolean onClose() {
-                        // back_feed.setVisibility(View.VISIBLE);
-                        //title.setVisibility(View.VISIBLE);
-                        searchView.setBackgroundColor(Color.parseColor("#000000"));
-                        return false;
-                    }
-                });
+
+        user_name_menu.setText(sessionManager.getRegId("name"));
+
+        //phone_no.setText(sessionManager.getRegId("phone").substring(10));
 
 
 
-       user_name_menu.setText(sessionManager.getRegId("name"));
-      phone_no.setText(sessionManager.getRegId("phone"));
+
 
         drawer = (DrawerLayout)view.findViewById(R.id.drawer_layout);
         
@@ -147,15 +154,15 @@ Fragment selectedFragment;
             lngObject = new JSONObject(sessionManager.getRegId("language"));
 
 
-            connections.setText(lngObject.getString("Connections"));
-            nw_request.setText(lngObject.getString("NewRequest"));
-            nearby.setText(lngObject.getString("Nearby"));
-            home.setText(lngObject.getString("Message"));
-            settings.setText(lngObject.getString("Settings"));
-
-            connection_nw.setText(lngObject.getString("Connections"));
-            list_farm.setText(lngObject.getString("ListyourFarm"));
-            your_requests.setText(lngObject.getString("YourRequests"));
+//            connections.setText(lngObject.getString("Connections"));
+//            nw_request.setText(lngObject.getString("NewRequest"));
+//            nearby.setText(lngObject.getString("Nearby"));
+//            home.setText(lngObject.getString("Message"));
+//            settings.setText(lngObject.getString("Settings"));
+//
+//            connection_nw.setText(lngObject.getString("Connections"));
+//            list_farm.setText(lngObject.getString("ListyourFarm"));
+//            your_requests.setText(lngObject.getString("YourRequests"));
 
 
 
@@ -164,7 +171,6 @@ Fragment selectedFragment;
             e.printStackTrace();
         }
 
-
         // scrollView.requestFocus(View.FOCUS_UP);
 
         NavigationView navigationView = (NavigationView)view.findViewById(R.id.nav_view);
@@ -172,7 +178,7 @@ Fragment selectedFragment;
         System.out.println("hhhrtryur");
 
 
-        selectedFragment = DashboardFragment.newInstance();
+        selectedFragment = FarmPe_Logo_Fragment.newInstance();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.first_full_frame, selectedFragment);
         transaction.commit();
@@ -188,16 +194,16 @@ Fragment selectedFragment;
             }
         });
 
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                selectedFragment = ComingSoonFragment.newInstance();
+                selectedFragment = AddFirstLookingFor.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("home");
                 transaction.commit();
+                drawer.closeDrawers();
 
             }
         });
@@ -206,11 +212,12 @@ Fragment selectedFragment;
             @Override
             public void onClick(View view) {
 
-                selectedFragment = NotificationFragment.newInstance();
+                selectedFragment = LookingForFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.replace(R.id.first_full_frame, selectedFragment);
                 transaction.addToBackStack("home");
                 transaction.commit();
+                drawer.closeDrawers();
 
             }
         });
@@ -224,70 +231,86 @@ Fragment selectedFragment;
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("home");
                 transaction.commit();
+                drawer.closeDrawers();
 
             }
         });
 
-        nw_request.setOnClickListener(new View.OnClickListener() {
+
+        your_farms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                selectedFragment = AddFirstLookingFor.newInstance();
+                selectedFragment = FarmsHomePageFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("looking");
+                transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.addToBackStack("home");
                 transaction.commit();
                 drawer.closeDrawers();
+
+            }
+        });
+//
+//        nw_request.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                selectedFragment = AddFirstLookingFor.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("looking");
+//                transaction.commit();
+//                drawer.closeDrawers();
 
 //                selectedFragment = ComingSoonFragment.newInstance();
 //                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 //                transaction.replace(R.id.frame_layout, selectedFragment);
 //                transaction.addToBackStack("home");
 //                transaction.commit();
+//
+//            }
+//        });
 
-            }
-        });
-
-
-        near_by.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                selectedFragment = ComingSoonFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-
-            }
-        });
-
-
-        linear_connection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                selectedFragment = ComingSoonFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-
-            }
-        });
-
-        connection_nw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                selectedFragment = ComingSoonFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-
-            }
-        });
+//
+//        near_by.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                selectedFragment = ComingSoonFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
+//
+//            }
+//        });
+//
+//
+//        linear_connection.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                selectedFragment = ComingSoonFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
+//
+//            }
+//        });
+//
+//        connection_nw.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                selectedFragment = ComingSoonFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
+//
+//            }
+//        });
 
         notification_bell.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -310,26 +333,6 @@ Fragment selectedFragment;
             }
         });
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-
-                selectedFragment = DashboardFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.first_full_frame, selectedFragment);
-                transaction.addToBackStack("home_menu");
-                transaction.commit();
-                drawer.closeDrawers();
-
-
-            }
-        });
-
-
-
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,19 +347,19 @@ Fragment selectedFragment;
             }
         });
 
-        near_by.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedFragment = ComingSoonFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-                drawer.closeDrawers();
-
-
-            }
-        });
+//        near_by.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                selectedFragment = ComingSoonFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
+//                drawer.closeDrawers();
+//
+//
+//            }
+//        });
 
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -397,8 +400,11 @@ Fragment selectedFragment;
 
 
                         user_name_menu.setText(ProfileName);
-                        phone_no.setText(ProfilePhone);
+                        phone_no.setText(ProfilePhone.substring(3));
+
+                       // phone_no.setText(ProfilePhone.substring(0,13-6) + ""); // masking + deleting last line
                        // profile_mail.setText(ProfileEmail);
+
 
                         Glide.with(getActivity()).load(ProfileImage)
 

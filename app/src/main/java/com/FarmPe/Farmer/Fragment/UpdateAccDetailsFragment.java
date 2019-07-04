@@ -1,5 +1,6 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,15 +11,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,6 +33,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +62,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,12 +86,13 @@ public class UpdateAccDetailsFragment extends Fragment {
     JSONObject lngObject;
     String toast_name,toast_mobile,toast_passwrd,toast_new_mobile,toast_minimum_toast,toast_update,toast_image;
     LinearLayout update_btn,linearLayout;
-    private static int RESULT_LOAD_IMG = 1;
     Bitmap selectedImage,imageB;
     EditText profile_name,profile_phone,profile_mail,profile_passwrd;
-    CircleImageView prod_img;
-
-
+    ImageView prod_img;
+    private static int RESULT_LOAD_IMG = 1;
+    private int PICK_IMAGE_REQUEST = 1;
+    Bitmap bitmap;
+    ImageView name_tick,phone_tick,pass_tick;
     LinearLayout back_feed;
     Fragment selectedFragment;
 
@@ -99,7 +106,9 @@ public class UpdateAccDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.update_acc_details, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
+        name_tick = view.findViewById(R.id.name_tick);
+        phone_tick = view.findViewById(R.id.phone_tick);
+        pass_tick = view.findViewById(R.id.pass_tick);
         recyclerView = view.findViewById(R.id.recycler_what_looking);
         toolbar_title = view.findViewById(R.id.toolbar_title);
         update_btn_txt = view.findViewById(R.id.update_btn_txt);
@@ -108,7 +117,7 @@ public class UpdateAccDetailsFragment extends Fragment {
         profile_phone = view.findViewById(R.id.profile_phone);
         profile_mail = view.findViewById(R.id.profile_mail);
         profile_passwrd = view.findViewById(R.id.profile_passwrd);
-        prod_img = view.findViewById(R.id.prod_img);
+        prod_img = view.findViewById(R.id.prod_imgg);
         update_btn = view.findViewById(R.id.update_btn);
         linearLayout = view.findViewById(R.id.main_layout);
 
@@ -116,16 +125,14 @@ public class UpdateAccDetailsFragment extends Fragment {
 
         setupUI(linearLayout);
 
-
         prod_img.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 100);
             }
         });
-
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +169,6 @@ public class UpdateAccDetailsFragment extends Fragment {
 
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
-
             toolbar_title.setText(lngObject.getString("UpdateYourAccountDetails"));
             update_btn_txt.setText(lngObject.getString("Update"));
             profile_name.setHint(lngObject.getString("Enteryourname"));
@@ -189,11 +195,12 @@ public class UpdateAccDetailsFragment extends Fragment {
 
 
 
-      //  profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
+        //  profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
 
-       // profile_name.setFilters(new InputFilter[]{EMOJI_FILTER});
+        // profile_name.setFilters(new InputFilter[]{EMOJI_FILTER});
 
 
+        // Adding textWatcher to name
 
         final InputFilter filter1 = new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -203,8 +210,8 @@ public class UpdateAccDetailsFragment extends Fragment {
                     if (!Character.isWhitespace(character)) {
                         filtered += character;
 
-                        }
                     }
+                }
                 return filtered;
             }
 
@@ -214,7 +221,7 @@ public class UpdateAccDetailsFragment extends Fragment {
 
         profile_passwrd.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(12) });
         profile_mail.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(50) });
-       // profile_name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
+        // profile_name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
 
 
 
@@ -269,15 +276,15 @@ public class UpdateAccDetailsFragment extends Fragment {
                         profile_name.setFilters(new InputFilter[]{EMOJI_FILTER});
                         profile_phone.setFilters(new InputFilter[]{EMOJI_FILTER});
                         profile_mail.setFilters(new InputFilter[]{EMOJI_FILTER});
-                        profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
+                     //   profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
 
-                          Glide.with(getActivity()).load(ProfileImage)
+                        Glide.with(getActivity()).load(ProfileImage)
 
-                                  .thumbnail(0.5f)
+                                .thumbnail(0.5f)
                                 //  .crossFade()
-                                  .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                  .error(R.drawable.avatarmale)
-                                  .into(prod_img);
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.drawable.avatarmale)
+                                .into(prod_img);
 
 
                     }catch (Exception e){
@@ -292,78 +299,149 @@ public class UpdateAccDetailsFragment extends Fragment {
         }
 
 
+
+
+        profile_passwrd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              if(profile_passwrd.length()<6){
+                  pass_tick.setVisibility(View.GONE);
+
+
+              }else{
+                  pass_tick.setVisibility(View.VISIBLE);
+
+              }
+
+            }
+        });
+
+        profile_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(profile_name.getText().toString().length()>=2){
+                    name_tick.setVisibility(View.VISIBLE);
+                }
+
+                else{
+
+                    name_tick.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        profile_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(profile_phone.getText().toString().length()!=13){
+                    phone_tick.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    phone_tick.setVisibility(View.VISIBLE);
+
+
+                }
+
+                if (profile_phone.getText().toString().length()<3){
+                    profile_phone.setText("+91");
+                    profile_phone.setSelection(profile_phone.getText().toString().length());
+                }
+            }
+        });
+
+
+
+        profile_passwrd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(profile_passwrd.getText().toString().length()<=12 && profile_passwrd.getText().toString().length()>=6){
+                    pass_tick.setVisibility(View.VISIBLE);
+                }
+                else{
+                    pass_tick.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
         update_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-            System.out.println("nnbchcxbhchvcvccgcv"+profile_passwrd.getText().toString());
-
+                //   System.out.println("nnbchcxbhchvcvccgcv"+profile_passwrd.getText().toString());
                 if(profile_name.getText().toString().equals("")) {
-
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, toast_name, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setTextColor(Color.RED);
                     snackbar.show();
-
-
                 } else if(profile_name.getText().toString().length()<2) {
-
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, toast_minimum_toast, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setTextColor(Color.RED);
                     snackbar.show();
-
-
                 }else if(profile_phone.getText().toString().equals("")) {
-
-
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, toast_new_mobile, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setTextColor(Color.RED);
                     snackbar.show();
-
-
                 }else if(profile_phone.getText().toString().length()<10) {
-
-
-                     Snackbar snackbar = Snackbar
-                             .make(linearLayout, toast_mobile, Snackbar.LENGTH_LONG);
-                     View snackbarView = snackbar.getView();
-                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                     tv.setTextColor(Color.RED);
-                     snackbar.show();
-
-                 }else if((!profile_passwrd.getText().toString().equals("")&&(profile_passwrd.getText().toString().length()<6))){
-
-
-                         Snackbar snackbar = Snackbar
-                                 .make(linearLayout, toast_passwrd, Snackbar.LENGTH_LONG);
-                         View snackbarView = snackbar.getView();
-                         TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                         tv.setTextColor(Color.RED);
-                         snackbar.show();
-
-
-
-                 }
-
-                 else {
-
-
-                    // update_profile_details();
-
-                    uploadImage(selectedImage);
-
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, toast_mobile, Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setTextColor(Color.RED);
+                    snackbar.show();
+                }else if((!profile_passwrd.getText().toString().equals("")&&(profile_passwrd.getText().toString().length()<6))){
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, toast_passwrd, Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setTextColor(Color.RED);
+                    snackbar.show();
+                    // imageUpload(filePath);
+                    //  uploadImage(bitmap);
+                } else if (bitmap != null) {
+                    // imageUpload(filePath);
+                    uploadImage(bitmap);
                 }
+                // update_profile_details();
+                //     uploadImage(b);*/
             }
         });
-
 
       /*  SharedPreferences myPrefrence = getActivity().getPreferences(MODE_PRIVATE);
         String imageS = myPrefrence.getString("imagePreferance", "");
@@ -414,108 +492,163 @@ public class UpdateAccDetailsFragment extends Fragment {
         byte[] decodedByte = Base64.decode(input, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
-
-
     @Override
-    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-        Uri imageUri = data.getData();
-            final InputStream imageStream;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
+
+            //getting the image Uri
+            Uri imageUri = data.getData();
             try {
-                imageStream = getActivity().getContentResolver().openInputStream(imageUri);
+                //getting bitmap object from uri
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
 
-            selectedImage = BitmapFactory.decodeStream(imageStream);
-                prod_img.setImageBitmap(selectedImage);
-
-
-            } catch (FileNotFoundException e) {
+                //displaying selected image to imageview
+                prod_img.setImageBitmap(bitmap);
+              /*  if (bitmap != null) {
+                    // imageUpload(filePath);
+                    uploadImage(bitmap);
+                } else {
+                    //  Toast.makeText(getActivity(), "Image not selected!", Toast.LENGTH_LONG).show();
+                }*/
+                //calling the method uploadBitmap to upload image
+                // uploadImage(bitmap);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-        }else {
-            Toast.makeText(getActivity(),toast_image,Toast.LENGTH_LONG).show();
         }
     }
-
-
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-            bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
-
-            return byteArrayOutputStream.toByteArray();
-
-
-
-        //System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"+byteArrayOutputStream.toByteArray());
-
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
     }
-
     private void uploadImage(final Bitmap bitmap){
-        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,Urls.Update_Profile_Details,
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.Update_Profile_Details,
                 new Response.Listener<NetworkResponse>(){
                     @Override
                     public void onResponse(NetworkResponse response) {
-                        //Toast.makeText(getActivity(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                      //  String resultResponse = new String(response.data);
-                        selectedImage=null;
-
-                        Toast.makeText(getActivity(),toast_update, Toast.LENGTH_SHORT).show();
+                        Log.e(TAG,"afaeftagsbillvalue"+response.data);
+                        Log.e(TAG,"afaeftagsbillvalue"+response);
+                        Toast.makeText(getActivity(),"Profile photo is changed", Toast.LENGTH_SHORT).show();
                         selectedFragment = SettingFragment.newInstance();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frame_layout,selectedFragment);
                         ft.commit();
+                        try {
+                            JSONObject obj = new JSONObject(new String(response.data));
 
-                           }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 },
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
-            /*
-             *pass files using below method
-             * */
+
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-              //  params.put("UserId",sessionManager.getRegId("userId") );
-
                 params.put("UserId",sessionManager.getRegId("userId"));
                 params.put("FullName",profile_name.getText().toString());
                 params.put("PhoneNo",profile_phone.getText().toString());
-                params.put("EmailId",profile_mail.getText().toString());
+                params.put("EmailId","abcd@gmail.com");
                 params.put("Password",profile_passwrd.getText().toString());
                 Log.e(TAG,"afaeftagsparams"+params);
                 return params;
             }
-
-
             @Override
-            protected Map<String, VolleyMultipartRequest.DataPart> getByteData() {
+            protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
-               // params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
-                Log.e(TAG,"Imhereafaeftagsparams Imhereafaeftagsparams "+bitmap);
-
-                if (bitmap==null){
-
-                }else {
-                    params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
-
-                }
-                Log.e(TAG,"Imhereafaeftagsparams "+params);
+                params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+                Log.e(TAG,"Im here " + params);
                 return params;
             }
         };
         //adding the request to volley
         Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
     }
+  /* @Override
+   public void onActivityResult(int requestCode, int resultCode, Intent data) {
+       super.onActivityResult(requestCode, resultCode, data);
+       if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
 
+           //getting the image Uri
+           Uri imageUri = data.getData();
+           try {
+               //getting bitmap object from uri
+               bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+               //displaying selected image to imageview
+               if (bitmap != null) {
+                   // imageUpload(filePath);
+                   uploadImage(bitmap);
+               }
+               prod_img.setImageBitmap(bitmap);
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+       }
+   }
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+    private void uploadImage(final Bitmap bitmap){
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.Update_Profile_Details,
+                new Response.Listener<NetworkResponse>(){
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        Log.e(TAG,"afaeftagsbillvalue"+response.data);
+                        Log.e(TAG,"afaeftagsbillvalue"+response);
+                        Toast.makeText(getActivity(),"Profile photo is changed", Toast.LENGTH_SHORT).show();
+                        selectedFragment = SettingFragment.newInstance();
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.frame_layout,selectedFragment);
+                        ft.commit();
+                        try {
+                            JSONObject obj = new JSONObject(new String(response.data));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("UserId",sessionManager.getRegId("userId"));
+                params.put("FullName",profile_name.getText().toString());
+                params.put("PhoneNo",profile_phone.getText().toString());
+                params.put("EmailId","abcd@gmail.com");
+                params.put("Password",profile_passwrd.getText().toString());
+                Log.e(TAG,"afaeftagsparams"+params);
+                return params;
+            }
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+                params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+                Log.e(TAG,"Im here " + params);
+                return params;
+            }
+        };
+        //adding the request to volley
+        Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
+    }*/
 
     private String encodeToBase64(Bitmap image) {
 
@@ -541,10 +674,12 @@ public class UpdateAccDetailsFragment extends Fragment {
                         @Override
                         public void onResponse(String response) {
 
-                            final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
-                                    null, true);
-                            progressDialog.setContentView(R.layout.small_progress_bar);
-                            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+//                            final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
+//                                    null, true);
+//                            progressDialog.setContentView(R.layout.small_progress_bar);
+//                            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
                             Log.d("Response", response);
 

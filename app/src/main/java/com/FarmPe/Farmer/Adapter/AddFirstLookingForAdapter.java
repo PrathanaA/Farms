@@ -83,6 +83,7 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
 
+
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

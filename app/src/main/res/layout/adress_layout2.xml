@@ -47,7 +47,7 @@
             android:textColor="@color/dot_dark_screen1"
             android:text="#12 5th main 2nd cross xyz Apartments"/>
 
-
+<!--
         <TextView
             android:id="@+id/landmark1"
             android:layout_width="match_parent"
@@ -56,7 +56,7 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/dot_dark_screen1"
 
-            android:text="Bengaluru, Karnataka"/>
+            android:text="Bengaluru, Karnataka"/>-->
 
         <TextView
             android:id="@+id/city_1"

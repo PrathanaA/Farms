@@ -38,10 +38,12 @@ public class PrivacyPolicyFragment extends Fragment {
     TextView editText,privacypolicytxt,first_textt,privacypolicytxt2,privacypolicytxt3,second_t,second_tx;
     private Context context;
 
+
     public static PrivacyPolicyFragment newInstance() {
         PrivacyPolicyFragment fragment = new PrivacyPolicyFragment();
         return fragment;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

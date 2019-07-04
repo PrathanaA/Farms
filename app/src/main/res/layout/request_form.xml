@@ -32,6 +32,7 @@
                 android:id="@+id/back_feed"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="@drawable/ripple_effect"
                 android:gravity="left">
 
 
@@ -259,7 +260,7 @@
             android:id="@+id/request"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Request for Tractor Price"
+            android:text="Submit"
             android:textSize="16dp"
             android:textColor="#fff"
             android:background="@drawable/border_filled_red"

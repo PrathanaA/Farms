@@ -93,7 +93,7 @@ public class LokingForDetailsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.farmers_detail_page, container, false);
+        View view = inflater.inflate(R.layout.looking_details_layout, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         toolbar_title=view.findViewById(R.id.toolbar_title);
@@ -143,11 +143,6 @@ public class LokingForDetailsFragment extends Fragment {
                 return false;
             }
         });
-
-
-
-
-
 
 
         try{
@@ -212,6 +207,9 @@ public class LokingForDetailsFragment extends Fragment {
 */
         return view;
     }
+
+
+
     public static InputFilter EMOJI_FILTER = new InputFilter() {
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {

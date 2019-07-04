@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.FarmPe.Farmer.Fragment.HomeMenuFragment.searchView;
+
 
 public class LookingForFragment extends Fragment {
 
@@ -47,6 +47,7 @@ public class LookingForFragment extends Fragment {
         LookingForFragment fragment = new LookingForFragment();
         return fragment;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,34 +88,34 @@ public class LookingForFragment extends Fragment {
         recyclerView.setAdapter(farmadapter);
 */
 
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                searchView.clearFocus();
-                System.out.println("lknkknknknknknknknnk");
-             /*   if(list.contains(query)){
-                    adapter.getFilter().filter(query);
-                }else{
-                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
-                }*/
-                return false;
-
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // back_feed.setVisibility(View.GONE);
-                //title.setVisibility(View.GONE);
-                System.out.println("lknkknknknknknknknnk"+newText);
-                sorting(newText);
-
-
-                return false;
-            }
-        });
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//                searchView.clearFocus();
+//                System.out.println("lknkknknknknknknknnk");
+//             /*   if(list.contains(query)){
+//                    adapter.getFilter().filter(query);
+//                }else{
+//                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+//                }*/
+//                return false;
+//
+//            }
+//
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                // back_feed.setVisibility(View.GONE);
+//                //title.setVisibility(View.GONE);
+//                System.out.println("lknkknknknknknknknnk"+newText);
+//                sorting(newText);
+//
+//
+//                return false;
+//            }
+//        });
 
 
         return view;

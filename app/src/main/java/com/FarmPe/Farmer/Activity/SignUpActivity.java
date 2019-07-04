@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -46,7 +48,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
    public static TextView create_acc, continue_sign_up, change_lang, backtologin, referal_text;
     LinearLayout back_feed;
@@ -57,20 +59,89 @@ public class SignUpActivity extends AppCompatActivity {
     Activity activity;
     JSONObject lngObject;
     public static TextInputLayout sign_name,sign_mobile,sign_pass;
-    public static String mob_toast,passwrd_toast,minimum_character_toast,enter_all_toast,name_toast,mobile_registered_toast;
+    public static String mob_toast,passwrd_toast,minimum_character_toast,enter_all_toast,name_toast,mobile_registered_toast,toast_internet,toast_nointernet;
 
     List<SelectLanguageBean>language_arrayBeanList = new ArrayList<>();
     SelectLanguageBean selectLanguageBean;
     SelectLanguageAdapter_SignUP mAdapter;
+
+    public static boolean connectivity_check;
+    ConnectivityReceiver connectivityReceiver;
+    @Override
+    protected void onStop()
+    {
+        unregisterReceiver(connectivityReceiver);
+        super.onStop();
+    }
+
 
     LinearLayout linearLayout;
     BroadcastReceiver receiver;
     EditText spn_localize;
     String localize_text;
     TextInputLayout textInputLayout_name, textInputLayout_pass;
-    public static String contact, mob_contact;
-    String refer;
+     public static String contact, mob_contact;
+     String refer;
      public static   Dialog dialog;
+
+
+
+
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        showSnack(isConnected);
+    }
+
+
+    private void showSnack(boolean isConnected) {
+        String message = null;
+        int color=0;
+        if (isConnected) {
+            if(connectivity_check) {
+                message = "Good! Connected to Internet";
+                color = Color.WHITE;
+                Snackbar snackbar = Snackbar.make(linearLayout,toast_internet, Snackbar.LENGTH_LONG);
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
+                textView.setTextColor(Color.WHITE);
+                snackbar.show();
+
+                //setting connectivity to false only on executing "Good! Connected to Internet"
+                connectivity_check=false;
+            }
+
+
+        } else {
+            message = "No Internet Connection";
+            color = Color.RED;
+            //setting connectivity to true only on executing "Sorry! Not connected to internet"
+            connectivity_check=true;
+            // Snackbar snackbar = Snackbar.make(coordinatorLayout,message, Snackbar.LENGTH_LONG);
+            Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG).show();
+
+          /*  View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(color);
+            snackbar.show();*/
+        }
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        connectivityReceiver = new ConnectivityReceiver();
+        registerReceiver(connectivityReceiver, intentFilter);
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
+
+
+
+    }
 
 
     @Nullable
@@ -83,6 +154,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_new);
+        checkConnection();
 
 
         linearLayout = findViewById(R.id.linear_login);
@@ -155,7 +227,8 @@ public class SignUpActivity extends AppCompatActivity {
                 enter_all_toast = lngObject.getString("EnterAllTextFields");
                 name_toast = lngObject.getString("Enteryourname");
                 mobile_registered_toast = lngObject.getString("Thismobilehasalreadyregistered");
-
+                toast_internet = lngObject.getString("GoodConnectedtoInternet");
+                toast_nointernet = lngObject.getString("NoInternetConnection");
 
 
             }
@@ -331,27 +404,24 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });*/
 
-       //with space in between nt in starting
-//
-//        final InputFilter filter1 = new InputFilter() {
-//            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-//                //String filtered = "";
-//                for (int i = start; i < end; i++) {
-//                    char character = source.charAt(i);
-//                    if (Character.isWhitespace(source.charAt(i))) {
-//                        if (dstart == 0)
-//                            return "";
-//                    }
-//                }
-//                return null;
-//            }
-//
-//        };
-//
-//
-//        name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
+     //  with space in between nt in starting
 
-      name.setFilters(new InputFilter[]{EMOJI_FILTER});
+        final InputFilter filter1 = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                //String filtered = "";
+                for (int i = start; i < end; i++) {
+                    char character = source.charAt(i);
+                    if (Character.isWhitespace(source.charAt(i))) {
+                        if (dstart == 0)
+                            return "";
+                    }
+                }
+                return null;
+            }
+
+        };
+
+        name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
 
 
        //without space
@@ -371,6 +441,8 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         password.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(12)});
+       // name.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(30)});
+
 
         continue_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -461,7 +533,18 @@ public class SignUpActivity extends AppCompatActivity {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setTextColor(Color.RED);
                     snackbar.show();
-                }*/ else if (password.equals("")) {
+                }*/
+                else if (contact.equals(sessionManager.getRegId("phone"))){
+                    System.out.println("fdgjhhijihujhgcgfhghghkkk");
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, mobile_registered_toast, Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    snackbar.show();
+                }
+                else if (password.equals("")) {
 
                     //Toast.makeText(SignUp.this, "Enter Your Password", Toast.LENGTH_SHORT).show();
                     Snackbar snackbar = Snackbar
@@ -619,8 +702,9 @@ public class SignUpActivity extends AppCompatActivity {
                         passwrd_toast = result.getString("Enterpasswordoflength6characters");
                         mob_toast = result.getString("Entervalidmobilenumber");
                         name_toast = result.getString("Enteryourname");
-                       mobile_registered_toast = result.getString("Thismobilehasalreadyregistered");
-
+                        mobile_registered_toast = result.getString("Thismobilehasalreadyregistered");
+                        toast_internet = lngObject.getString("GoodConnectedtoInternet");
+                        toast_nointernet = lngObject.getString("NoInternetConnection");
 
 
 
@@ -630,11 +714,9 @@ public class SignUpActivity extends AppCompatActivity {
                         create_acc.setText(log_regi);
                         continue_sign_up.setText(log_register);
 
-                        name.setFilters(new InputFilter[]{EMOJI_FILTER});
-
-
-
-
+                       name.setFilters(new InputFilter[]{EMOJI_FILTER});
+//
+//                        name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(12) });
 
                     }catch (Exception e){
                         e.printStackTrace();
@@ -883,5 +965,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+
+    }
 }
 

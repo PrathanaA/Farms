@@ -42,10 +42,10 @@
 
 
                         <ImageView
+                            android:id="@+id/lang_icon"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                          android:src="@drawable/united_kingdom"
                             android:textColor="#fff" />
 
                     </LinearLayout>

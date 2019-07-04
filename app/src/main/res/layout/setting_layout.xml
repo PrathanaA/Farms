@@ -40,6 +40,7 @@
                 android:id="@+id/back_feed"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:clickable="true"
                 android:gravity="left">
 
 
@@ -53,7 +54,7 @@
 
             </LinearLayout>
 
-
+r
             <TextView
 
                 android:layout_width="wrap_content"

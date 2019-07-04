@@ -36,9 +36,10 @@
 
                 <LinearLayout
                     android:id="@+id/back_feed"
-                    android:layout_width="35dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
+                    android:background="@drawable/ripple_effect"
                     android:layout_marginTop="20dp"
                     >
 

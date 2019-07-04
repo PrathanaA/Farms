@@ -150,7 +150,7 @@ public class You_Address_Fragment extends Fragment {
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.select_address_popup);
                 final TextView home = (TextView) dialog.findViewById(R.id.home_1);
-                final TextView barn = (TextView) dialog.findViewById(R.id.barn);
+               // final TextView barn = (TextView) dialog.findViewById(R.id.barn);
                 final TextView ware_house = (TextView)dialog.findViewById(R.id.ware_hus) ;
                 final TextView farm = (TextView)dialog.findViewById(R.id.farm) ;
                 final TextView others = (TextView)dialog.findViewById(R.id.othrs) ;
@@ -160,7 +160,7 @@ public class You_Address_Fragment extends Fragment {
                     lngObject = new JSONObject(sessionManager.getRegId("language"));
                     popuptxt.setText(lngObject.getString("SelectanAddressType"));
                     home.setText(lngObject.getString("Home"));
-                    barn.setText(lngObject.getString("Barn"));
+                   // barn.setText(lngObject.getString("Barn"));
                     ware_house.setText(lngObject.getString("Warehouse"));
                     farm.setText(lngObject.getString("Farm"));
                     others.setText(lngObject.getString("Others"));
@@ -185,7 +185,7 @@ public class You_Address_Fragment extends Fragment {
                     }
                 });
 
-                barn.setOnClickListener(new View.OnClickListener() {
+               /* barn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         select_address_type.setText(barn.getText().toString());
@@ -193,7 +193,7 @@ public class You_Address_Fragment extends Fragment {
                         gettingAddress("Barn");
 
                     }
-                });
+                });*/
 
                 ware_house.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -248,7 +248,7 @@ public class You_Address_Fragment extends Fragment {
             toolbar_titletxt.setText(lngObject.getString("SelectYourAdress"));
             add_new_address.setText(lngObject.getString("AddNewAddress"));
             select_address_type.setText(lngObject.getString("Home"));
-            ad_list=(lngObject.getString("addressesareaddedin"));
+            //ad_list=(lngObject.getString("addressesareaddedin"));
 
 
         } catch (JSONException e) {
@@ -289,7 +289,7 @@ public class You_Address_Fragment extends Fragment {
                         }
 
                         item_list = String.valueOf(new_address_beanArrayList.size());
-                        address_list.setText(item_list+" " + ad_list );
+                        address_list.setText(item_list+" " + "Addresses are added" );
 
 
                         mAdapter.notifyDataSetChanged();

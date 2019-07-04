@@ -61,10 +61,13 @@
                 android:contentInsetEnd="0dp"
                 app:contentInsetRight="0dp"
                 app:contentInsetEnd="0dp">
+
+
                 <LinearLayout
                     android:id="@+id/back_feed"
-                    android:layout_width="35dp"
+                    android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:background="@drawable/ripple_effect"
                     >
                     <ImageView
                         android:layout_width="20dp"

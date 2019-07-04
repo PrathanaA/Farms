@@ -1,11 +1,13 @@
 package com.FarmPe.Farmer.Adapter;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +50,7 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView prod_price,prod_name,duration,farmer_name,location,connect;
-
+       public LinearLayout edit,linear_looking_main;
 
 
 
@@ -59,15 +61,15 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
             prod_price=view.findViewById(R.id.prod_price);
           //  prod_name=view.findViewById(R.id.prod_name);
          //   duration=view.findViewById(R.id.duration);
-            farmer_name=view.findViewById(R.id.farmer_name);
+          //  farmer_name=view.findViewById(R.id.farmer_name);
             location=view.findViewById(R.id.location);
-            connect=view.findViewById(R.id.connect);
+            linear_looking_main=view.findViewById(R.id.linear_looking_main);
+          //  connect=view.findViewById(R.id.connect);
             image=view.findViewById(R.id.prod_img);
+            edit=view.findViewById(R.id.edit);
           //  session=new SessionManager(activity);
             //linearLayout=view.findViewById(R.id.dialog_list);
             //confirmbutton=view.findViewById(R.id.delivery2);
-
-
 
         }
 
@@ -88,12 +90,24 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
         holder.prod_price.setText(products.getProd_price());
       //  holder.prod_name.setText(products.getModelname());
        // holder.duration.setText(products.getDuration());
-        holder.farmer_name.setText(products.getFarmer_name());
+      //  holder.farmer_name.setText(products.getFarmer_name());
         holder.location.setText(products.getLocation()+", "+"Karnataka");
 
 
 
-        holder.connect.setOnClickListener(new View.OnClickListener() {
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width_px = Resources.getSystem().getDisplayMetrics().widthPixels;
+        int height_px =Resources.getSystem().getDisplayMetrics().heightPixels;
+        int height_set=(int)(height_px*0.6);
+        System.out.println("height&Width"+width_px+","+height_px);
+        LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width_px,height_set);
+        holder.linear_looking_main.setLayoutParams(parms);
+
+
+
+        holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -122,7 +136,7 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
             lngObject = new JSONObject(session.getRegId("language"));
 
 
-            holder.connect.setText(lngObject.getString("connect"));
+           // holder.connect.setText(lngObject.getString("connect"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -130,7 +144,7 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
 
      //   holder.duration.setVisibility(View.GONE);
        // Glide.with(activity).load(products.getImage())
-        Glide.with(activity).load(R.drawable.poultry)
+        Glide.with(activity).load(products.getImage())
 
                 .thumbnail(0.5f)
                 .crossFade()

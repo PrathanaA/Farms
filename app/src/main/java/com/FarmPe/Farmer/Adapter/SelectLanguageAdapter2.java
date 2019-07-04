@@ -99,7 +99,6 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
 
         try{
 
-
               JSONObject jsonObject = new JSONObject();
               jsonObject.put("Id",id);
 
@@ -143,6 +142,8 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
                            LoginActivity.pass_toast = result.getString("EnterPassword");
                            LoginActivity.toast_invalid = result.getString("InvalidCredentials");
                            LoginActivity.toast_click_back = result.getString("PleaseclickBACKagaintoexit");
+                           LoginActivity.toast_internet = result.getString("GoodConnectedtoInternet");
+                           LoginActivity.toast_nointernet = result.getString("NoInternetConnection");
 
 
 

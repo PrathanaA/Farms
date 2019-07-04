@@ -1,7 +1,5 @@
 package com.FarmPe.Farmer.Fragment;
 
-
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -95,6 +93,7 @@ public class ReferAndEarncopy extends Fragment {
         });
 
 
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +103,7 @@ public class ReferAndEarncopy extends Fragment {
 
             }
         });
+
 
         Resources resources = getResources();
         PackageManager pm = getActivity().getPackageManager();

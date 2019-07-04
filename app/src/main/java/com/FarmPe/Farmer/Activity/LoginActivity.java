@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,11 +53,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
      public static TextView register, log_in, forgot_pass,mob_text_signin;
      public static EditText mobile_no, pass;
      public static String mobile,loc_text;
-     LinearLayout linearLayout;
      public String status,userId;
      boolean doubleBackToExitPressedOnce = false;
 
@@ -65,13 +66,22 @@ public class LoginActivity extends AppCompatActivity {
 
      public static TextInputLayout text_mobile,text_pass;
 
+    ConnectivityReceiver connectivityReceiver;
+    @Override
+    protected void onStop()
+    {
+        unregisterReceiver(connectivityReceiver);
+        super.onStop();
+    }
+
 
      LinearLayout back_xlogin;
      LinearLayout coordinatorLayout;
      public static CheckBox remember_me;
      DatabaseHelper myDb;
+    public static boolean connectivity_check;
      TextInputLayout textInputLayout,textInputLayout_pass;
-     public static  String password,mob_toast,mobile_string,pass_toast,toast_invalid,toast_click_back;
+     public static  String password,mob_toast,mobile_string,pass_toast,toast_invalid,toast_click_back,toast_internet,toast_nointernet;
      EditText spn_localize;
      public static   JSONObject lngObject;
      JSONArray lng_array;
@@ -82,18 +92,72 @@ public class LoginActivity extends AppCompatActivity {
     public static TextView welcome_back, createaccount, change_lang,farmPe_title ,enterPassword, forgotPassword;
 
 
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        showSnack(isConnected);
+    }
+
+
+    private void showSnack(boolean isConnected) {
+        String message = null;
+        int color=0;
+        if (isConnected) {
+            if(connectivity_check) {
+                message = "Good! Connected to Internet";
+                color = Color.WHITE;
+                Snackbar snackbar = Snackbar.make(coordinatorLayout,toast_internet, Snackbar.LENGTH_LONG);
+                View sbView2 = snackbar.getView();
+                TextView textView = (TextView) sbView2.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
+                textView.setTextColor(Color.WHITE);
+                snackbar.show();
+
+                //setting connectivity to false only on executing "Good! Connected to Internet"
+                connectivity_check=false;
+            }
+
+        }  else {
+            message = "No Internet Connection";
+            color = Color.RED;
+            //setting connectivity to true only on executing "Sorry! Not connected to internet"
+            connectivity_check=true;
+            // Snackbar snackbar = Snackbar.make(coordinatorLayout,message, Snackbar.LENGTH_LONG);
+            Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG).show();
+
+          /*  View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(color);
+            snackbar.show();*/
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        connectivityReceiver = new ConnectivityReceiver();
+        registerReceiver(connectivityReceiver, intentFilter);
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
+
+
+
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
-
-        linearLayout=findViewById(R.id.main_layout);
+        checkConnection();
         welcome_back = findViewById(R.id.welcome_back);
         createaccount = findViewById(R.id.create_acc);
         change_lang = findViewById(R.id.change_lang);
         text_mobile = findViewById(R.id.text_name);
         text_pass = findViewById(R.id.text_pass);
+
 
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
@@ -104,12 +168,14 @@ public class LoginActivity extends AppCompatActivity {
         mobile_no = findViewById(R.id.mob_no);
         pass = findViewById(R.id.pass);
         //back_xlogin = view.findViewById(R.id.arrow_layout);
-        coordinatorLayout =findViewById(R.id.main_layout);
+        coordinatorLayout =findViewById(R.id.main_layou1);
         remember_me = findViewById(R.id.remember_me);
         loc_text="+91";
-        setupUI(linearLayout);
+        setupUI(coordinatorLayout);
         myDb = new DatabaseHelper(this);
         edittext_move(mobile_no, pass);
+
+
 
 
 
@@ -187,6 +253,8 @@ public class LoginActivity extends AppCompatActivity {
                 mob_toast = lngObject.getString("EnterPhoneNo");
                 toast_invalid = lngObject.getString("InvalidCredentials");
                 toast_click_back = lngObject.getString("PleaseclickBACKagaintoexit");
+                toast_internet = lngObject.getString("GoodConnectedtoInternet");
+                toast_nointernet = lngObject.getString("NoInternetConnection");
 
 
             }
@@ -304,6 +372,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
+
+
+
         log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -317,7 +389,7 @@ public class LoginActivity extends AppCompatActivity {
                     mobile_no.requestFocus();
 
                     Snackbar snackbar = Snackbar
-                            .make(linearLayout, mob_toast, Snackbar.LENGTH_LONG);
+                            .make(coordinatorLayout, mob_toast, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
@@ -349,7 +421,7 @@ public class LoginActivity extends AppCompatActivity {
                     pass.requestFocus();
 
                     Snackbar snackbar = Snackbar
-                            .make(linearLayout, pass_toast, Snackbar.LENGTH_LONG);
+                            .make(coordinatorLayout, pass_toast, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
@@ -360,7 +432,7 @@ public class LoginActivity extends AppCompatActivity {
                     pass.requestFocus();
 
                     Snackbar snackbar = Snackbar
-                            .make(linearLayout, "Password should not contain spaces", Snackbar.LENGTH_LONG);
+                            .make(coordinatorLayout, "Password should not contain spaces", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
@@ -454,6 +526,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
+
     private void getLang(int id) {
 
         try{
@@ -487,6 +561,8 @@ public class LoginActivity extends AppCompatActivity {
                         pass_toast = result.getString("EnterPassword");
                         toast_invalid = result.getString("InvalidCredentials");
                         toast_click_back = result.getString("PleaseclickBACKagaintoexit");
+                        toast_internet = result.getString("GoodConnectedtoInternet");
+                        toast_nointernet = result.getString("NoInternetConnection");
 
 
 
@@ -496,7 +572,7 @@ public class LoginActivity extends AppCompatActivity {
                         text_mobile.setHint(log_mobile);
                         //farmPe_title.setText(log_title);
 
-                        forgot_pass.setText(log_forgot_passwrd);
+                        forgot_pass.setText(log_forgot_passwrd+"?");
                         text_pass.setHint(log_password);
                         welcome_back.setText(log_login);
                         createaccount.setText(log_register);
@@ -601,6 +677,7 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
+
     private void AddData(String userId,String pass) {
         System.out.println("kkkkkkkkkkkkk"+userId);
         System.out.println("sssssssssssss"+pass);
@@ -672,4 +749,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
 }

@@ -44,8 +44,9 @@
 
                     <LinearLayout
                         android:id="@+id/back_feed"
-                        android:layout_width="35dp"
+                        android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:background="@drawable/ripple_effect"
                         android:layout_marginLeft="10dp"
                         >
 
@@ -58,7 +59,6 @@
                             android:src="@drawable/go_back_left_arrow"
                             style="@style/SelectableItemBackground"
                             android:background="?attr/selectableItemBackgroundBorderless"
-
                             />
 
                     </LinearLayout>

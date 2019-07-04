@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -28,13 +29,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Thank_U_New extends AppCompatActivity {
+public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
    LinearLayout back_thank_u;
    TextView thanktu_submit,otp_text,thank_title;
    EditText enter_otp,otp_forgot_pass;
     JSONObject lngObject;
-    public  static String toast_otp,toast_invalid_otp;
+    public  static String toast_otp,toast_invalid_otp,toast_internet,toast_nointernet;
     public  static String otp_get_text,sessionId;
     LinearLayout linearLayout;
     private Context mContext=Thank_U_New.this;
@@ -42,16 +43,85 @@ public class Thank_U_New extends AppCompatActivity {
    BroadcastReceiver receiver;
     SessionManager sessionManager;
 
+
+
+    public static boolean connectivity_check;
+
+    ConnectivityReceiver connectivityReceiver;
+    @Override
+
+    protected void onStop()
+    {
+        unregisterReceiver(connectivityReceiver);
+        super.onStop();
+    }
+
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        showSnack(isConnected);
+    }
+
+
+    private void showSnack(boolean isConnected) {
+        String message = null;
+        int color=0;
+        if (isConnected) {
+            if(connectivity_check) {
+                message = "Good! Connected to Internet";
+                color = Color.WHITE;
+                Snackbar snackbar = Snackbar.make(linearLayout,toast_internet, Snackbar.LENGTH_LONG);
+                View sbView = snackbar.getView();
+                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setBackgroundColor(ContextCompat.getColor(Thank_U_New.this,R.color.orange));
+                textView.setTextColor(Color.WHITE);
+                snackbar.show();
+
+                //setting connectivity to false only on executing "Good! Connected to Internet"
+                connectivity_check=false;
+            }
+
+        } else {
+            message = "No Internet Connection";
+            color = Color.RED;
+            //setting connectivity to true only on executing "Sorry! Not connected to internet"
+            connectivity_check=true;
+            // Snackbar snackbar = Snackbar.make(coordinatorLayout,message, Snackbar.LENGTH_LONG);
+            Snackbar.make(findViewById(android.R.id.content),toast_nointernet, Snackbar.LENGTH_LONG).show();
+
+          /*  View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(color);
+            snackbar.show();*/
+        }
+    }
+
+
+
     @Override
     public void onResume() {
         LocalBroadcastManager.getInstance(Thank_U_New.this).registerReceiver(receiver, new IntentFilter("otp_forgot"));
+
         super.onResume();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        connectivityReceiver = new ConnectivityReceiver();
+        registerReceiver(connectivityReceiver, intentFilter);
+        MyApplication.getInstance().setConnectivityListener(this);
+        // register connection status listener
+
+
     }
+
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        checkConnection();
         setContentView(R.layout.thank_you_otp);
         linearLayout=findViewById(R.id.main_layout);
         back_thank_u=findViewById(R.id.arrow_thank_u);
@@ -80,6 +150,8 @@ public class Thank_U_New extends AppCompatActivity {
             enter_otp.setHint(lngObject.getString("EntertheOTP"));
             toast_otp = lngObject.getString("EntertheOTP");
             toast_invalid_otp = lngObject.getString("InvalidOTP");
+            toast_internet = lngObject.getString("GoodConnectedtoInternet");
+            toast_nointernet = lngObject.getString("NoInternetConnection");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -225,4 +297,8 @@ inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowT
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        showSnack(isConnected);
+    }
 }

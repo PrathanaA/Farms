@@ -6,12 +6,14 @@ public class Urls {
    private static final String ROOT_URL = "http://3.17.6.57:9393/api/";///DEV
    // private static final String ROOT_URL = "http://3.17.6.57:8888//api/";//PRO
 
+
+    public static final String IMAGE_ROOT_URL = "http://3.17.6.57:9393";//Image root
+
     public static final String Add_New_Address = ROOT_URL+"MasterTable/AddUserAddress";
  public static final String GetFarmerDetailsList = ROOT_URL+"MasterTable/GetFarmersList";
 
     public static final String LOGIN=ROOT_URL+"Auth/ValidateUser";
     public static final String SIGNUP=ROOT_URL+"Auth/RegisterUser";
-
     public static final String GetAllCrops=ROOT_URL+"Crops/GetCrops";
     public static final String AddToCart=ROOT_URL+"Order/AddToCart";
     public static final String Languages=ROOT_URL+"MasterTable/GetLanguages";

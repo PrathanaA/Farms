@@ -1,7 +1,6 @@
 package com.FarmPe.Farmer.Fragment;
 
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -78,29 +77,24 @@ public class Notification_Recyc_Fragment extends Fragment {
         }
 
 
-        switchCompat.setOnClickListener(new View.OnClickListener() {
+//        switchCompat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//            }
+//        });
+
+        back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
             }
         });
-
-//        back_feed.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(getArguments().getString("navigation_from").equals("home")){
-//                    FragmentManager fm = getActivity().getSupportFragmentManager();
-//                    fm.popBackStack ("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//
-//                } /*else if(getArguments().getString("navigation_from").equals("setting")){
-//                    FragmentManager fm = getActivity().getSupportFragmentManager();
-//                    fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//
-//                }*/
-//            }
-//        });
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -113,7 +107,7 @@ public class Notification_Recyc_Fragment extends Fragment {
 
 
                         FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.popBackStack("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 
 
@@ -132,9 +126,12 @@ public class Notification_Recyc_Fragment extends Fragment {
         recyclerView1.setLayoutManager(mLayoutManager_farm1);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
+
         farmadapter = new Notification_Adapter1(getActivity(),newOrderBeansList);
         farmadapter1 =new Notification_Adapter2(getActivity(),newmember_List);
+
         recyclerView.setAdapter(farmadapter);
+
         recyclerView1.setAdapter(farmadapter1);
 
 
@@ -261,7 +258,6 @@ public void  getnot(){
                 System.out.println("ffffffnn" + result);
 
 
-
                 try{
                     noti_array = result.getJSONArray("NotificationMasterList");
                     for(int i = 0;i<noti_array.length();i++){
@@ -276,7 +272,6 @@ public void  getnot(){
 
                             notification_recy_bean = new Notification_recy_bean(jsonObject1.getString("NotificationAction"), jsonObject1.getString("NotificationCode"), jsonObject1.getString("NotificationID"));
                             newmember_List.add(notification_recy_bean);
-
 
 
                         }

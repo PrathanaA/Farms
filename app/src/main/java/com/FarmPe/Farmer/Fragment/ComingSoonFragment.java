@@ -14,7 +14,7 @@ import com.FarmPe.Farmer.R;
 
 public class ComingSoonFragment extends Fragment {
     Fragment selectedFragment;
-    LinearLayout backfeed;
+   public static LinearLayout backfeed;
 
     public static ComingSoonFragment newInstance() {
         ComingSoonFragment fragment = new ComingSoonFragment();

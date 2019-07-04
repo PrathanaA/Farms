@@ -3,13 +3,12 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="450dp"
     android:layout_marginLeft="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#000"
-    android:layout_marginBottom="10dp"
-
+    android:id="@+id/linear_looking_main"
 
     android:tag="cards main container">
 
@@ -19,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/border_grey_looking"
+        android:layout_marginBottom="10dp"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -38,11 +38,33 @@
         </LinearLayout>
 
 
+
+        <LinearLayout
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/border_round_grey"
+                android:src="@drawable/ic_edit_pencil" />
+
+
+        </LinearLayout>
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="bottom"
-
+            android:weightSum="100"
             android:orientation="vertical">
 
             <LinearLayout
@@ -50,7 +72,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="#66000000"
+                android:weightSum="100"
                 >
+
 
                 <TextView
                     android:id="@+id/prod_price"
@@ -65,15 +89,17 @@
                     android:textColor="#f1f1f1"
                     android:textSize="16dp" />
 
-                <TextView
-                    android:id="@+id/farmer_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Dairy Farm"
-                    android:textColor="#f1f1f1"
-                    android:textSize="12dp" />
+                <!--
+                                <TextView
+                                    android:id="@+id/farmer_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:paddingLeft="10dp"
+                                    android:text="Dairy Farm"
+                                    android:textColor="#f1f1f1"
+                                    android:textSize="12dp" />
+                -->
 
                 <TextView
                     android:id="@+id/location"
@@ -88,74 +114,9 @@
                     android:textSize="12dp" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:weightSum="100"
-                    >
 
-                    <LinearLayout
-                        android:id="@+id/shortlist_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="30"
-                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/short_list_image"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star_white"
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/segoeui"
-                            android:layout_weight="30"
-                            android:text="Shortlist"
-                            android:layout_marginBottom="10dp"
-                            android:paddingTop="6dp"
-                            android:layout_marginLeft="10dp"
-                            android:textColor="#f1f1f1"
-                            android:textSize="14dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="70"
-                        android:gravity="right">
-
-                        <TextView
-                            android:id="@+id/connect"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/segoeui"
-
-                            android:text="CONNECT"
-                            android:background="@drawable/border_red"
-                            android:paddingVertical="8dp"
-                            android:paddingHorizontal="15dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_gravity="right"
-                            android:drawablePadding="10dp"
-                            android:drawableLeft="@drawable/ic_air_conditioner"
-                            android:textColor="#fff"
-                            android:textSize="14dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-            <!--
+                <!--
                         <TextView
                             android:id="@+id/connect"
                             android:layout_width="match_parent"
@@ -175,9 +136,9 @@
 
 
 
+            </LinearLayout>
+
         </LinearLayout>
-
-
 
     </RelativeLayout>
 
@@ -325,3 +286,8 @@
     -->
 
 </LinearLayout>
+
+
+
+
+

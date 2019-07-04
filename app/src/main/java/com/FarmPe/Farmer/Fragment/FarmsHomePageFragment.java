@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.FarmPe.Farmer.Fragment.HomeMenuFragment.searchView;
+
 
 public class FarmsHomePageFragment extends Fragment {
 
@@ -80,33 +80,33 @@ public class FarmsHomePageFragment extends Fragment {
        /* farmadapter=new FarmsHomeAdapter(getActivity(),newOrderBeansList);
         recyclerView.setAdapter(farmadapter);
 */
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//                searchView.clearFocus();
+//                System.out.println("lknkknknknknknknknnk");
+//             /*   if(list.contains(query)){
+//                    adapter.getFilter().filter(query);
+//                }else{
+//                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+//                }*/
+//                return false;
+//
+//            }
 
-                searchView.clearFocus();
-                System.out.println("lknkknknknknknknknnk");
-             /*   if(list.contains(query)){
-                    adapter.getFilter().filter(query);
-                }else{
-                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
-                }*/
-                return false;
-
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public boolean onQueryTextChange(String newText) {
-               // back_feed.setVisibility(View.GONE);
-                //title.setVisibility(View.GONE);
-                System.out.println("lknkknknknknknknknnk"+newText);
-                sorting(newText);
-
-
-                return false;
-            }
-        });
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//               // back_feed.setVisibility(View.GONE);
+//                //title.setVisibility(View.GONE);
+//                System.out.println("lknkknknknknknknknnk"+newText);
+//                sorting(newText);
+//
+//
+//                return false;
+//            }
+//        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
         {

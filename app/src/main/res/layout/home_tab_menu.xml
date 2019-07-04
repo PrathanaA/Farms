@@ -11,66 +11,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <!-- <ScrollView
-        android:id="@+id/scroll_view"
+    <!-- <ScrollView
+         android:id="@+id/scroll_view"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:descendantFocusability="blocksDescendants"
+         android:focusableInTouchMode="true">-->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants"
-        android:focusableInTouchMode="true">-->
+        android:background="#000"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#000"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#000"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
+                <!-- <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="30"
+        android:layout_gravity="start"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        >-->
 
-                    <!-- <LinearLayout
-            android:id="@+id/menu"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="30"
-            android:layout_gravity="start"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            >-->
-
-                    <RelativeLayout
-                        android:id="@+id/menu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="start"
-                        android:layout_weight="22">
+                <RelativeLayout
+                    android:id="@+id/menu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:layout_weight="15">
 
 
-                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/prod_img1"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/avatarmale"
-                            app:civ_border_color="#ffffff"
-                            app:civ_border_width="0.5dp" />
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/prod_img"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/avatarmale"
+                        app:civ_border_color="#ffffff"
+                        app:civ_border_width="0.5dp" />
 
-                        <LinearLayout
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginLeft="30dp"
-                            android:background="@drawable/border_round_grey"
-                            >
+                    <LinearLayout
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/border_round_grey"
+                        >
 
                         <ImageView
                             android:layout_width="10dp"
@@ -79,150 +79,164 @@
                             android:layout_marginLeft="5dp"
                             android:src="@drawable/ic_menu_button" />
 
-                        </LinearLayout>
-                    </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
 
-                    <!-- </LinearLayout>-->
+                <!-- </LinearLayout>-->
 
-                   <!-- <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="70"
+                <!-- <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="70"
+                     android:gravity="center_vertical"
+                     android:orientation="horizontal"
+                     android:weightSum="100"
+
+                     >-->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="62"
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/search"
+                            android:layout_width="100dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/farmer_logo"
+
+                            />
+
+                    </LinearLayout>
+
+                    <!--<LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_search_filled"
+
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:weightSum="100"
-
-                        >-->
-
-                        <LinearLayout
-                           android:id="@+id/search"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="55"
-                            android:layout_marginVertical="5dp"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/border_grey"
-                            android:orientation="horizontal"
-                            android:weightSum="100"
-                            >
-
-                           <!-- <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp"
-                                >
-
-                                <ImageView
-                                    android:id="@+id/search"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:src="@drawable/ic_search_filled"
-
-                                    />
-
-                            </LinearLayout>-->
-
-                            <android.support.v7.widget.SearchView
-                                android:id="@+id/search1"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_gravity="end"
-                                android:animateLayoutChanges="true"
-                                android:gravity="right"
-                                app:searchIcon="@drawable/ic_search_filled"
-                                app:iconifiedByDefault="true"
-                                app:queryHint="Search" />
-
-
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="23"
-                            android:gravity="end">
-
-                           <!-- <ImageView
-                                android:id="@+id/search"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/ic_search_filled"
-
-                                />-->
-
-                            <RelativeLayout
-                                android:id="@+id/notification_bell"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
-
-                                android:gravity="end"
-                                >
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-
-                                    >
-
-                                <ImageView
-                                    android:id="@+id/notification"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:src="@drawable/notification"
-
-                                    />
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:id="@+id/cart_count"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginLeft="21dp"
-                                    android:background="@drawable/border_round_grey"
-                                    android:gravity="center"
-                                    android:textStyle="bold"
-                                    android:text="1"
-                                    android:textColor="#cb202d"
-                                    android:textSize="10dp" />
-
-                            </RelativeLayout>
-
-                            <ImageView
-                                android:id="@+id/plus_sign_add"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="10dp"
-                                android:src="@drawable/plus_sign_add"
-
-                                />
-                        </LinearLayout>
-
-
-                   <!-- </LinearLayout>-->
+                        android:paddingHorizontal="5dp"
+                        android:text="Search"
+                        android:textColor="#bfbfbf"
+                        android:textSize="14dp" />
+-->
 
 
                 </LinearLayout>
 
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="23"
+                    android:gravity="end">
+
+                    <!-- <ImageView
+                         android:id="@+id/search"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center_vertical"
+                         android:src="@drawable/ic_search_filled"
+
+                         />-->
+
+                    <RelativeLayout
+                        android:id="@+id/notification_bell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+
+                        android:gravity="end"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+
+                            >
+
+                            <ImageView
+                                android:id="@+id/notification"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/notification"
+
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/cart_count"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="21dp"
+                            android:background="@drawable/border_round_grey"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="1"
+                            android:textColor="#cb202d"
+                            android:textSize="10dp" />
+
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/plus_sign_add"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/plus_sign_add"
+
+                        />
+                </LinearLayout>
+
+
+                <!-- </LinearLayout>-->
+
+
             </LinearLayout>
 
-            <FrameLayout
-                android:id="@+id/first_full_frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-            </FrameLayout>
-
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/first_full_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </FrameLayout>
+
+    </LinearLayout>
     <!--</ScrollView>-->
 </LinearLayout>

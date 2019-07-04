@@ -147,11 +147,11 @@ public class Update_Address_Fragment extends Fragment {
 
         linear_name = view.findViewById(R.id.linea_name1);
         linear_mobile = view.findViewById(R.id.linea_mobile1);
-        linear_pincode= view.findViewById(R.id.linea_pincode1);
-        linear_house= view.findViewById(R.id.linear_houseno);
+       //linear_pincode= view.findViewById(R.id.linea_pincode1);
+       // linear_house= view.findViewById(R.id.linear_houseno);
         linear_street= view.findViewById(R.id.linea_street);
-        linear_landmark= view.findViewById(R.id.linea_landmark);
-        linear_city= view.findViewById(R.id.linea_city);
+       // linear_landmark= view.findViewById(R.id.linea_landmark);
+        //linear_city= view.findViewById(R.id.linea_city);
 
 
         sessionManager = new SessionManager(getActivity());
@@ -269,7 +269,7 @@ public class Update_Address_Fragment extends Fragment {
 
                 ImageView image = (ImageView) dialog.findViewById(R.id.close_popup);
                 final TextView home =(TextView)dialog.findViewById(R.id.home_1);
-                final TextView barn = (TextView)dialog.findViewById(R.id.barn) ;
+               //final TextView barn = (TextView)dialog.findViewById(R.id.barn) ;
                 final TextView ware_house = (TextView)dialog.findViewById(R.id.ware_hus) ;
                 final TextView farm = (TextView)dialog.findViewById(R.id.farm) ;
                 final TextView others = (TextView)dialog.findViewById(R.id.othrs) ;
@@ -291,14 +291,14 @@ public class Update_Address_Fragment extends Fragment {
                 });
 
 
-                barn.setOnClickListener(new View.OnClickListener() {
+               /* barn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         select_address.setText(barn.getText().toString());
                         dialog.dismiss();
 
                     }
-                });
+                });*/
 
                 ware_house.setOnClickListener(new View.OnClickListener() {
                     @Override

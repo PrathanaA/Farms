@@ -10,15 +10,55 @@
     android:background="#000"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@android:color/white"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Requests"
+                    android:textSize="20dp"
+                    android:textColor="#fff"
+
+                    android:id="@+id/toolbar_title" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Filter"
+                    android:textSize="14dp"
+                    android:textColor="#fff"
+                    android:gravity="right"
+                    android:layout_marginHorizontal="10dp"
+                    />
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+    </LinearLayout>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_looking"
         android:layout_width="match_parent"
         android:background="#000"
-        android:paddingRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>

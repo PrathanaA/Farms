@@ -18,10 +18,13 @@ import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Crop_Post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +50,7 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView language_name;
         public LinearLayout submit_langu;
-        public ImageView right_img;
+        public ImageView right_img,lang_image;
 
 
         public MyViewHolder(View view) {
@@ -55,6 +58,7 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
             language_name=view.findViewById(R.id.lang_text);
             submit_langu=view.findViewById(R.id.submit_langu_layout);
             right_img=view.findViewById(R.id.right_img);
+            lang_image = view.findViewById(R.id.lang_icon);
 
         }
 
@@ -68,16 +72,19 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
 
     }
 
+
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final SelectLanguageBean products = productList.get(position);
 
-        if (sessionManager.getRegId("language_name").equals(products.getVendor())){
+        if (sessionManager.getRegId("language_name").equals(products.getVendor())) {
             holder.right_img.setImageResource(R.drawable.ic_verified_filled_grey_white);
             //  holder.lng_rad_but.setBackgroundColor(Color.GREEN);
 
 
-        }else {
+        } else {
+
 
             holder.right_img.setImageResource(R.drawable.filled_grey_circle);
 
@@ -85,10 +92,20 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
 
             //  holder.lng_rad_but.setBackgroundColor(Color.WHITE);
 
-
         }
 
         holder.language_name.setText(products.getVendor());
+
+        System.out.println("11111lng" + Urls.IMAGE_ROOT_URL + products.getImageicon() );
+       // URL farmpe =  Urls.IMAGE_ROOT_URL + products.getImageicon();
+
+        Glide.with(activity).load("http://3.17.6.57:9393//content//Images//LangIcons//Language.png")
+
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.lang_image);
+
 
         holder.submit_langu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,14 +115,11 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
                 sessionManager.saveLanguage_name(products.getVendor());
                 getLang(products.getLanguageid());
 
-
-
-
             }
         });
-
-
     }
+
+
 
     private void getLang(int id) {
 
