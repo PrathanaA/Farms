@@ -224,7 +224,6 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
                         add_id =products.getAdd_id();
 
                         try{
-
                             JSONObject jsonObject  = new JSONObject();
                             jsonObject.put("Id",add_id);
                             jsonObject.put("UserId",sessionManager.getRegId("userId"));

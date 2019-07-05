@@ -50,7 +50,8 @@ public class HoblisAdapter extends RecyclerView.Adapter<HoblisAdapter.HoblisMyVi
             public void onClick(View view) {
                 hobliid=stateBean.getId();
                 Add_New_Address_Fragment.hobli.setText(holder.statename.getText().toString());
-                Add_New_Address_Fragment.grade_dialog.dismiss();
+                Add_New_Address_Fragment.drawer.closeDrawers();
+                //  Add_New_Address_Fragment.grade_dialog.dismiss();
 
 
             }

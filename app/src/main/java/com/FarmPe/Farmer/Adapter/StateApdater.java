@@ -48,7 +48,8 @@ public class StateApdater extends RecyclerView.Adapter<StateApdater.MyStateHolde
 
                 stateid=stateBean.getId();
                 Add_New_Address_Fragment.state.setText(holder.statename.getText().toString());
-                Add_New_Address_Fragment.grade_dialog.dismiss();
+                Add_New_Address_Fragment.drawer.closeDrawers();
+                //   Add_New_Address_Fragment.grade_dialog.dismiss();
 
             }
         });

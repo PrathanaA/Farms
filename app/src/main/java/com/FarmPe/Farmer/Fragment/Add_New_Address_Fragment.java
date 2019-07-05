@@ -33,12 +33,14 @@ import android.widget.TextView;
 
 
 import com.FarmPe.Farmer.Adapter.DistrictAdapter;
+import com.FarmPe.Farmer.Adapter.FarmsImageAdapter;
 import com.FarmPe.Farmer.Adapter.HoblisAdapter;
 import com.FarmPe.Farmer.Adapter.Sell_Location_Adapter;
 import com.FarmPe.Farmer.Adapter.StateApdater;
 import com.FarmPe.Farmer.Adapter.TalukAdapter;
 import com.FarmPe.Farmer.Adapter.VillageAdapter;
 import com.FarmPe.Farmer.Adapter.You_Address_Adapter;
+import com.FarmPe.Farmer.Bean.FarmsImageBean;
 import com.FarmPe.Farmer.Bean.StateBean;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
@@ -116,6 +118,9 @@ public class  Add_New_Address_Fragment extends Fragment {
         //house_numb = view.findViewById(R.id.house_no);
         street_name = view.findViewById(R.id.street);
         //landmrk = view.findViewById(R.id.landmark_1);
+
+
+
 
         add_new_address = view.findViewById(R.id.add_address);
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -368,13 +373,12 @@ public class  Add_New_Address_Fragment extends Fragment {
         });
 
 
-
         search.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 //adapter.getFilter().filter(cs);
-
+                sorting(cs.toString());
 
             }
 
@@ -471,10 +475,6 @@ public class  Add_New_Address_Fragment extends Fragment {
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-                StateBean item1 = new StateBean("Karnataka","29");
-
-                stateBeanList.add(item1);
-
                 stateApdater = new StateApdater(stateBeanList,getActivity());
 
                 recyclerView.setAdapter(stateApdater);
@@ -484,8 +484,6 @@ public class  Add_New_Address_Fragment extends Fragment {
 
             }
         });
-
-
 
 
 
@@ -854,7 +852,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                        // sorting(talukBeanList);
 
                         talukAdapter.notifyDataSetChanged();
-                        grade_dialog.show();
+                       // grade_dialog.show();
 
                     }catch (Exception e){
                         e.printStackTrace();
@@ -899,7 +897,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                        // sorting(hobliBeanList);
 
                         hoblisAdapter.notifyDataSetChanged();
-                        grade_dialog.show();
+                      //  grade_dialog.show();
 
 
 
@@ -942,7 +940,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                         //sorting(villageBeanList);
 
                         villageAdapter.notifyDataSetChanged();
-                        grade_dialog.show();
+                     //   grade_dialog.show();
 
 
 
@@ -1262,6 +1260,24 @@ public class  Add_New_Address_Fragment extends Fragment {
     };
 
 
+
+    public  void sorting(String filter_text){
+
+        stateBeanList.clear();
+        for (StateBean composeMsgOrderSecondBean: stateBeanList) {
+            System.out.println("llllllllllllllll"+composeMsgOrderSecondBean.getName());
+            final String text = composeMsgOrderSecondBean.getName().toLowerCase();
+
+
+            if (text.contains(filter_text)){
+
+                stateBeanList.add(composeMsgOrderSecondBean);
+            }
+        }
+
+        stateApdater.notifyDataSetChanged();
+
+    }
 
 }
 

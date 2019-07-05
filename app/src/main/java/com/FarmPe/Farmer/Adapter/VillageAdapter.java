@@ -49,7 +49,8 @@ public class VillageAdapter extends RecyclerView.Adapter<VillageAdapter.HoblisMy
             public void onClick(View view) {
                villageid = stateBean.getId();
                 Add_New_Address_Fragment.village.setText(holder.statename.getText().toString());
-                Add_New_Address_Fragment.grade_dialog.dismiss();
+                Add_New_Address_Fragment.drawer.closeDrawers();
+                // Add_New_Address_Fragment.grade_dialog.dismiss();
             }
         });
     }

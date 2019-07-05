@@ -39,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -88,7 +89,7 @@ public class UpdateAccDetailsFragment extends Fragment {
     LinearLayout update_btn,linearLayout;
     Bitmap selectedImage,imageB;
     EditText profile_name,profile_phone,profile_mail,profile_passwrd;
-    ImageView prod_img;
+    CircleImageView prod_img;
     private static int RESULT_LOAD_IMG = 1;
     private int PICK_IMAGE_REQUEST = 1;
     Bitmap bitmap;
@@ -101,6 +102,7 @@ public class UpdateAccDetailsFragment extends Fragment {
         UpdateAccDetailsFragment fragment = new UpdateAccDetailsFragment();
         return fragment;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -129,10 +131,11 @@ public class UpdateAccDetailsFragment extends Fragment {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, 100);
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // to go to gallery
+                startActivityForResult(i, 100); // on activity method will execute
             }
         });
+
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,7 +279,7 @@ public class UpdateAccDetailsFragment extends Fragment {
                         profile_name.setFilters(new InputFilter[]{EMOJI_FILTER});
                         profile_phone.setFilters(new InputFilter[]{EMOJI_FILTER});
                         profile_mail.setFilters(new InputFilter[]{EMOJI_FILTER});
-                     //   profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
+                        //   profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
 
                         Glide.with(getActivity()).load(ProfileImage)
 
@@ -304,14 +307,14 @@ public class UpdateAccDetailsFragment extends Fragment {
         profile_passwrd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              if(profile_passwrd.length()<6){
-                  pass_tick.setVisibility(View.GONE);
+                if(profile_passwrd.length()<6){
+                    pass_tick.setVisibility(View.GONE);
 
 
-              }else{
-                  pass_tick.setVisibility(View.VISIBLE);
+                }else{
+                    pass_tick.setVisibility(View.VISIBLE);
 
-              }
+                }
 
             }
         });
@@ -392,6 +395,7 @@ public class UpdateAccDetailsFragment extends Fragment {
                 }
             }
         });
+
 
         update_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -487,11 +491,7 @@ public class UpdateAccDetailsFragment extends Fragment {
             }
         }
     };
-    private Bitmap decodeToBase64(String input) {
 
-        byte[] decodedByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -500,53 +500,49 @@ public class UpdateAccDetailsFragment extends Fragment {
             //getting the image Uri
             Uri imageUri = data.getData();
             try {
-                //getting bitmap object from uri
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
 
-                //displaying selected image to imageview
                 prod_img.setImageBitmap(bitmap);
-              /*  if (bitmap != null) {
-                    // imageUpload(filePath);
-                    uploadImage(bitmap);
-                } else {
-                    //  Toast.makeText(getActivity(), "Image not selected!", Toast.LENGTH_LONG).show();
-                }*/
-                //calling the method uploadBitmap to upload image
-                // uploadImage(bitmap);
+                Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
     private void uploadImage(final Bitmap bitmap){
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
+                "Loading....Please wait.");
+
+        progressDialog.show();
+
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.Update_Profile_Details,
                 new Response.Listener<NetworkResponse>(){
-                    @Override
+                  @Override
                     public void onResponse(NetworkResponse response) {
                         Log.e(TAG,"afaeftagsbillvalue"+response.data);
                         Log.e(TAG,"afaeftagsbillvalue"+response);
-                        Toast.makeText(getActivity(),"Profile photo is changed", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+
+                      Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
                         selectedFragment = SettingFragment.newInstance();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frame_layout,selectedFragment);
                         ft.commit();
-                        try {
-                            JSONObject obj = new JSONObject(new String(response.data));
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                     }
                 }) {
 
@@ -570,188 +566,14 @@ public class UpdateAccDetailsFragment extends Fragment {
                 return params;
             }
         };
+        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(1000 * 60, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //adding the request to volley
         Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
     }
-  /* @Override
-   public void onActivityResult(int requestCode, int resultCode, Intent data) {
-       super.onActivityResult(requestCode, resultCode, data);
-       if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-
-           //getting the image Uri
-           Uri imageUri = data.getData();
-           try {
-               //getting bitmap object from uri
-               bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-               //displaying selected image to imageview
-               if (bitmap != null) {
-                   // imageUpload(filePath);
-                   uploadImage(bitmap);
-               }
-               prod_img.setImageBitmap(bitmap);
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-       }
-   }
-    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
-    }
-    private void uploadImage(final Bitmap bitmap){
-        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.Update_Profile_Details,
-                new Response.Listener<NetworkResponse>(){
-                    @Override
-                    public void onResponse(NetworkResponse response) {
-                        Log.e(TAG,"afaeftagsbillvalue"+response.data);
-                        Log.e(TAG,"afaeftagsbillvalue"+response);
-                        Toast.makeText(getActivity(),"Profile photo is changed", Toast.LENGTH_SHORT).show();
-                        selectedFragment = SettingFragment.newInstance();
-                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.frame_layout,selectedFragment);
-                        ft.commit();
-                        try {
-                            JSONObject obj = new JSONObject(new String(response.data));
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("UserId",sessionManager.getRegId("userId"));
-                params.put("FullName",profile_name.getText().toString());
-                params.put("PhoneNo",profile_phone.getText().toString());
-                params.put("EmailId","abcd@gmail.com");
-                params.put("Password",profile_passwrd.getText().toString());
-                Log.e(TAG,"afaeftagsparams"+params);
-                return params;
-            }
-            @Override
-            protected Map<String, DataPart> getByteData() {
-                Map<String, DataPart> params = new HashMap<>();
-                long imagename = System.currentTimeMillis();
-                params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
-                Log.e(TAG,"Im here " + params);
-                return params;
-            }
-        };
-        //adding the request to volley
-        Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
-    }*/
-
-    private String encodeToBase64(Bitmap image) {
-
-        Bitmap immage = image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-
-        Log.d("Image Log:", imageEncoded);
-        return imageEncoded;
-    }
-
-    private void update_profile_details() {
-
-        try{
-
-            StringRequest postRequest = new StringRequest(Request.Method.POST, "http://3.17.6.57:8686/api/Auth/UpdateUserProfile",
-
-                    new Response.Listener<String>()
-
-                    {
-                        @Override
-                        public void onResponse(String response) {
 
 
 
-//                            final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
-//                                    null, true);
-//                            progressDialog.setContentView(R.layout.small_progress_bar);
-//                            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                            Log.d("Response", response);
-
-                            try{
-                                //progressDialog.cancel();
-
-                                JSONObject jsonObject = new JSONObject(response);
-
-                                JSONObject jsonObject1 = jsonObject.getJSONObject("Response");
-                                String status = jsonObject1.getString("Status");
-
-                                if(status.equals("2")){
-
-                                    Toast.makeText(getActivity(), "Your Details Updated Successfully", Toast.LENGTH_SHORT).show();
-                                    selectedFragment = SettingFragment.newInstance();
-                                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                    ft.replace(R.id.frame_layout,selectedFragment);
-                                    ft.commit();
-
-                                }else{
-
-                                    Toast.makeText(getActivity(), "Your Details Not Updated Successfully", Toast.LENGTH_SHORT).show();
-
-                                }
-
-
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-
-                        }
-                    },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            progressDialog.cancel();
-                            // error
-                        }
-                    }
-            ) {
-                @Override
-                protected Map<String, String> getParams()
-                {
-                    Map<String, String>  params = new HashMap<String, String>();
-
-                    params.put("UserId",sessionManager.getRegId("userId"));
-                    params.put("FullName",profile_name.getText().toString());
-                    params.put("PhoneNo",profile_phone.getText().toString());
-                    params.put("EmailId",profile_mail.getText().toString());
-                    params.put("Password",profile_passwrd.getText().toString());
-
-                    return params;
-                }
-            };
-
-            VolleySingletonQuee.getInstance(getActivity()).addToRequestQueue(postRequest);
-
-//            StringRequest stringRequest=new StringRequest(new VoleyJsonObjectCallback() {
-//                @Override
-//                public void onSuccessResponse(JSONObject result) {
-//
-//                }
-//            })
-
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
 
 
 
@@ -806,3 +628,4 @@ public class UpdateAccDetailsFragment extends Fragment {
 
 
 }
+

@@ -96,10 +96,12 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
 
         holder.language_name.setText(products.getVendor());
 
-        System.out.println("11111lng" + Urls.IMAGE_ROOT_URL + products.getImageicon() );
-       // URL farmpe =  Urls.IMAGE_ROOT_URL + products.getImageicon();
+       /* System.out.println("11111lng" + Urls.IMAGE_ROOT_URL + products.getImageicon() );
+        String farmpe =  Urls.IMAGE_ROOT_URL + products.getImageicon().replace("\\","//");
+        System.out.println("11111lngfff" + farmpe );*/
 
-        Glide.with(activity).load("http://3.17.6.57:9393//content//Images//LangIcons//Language.png")
+
+        Glide.with(activity).load(products.getImageicon())
 
                 .thumbnail(0.5f)
                 .crossFade()

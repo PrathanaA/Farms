@@ -37,7 +37,6 @@ public class SessionManager {
     // User name (make variable public to access from outside)
     public static final String KEY_PASSWORD = "pass";
     public static final String KEY_NAME = "name";
-
     public static final String KEY_LANGUAGE_DETAILS= "langdetails";
     public static final String KEY_DEFAULT_ADDRESS= "default_address";
     public static final String KEY_DEFAULT_ADDRESS_ID= "default_address_id";

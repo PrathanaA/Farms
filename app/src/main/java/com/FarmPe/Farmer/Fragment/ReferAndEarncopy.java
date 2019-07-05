@@ -1,5 +1,7 @@
 package com.FarmPe.Farmer.Fragment;
 
+
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +41,7 @@ import java.util.List;
 public class ReferAndEarncopy extends Fragment {
     Fragment selectedFragment;
 
-    LinearLayout back, more, whatsapp, insta, facebook, back_feed, twitter;
+    LinearLayout back, more, whatsapp, insta, facebook, back_feed, twitter,message;
     public static String status;
     Intent intent;
     private ArrayAdapter<AgriBean> arrayAdapter;
@@ -61,16 +63,17 @@ public class ReferAndEarncopy extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.refer_n_earn, container, false);
         back_feed=view.findViewById(R.id.back_feed);
-        wallet_balance=view.findViewById(R.id.wallet_blnc);
-        referal_code=view.findViewById(R.id.refer_code);
+       // wallet_balance=view.findViewById(R.id.wallet_blnc);
+       // referal_code=view.findViewById(R.id.refer_code);
         whatsapp=view.findViewById(R.id.whatsapp);
         facebook=view.findViewById(R.id.facebook);
         insta=view.findViewById(R.id.insta);
         twitter=view.findViewById(R.id.twitter);
+        message=view.findViewById(R.id.msg);
         more = view.findViewById(R.id.more);
         getscratchtxt=view.findViewById(R.id.getscratch);
-        winuptxt=view.findViewById(R.id.winup);
-        wallet_blnctxtt=view.findViewById(R.id.wallet_blnctxt);
+       // winuptxt=view.findViewById(R.id.winup);
+      //  wallet_blnctxtt=view.findViewById(R.id.wallet_blnctxt);
         referearntxt=view.findViewById(R.id.toolbar_title);
         sessionManager=new SessionManager(getActivity());
 
@@ -93,7 +96,6 @@ public class ReferAndEarncopy extends Fragment {
         });
 
 
-
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +105,6 @@ public class ReferAndEarncopy extends Fragment {
 
             }
         });
-
 
         Resources resources = getResources();
         PackageManager pm = getActivity().getPackageManager();
@@ -131,7 +132,7 @@ public class ReferAndEarncopy extends Fragment {
 
                         String balance = jsonObject.getString("BalanceAmount");
 
-                        wallet_balance.setText(balance);
+                       // wallet_balance.setText(balance);
 
                         /*for(int i=0;i<wallet_array.length();i++){
                             JSONObject jsonObject1 = wallet_array.getJSONObject(i);
@@ -179,7 +180,7 @@ public class ReferAndEarncopy extends Fragment {
 
                         refer_code= jsonObject1.getString("RefferalCode");
 
-                        referal_code.setText(refer_code);
+                       // referal_code.setText(refer_code);
 
                     }catch (Exception e){
                         e.printStackTrace();
@@ -209,7 +210,7 @@ public class ReferAndEarncopy extends Fragment {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setClassName("com.twitter.android", "com.twitter.android.composer.ComposerActivity");
                     intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Hey,you found one app \\\"FarmPe\\\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app & use my invite code \"+refer_code +\" to get 79Rs on app install!");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app!");
 
                     startActivity(intent);
 
@@ -233,7 +234,7 @@ public class ReferAndEarncopy extends Fragment {
                     whatsappIntent.setType("text/plain");
                     whatsappIntent.setPackage("com.whatsapp");
                     //whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Text");
-                    whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Hey,you found one app \\\"FarmPe\\\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app & use my invite code \"+refer_code +\" to get 79Rs on app install!");
+                    whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app!");
                     try {
                         startActivity(whatsappIntent);
                     } catch (android.content.ActivityNotFoundException ex) {
@@ -247,6 +248,34 @@ public class ReferAndEarncopy extends Fragment {
             }
         });
 
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"+message);
+
+                if (packageName.contains("com.android.mms")) {
+                    Intent messageIntent = new Intent(Intent.ACTION_SEND);
+                    messageIntent.setType("text/plain");
+                    messageIntent.setPackage("com.android.mms");
+                    //whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Text");
+                    messageIntent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app");
+                    try {
+                        startActivity(messageIntent);
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(getActivity(), "Message have not been installed.", Toast.LENGTH_SHORT);
+                    }
+
+                }else {
+                    Toast.makeText(getActivity(), "Message have not been installed.", Toast.LENGTH_SHORT);
+
+                }
+
+
+            }
+        });
+
+
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -259,7 +288,7 @@ public class ReferAndEarncopy extends Fragment {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setClassName("com.twitter.android", "com.twitter.android.composer.ComposerActivity");
                     intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Hey,you found one app \\\"FarmPe\\\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app & use my invite code \"+refer_code +\" to get 79Rs on app install!");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app");
                     startActivity(intent);
 
                 }
@@ -281,7 +310,7 @@ public class ReferAndEarncopy extends Fragment {
                 if (packageName.contains("com.instagram")) {
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey,you found one app \\\"FarmPe\\\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app & use my invite code \"+refer_code +\" to get 79Rs on app install!");
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app");
 
                     sendIntent.setType("text/plain");
                     sendIntent.setPackage("com.instagram.android");
@@ -308,11 +337,11 @@ public class ReferAndEarncopy extends Fragment {
 
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
-            referearntxt.setText(lngObject.getString("Refer_Earn"));
-            winuptxt.setText(lngObject.getString("Winupto1000"));
+           // referearntxt.setText(lngObject.getString("Refer_Earn"));
+           // winuptxt.setText(lngObject.getString("Winupto1000"));
             getscratchtxt.setText(lngObject.getString("Getascratchcardmin100cashbackonyourfriendsfirstappsharing"));
             //copyhereurltxt.setText(lngObject.getString("ClickHeretoCopyURL"));
-            wallet_blnctxtt.setText(lngObject.getString("WalletBalance"));
+           // wallet_blnctxtt.setText(lngObject.getString("WalletBalance"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -335,19 +364,18 @@ public class ReferAndEarncopy extends Fragment {
 
 
                 if (packageName.contains("com.twitter.android") || packageName.contains("com.facebook.katana")
-                        || packageName.contains("com.whatsapp") || packageName.contains("com.google.android.apps.plus")
+                         || packageName.contains("com.google.android.apps.plus")
                         || packageName.contains("com.google.android.talk") || packageName.contains("com.slack")
                         || packageName.contains("com.google.android.gm") || packageName.contains("com.facebook.orca")
                         || packageName.contains("com.yahoo.mobile") || packageName.contains("com.skype.raider")
-                        || packageName.contains("com.android.mms") || packageName.contains("com.linkedin.android")
-                        || packageName.contains("com.google.android.apps.messaging")) {
+                        || packageName.contains("com.linkedin.android")) {
                     Intent intent = new Intent();
 
                     intent.setComponent(new ComponentName(packageName, resInfo.activityInfo.name));
                     intent.putExtra("AppName", resInfo.loadLabel(pm).toString());
                     intent.setAction(Intent.ACTION_SEND);
                     intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Hey,you found one app \\\"FarmPe\\\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app & use my invite code \"+refer_code +\" to get 79Rs on app install!");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app!");
                     //intent.putExtra(Intent.EXTRA_SUBJECT, "");
                     intent.setPackage(packageName);
                     targetShareIntents.add(intent);

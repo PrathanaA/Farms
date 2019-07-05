@@ -55,6 +55,7 @@ public class Urls {
     public static final String Get_Profile_Details= ROOT_URL + "Auth/GetUserDetails";
     public static final String Update_Profile_Details= ROOT_URL + "Auth/UpdateUserProfile";
 
+
    //Notification
    public static final String GET_NOTIFICATION= ROOT_URL + "MasterTable/GetNotificationMaster";
    public static final String GET_NOTIFICATIONLIST= ROOT_URL + "MasterTable/GetNotifications";
@@ -77,5 +78,12 @@ public class Urls {
     public static final String GetLookingForFirst = ROOT_URL+"MasterTable/GetLookingFor";
     public static final String GetLookingForList = ROOT_URL+"MasterTable/GetLookingForLists";
     public static final String YourRequest = ROOT_URL+"MasterTable/GetLookingForListsById";
+
+
+    //List Your Farms
+
+    public static final String List_Your_Farms = ROOT_URL+"MasterTable/GetFarmCategoryList";
+    public static final String Farm_Type_List = ROOT_URL+"MasterTable/GetFarmTypesList";
+
 
 }

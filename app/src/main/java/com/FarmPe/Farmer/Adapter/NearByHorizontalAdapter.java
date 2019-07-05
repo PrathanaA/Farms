@@ -22,9 +22,9 @@ public class NearByHorizontalAdapter extends RecyclerView.Adapter<NearByHorizont
     Activity activity;
     Fragment selectedFragment;
     SessionManager sessionManager;
- String userid;
- public static String item_name,item_variety,item_price,item_uom,item_quantity,id;
- public static int farmer_id;
+    String userid;
+    public static String item_name,item_variety,item_price,item_uom,item_quantity,id;
+    public static int farmer_id;
 
     //    SessionManager session;
 
@@ -40,14 +40,14 @@ public class NearByHorizontalAdapter extends RecyclerView.Adapter<NearByHorizont
        ImageView imageView;
         public LinearLayout item;
         public MyViewHolder(View view) {
-            super(view);
-            imageView=view.findViewById(R.id.image_near);
+              super(view);
+              imageView=view.findViewById(R.id.image_near);
 
         }
 
-
-
     }
+
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,6 +56,7 @@ public class NearByHorizontalAdapter extends RecyclerView.Adapter<NearByHorizont
         return new MyViewHolder(itemView);
 
     }
+
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {

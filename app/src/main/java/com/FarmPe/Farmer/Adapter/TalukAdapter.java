@@ -49,7 +49,8 @@ public class TalukAdapter extends RecyclerView.Adapter<TalukAdapter.TalukMyViewH
                 System.out.println("checkingggggg");
                 talukid=stateBean.getId();
                 Add_New_Address_Fragment.taluk.setText(holder.statename.getText().toString());
-                Add_New_Address_Fragment.grade_dialog.dismiss();
+                Add_New_Address_Fragment.drawer.closeDrawers();
+                //  Add_New_Address_Fragment.grade_dialog.dismiss();
 
 
             }

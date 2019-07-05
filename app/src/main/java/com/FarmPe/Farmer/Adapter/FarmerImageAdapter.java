@@ -46,12 +46,9 @@ public class FarmerImageAdapter extends RecyclerView.Adapter<FarmerImageAdapter.
     }
 
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public CircleImageView image;
         public TextView prod_price,prod_name,duration,farmer_name,location,connect;
-
-
 
 
         public MyViewHolder(View view) {

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingVertical="20dp"
+    android:background="#fff"
+    android:tag="cards main container">
+
+
+    <!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+
+           android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:orientation="vertical">-->
+
+    <LinearLayout
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:background="#fff"
+        android:gravity="center"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+           >
+
+
+            <ImageView
+                android:id="@+id/prod_img"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+
+                />
+
+
+
+              <!--<LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:layout_gravity="center"
+                  android:orientation="vertical">
+
+                  <TextView
+                      android:id="@+id/prod_price"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:fontFamily="@font/segoeui"
+                      android:gravity="center"
+                      android:text="Tracter Price"
+                      android:textColor="#000"
+                      android:textSize="16dp"
+                       />
+
+
+
+              </LinearLayout>-->
+
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/add_text_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Image"
+        android:textColor="#000"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:layout_marginTop="60dp"
+        />
+
+</RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

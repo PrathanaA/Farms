@@ -1,7 +1,13 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,6 +16,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +25,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.FarmPe.Farmer.volleypost.VolleyMultipartRequest;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -31,7 +47,15 @@ import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.app.Activity.RESULT_OK;
+import static com.android.volley.VolleyLog.TAG;
 
 
 public class HomeMenuFragment extends Fragment implements  View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
@@ -43,8 +67,11 @@ Fragment selectedFragment;
     SessionManager sessionManager;
       CircleImageView prod_img,prod_img1;
       String mob_no;
-    String userid;
-    TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm;
+     String userid;
+    private static int RESULT_LOAD_IMG = 1;
+    private int PICK_IMAGE_REQUEST = 1;
+    Bitmap bitmap;
+      TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm;
     public static TextView your_farms,cart_count_text,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
@@ -69,6 +96,7 @@ Fragment selectedFragment;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.activity_navigation_menu_home, container, false);
 
+
         menu=view.findViewById(R.id.menu);
        // searchView=view.findViewById(R.id.search1);
        // linearLayout=view.findViewById(R.id.search);
@@ -81,7 +109,7 @@ Fragment selectedFragment;
         notification_bell=view.findViewById(R.id.notification_bell);
         settings=view.findViewById(R.id.settings);
         prod_img=view.findViewById(R.id.prod_img);
-      //  prod_img1=view.findViewById(R.id.prod_img1);
+       prod_img1=view.findViewById(R.id.prod_img1);
        /* looking_for=view.findViewById(R.id.looking_for);
         farms=view.findViewById(R.id.farms);phone_no
         farmer=view.findViewById(R.id.farmer);*/
@@ -102,6 +130,18 @@ Fragment selectedFragment;
        // near_by=view.findViewById(R.id.near_by);
         sessionManager = new SessionManager(getActivity());
         userid=sessionManager.getRegId("userId");
+
+
+        prod_img1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // to go to gallery
+                startActivityForResult(i, 100); // on activity method will execute
+            }
+        });
+
+
 
   //      ComingSoonFragment.backfeed.setVisibility(View.GONE);
 
@@ -226,7 +266,7 @@ Fragment selectedFragment;
             @Override
             public void onClick(View view) {
 
-                selectedFragment = ComingSoonFragment.newInstance();
+                selectedFragment = ListYourFarms.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("home");
@@ -250,67 +290,8 @@ Fragment selectedFragment;
 
             }
         });
-//
-//        nw_request.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                selectedFragment = AddFirstLookingFor.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.addToBackStack("looking");
-//                transaction.commit();
-//                drawer.closeDrawers();
 
-//                selectedFragment = ComingSoonFragment.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.addToBackStack("home");
-//                transaction.commit();
-//
-//            }
-//        });
 
-//
-//        near_by.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                selectedFragment = ComingSoonFragment.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.addToBackStack("home");
-//                transaction.commit();
-//
-//            }
-//        });
-//
-//
-//        linear_connection.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                selectedFragment = ComingSoonFragment.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.addToBackStack("home");
-//                transaction.commit();
-//
-//            }
-//        });
-//
-//        connection_nw.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                selectedFragment = ComingSoonFragment.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.addToBackStack("home");
-//                transaction.commit();
-//
-//            }
-//        });
 
         notification_bell.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -321,15 +302,7 @@ Fragment selectedFragment;
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("home");
                 transaction.commit();
-//
-//  Bundle bundle = new Bundle();
-//                bundle.putString("navigation_from", "home");
-//                selectedFragment = NotificationFragment.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                selectedFragment.setArguments(bundle);
-//                transaction.addToBackStack("home");
-//                transaction.commit();
+
             }
         });
 
@@ -346,20 +319,6 @@ Fragment selectedFragment;
 
             }
         });
-
-//        near_by.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                selectedFragment = ComingSoonFragment.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.addToBackStack("home");
-//                transaction.commit();
-//                drawer.closeDrawers();
-//
-//
-//            }
-//        });
 
 
         menu.setOnClickListener(new View.OnClickListener() {
@@ -446,6 +405,97 @@ Fragment selectedFragment;
 
         return view;
     }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
+
+            //getting the image Uri
+            Uri imageUri = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+
+                prod_img1.setImageBitmap(bitmap);
+                prod_img.setImageBitmap(bitmap);
+                uploadImage(bitmap);
+                Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    private void uploadImage(final Bitmap bitmap){
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
+                "Loading....Please wait.");
+
+        progressDialog.show();
+
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.Update_Profile_Details,
+                new Response.Listener<NetworkResponse>(){
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        Log.e(TAG,"afaeftagsbillvalue"+response.data);
+                        Log.e(TAG,"afaeftagsbillvalue"+response);
+                        progressDialog.dismiss();
+
+//                        Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
+//                        selectedFragment = SettingFragment.newInstance();
+//                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//                        ft.replace(R.id.frame_layout,selectedFragment);
+//                        ft.commit();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }) {
+
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("UserId",sessionManager.getRegId("userId"));
+                params.put("FullName",sessionManager.getRegId("name"));
+                params.put("PhoneNo",sessionManager.getRegId("phone"));
+                params.put("EmailId","abcd@gmail.com");
+                params.put("Password",sessionManager.getRegId("pass"));
+                Log.e(TAG,"afaeftagsparams"+params);
+                return params;
+            }
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+                params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+                Log.e(TAG,"Im here " + params);
+                return params;
+            }
+        };
+        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(1000 * 60, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //adding the request to volley
+        Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
+    }
+
+
+
 
 
 
