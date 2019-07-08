@@ -32,6 +32,8 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
     public static String first;
     public static CardView cardView;
     public static String farm_listid;
+    public static int selected_position = 0;
+
 
     public List_Farm_Adapter(Activity activity, List<List_Farm_Bean> moviesList) {
         this.productList = moviesList;
@@ -72,17 +74,54 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final List_Farm_Bean products = productList.get(position);
 
+ System.out.println("111wadwd" + products.isIsselected());
+
+         holder.list_farm1.setText(products.getFarm_list_name());
+/*
+
+         if (products.isIsselected()){
+
+             holder.list_farm1.setChecked(true);
+
+         }else {
+
+             holder.list_farm1.setChecked(false);
+         }
+*/
+
+       boolean selectedval= products.isIsselected()? true : false;
+
+        holder.list_farm1.setChecked(selectedval);
 
 
-        holder.list_farm1.setText(products.getFarm_list_name());
 
 
-
-     holder.list_farm1.setOnClickListener(new View.OnClickListener() {
+        holder.list_farm1.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
 
+             boolean selectedval= products.isIsselected()? false : true;
+
+             holder.list_farm1.setChecked(selectedval);
+
              farm_listid = products.getFarm_list_id();
+
+             for(int i = 0;i<productList.size();i++){
+                 System.out.println("111uuuudwd" + i);
+
+                 if (i==position){
+                     products.setIsselected(true);
+
+                 }else {
+                     productList.get(i).setIsselected(false);
+                 }
+
+             }
+
+
+
+             notifyDataSetChanged();
+
 
 
 

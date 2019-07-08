@@ -530,14 +530,17 @@ public class UpdateAccDetailsFragment extends Fragment {
                         Log.e(TAG,"afaeftagsbillvalue"+response);
                         progressDialog.dismiss();
 
-                      Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                       // sessionManager.save_name(userObject.getString("FullName"),userObject.getString("PhoneNo"),userObject.getString("ProfilePic"));
+
+                        Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
                         selectedFragment = SettingFragment.newInstance();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frame_layout,selectedFragment);
                         ft.commit();
-
                     }
                 },
+
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -545,6 +548,7 @@ public class UpdateAccDetailsFragment extends Fragment {
                         progressDialog.dismiss();
                     }
                 }) {
+
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

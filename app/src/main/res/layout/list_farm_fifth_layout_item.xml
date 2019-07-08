@@ -179,12 +179,12 @@
             android:paddingHorizontal="20dp"
             />-->
         <TextView
-            android:id="@+id/continue_2"
+            android:id="@+id/upload_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Upload"
             android:gravity="center"
-      android:layout_marginHorizontal="20dp"
+           android:layout_marginHorizontal="20dp"
             android:textColor="#fff"
             android:background="@drawable/border_filled_red"
             android:paddingVertical="10dp"

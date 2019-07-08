@@ -60,7 +60,7 @@ public class ListYourFarmsSecond extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = HomeMenuFragment.newInstance();
+                selectedFragment = ListYourFarms.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 // transaction.addToBackStack("looking");
@@ -109,7 +109,7 @@ public class ListYourFarmsSecond extends Fragment {
                         for(int i=0;i<farm_list2_array.length();i++) {
                             JSONObject jsonObject1 = farm_list2_array.getJSONObject(i);
                             System.out.println("wwwww" + jsonObject1.getString("FarmCategoryId"));
-                            list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmType"), jsonObject1.getString("FarmTypeId"));
+                            list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmType"), jsonObject1.getString("FarmTypeId"),false);
                             list_farm_beanList.add(list_farm_bean);
 
                         }

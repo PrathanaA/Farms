@@ -34,7 +34,7 @@ public class ListYourFarmsFive extends Fragment {
     public static AddPhotoAdapter farmadapter;
     LinearLayout back_feed,add_photo_layout2,add_photo_layout1;
     Fragment selectedFragment;
-    TextView toolbar_title,continue_3;
+    TextView toolbar_title,upload_1;
     Bitmap bitmap = null;
     public static final int GET_FROM_GALLERY = 3;
     ImageView cover_image;
@@ -50,6 +50,7 @@ public class ListYourFarmsFive extends Fragment {
         View view = inflater.inflate(R.layout.list_farm_fifth_layout_item, container, false);
         recyclerView=view.findViewById(R.id.recycler_photo);
         back_feed=view.findViewById(R.id.back_feed);
+        upload_1=view.findViewById(R.id.upload_1);
 
 
         back_feed.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +78,14 @@ public class ListYourFarmsFive extends Fragment {
             newOrderBeansList.add(img1);
             farmadapter=new AddPhotoAdapter(getActivity(),newOrderBeansList);
             recyclerView.setAdapter(farmadapter);
+
+
+            upload_1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
 
 

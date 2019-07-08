@@ -220,7 +220,7 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(feedback_type.getText().toString().equals("")&& feedback_title.getText().toString().equals("")&& feedback_description.getText().toString().equals("")){
+                if((fdType.getCheckedRadioButtonId()==-1)&& feedback_title.getText().toString().equals("")&& feedback_description.getText().toString().equals("")){
                     //Toast.makeText(getActivity(), "Select Feedback Type", Toast.LENGTH_SHORT).show();
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, enterallfields, Snackbar.LENGTH_LONG);
@@ -230,7 +230,7 @@ public class FeedbackFragment extends Fragment {
                     tv.setTextColor(Color.WHITE);
                     snackbar.show();
 
-                }else if(feedback_type.getText().toString().equals("")){
+                }else if((fdType.getCheckedRadioButtonId()==-1)){
                     //Toast.makeText(getActivity(), "Select Feedback Type", Toast.LENGTH_SHORT).show();
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, feedtype, Snackbar.LENGTH_LONG);

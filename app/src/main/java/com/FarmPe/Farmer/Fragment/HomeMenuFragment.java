@@ -97,6 +97,7 @@ Fragment selectedFragment;
         final View view = inflater.inflate(R.layout.activity_navigation_menu_home, container, false);
 
 
+
         menu=view.findViewById(R.id.menu);
        // searchView=view.findViewById(R.id.search1);
        // linearLayout=view.findViewById(R.id.search);
@@ -175,10 +176,27 @@ Fragment selectedFragment;
 
         user_name_menu.setText(sessionManager.getRegId("name"));
 
-        //phone_no.setText(sessionManager.getRegId("phone").substring(10));
+        phone_no.setText(sessionManager.getRegId("phone").substring(3));
 
 
 
+        Glide.with(getActivity()).load(sessionManager.getRegId("image"))
+
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.avatarmale)
+                .into(prod_img);
+
+
+
+        Glide.with(getActivity()).load(sessionManager.getRegId("image"))
+
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.avatarmale)
+                .into(prod_img1);
 
 
         drawer = (DrawerLayout)view.findViewById(R.id.drawer_layout);
@@ -334,6 +352,7 @@ Fragment selectedFragment;
 
 
 
+/*
 
         try{
 
@@ -400,6 +419,7 @@ Fragment selectedFragment;
 
 
 
+*/
 
 
 

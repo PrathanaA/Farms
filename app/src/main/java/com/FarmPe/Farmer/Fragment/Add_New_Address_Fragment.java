@@ -4,7 +4,9 @@ package com.FarmPe.Farmer.Fragment;
 
 import android.app.Dialog;
 import android.graphics.Color;
+
 import android.os.Bundle;
+
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,17 +17,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
+import android.support.v7.widget.SearchView;
+
 import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.TextWatcher;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -68,12 +71,13 @@ public class  Add_New_Address_Fragment extends Fragment {
     static List<StateBean> talukBeanList = new ArrayList<>();
     static List<StateBean> hobliBeanList = new ArrayList<>();
     static List<StateBean> villageBeanList = new ArrayList<>();
-    List<StateBean> sdearcstateBeanList = new ArrayList<>();
+    private List<StateBean> searchresultAraaylist = new ArrayList<>();
     StateApdater stateApdater;
     DistrictAdapter districtAdapter;
     TalukAdapter talukAdapter;
     HoblisAdapter hoblisAdapter;
     VillageAdapter villageAdapter;
+
 
     public static DrawerLayout drawer;
     LinearLayout linear_name, linear_mobile,linear_pincode,linear_city,linear_street,linear_house,linear_landmark;
@@ -82,13 +86,14 @@ public class  Add_New_Address_Fragment extends Fragment {
     JSONArray jsonArray,state_array,tal_array,hobli_array,village_array;
     StateBean stateBean;
     String new_add_toast;
-    EditText search;
+    SearchView search;
     public static String search_status="status";
-
     public static TextView add_new_address;
     Fragment selectedFragment = null;
     JSONObject lngObject;
     LinearLayout linearLayout;
+
+
     String s_addtype,entername,entermno,inncrtmno,enterhno,enterstreetad,enterlandmark,entercity,enterpincode,entervalidpin,selectstate,selectdistrict,selecttaluk,selecthobli,selectvillage,newaddressadded,addnotadded,adddeleted ;
     public static EditText name,mobile,pincode_no,house_numb,street_name,landmrk,city,state,taluk,hobli,district,village,select_address;
     String status,message;
@@ -108,7 +113,7 @@ public class  Add_New_Address_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.select_your_region_layout, container, false);
-        getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        //getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         select_address = view.findViewById(R.id.select_address);
         name = view.findViewById(R.id.full_name);
@@ -120,13 +125,11 @@ public class  Add_New_Address_Fragment extends Fragment {
         //landmrk = view.findViewById(R.id.landmark_1);
 
 
-
-
         add_new_address = view.findViewById(R.id.add_address);
         recyclerView = view.findViewById(R.id.recycler_view);
-         drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout_op);
-         state = view.findViewById(R.id.state);
-       // city = view.findViewById(R.id.city_1);
+        drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout_op);
+        state = view.findViewById(R.id.state);
+        // city = view.findViewById(R.id.city_1);
         district = view.findViewById(R.id.district_1);
         taluk = view.findViewById(R.id.taluk_1);
         hobli = view.findViewById(R.id.hobli_1);
@@ -149,7 +152,7 @@ public class  Add_New_Address_Fragment extends Fragment {
         pincode_no.setText(getArguments().getString("Addr_pincode"));
         // house_numb.setText(getArguments().getString("Addr_Houseno"));
         street_name.setText(getArguments().getString("Addr_Street"));
-       // landmrk.setText(getArguments().getString("Addr_landmark"));
+        // landmrk.setText(getArguments().getString("Addr_landmark"));
         //city.setText(getArguments().getString("Addr_city"));
 
 
@@ -165,7 +168,12 @@ public class  Add_New_Address_Fragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
 
-
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,73 +234,6 @@ public class  Add_New_Address_Fragment extends Fragment {
         });
 
 
-        /*name.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                linear_layout_selection(linear_name,linear_mobile,linear_pincode,linear_house,linear_street,linear_landmark,linear_city);
-                return false;
-            }
-        });
-
-
-        mobile.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                linear_layout_selection(linear_mobile,linear_name,linear_pincode,linear_house,linear_landmark,linear_street,linear_city);
-
-                return false;
-
-            }
-        });
-
-        pincode_no.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                linear_layout_selection(linear_pincode,linear_name,linear_mobile,linear_house,linear_landmark,linear_street,linear_city);
-                return false;
-
-            }
-        });
-
-
-        house_numb.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                linear_layout_selection(linear_house,linear_name,linear_mobile,linear_pincode,linear_street,linear_landmark,linear_city);
-                return false;
-            }
-        });
-
-
-        street_name.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                linear_layout_selection(linear_street,linear_name,linear_mobile,linear_house,linear_landmark,linear_pincode,linear_city);
-                return false;
-            }
-        });
-
-
-
-        landmrk.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                linear_layout_selection(linear_landmark,linear_name,linear_mobile,linear_house,linear_street,linear_pincode,linear_city);
-                return false;
-            }
-        });
-
-
-
-        city.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                linear_layout_selection(linear_city,linear_landmark,linear_name,linear_mobile,linear_house,linear_street,linear_pincode);
-                return false;
-            }
-        });*/
 
 
 
@@ -373,12 +314,11 @@ public class  Add_New_Address_Fragment extends Fragment {
         });
 
 
-        search.addTextChangedListener(new TextWatcher() {
+      /*  search.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 //adapter.getFilter().filter(cs);
-                sorting(cs.toString());
 
             }
 
@@ -390,7 +330,7 @@ public class  Add_New_Address_Fragment extends Fragment {
             @Override
 
             public void afterTextChanged(Editable arg0) {
-                if (search_status.equals("state")){
+               *//* if (search_status.equals("state")){
                     sdearcstateBeanList.clear();
                     for (int i = 0; i < stateBeanList.size(); i++) {
 
@@ -454,9 +394,42 @@ public class  Add_New_Address_Fragment extends Fragment {
                     recyclerView.setAdapter(villageAdapter);
                 }
 
+            }*//*
+
             }
 
+        });*/
+
+
+
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                // search.clearFocus();
+                System.out.println("lknkknknknknknknknnk");
+             /*   if(list.contains(query)){
+                    adapter.getFilter().filter(query);
+                }else{
+                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+                }*/
+                return false;
+
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // back_feed.setVisibility(View.GONE);
+                //title.setVisibility(View.GONE);
+                System.out.println("lknkknknknknknknknnk"+newText);
+                sorting(newText);
+
+
+                return false;
+            }
         });
+
 
 
 
@@ -466,7 +439,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 // submit.setVisibility(View.GONE);
                 drawer.openDrawer(GravityCompat.END);
                 search_status="state";
-                search.setText("");
+                search.setQueryHint("");
                 stateBeanList.clear();
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -494,7 +467,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="district";
-                search.setText("");
+                search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -526,7 +499,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="taluk";
-                search.setText("");
+                search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -536,7 +509,7 @@ public class  Add_New_Address_Fragment extends Fragment {
 
                 talukAdapter = new TalukAdapter( talukBeanList,getActivity());
                 recyclerView.setAdapter(talukAdapter);
-               prepareTalukData();
+                prepareTalukData();
 
             }
         });
@@ -547,7 +520,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="hobli";
-                search.setText("");
+                search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
 
@@ -572,7 +545,7 @@ public class  Add_New_Address_Fragment extends Fragment {
 
                 drawer.openDrawer(GravityCompat.END);
                 search_status="village";
-                search.setText("");
+                search.setQueryHint("");
                 // stateBeanList.clear();
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -781,9 +754,9 @@ public class  Add_New_Address_Fragment extends Fragment {
             name.setHint(lngObject.getString("FullName"));
             mobile.setHint(lngObject.getString("PhoneNo"));
             street_name.setHint(lngObject.getString("Colony_Street_Locality"));
-           // house_numb.setHint(lngObject.getString("Flat_HouseNo_Floor_Building"));
+            // house_numb.setHint(lngObject.getString("Flat_HouseNo_Floor_Building"));
             //landmrk.setHint(lngObject.getString("LandMark"));
-           // city.setHint(lngObject.getString("City"));
+            // city.setHint(lngObject.getString("City"));
             pincode_no.setHint(lngObject.getString("Pincode"));
             state.setHint(lngObject.getString("State"));
             hobli.setHint(lngObject.getString("Hobli"));
@@ -796,9 +769,9 @@ public class  Add_New_Address_Fragment extends Fragment {
             entername = lngObject.getString("Enteryourname");
             entermno = lngObject.getString("EnterPhoneNo");
             inncrtmno = lngObject.getString("Entervalidmobilenumber");
-           // enterhno = lngObject.getString("EnterhouseNoFloorbuilding");
+            // enterhno = lngObject.getString("EnterhouseNoFloorbuilding");
             enterstreetad = lngObject.getString("EnterStreetaddress");
-           // enterlandmark = lngObject.getString("Enterlandmark");
+            // enterlandmark = lngObject.getString("Enterlandmark");
             //entercity = lngObject.getString("Entercity");
             enterpincode = lngObject.getString("Enterpincode");
             selectstate = lngObject.getString("Selectstate");
@@ -816,10 +789,10 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
 
-      //  name.setFilters(new InputFilter[]{EMOJI_FILTER});
-     //  street_name.setFilters(new InputFilter[]{EMOJI_FILTER});
+        //  name.setFilters(new InputFilter[]{EMOJI_FILTER});
+        //  street_name.setFilters(new InputFilter[]{EMOJI_FILTER});
         //landmrk.setFilters(new InputFilter[]{EMOJI_FILTER});
-      //                house_numb.setFilters(new InputFilter[]{EMOJI_FILTER});
+        //                house_numb.setFilters(new InputFilter[]{EMOJI_FILTER});
         //city.setFilters(new InputFilter[]{EMOJI_FILTER});
 
         return view;
@@ -849,10 +822,10 @@ public class  Add_New_Address_Fragment extends Fragment {
                             talukBeanList.add(stateBean);
 
                         }
-                       // sorting(talukBeanList);
+                        // sorting(talukBeanList);
 
                         talukAdapter.notifyDataSetChanged();
-                       // grade_dialog.show();
+                        // grade_dialog.show();
 
                     }catch (Exception e){
                         e.printStackTrace();
@@ -894,10 +867,10 @@ public class  Add_New_Address_Fragment extends Fragment {
                             hobliBeanList.add(stateBean);
 
                         }
-                       // sorting(hobliBeanList);
+                        // sorting(hobliBeanList);
 
                         hoblisAdapter.notifyDataSetChanged();
-                      //  grade_dialog.show();
+                        //  grade_dialog.show();
 
 
 
@@ -940,7 +913,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                         //sorting(villageBeanList);
 
                         villageAdapter.notifyDataSetChanged();
-                     //   grade_dialog.show();
+                        //   grade_dialog.show();
 
 
 
@@ -957,48 +930,47 @@ public class  Add_New_Address_Fragment extends Fragment {
 
     }
 
-        private void prepareStateData() {
+    private void prepareStateData() {
 
 
         try{
 
-                    JSONObject jsonObject = new JSONObject();
+            JSONObject jsonObject = new JSONObject();
 
-                    Crop_Post.crop_posting(getActivity(), Urls.State, jsonObject, new VoleyJsonObjectCallback() {
-                        @Override
-                        public void onSuccessResponse(JSONObject result) {
-                            System.out.println("11111ssss" + result);
-
-
-                            try{
-                                stateBeanList.clear();
-                                state_array = result.getJSONArray("StateList");
-                                for(int i =0;i<state_array.length();i++){
-                                    JSONObject jsonObject1 = state_array.getJSONObject(i);
-
-                                    stateBean = new StateBean(jsonObject1.getString("State").trim(),jsonObject1.getString("StateId"));
-                                    stateBeanList.add(stateBean);
-                                }
-
-                                //sorting(stateBeanList);
-
-                                stateApdater.notifyDataSetChanged();
-                                grade_dialog.show();
+            Crop_Post.crop_posting(getActivity(), Urls.State, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.println("11111ssss" + result);
 
 
+                    try{
+                        stateBeanList.clear();
+                        state_array = result.getJSONArray("StateList");
+                        for(int i =0;i<state_array.length();i++){
+                            JSONObject jsonObject1 = state_array.getJSONObject(i);
 
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-
+                            stateBean = new StateBean(jsonObject1.getString("State").trim(),jsonObject1.getString("StateId"));
+                            stateBeanList.add(stateBean);
                         }
-                    });
+                        //sorting(stateBeanList);
+
+                        stateApdater.notifyDataSetChanged();
+                        grade_dialog.show();
+
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            });
 
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        }
+    }
 
 
 
@@ -1006,44 +978,44 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
 
-                try{
+        try{
 
-                    JSONObject jsonObject = new JSONObject();
-                    JSONObject post_jsonobject = new JSONObject();
-                    jsonObject.put("StateId",stateApdater.stateid);
-                    post_jsonobject.put("Districtobj",jsonObject);
+            JSONObject jsonObject = new JSONObject();
+            JSONObject post_jsonobject = new JSONObject();
+            jsonObject.put("StateId",stateApdater.stateid);
+            post_jsonobject.put("Districtobj",jsonObject);
 
-                    Crop_Post.crop_posting(getActivity(), Urls.Districts, post_jsonobject, new VoleyJsonObjectCallback() {
-                        @Override
-                        public void onSuccessResponse(JSONObject result) {
-                            System.out.println("dddddddddddd11111" + result);
-                            try{
-                                districtBeanList.clear();
-                                jsonArray = result.getJSONArray("DistrictList");
-                                for(int i =0;i<jsonArray.length();i++){
-                                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                    stateBean = new StateBean(jsonObject1.getString("District"),jsonObject1.getString("DistrictId"));
-                                    districtBeanList.add(stateBean);
-                                }
-
-                            //    sorting(districtBeanList);
-
-
-                                districtAdapter.notifyDataSetChanged();
-                                grade_dialog.show();
-
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-
-
+            Crop_Post.crop_posting(getActivity(), Urls.Districts, post_jsonobject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.println("dddddddddddd11111" + result);
+                    try{
+                        districtBeanList.clear();
+                        jsonArray = result.getJSONArray("DistrictList");
+                        for(int i =0;i<jsonArray.length();i++){
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            stateBean = new StateBean(jsonObject1.getString("District"),jsonObject1.getString("DistrictId"));
+                            districtBeanList.add(stateBean);
                         }
-                    });
+
+                        //    sorting(districtBeanList);
 
 
-                }catch (Exception e){
-                    e.printStackTrace();
+                        districtAdapter.notifyDataSetChanged();
+                        grade_dialog.show();
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+
                 }
+            });
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void ComposeCategory() {
@@ -1053,7 +1025,7 @@ public class  Add_New_Address_Fragment extends Fragment {
             jsonObject.put("DistrictId",DistrictAdapter.districtid);
             jsonObject.put("HobliId", HoblisAdapter.hobliid);
             //jsonObject.put("LandMark",landmrk.getText().toString());
-           // jsonObject.put("City",city.getText().toString());
+            // jsonObject.put("City",city.getText().toString());
             jsonObject.put("MobileNo",mobile.getText().toString());
             jsonObject.put("Name",name.getText().toString());
             jsonObject.put("PickUpFrom",select_address.getText().toString());
@@ -1065,15 +1037,15 @@ public class  Add_New_Address_Fragment extends Fragment {
             jsonObject.put("StreeAddress1",street_name.getText().toString());
             jsonObject.put("UserId",sessionManager.getRegId("userId"));
             System.out.println("Add_New_AddresssssssssssssssssjsonObject"+jsonObject);
-           if(getArguments().getString("navigation_from").equals("your_add")){
+            if(getArguments().getString("navigation_from").equals("your_add")){
 
-               jsonObject.put("Id", You_Address_Adapter.add_id);
-
-
-           } else{
+                jsonObject.put("Id", You_Address_Adapter.add_id);
 
 
-           }
+            } else{
+
+
+            }
 
 
 
@@ -1084,7 +1056,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 public void onSuccessResponse(JSONObject result) {
                     Bundle bundle=new Bundle();
 
-                   System.out.println("Add_New_Addresssssssssssssssss"+result);
+                    System.out.println("Add_New_Addresssssssssssssssss"+result);
                     try{
 
                         status= result.getString("Status");
@@ -1154,7 +1126,7 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
                                 bundle.putString("add_id",status);
-                               // bundle.putString("city",city.getText().toString());
+                                // bundle.putString("city",city.getText().toString());
                                 bundle.putInt("selected_id2",selected_id);
                                 bundle.putInt("selected_id_time1",selected_id_time);
                                 selectedFragment = RequestFormFragment.newInstance();
@@ -1170,7 +1142,7 @@ public class  Add_New_Address_Fragment extends Fragment {
 
                         }else{
 
-                           // Toast.makeText(getActivity(),"Your Address not Added ",Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getActivity(),"Your Address not Added ",Toast.LENGTH_SHORT).show();
                             Snackbar snackbar = Snackbar
                                     .make(linearLayout, addnotadded, Snackbar.LENGTH_LONG);
                             View snackbarView = snackbar.getView();
@@ -1262,22 +1234,117 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
     public  void sorting(String filter_text){
+        System.out.println("lllllllllllllllljjjjjjj"+stateBeanList.size());
 
-        stateBeanList.clear();
-        for (StateBean composeMsgOrderSecondBean: stateBeanList) {
-            System.out.println("llllllllllllllll"+composeMsgOrderSecondBean.getName());
-            final String text = composeMsgOrderSecondBean.getName().toLowerCase();
+        final String text = filter_text.toLowerCase();
+
+      /*  searchresultAraaylist.clear();
+
+        if (search_status.equals("state")){
+            for (int i=0;i<stateBeanList.size();i++){
+                System.out.println("lllllllllllllllljjjjjjj"+stateBeanList.size());
+
+                final String text = stateBeanList.get(i).getName().toLowerCase().trim();
 
 
-            if (text.contains(filter_text)){
+                if (text.contains(filter_text)){
 
-                stateBeanList.add(composeMsgOrderSecondBean);
+                    searchresultAraaylist.add(stateBeanList.get(i));
+                }
             }
+
+
+            stateApdater = new StateApdater(searchresultAraaylist,getActivity());
+
+            recyclerView.setAdapter(stateApdater);
+       }else if (search_status.equals("district")){
+
+            for (int i=0;i<stateBeanList.size();i++){
+                System.out.println("lllllllllllllllljjjjjjj"+stateBeanList.size());
+
+                final String text = searchresultAraaylist;
+
+
+                if (text.contains(filter_text)){
+
+                    searchresultAraaylist.add(stateBeanList.get(i));
+                }
+            }
+
+
+            stateApdater = new StateApdater(searchresultAraaylist,getActivity());
+
+            recyclerView.setAdapter(stateApdater);
+        }*/
+
+
+
+        if (search_status.equals("state")){
+            searchresultAraaylist.clear();
+            for (int i = 0; i < stateBeanList.size(); i++) {
+
+                if (stateBeanList.get(i).getName().toLowerCase().contains(text)) {
+                    searchresultAraaylist.add(stateBeanList.get(i));
+
+                }
+            }
+            stateApdater = new StateApdater(searchresultAraaylist,getActivity());
+            recyclerView.setAdapter(stateApdater);
+        }
+        else if (search_status.equals("district")) {
+            searchresultAraaylist.clear();
+            for (int i = 0; i < districtBeanList.size(); i++) {
+
+                if (districtBeanList.get(i).getName().toLowerCase().contains(text)) {
+                    searchresultAraaylist.add(districtBeanList.get(i));
+
+                }
+            }
+            districtAdapter = new DistrictAdapter(searchresultAraaylist, getActivity());
+            recyclerView.setAdapter(districtAdapter);
+
+            // Toast.makeText(getApplicationContext(),"after text change",Toast.LENGTH_LONG).show();
+        }
+        else if (search_status.equals("taluk")){
+            searchresultAraaylist.clear();
+            for (int i = 0; i < talukBeanList.size(); i++) {
+
+                if (talukBeanList.get(i).getName().toLowerCase().contains(text)) {
+                    searchresultAraaylist.add(talukBeanList.get(i));
+
+                }
+            }
+            talukAdapter = new TalukAdapter(searchresultAraaylist, getActivity());
+            recyclerView.setAdapter(talukAdapter);
         }
 
-        stateApdater.notifyDataSetChanged();
+        else if (search_status.equals("hobli")){
+            searchresultAraaylist.clear();
+            for (int i = 0; i < hobliBeanList.size(); i++) {
+
+                if (hobliBeanList.get(i).getName().toLowerCase().contains(text)) {
+                    searchresultAraaylist.add(hobliBeanList.get(i));
+
+                }
+            }
+            hoblisAdapter = new HoblisAdapter(searchresultAraaylist, getActivity());
+            recyclerView.setAdapter(hoblisAdapter);
+        }
+        else if (search_status.equals("village")){
+            searchresultAraaylist.clear();
+            for (int i = 0; i < villageBeanList.size(); i++) {
+
+                if (villageBeanList.get(i).getName().toLowerCase().contains(text)) {
+                    searchresultAraaylist.add(villageBeanList.get(i));
+
+                }
+            }
+//                    villageAdapter = new VillageAdapter(sdearcstateBeanList);
+            recyclerView.setAdapter(villageAdapter);
+        }
 
     }
-
 }
+
+
 

@@ -39,6 +39,14 @@
         <item name="android:theme">@style/SelectableItemTheme</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+    <style name="SelectableItemTheme1">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
+    <style name="SelectableItemBackground1">
+        <item name="android:theme">@style/SelectableItemTheme1</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
 
 
     <style name="SCBSwitch" parent="Theme.AppCompat">

@@ -21,6 +21,7 @@
         android:layout_gravity="end"
         android:fitsSystemWindows="true"
         >
+
         <include
             layout="@layout/nav_slide_info_layout"
             android:layout_width="match_parent"

@@ -478,7 +478,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                                             startActivity(intent);
                                             sessionManager.createLoginSession(password,mob_no);
 
-                                            sessionManager.save_name(userObject.getString("FullName"),userObject.getString("PhoneNo"));
+                                            sessionManager.save_name(userObject.getString("FullName"),userObject.getString("PhoneNo"),userObject.getString("ProfilePic"));
                                             sessionManager.saveUserId(userObject.getString("Id"));
 
 

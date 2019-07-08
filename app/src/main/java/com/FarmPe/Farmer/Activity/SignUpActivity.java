@@ -947,7 +947,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                             String userid = jsonObject.getString("Id");
                             System.out.println("useerrrriidd" + userid);
                             sessionManager.saveUserId(userid);
-                            sessionManager.save_name(jsonObject.getString("FullName"), jsonObject.getString("PhoneNo"));
+                            sessionManager.save_name(jsonObject.getString("FullName"), jsonObject.getString("PhoneNo"),jsonObject.getString("ProfilePic"));
                             Intent intent = new Intent(SignUpActivity.this, EnterOTP.class);
                             intent.putExtra("otpnumber", status);
                             startActivity(intent);

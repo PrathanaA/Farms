@@ -40,7 +40,6 @@
                 android:id="@+id/back_feed"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:clickable="true"
                 android:gravity="left">
 
 
@@ -49,12 +48,13 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_go_back_left_arrow_"
-
+                    style="@style/SelectableItemBackground1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     />
 
             </LinearLayout>
 
-r
+
             <TextView
 
                 android:layout_width="wrap_content"

@@ -109,7 +109,7 @@ public class ListYourFarms extends Fragment {
                         for(int i=0;i<list_farm_array.length();i++){
                             JSONObject jsonObject1 = list_farm_array.getJSONObject(i);
                             System.out.println("wwwww" + jsonObject1.getString("FarmCategoryId"));
-                            list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmCategory"),jsonObject1.getString("FarmCategoryId"));
+                            list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmCategory"),jsonObject1.getString("FarmCategoryId"),false);
                             list_farm_beanList.add(list_farm_bean);
 
                         }
