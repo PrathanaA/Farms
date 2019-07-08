@@ -222,8 +222,8 @@ public class UpdateAccDetailsFragment extends Fragment {
 
 
 
-        profile_passwrd.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(12) });
-        profile_mail.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(50) });
+     //   profile_passwrd.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(12) });
+      //  profile_mail.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(50) });
         // profile_name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
 
 
@@ -557,6 +557,8 @@ public class UpdateAccDetailsFragment extends Fragment {
                 params.put("FullName",profile_name.getText().toString());
                 params.put("PhoneNo",profile_phone.getText().toString());
                 params.put("EmailId","abcd@gmail.com");
+
+
                 params.put("Password",profile_passwrd.getText().toString());
                 Log.e(TAG,"afaeftagsparams"+params);
                 return params;

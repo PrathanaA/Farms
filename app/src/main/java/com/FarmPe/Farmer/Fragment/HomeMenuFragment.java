@@ -287,7 +287,7 @@ Fragment selectedFragment;
                 selectedFragment = ListYourFarms.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
+                transaction.addToBackStack("list_farm");
                 transaction.commit();
                 drawer.closeDrawers();
 

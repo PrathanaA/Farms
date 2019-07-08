@@ -2,10 +2,12 @@ package com.FarmPe.Farmer.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,24 @@ public class ListYourFarmsSecond extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_2);
 
 
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("list_farm1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +87,16 @@ public class ListYourFarmsSecond extends Fragment {
                 transaction.commit();
             }
         });
+
+
+
         continue_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectedFragment = ListYourFarmsThird.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
+                 transaction.addToBackStack("lookingSecond");
                 transaction.commit();
             }
         });

@@ -379,6 +379,38 @@
             />
 -->
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:text="By Registering, you accept our"
+            android:textColor="#fff"
+            android:textSize="11dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                android:text="Privacy policy and Terms of use."
+                android:textColor="#fff"
+                android:textSize="11dp" />
+
+
+
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/sign_up_continue"
             android:layout_width="match_parent"
@@ -393,19 +425,6 @@
             android:text="REGISTER"
             android:textColor="#fff"
             android:textSize="16dp" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="3dp"
-            android:text="By Registering, you accept our Privacy policy and Terms of use."
-            android:textColor="#fff"
-            android:textSize="11dp" />
-
-
 
         <LinearLayout
             android:layout_width="match_parent"

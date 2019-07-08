@@ -75,7 +75,36 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
         holder.list_farm1.setText(products.getFarm_list_name());
 
+        boolean selectedval= products.isIsselected()? true : false;
 
+        holder.list_farm1.setChecked(selectedval);
+
+
+        holder.list_farm1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                boolean selectedval= products.isIsselected()? false : true;
+
+                holder.list_farm1.setChecked(selectedval);
+
+             //   farm_listid = products.getFarm_list_id();
+
+                for(int i = 0;i<productList.size();i++) {
+                    System.out.println("111uuuudwd" + i);
+
+                    if (i == position) {
+                        products.setIsselected(true);
+
+                    } else {
+                        productList.get(i).setIsselected(false);
+                    }
+                }
+
+                notifyDataSetChanged();
+            }
+        });
 
 
 

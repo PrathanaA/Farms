@@ -106,10 +106,7 @@ public class ForgotPasswordNew extends AppCompatActivity implements Connectivity
         // register connection status listener
         MyApplication.getInstance().setConnectivityListener(this);
 
-
-
     }
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

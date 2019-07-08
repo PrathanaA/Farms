@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -113,7 +114,9 @@ public class  Add_New_Address_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.select_your_region_layout, container, false);
-        //getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
 
         select_address = view.findViewById(R.id.select_address);
         name = view.findViewById(R.id.full_name);
@@ -232,7 +235,6 @@ public class  Add_New_Address_Fragment extends Fragment {
                 return false;
             }
         });
-
 
 
 
@@ -740,7 +742,6 @@ public class  Add_New_Address_Fragment extends Fragment {
                     ComposeCategory();
 
                 }
-
 
             }
         });

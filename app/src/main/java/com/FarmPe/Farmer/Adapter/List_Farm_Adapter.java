@@ -65,8 +65,10 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
+
+
                 .inflate(R.layout.list_farm_first_layout_item, parent, false);
-        return new MyViewHolder(itemView);
+                 return new MyViewHolder(itemView);
 
     }
 
@@ -74,7 +76,7 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final List_Farm_Bean products = productList.get(position);
 
- System.out.println("111wadwd" + products.isIsselected());
+         System.out.println("111wadwd" + products.isIsselected());
 
          holder.list_farm1.setText(products.getFarm_list_name());
 /*

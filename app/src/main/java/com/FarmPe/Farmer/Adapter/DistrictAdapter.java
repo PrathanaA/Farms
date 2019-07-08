@@ -73,6 +73,7 @@ public class DistrictAdapter extends RecyclerView.Adapter<DistrictAdapter.MyStat
             statename=itemView.findViewById(R.id.state_item);
             state_name_layout=itemView.findViewById(R.id.state_name_layout);
 
+
         }
     }
 }

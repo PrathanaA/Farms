@@ -60,6 +60,28 @@ public class ListYourFarms extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_2);
 
 
+
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,10 +100,13 @@ public class ListYourFarms extends Fragment {
                 selectedFragment = ListYourFarmsSecond.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
+                 transaction.addToBackStack("list_farm1");
                 transaction.commit();
             }
         });
+
+
+
 
         list_farm_beanList.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
@@ -105,16 +130,28 @@ public class ListYourFarms extends Fragment {
                     try{
 
 
-                        list_farm_array = result.getJSONArray("FarmCategoryList");
-                        for(int i=0;i<list_farm_array.length();i++){
+                         list_farm_array = result.getJSONArray("FarmCategoryList");
+                          for(int i=0;i<list_farm_array.length();i++){
+
                             JSONObject jsonObject1 = list_farm_array.getJSONObject(i);
                             System.out.println("wwwww" + jsonObject1.getString("FarmCategoryId"));
-                            list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmCategory"),jsonObject1.getString("FarmCategoryId"),false);
-                            list_farm_beanList.add(list_farm_bean);
+                            if (i==0){
+                                list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmCategory"),jsonObject1.getString("FarmCategoryId"),true);
+                                list_farm_beanList.add(list_farm_bean);
+
+                            }else{
+                                list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmCategory"),jsonObject1.getString("FarmCategoryId"),false);
+                                list_farm_beanList.add(list_farm_bean);
+
+                            }
+
+
 
                         }
 
                         farmadapter.notifyDataSetChanged();
+
+
 
 
 

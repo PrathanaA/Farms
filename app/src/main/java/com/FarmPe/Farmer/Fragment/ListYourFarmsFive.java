@@ -8,10 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,7 @@ public class ListYourFarmsFive extends Fragment {
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_farm_fifth_layout_item, container, false);
@@ -52,15 +55,28 @@ public class ListYourFarmsFive extends Fragment {
         back_feed=view.findViewById(R.id.back_feed);
         upload_1=view.findViewById(R.id.upload_1);
 
-
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = HomeMenuFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
-                transaction.commit();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack ("lookingFourth", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
+        });
+
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack ("lookingFourth", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
             }
         });
 

@@ -2,11 +2,19 @@ package com.FarmPe.Farmer.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+
+import android.text.InputFilter;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +26,8 @@ import com.FarmPe.Farmer.R;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class ListYourFarmsFour extends Fragment {
 
     public static List<AddTractorBean> newOrderBeansList = new ArrayList<>();
@@ -26,6 +36,7 @@ public class ListYourFarmsFour extends Fragment {
     LinearLayout back_feed;
     Fragment selectedFragment;
     TextView toolbar_title,continue_4;
+    EditText farm_name,contact_person,email;
 
 
 
@@ -42,16 +53,35 @@ public class ListYourFarmsFour extends Fragment {
         back_feed=view.findViewById(R.id.back_feed);
         continue_4=view.findViewById(R.id.continue_4);
 
+        farm_name=view.findViewById(R.id.name);
+        contact_person=view.findViewById(R.id.contact);
+        email=view.findViewById(R.id.email);
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = HomeMenuFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
-                transaction.commit();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack ("lookingThird", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
+
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack ("lookingThird", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         continue_4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +89,7 @@ public class ListYourFarmsFour extends Fragment {
                 selectedFragment = ListYourFarmsFive.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
+              transaction.addToBackStack("lookingFourth");
                 transaction.commit();
             }
         });
@@ -150,12 +180,48 @@ public class ListYourFarmsFour extends Fragment {
         farmadapter=new AddFirstListYourFramsAdapter(getActivity(),newOrderBeansList);
         recyclerView.setAdapter(farmadapter);
 */
+        farm_name.setFilters(new InputFilter[]{EMOJI_FILTER,new InputFilter.LengthFilter(30)});
+        contact_person.setFilters(new InputFilter[]{EMOJI_FILTER,new InputFilter.LengthFilter(30)});
+        email.setFilters(new InputFilter[]{EMOJI_FILTER,new InputFilter.LengthFilter(30)});
 
 
 
         return view;
     }
 
+    public static InputFilter EMOJI_FILTER = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            boolean keepOriginal = true;
+            StringBuilder sb = new StringBuilder(end - start);
+            for (int index = start; index < end; index++) {
+                int type = Character.getType(source.charAt(index));
+                if (type == Character.SURROGATE || type == Character.OTHER_SYMBOL) {
+                    return "";
+                }
+                for (int i = start; i < end; i++) {
+                    if (Character.isWhitespace(source.charAt(i))) {
+                        if (dstart == 0)
+                            return "";
+                    }
+                }
+                return null;
+
+            }
+
+            if (keepOriginal)
+                return null;
+            else {
+                if (source instanceof Spanned) {
+                    SpannableString sp = new SpannableString(sb);
+                    TextUtils.copySpansFrom((Spanned) source, start, sb.length(), null, sp, 0);
+                    return sp;
+                } else {
+                    return sb;
+                }
+            }
+        }
+    };
 
 
 }
