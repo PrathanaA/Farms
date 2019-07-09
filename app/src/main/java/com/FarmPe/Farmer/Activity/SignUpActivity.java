@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,7 @@ import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
     String status, status_resp;
     JSONArray lng_array;
     Activity activity;
+    TextView privacy_terms;
     JSONObject lngObject;
     public static TextInputLayout sign_name,sign_mobile,sign_pass;
     public static String mob_toast,passwrd_toast,minimum_character_toast,enter_all_toast,name_toast,mobile_registered_toast,toast_internet,toast_nointernet;
@@ -143,7 +146,6 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
 
     }
 
-
     @Nullable
     @Override
     public ActionBar getSupportActionBar() {
@@ -171,6 +173,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
         mobile_no = findViewById(R.id.mobilesignup);
         password = findViewById(R.id.passsignup);
         change_lang = findViewById(R.id.change_lang);
+        privacy_terms = findViewById(R.id.privacy_terms);
         // referal_text=findViewById(R.id.referal_text);
         // referal_code=findViewById(R.id.referal_code);
         // textInputLayout_pass=findViewById(R.id.text_pass);
@@ -241,16 +244,25 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
 
 
 
-
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
+
             }
         });
 
+
+        privacy_terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUpActivity.this, Privacy_Activity.class);
+                startActivity(intent);
+
+            }
+        });
 
        /* final InputFilter EMOJI_FILTER = new InputFilter() {
 
@@ -473,6 +485,12 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+
                     snackbar.show();
                 } else if (name_text.equals("")) {
 
@@ -483,6 +501,11 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
                 } else if (name_text.length() < 2) {
@@ -492,6 +515,12 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
                 } else if (name_text.startsWith(" ")) {
@@ -501,6 +530,12 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
@@ -513,6 +548,12 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                 } else if (!(contact.length() == 13)) {
 
@@ -523,6 +564,12 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
                 }/*else if (contact.equals(sessionManager.getRegId("phone"))){
@@ -534,16 +581,16 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     tv.setTextColor(Color.RED);
                     snackbar.show();
                 }*/
-                else if (contact.equals(sessionManager.getRegId("phone"))){
-                    System.out.println("fdgjhhijihujhgcgfhghghkkk");
-                    Snackbar snackbar = Snackbar
-                            .make(linearLayout, mobile_registered_toast, Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-                    snackbar.show();
-                }
+//                else if (contact.equals(sessionManager.getRegId("phone"))){
+//                    System.out.println("fdgjhhijihujhgcgfhghghkkk");
+//                    Snackbar snackbar = Snackbar
+//                            .make(linearLayout, mobile_registered_toast, Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//                    snackbar.show();
+//                }
                 else if (password.equals("")) {
 
                     //Toast.makeText(SignUp.this, "Enter Your Password", Toast.LENGTH_SHORT).show();
@@ -553,6 +600,11 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
                 } else if (password.length() < 6) {
@@ -564,6 +616,11 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
                 } else if (password_text.contains(" ")) {
@@ -574,6 +631,11 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                 } else {
 
@@ -938,6 +1000,12 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                             TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                             tv.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                             tv.setTextColor(Color.WHITE);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
                             snackbar.show();
 
 

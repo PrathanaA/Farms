@@ -10,12 +10,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -25,6 +27,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,6 +41,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.FarmPe.Farmer.Activity.LoginActivity;
+import com.FarmPe.Farmer.DB.DatabaseHelper;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -93,6 +98,7 @@ public class UpdateAccDetailsFragment extends Fragment {
     private static int RESULT_LOAD_IMG = 1;
     private int PICK_IMAGE_REQUEST = 1;
     Bitmap bitmap;
+    DatabaseHelper myDb;
     ImageView name_tick,phone_tick,pass_tick;
     LinearLayout back_feed;
     Fragment selectedFragment;
@@ -124,6 +130,7 @@ public class UpdateAccDetailsFragment extends Fragment {
         linearLayout = view.findViewById(R.id.main_layout);
 
         sessionManager = new SessionManager(getActivity());
+        myDb = new DatabaseHelper(getActivity());
 
         setupUI(linearLayout);
 
@@ -385,6 +392,7 @@ public class UpdateAccDetailsFragment extends Fragment {
 
             }
 
+
             @Override
             public void afterTextChanged(Editable editable) {
                 if(profile_passwrd.getText().toString().length()<=12 && profile_passwrd.getText().toString().length()>=6){
@@ -406,39 +414,70 @@ public class UpdateAccDetailsFragment extends Fragment {
                             .make(linearLayout, toast_name, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setTextColor(Color.RED);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                 } else if(profile_name.getText().toString().length()<2) {
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, toast_minimum_toast, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setTextColor(Color.RED);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                 }else if(profile_phone.getText().toString().equals("")) {
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, toast_new_mobile, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setTextColor(Color.RED);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
                     snackbar.show();
                 }else if(profile_phone.getText().toString().length()<10) {
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, toast_mobile, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setTextColor(Color.RED);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
+
                 }else if((!profile_passwrd.getText().toString().equals("")&&(profile_passwrd.getText().toString().length()<6))){
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, toast_passwrd, Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setTextColor(Color.RED);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                     // imageUpload(filePath);
                     //  uploadImage(bitmap);
-                } else if (bitmap != null) {
+                } else  {
                     // imageUpload(filePath);
                     uploadImage(bitmap);
                 }
@@ -503,7 +542,21 @@ public class UpdateAccDetailsFragment extends Fragment {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
 
                 prod_img.setImageBitmap(bitmap);
-                Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
+
+                Snackbar snackbar = Snackbar
+                        .make(linearLayout, "Your Changed Your Profile Photo", Snackbar.LENGTH_LONG);
+                View snackbarView = snackbar.getView();
+                TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                tv.setTextColor(Color.WHITE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                } else {
+                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                }
+                snackbar.show();
+              //  Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -531,9 +584,39 @@ public class UpdateAccDetailsFragment extends Fragment {
                         progressDialog.dismiss();
 
 
+                      if(profile_passwrd.getText().toString().length()<=12 && profile_passwrd.getText().toString().length()>=6){
+
+                          if(!myDb.isEmailExists(profile_phone.getText().toString())) {
+
+                              AddData(profile_phone.getText().toString(), profile_passwrd.getText().toString());
+                          }
+                      }
+
+                      else{
+
+                      }
+
+
                        // sessionManager.save_name(userObject.getString("FullName"),userObject.getString("PhoneNo"),userObject.getString("ProfilePic"));
 
-                        Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
+
+
+                      Snackbar snackbar = Snackbar
+                              .make(linearLayout, "Profile Details Updated Successfully", Snackbar.LENGTH_LONG);
+                      View snackbarView = snackbar.getView();
+                      TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                      tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                      tv.setTextColor(Color.WHITE);
+
+                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                          tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                      } else {
+                          tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                      }
+                      snackbar.show();
+
+
+                   //     Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
                         selectedFragment = SettingFragment.newInstance();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frame_layout,selectedFragment);
@@ -567,8 +650,12 @@ public class UpdateAccDetailsFragment extends Fragment {
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
-                params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+
                 Log.e(TAG,"Im here " + params);
+                  if (bitmap!=null) {
+                    params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+
+                }
                 return params;
             }
         };
@@ -579,7 +666,18 @@ public class UpdateAccDetailsFragment extends Fragment {
     }
 
 
+    private void AddData(String userId,String pass) {
+        System.out.println("kkkkkkkkkkkkk"+userId);
+        System.out.println("sssssssssssss"+pass);
+        boolean isInserted = myDb.insertData(userId, pass);
 
+        System.out.println("kkkkkkkkkkkkk"+userId);
+        System.out.println("sssssssssssss"+pass);
+        if (isInserted == true){
+        } else{
+
+        }
+    }
 
 
 

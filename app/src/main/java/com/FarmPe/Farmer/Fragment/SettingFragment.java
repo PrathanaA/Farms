@@ -39,6 +39,7 @@ public class SettingFragment extends Fragment {
     JSONObject lngObject;
     JSONArray get_address_array;
     String pickUPFrom;
+
     public static SettingFragment newInstance() {
         SettingFragment fragment = new SettingFragment();
         return fragment;
@@ -57,7 +58,6 @@ public class SettingFragment extends Fragment {
        // setting_tittle=view.findViewById(R.id.setting_tittle);
         acc_info=view.findViewById(R.id.acc_info);
         your_address=view.findViewById(R.id.ur_address);
-
         notificatn=view.findViewById(R.id.notificatn);
         change_language=view.findViewById(R.id.change_language);
         your_addresss=view.findViewById(R.id.your_addresss);
@@ -281,8 +281,11 @@ public class SettingFragment extends Fragment {
         policy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("status","setting_privacy");
                 selectedFragment = PrivacyPolicyFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                selectedFragment.setArguments(bundle);
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("setting");
                 transaction.commit();

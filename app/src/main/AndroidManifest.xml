@@ -59,6 +59,10 @@
         <activity android:name="com.FarmPe.Farmer.Activity.FarmerActivityNext"
             android:screenOrientation="portrait"/>
 
+        <activity android:name="com.FarmPe.Farmer.Activity.Privacy_Activity"
+            android:screenOrientation="portrait"/>
+
+
 
         <receiver
             android:name=".Activity.ConnectivityReceiver"

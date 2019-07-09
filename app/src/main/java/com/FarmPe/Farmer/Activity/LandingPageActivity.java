@@ -16,11 +16,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.FarmPe.Farmer.Fragment.HomeMenuFragment;
 import com.FarmPe.Farmer.R;
@@ -74,6 +76,11 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
                 TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setBackgroundColor(ContextCompat.getColor(LandingPageActivity.this,R.color.orange));
                 textView.setTextColor(Color.WHITE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                } else {
+                    textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                }
                 snackbar.show();
 
                 //setting connectivity to false only on executing "Good! Connected to Internet"
@@ -164,7 +171,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
 
 
-
         System.out.println("landiiiiiing");
 
         selectedFragment = HomeMenuFragment.newInstance();
@@ -177,7 +183,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
         mBottomSheetBehavior6 = BottomSheetBehavior.from(Profile);
 
         mBottomSheetBehavior6.setPeekHeight(0);
-
 
         mBottomSheetBehavior6.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
@@ -203,18 +208,16 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
     }
 
-
     @Override
     public void onBackPressed() {
+
         if (doubleBackToExitPressedOnce) {
 
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+            // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
             startActivity(intent);
-            activity.
-                    finish();
-            System.exit(0);                    }
+        }
 
         doubleBackToExitPressedOnce = true;
         Snackbar snackbar = Snackbar
@@ -223,7 +226,13 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
         TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
         tv.setBackgroundColor(ContextCompat.getColor(LandingPageActivity.this,R.color.orange));
         tv.setTextColor(Color.WHITE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        } else {
+            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+        }
         snackbar.show();
+
         new Handler().postDelayed(new Runnable() {
 
             @Override

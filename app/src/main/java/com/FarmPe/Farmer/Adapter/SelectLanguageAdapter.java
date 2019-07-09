@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.FarmPe.Farmer.Activity.LoginActivity;
 import com.FarmPe.Farmer.Bean.SelectLanguageBean;
 import com.FarmPe.Farmer.Fragment.ChangeLanguageFragment;
+import com.FarmPe.Farmer.Fragment.HomeMenuFragment;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
@@ -78,28 +80,39 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final SelectLanguageBean products = productList.get(position);
 
-        if (sessionManager.getRegId("language_name").equals(products.getVendor())) {
+
+        if (LoginActivity.isEng && position == 0){
             holder.right_img.setImageResource(R.drawable.ic_verified_filled_grey_white);
-            //  holder.lng_rad_but.setBackgroundColor(Color.GREEN);
+            LoginActivity.isEng = false;
 
+        }else if(HomeMenuFragment.isEng && position==0){
 
-        } else {
-
-
-            holder.right_img.setImageResource(R.drawable.filled_grey_circle);
-
-//            holder.right_img.setImageResource(R.drawable.v);
-
-            //  holder.lng_rad_but.setBackgroundColor(Color.WHITE);
+            holder.right_img.setImageResource(R.drawable.ic_verified_filled_grey_white);
+            HomeMenuFragment.isEng = false;
 
         }
+        else {
+            if (sessionManager.getRegId("language_name").equals(products.getVendor())) {
+                holder.right_img.setImageResource(R.drawable.ic_verified_filled_grey_white);
+                //  holder.lng_rad_but.setBackgroundColor(Color.GREEN);
 
+            } else {
+
+                holder.right_img.setImageResource(R.drawable.filled_grey_circle);
+
+          //            holder.right_img.setImageResource(R.drawable.v);
+
+                //  holder.lng_rad_but.setBackgroundColor(Color.WHITE);
+            }
+        }
         holder.language_name.setText(products.getVendor());
 
        /* System.out.println("11111lng" + Urls.IMAGE_ROOT_URL + products.getImageicon() );
         String farmpe =  Urls.IMAGE_ROOT_URL + products.getImageicon().replace("\\","//");
         System.out.println("11111lngfff" + farmpe );*/
 
+
+       System.out.println("fsddsd" +products.getImageicon());
 
         Glide.with(activity).load(products.getImageicon())
 

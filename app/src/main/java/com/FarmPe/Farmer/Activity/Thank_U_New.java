@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +76,11 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
                 TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setBackgroundColor(ContextCompat.getColor(Thank_U_New.this,R.color.orange));
                 textView.setTextColor(Color.WHITE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                } else {
+                    textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                }
                 snackbar.show();
 
                 //setting connectivity to false only on executing "Good! Connected to Internet"
@@ -88,6 +95,7 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
             // Snackbar snackbar = Snackbar.make(coordinatorLayout,message, Snackbar.LENGTH_LONG);
             Snackbar.make(findViewById(android.R.id.content),toast_nointernet, Snackbar.LENGTH_LONG).show();
 
+
           /*  View sbView = snackbar.getView();
             TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(color);
@@ -101,6 +109,7 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
     public void onResume() {
         LocalBroadcastManager.getInstance(Thank_U_New.this).registerReceiver(receiver, new IntentFilter("otp_forgot"));
 
+
         super.onResume();
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -111,10 +120,6 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
 
 
     }
-
-
-
-
 
 
     @Override
@@ -167,7 +172,7 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
         back_thank_u.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Thank_U_New.this,ForgotPasswordNew.class);
+                Intent intent=new Intent(Thank_U_New.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -194,6 +199,14 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(Thank_U_New.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+
                     snackbar.show();
 
                 }else {
@@ -207,6 +220,12 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
                         TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                         tv.setBackgroundColor(ContextCompat.getColor(Thank_U_New.this,R.color.orange));
                         tv.setTextColor(Color.WHITE);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
                         snackbar.show();
                     }
                 }
@@ -218,7 +237,7 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
     public void onBackPressed() {
         //System.exit(0);
 
-        Intent intent=new Intent(Thank_U_New.this,ForgotPasswordNew.class);
+        Intent intent=new Intent(Thank_U_New.this,LoginActivity.class);
         startActivity(intent);
         finish();
     }

@@ -19,15 +19,34 @@
             android:orientation="vertical"
             >
 
+            <!--<LinearLayout-->
+                <!--android:id="@+id/back_feed"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:background="@drawable/ic_filter_state">-->
 
-                    <LinearLayout
+                <!--<ImageView-->
+                    <!--android:id="@+id/b_arrow"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="20dp"-->
+                   <!---->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:src="@drawable/ic_close_black"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
+
+
+
+
+            <LinearLayout
                         android:id="@+id/back_feed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="20dp"
-                        android:background="@drawable/ripple_effect"
+                        android:background="@drawable/ic_filter_state"
                         >
 
 

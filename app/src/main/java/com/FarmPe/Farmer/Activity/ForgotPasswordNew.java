@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +76,12 @@ public class ForgotPasswordNew extends AppCompatActivity implements Connectivity
                 TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setBackgroundColor(ContextCompat.getColor(ForgotPasswordNew.this,R.color.orange));
                 textView.setTextColor(Color.WHITE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                } else {
+                    textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                }
                 snackbar.show();
 
                 //setting connectivity to false only on executing "Good! Connected to Internet"
@@ -189,6 +197,11 @@ public class ForgotPasswordNew extends AppCompatActivity implements Connectivity
                             TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                             tv.setBackgroundColor(ContextCompat.getColor(ForgotPasswordNew.this,R.color.orange));
                             tv.setTextColor(Color.WHITE);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
                             snackbar.show();
                           //  Toast.makeText(ForgotPasswordNew.this, "Enter Mobile Number", Toast.LENGTH_SHORT).show();
                         } else if (mobileno.length() <= 9) {
@@ -200,6 +213,12 @@ public class ForgotPasswordNew extends AppCompatActivity implements Connectivity
                             TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                             tv.setBackgroundColor(ContextCompat.getColor(ForgotPasswordNew.this,R.color.orange));
                             tv.setTextColor(Color.WHITE);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
                             snackbar.show();
 
                         } else {
@@ -228,6 +247,12 @@ public class ForgotPasswordNew extends AppCompatActivity implements Connectivity
                                                 TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                                 tv.setBackgroundColor(ContextCompat.getColor(ForgotPasswordNew.this,R.color.orange));
                                                 tv.setTextColor(Color.WHITE);
+
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                                } else {
+                                                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                                }
                                                 snackbar.show();
 
                                             }else if (status==2){
@@ -238,6 +263,11 @@ public class ForgotPasswordNew extends AppCompatActivity implements Connectivity
                                                 TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                                 tv.setBackgroundColor(ContextCompat.getColor(ForgotPasswordNew.this,R.color.orange));
                                                 tv.setTextColor(Color.WHITE);
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                                } else {
+                                                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                                }
                                                 snackbar.show();
                                             }
 
@@ -251,6 +281,12 @@ public class ForgotPasswordNew extends AppCompatActivity implements Connectivity
                                                 TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                                 tv.setBackgroundColor(ContextCompat.getColor(ForgotPasswordNew.this,R.color.orange));
                                                 tv.setTextColor(Color.WHITE);
+
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                                } else {
+                                                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                                }
                                                 snackbar.show();
 
                                                 System.out.println("ffffff" + Message);

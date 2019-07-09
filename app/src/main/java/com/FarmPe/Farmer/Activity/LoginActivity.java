@@ -24,6 +24,8 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
      public static CheckBox remember_me;
      DatabaseHelper myDb;
     public static boolean connectivity_check;
+    public static boolean isEng = false;
      TextInputLayout textInputLayout,textInputLayout_pass;
      public static  String password,mob_toast,mobile_string,pass_toast,toast_invalid,toast_click_back,toast_internet,toast_nointernet;
      EditText spn_localize;
@@ -110,6 +113,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 TextView textView = (TextView) sbView2.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
                 textView.setTextColor(Color.WHITE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                } else {
+                    textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                }
+                snackbar.show();
                 snackbar.show();
 
                 //setting connectivity to false only on executing "Good! Connected to Internet"
@@ -159,6 +168,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         text_pass = findViewById(R.id.text_pass);
 
 
+
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         log_in = findViewById(R.id.login_button);
@@ -177,7 +187,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
 
 
-
+        remember_me.setChecked(true);
 
         if( sessionManager.getRegId("language_name").equals("")){
 
@@ -205,6 +215,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 return null;
             }
         };
+
         pass.setFilters(new InputFilter[]{EMOJI_FILTER});
 
         final InputFilter filter = new InputFilter() {
@@ -292,9 +303,9 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
                 System.out.println("aaaaaaaaaaaa");
                  dialog = new Dialog(LoginActivity.this);
-                dialog.setContentView(R.layout.change_lang_login);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setCancelable(false);
+                 dialog.setContentView(R.layout.change_lang_login);
+                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                 dialog.setCancelable(false);
 
                 close_layout =  dialog.findViewById(R.id.close_layout);
                 recyclerView =  dialog.findViewById(R.id.recycler_change_lang);
@@ -379,6 +390,15 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (change_lang.getText().toString().equals("English")){
+                    isEng = true;
+                    Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
+                }
+                else{
+                    isEng = false;
+                    Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
+                }
                 mobile_string=mobile_no.getText().toString();
                 mob_no =loc_text+ mobile_no.getText().toString();
                 password = pass.getText().toString();
@@ -394,6 +414,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+
                     snackbar.show();
 //                    snackbar = Snackbar
 //                            .make(coordinatorLayout,toast_mob, Snackbar.LENGTH_LONG);
@@ -426,6 +452,13 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+
                     snackbar.show();
 
                 } else if (password.contains(" ")) {
@@ -437,11 +470,17 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+
                     snackbar.show();
 
 
                 } else {
-
 
 
                     try{
@@ -504,6 +543,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                                         TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                         tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
                                         tv.setTextColor(Color.WHITE);
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                        } else {
+                                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                        }
+                                        snackbar.show();
                                         snackbar.show();
 
 
@@ -546,9 +591,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     System.out.println("qqqqqqvv" + result);
 
                     try{
-
                         sessionManager.saveLanguage(result.toString());
-
                         String log_login = result.getString("Login");
                         String log_mobile = result.getString("DigitMobileNumber");
                         String log_password = result.getString("Password");
@@ -615,6 +658,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
         tv.setBackgroundColor(ContextCompat.getColor(LoginActivity.this,R.color.orange));
         tv.setTextColor(Color.WHITE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        } else {
+            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+        }
+
         snackbar.show();
      //   Toast.makeText(getApplicationContext(), toast_click_back, Toast.LENGTH_SHORT).show();
 

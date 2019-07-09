@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -19,6 +20,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +79,12 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
                 TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setBackgroundColor(ContextCompat.getColor(ResetPasswordNew.this,R.color.orange));
                 textView.setTextColor(Color.WHITE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                } else {
+                    textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                }
                 snackbar.show();
 
                 //setting connectivity to false only on executing "Good! Connected to Internet"
@@ -169,7 +177,7 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
         back_reset_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ResetPasswordNew.this,Thank_U_New.class);
+                Intent intent=new Intent(ResetPasswordNew.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -210,6 +218,11 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(ResetPasswordNew.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                     //Toast.makeText(ResetPassword.this, "Enter The Password", Toast.LENGTH_LONG).show();
                     // passwrd.setError("Enter The Password");
@@ -222,6 +235,11 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(ResetPasswordNew.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                 }
 
@@ -233,6 +251,11 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(ResetPasswordNew.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                     //Toast.makeText(ResetPassword.this, "Enter Minimum 6 Characters", Toast.LENGTH_LONG).show();
                     // passwrd.setError("Enter Minimum 6 Character");
@@ -246,6 +269,11 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(ResetPasswordNew.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                     //Toast.makeText(ResetPassword.this, "Confirm Your Password", Toast.LENGTH_LONG).show();
                     // confpass.setError("Confirm Your Password");
@@ -258,6 +286,11 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(ResetPasswordNew.this,R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                     //Toast.makeText(ResetPassword.this, "Password Not Matching", Toast.LENGTH_LONG).show();
                     // Snackbar snackbar=Snackbar.make(v,"Password Not Matching",Snackbar.LENGTH_LONG);
@@ -342,7 +375,7 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
     @Override
     public void onBackPressed() {
         //System.exit(0);
-        Intent intent=new Intent(ResetPasswordNew.this,Thank_U_New.class);
+        Intent intent=new Intent(ResetPasswordNew.this,LoginActivity.class);
         startActivity(intent);
         finish();
     }

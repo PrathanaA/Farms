@@ -344,6 +344,7 @@
                 android:textColorHint="#8c8c8c"
                 android:textSize="15dp"
                 />
+
         </android.support.design.widget.TextInputLayout>
         </LinearLayout>
        <!-- <TextView
@@ -380,36 +381,7 @@
 -->
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="3dp"
-            android:text="By Registering, you accept our"
-            android:textColor="#fff"
-            android:textSize="11dp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="3dp"
-                android:text="Privacy policy and Terms of use."
-                android:textColor="#fff"
-                android:textSize="11dp" />
-
-
-
-
-        </LinearLayout>
 
         <TextView
             android:id="@+id/sign_up_continue"
@@ -425,6 +397,38 @@
             android:text="REGISTER"
             android:textColor="#fff"
             android:textSize="16dp" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+         >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="By Registering, you accept our"
+                android:textColor="#fff"
+                android:textSize="11dp" />
+
+
+
+            <TextView
+                android:id="@+id/privacy_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Privacy policy and Terms of use."
+                android:textColor="#fff"
+                android:textSize="11dp" />
+
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -445,12 +449,14 @@
                 android:drawablePadding="10dp"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
+                android:drawableLeft="@drawable/ic_internet"
                 android:drawableRight="@drawable/ic_down_arrow"
                 android:fontFamily="@font/segoeui"
                 android:textSize="14dp"
 
                 android:textColor="#fff"
                 />
+
 
 
         </LinearLayout>

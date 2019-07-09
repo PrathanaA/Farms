@@ -8,6 +8,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +61,24 @@ public class FarmsHomePageFragment extends Fragment {
         recyclerView.setNestedScrollingEnabled(false);
         sessionManager=new SessionManager(getActivity());
         FarmsList();
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    HomeMenuFragment.drawer.openDrawer(Gravity.START);
+                    /*FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("list_farm1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+*/
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
       /*  FarmsImageBean1 img1=new FarmsImageBean1(R.drawable.cow_dairy,"Amrutha Dairy Farm","Commertial Dairy Farming Training,Consulting Project Reporting","","","Jagdish Kumar","Halenahalli DoddaBallapura","");

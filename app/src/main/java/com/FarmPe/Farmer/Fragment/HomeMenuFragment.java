@@ -6,17 +6,22 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +32,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.FarmPe.Farmer.Activity.LandingPageActivity;
+import com.FarmPe.Farmer.Activity.LoginActivity;
 import com.FarmPe.Farmer.volleypost.VolleyMultipartRequest;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -55,6 +62,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
+import static com.FarmPe.Farmer.Activity.LandingPageActivity.toast_click_back;
 import static com.android.volley.VolleyLog.TAG;
 
 
@@ -66,6 +74,7 @@ Fragment selectedFragment;
     LinearLayout update_acc_layout,near_by,linear_connection;
     SessionManager sessionManager;
       CircleImageView prod_img,prod_img1;
+      public static boolean isEng = false;
       String mob_no;
      String userid;
     private static int RESULT_LOAD_IMG = 1;
@@ -142,6 +151,15 @@ Fragment selectedFragment;
             }
         });
 
+
+        if (LoginActivity.change_lang.getText().toString().equals("English")){
+            isEng = true;
+            Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
+        }
+        else{
+            isEng = false;
+            Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
+        }
 
 
   //      ComingSoonFragment.backfeed.setVisibility(View.GONE);
@@ -310,12 +328,11 @@ Fragment selectedFragment;
         });
 
 
-
         notification_bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                selectedFragment = NotificationList.newInstance();
+                selectedFragment = NotificationFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("home");
@@ -428,6 +445,9 @@ Fragment selectedFragment;
 
 
 
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -519,6 +539,8 @@ Fragment selectedFragment;
 
 
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
@@ -528,6 +550,7 @@ Fragment selectedFragment;
     public void onClick(View v) {
 
     }
+
 
 
 

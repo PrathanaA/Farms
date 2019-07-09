@@ -27,7 +27,7 @@
             android:padding="10dp"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/ripple_effect"
+            android:background="@drawable/ic_filter_state"
             >
 
 

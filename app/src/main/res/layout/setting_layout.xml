@@ -40,19 +40,35 @@
                 android:id="@+id/back_feed"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:gravity="left">
-
+                android:gravity="center"
+                android:background="@drawable/ic_filter_state">
 
                 <ImageView
-                    android:layout_width="20dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
+                    android:layout_marginRight="25dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_go_back_left_arrow_"
-                    style="@style/SelectableItemBackground1"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     />
-
             </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/back_feed"-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:gravity="left">-->
+
+
+                <!--<ImageView-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:src="@drawable/ic_go_back_left_arrow_"-->
+                    <!--style="@style/SelectableItemBackground1"-->
+                    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                    <!--/>-->
+
+            <!--</LinearLayout>-->
 
 
             <TextView

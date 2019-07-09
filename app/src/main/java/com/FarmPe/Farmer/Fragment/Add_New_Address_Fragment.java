@@ -5,6 +5,7 @@ package com.FarmPe.Farmer.Fragment;
 import android.app.Dialog;
 import android.graphics.Color;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import android.support.design.widget.Snackbar;
@@ -24,6 +25,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -441,7 +443,8 @@ public class  Add_New_Address_Fragment extends Fragment {
                 // submit.setVisibility(View.GONE);
                 drawer.openDrawer(GravityCompat.END);
                 search_status="state";
-                search.setQueryHint("");
+              //  search.setQueryHint("");
+                search.setQuery("",false);
                 stateBeanList.clear();
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -469,7 +472,8 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="district";
-                search.setQueryHint("");
+                search.setQuery("",false);
+               // search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -501,7 +505,8 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="taluk";
-                search.setQueryHint("");
+              //  search.setQueryHint("");
+                search.setQuery("",false);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -522,7 +527,8 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="hobli";
-                search.setQueryHint("");
+                search.setQuery("",false);
+              //  search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
 
@@ -547,7 +553,8 @@ public class  Add_New_Address_Fragment extends Fragment {
 
                 drawer.openDrawer(GravityCompat.END);
                 search_status="village";
-                search.setQueryHint("");
+                search.setQuery("",false);
+             //   search.setQueryHint("");
                 // stateBeanList.clear();
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -582,6 +589,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                     //Toast.makeText(getActivity(), "Select Address Type", Toast.LENGTH_SHORT).show();
 
@@ -593,6 +605,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
                     //Toast.makeText(getActivity(), "Enter Name", Toast.LENGTH_SHORT).show();
 
@@ -606,6 +623,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
                 }else if(mobile.length()<10){
@@ -616,6 +638,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
                 }/*else if(house_numb.getText().toString().equals("")){
@@ -637,6 +664,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
@@ -669,6 +701,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
@@ -680,6 +717,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
@@ -691,6 +733,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
@@ -702,6 +749,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
@@ -713,6 +765,12 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
@@ -724,18 +782,24 @@ public class  Add_New_Address_Fragment extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                     tv.setTextColor(Color.WHITE);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
                     snackbar.show();
 
 
-                }else if(village.getText().toString().equals("")) {
-                    //Toast.makeText(getActivity(), "Select Village", Toast.LENGTH_SHORT).show();
-                    Snackbar snackbar = Snackbar
-                            .make(linearLayout, selectvillage, Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-                    snackbar.show();
+//                }else if(village.getText().toString().equals("")) {
+//                    //Toast.makeText(getActivity(), "Select Village", Toast.LENGTH_SHORT).show();
+//                    Snackbar snackbar = Snackbar
+//                            .make(linearLayout, selectvillage, Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//                    snackbar.show();
 
                 }else {
 
@@ -1081,6 +1145,12 @@ public class  Add_New_Address_Fragment extends Fragment {
                                 TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                 tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                                 tv.setTextColor(Color.WHITE);
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                } else {
+                                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                }
                                 snackbar.show();
 
 
@@ -1094,6 +1164,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                                 TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                 tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                                 tv.setTextColor(Color.WHITE);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                } else {
+                                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                }
                                 snackbar.show();
 
                                 selectedFragment = You_Address_Fragment.newInstance();
@@ -1110,6 +1185,12 @@ public class  Add_New_Address_Fragment extends Fragment {
                                 TextView tv1 = (TextView) snackbarView1.findViewById(android.support.design.R.id.snackbar_text);
                                 tv1.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                                 tv1.setTextColor(Color.WHITE);
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                    tv1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                } else {
+                                    tv1.setGravity(Gravity.CENTER_HORIZONTAL);
+                                }
                                 snackbar1.show();
 
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -1123,6 +1204,12 @@ public class  Add_New_Address_Fragment extends Fragment {
                                 TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                 tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                                 tv.setTextColor(Color.WHITE);
+
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                } else {
+                                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                }
                                 snackbar.show();
 
 
@@ -1150,6 +1237,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                             TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                             tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
                             tv.setTextColor(Color.WHITE);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
                             snackbar.show();
 
 
