@@ -202,14 +202,15 @@ public class FarmsHomePageFragment extends Fragment {
                         for (int i=0;i<cropsListArray.length();i++){
                             JSONObject jsonObject1=cropsListArray.getJSONObject(i);
                             String farm_name=jsonObject1.getString("FarmName");
-                            String location=jsonObject1.getString("Location");
+                           // String location=jsonObject1.getString("Location");
                             String image=jsonObject1.getString("FarmImages");
                             String id=jsonObject1.getString("Id");
+                            String village=jsonObject1.getJSONObject("FarmAddress").getString("Village");
 
 
                             System.out.println("madelslistt"+newOrderBeansList.size());
 
-                            FarmsImageBean crops = new FarmsImageBean(image,farm_name,"","","Commertial Dairy Farming Training,Consulting Project Reporting","Jagdish Kumar",location,id);
+                            FarmsImageBean crops = new FarmsImageBean(image,farm_name,"","","Commertial Dairy Farming Training,Consulting Project Reporting","Jagdish Kumar",village,id);
                             newOrderBeansList.add(crops);
 
 

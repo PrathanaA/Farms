@@ -85,6 +85,6 @@ public class Urls {
     public static final String List_Your_Farms = ROOT_URL+"MasterTable/GetFarmCategoryList";
     public static final String Farm_Type_List = ROOT_URL+"MasterTable/GetFarmTypesList";
     public static final String Farm_Details = ROOT_URL+"MasterTable/AddUpdateFarms";
-
+    public static final String AddUpdateFarms = ROOT_URL+"MasterTable/AddUpdateFarms";
 
 }

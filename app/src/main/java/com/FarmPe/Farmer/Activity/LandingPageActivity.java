@@ -3,11 +3,15 @@ package com.FarmPe.Farmer.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -16,7 +20,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,12 +30,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.FarmPe.Farmer.Adapter.AddPhotoAdapter;
+import com.FarmPe.Farmer.Bean.AddPhotoBean;
 import com.FarmPe.Farmer.Fragment.HomeMenuFragment;
+import com.FarmPe.Farmer.Fragment.ListYourFarmsFive;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class LandingPageActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
@@ -42,6 +54,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
     String toast_internet,toast_nointernet;
     CoordinatorLayout coordinate_layout;
     SessionManager sessionManager;
+    public static Bitmap selectedImage;
 
     public  static Activity activity;
     public static String toast_click_back;
@@ -93,7 +106,20 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
             //setting connectivity to true only on executing "Sorry! Not connected to internet"
             connectivity_check=true;
             // Snackbar snackbar = Snackbar.make(coordinatorLayout,message, Snackbar.LENGTH_LONG);
-            Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG).show();
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG);
+            View sb = snackbar.getView();
+            TextView textView = (TextView) sb.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setBackgroundColor(ContextCompat.getColor(LandingPageActivity.this, R.color.orange));
+            textView.setTextColor(Color.WHITE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            } else {
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            }
+
+
+            snackbar.show();
 
           /*  View sbView = snackbar.getView();
             TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
@@ -122,6 +148,42 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        System.out.println("priyanka");
+
+
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream =getContentResolver().openInputStream(imageUri);
+                selectedImage = BitmapFactory.decodeStream(imageStream);
+                System.out.println("imagebitmapppppppp"+selectedImage);
+                //profile_image.setImageBitmap(selectedImage);
+                AddPhotoBean img1=new AddPhotoBean( selectedImage);
+                if (!(selectedImage==null)){
+                    System.out.println("selecteddddddhgfysdu");
+                    AddPhotoAdapter.productList.add(0,img1);
+                    ListYourFarmsFive.farmadapter.notifyDataSetChanged();
+
+
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+
+        }else {
+            Toast.makeText(getApplicationContext(), "You haven't picked Image",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -140,7 +202,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
        // prof_name=findViewById(R.id.prof_name);
         cart_img=findViewById(R.id.cart_img);
 
-
         sessionManager = new SessionManager(this);
         activity= this;
 
@@ -157,7 +218,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
-
 
             toast_click_back = lngObject.getString("PleaseclickBACKagaintoexit");
             toast_internet = lngObject.getString("GoodConnectedtoInternet");
@@ -208,41 +268,63 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
     }
 
+
+
     @Override
-    public void onBackPressed() {
-
-        if (doubleBackToExitPressedOnce) {
-
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-            startActivity(intent);
-        }
-
-        doubleBackToExitPressedOnce = true;
-        Snackbar snackbar = Snackbar
-                .make(coordinate_layout,toast_click_back, Snackbar.LENGTH_LONG);
-        View snackbarView = snackbar.getView();
-        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setBackgroundColor(ContextCompat.getColor(LandingPageActivity.this,R.color.orange));
-        tv.setTextColor(Color.WHITE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        } else {
-            tv.setGravity(Gravity.CENTER_HORIZONTAL);
-        }
-        snackbar.show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if (doubleBackToExitPressedOnce) {
+                Intent a = new Intent(Intent.ACTION_MAIN);
+                a.addCategory(Intent.CATEGORY_HOME);
+                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(a);
             }
-        }, 3000);
-
+            this.doubleBackToExitPressedOnce = true;
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please click again to exit back", Snackbar.LENGTH_LONG);
+            View sb = snackbar.getView();
+            sb.setBackgroundColor(ContextCompat.getColor(LandingPageActivity.this, R.color.orange));
+            snackbar.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
+            Log.d("KKKKKK", "onKeyDown: jyf");
+        }
+        return true;
     }
 
+//
+//    @Override
+//    public void onBackPressed() {
+//        if (doubleBackToExitPressedOnce) {
+//
+//            Intent intent = new Intent(Intent.ACTION_MAIN);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+//            startActivity(intent);
+//            activity.finish();
+//            System.exit(0);                    }
+//
+//        doubleBackToExitPressedOnce = true;
+//        Snackbar snackbar = Snackbar
+//                .make(coordinate_layout,toast_click_back, Snackbar.LENGTH_LONG);
+//        View snackbarView = snackbar.getView();
+//        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//        tv.setBackgroundColor(ContextCompat.getColor(LandingPageActivity.this,R.color.orange));
+//        tv.setTextColor(Color.WHITE);
+//        snackbar.show();
+//        new Handler().postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                doubleBackToExitPressedOnce=false;
+//            }
+//        }, 3000);
+//
+//    }
+//
 
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {

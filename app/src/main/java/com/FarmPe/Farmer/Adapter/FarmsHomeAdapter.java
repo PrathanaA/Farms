@@ -91,7 +91,7 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
       //  holder.prod_name.setText(products.getModelname());
        // holder.duration.setText(products.getDuration());
       //  holder.farmer_name.setText(products.getFarmer_name());
-        holder.location.setText(products.getLocation()+", "+"Karnataka");
+        holder.location.setText(products.getLocation()+", "+"Gadag Karnataka");
 
 
 

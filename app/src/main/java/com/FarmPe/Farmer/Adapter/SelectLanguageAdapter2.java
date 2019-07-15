@@ -117,6 +117,8 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
 
                          sessionManager.saveLanguage(result.toString());
 
+                        String lang_title1 = result.getString("ChangeLanguage");
+
 
                           String log_login = result.getString("Login");
                           String log_mobile = result.getString("DigitMobileNumber");
@@ -126,9 +128,7 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
                           String log_register = result.getString("Register");
 
 
-
-
-
+                           LoginActivity.popup_heading.setText(lang_title1);
                            LoginActivity.remember_me.setText(log_remember_me);
                            LoginActivity.log_in.setText(log_login);
                            LoginActivity.forgot_pass.setText(log_forgot_passwrd+ "?");

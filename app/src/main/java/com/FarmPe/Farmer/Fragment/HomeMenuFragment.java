@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -67,29 +68,29 @@ import static com.android.volley.VolleyLog.TAG;
 
 
 public class HomeMenuFragment extends Fragment implements  View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
-Fragment selectedFragment;
+    Fragment selectedFragment;
     public static DrawerLayout drawer;
     ImageView plus_sign_add;
     RelativeLayout menu,prof_tab;
     LinearLayout update_acc_layout,near_by,linear_connection;
     SessionManager sessionManager;
-      CircleImageView prod_img,prod_img1;
-      public static boolean isEng = false;
-      String mob_no;
-     String userid;
+    public static CircleImageView prod_img,prod_img1;
+    public static boolean isEng = false;
+    String mob_no;
+    String userid;
     private static int RESULT_LOAD_IMG = 1;
     private int PICK_IMAGE_REQUEST = 1;
     Bitmap bitmap;
-      TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm;
+    TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm;
     public static TextView your_farms,cart_count_text,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
     JSONObject lngObject;
-     static boolean fragloaded;
- //  public static SearchView searchView;
-   LinearLayout linearLayout;
+    static boolean fragloaded;
+    //  public static SearchView searchView;
+    LinearLayout linearLayout;
 
-   static Fragment myloadingfragment;
+    static Fragment myloadingfragment;
     public static NestedScrollView scrollView;
     boolean doubleBackToExitPressedOnce = false;
 
@@ -108,9 +109,9 @@ Fragment selectedFragment;
 
 
         menu=view.findViewById(R.id.menu);
-       // searchView=view.findViewById(R.id.search1);
-       // linearLayout=view.findViewById(R.id.search);
-       //scrollView=view.findViewById(R.id.scroll);
+        // searchView=view.findViewById(R.id.search1);
+        // linearLayout=view.findViewById(R.id.search);
+        //scrollView=view.findViewById(R.id.scroll);
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
         //linear_connection = view.findViewById(R.id.linear_connection);
@@ -119,7 +120,7 @@ Fragment selectedFragment;
         notification_bell=view.findViewById(R.id.notification_bell);
         settings=view.findViewById(R.id.settings);
         prod_img=view.findViewById(R.id.prod_img);
-       prod_img1=view.findViewById(R.id.prod_img1);
+        prod_img1=view.findViewById(R.id.prod_img1);
        /* looking_for=view.findViewById(R.id.looking_for);
         farms=view.findViewById(R.id.farms);phone_no
         farmer=view.findViewById(R.id.farmer);*/
@@ -127,17 +128,17 @@ Fragment selectedFragment;
         farms_view=view.findViewById(R.id.farms_view);
         farmer_view=view.findViewById(R.id.farmer_view);
 
-     //   connections=view.findViewById(R.id.connections);
+        //   connections=view.findViewById(R.id.connections);
         your_farms=view.findViewById(R.id.your_farms);
         your_requests=view.findViewById(R.id.your_requests);
         list_farm=view.findViewById(R.id.list_farm);
 
-       // nw_request=view.findViewById(R.id.nw_request);
+        // nw_request=view.findViewById(R.id.nw_request);
         //nearby=view.findViewById(R.id.nearby);
 
         plus_sign_add=view.findViewById(R.id.plus_sign_add);
         user_name_menu=view.findViewById(R.id.user_name_menu);
-       // near_by=view.findViewById(R.id.near_by);
+        // near_by=view.findViewById(R.id.near_by);
         sessionManager = new SessionManager(getActivity());
         userid=sessionManager.getRegId("userId");
 
@@ -162,9 +163,9 @@ Fragment selectedFragment;
         }
 
 
-  //      ComingSoonFragment.backfeed.setVisibility(View.GONE);
+        //      ComingSoonFragment.backfeed.setVisibility(View.GONE);
 
-       // searchView.setBackgroundColor(Color.parseColor("#1ba261"));
+        // searchView.setBackgroundColor(Color.parseColor("#1ba261"));
 
 
 
@@ -198,7 +199,7 @@ Fragment selectedFragment;
 
 
 
-        Glide.with(getActivity()).load(sessionManager.getRegId("image"))
+      /*  Glide.with(getActivity()).load(sessionManager.getRegId("image"))
 
                 .thumbnail(0.5f)
                 .crossFade()
@@ -215,10 +216,10 @@ Fragment selectedFragment;
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.avatarmale)
                 .into(prod_img1);
-
+*/
 
         drawer = (DrawerLayout)view.findViewById(R.id.drawer_layout);
-        
+
 
         System.out.println("lajfdhsjkd");
 
@@ -369,7 +370,6 @@ Fragment selectedFragment;
 
 
 
-/*
 
         try{
 
@@ -397,15 +397,14 @@ Fragment selectedFragment;
                         user_name_menu.setText(ProfileName);
                         phone_no.setText(ProfilePhone.substring(3));
 
-                       // phone_no.setText(ProfilePhone.substring(0,13-6) + ""); // masking + deleting last line
-                       // profile_mail.setText(ProfileEmail);
+                        // phone_no.setText(ProfilePhone.substring(0,13-6) + ""); // masking + deleting last line
+                        // profile_mail.setText(ProfileEmail);
 
 
                         Glide.with(getActivity()).load(ProfileImage)
 
                                 .thumbnail(0.5f)
                                 .crossFade()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .error(R.drawable.avatarmale)
                                 .into(prod_img);
 
@@ -415,7 +414,6 @@ Fragment selectedFragment;
 
                                 .thumbnail(0.5f)
                                 .crossFade()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .error(R.drawable.avatarmale)
                                 .into(prod_img1);
 
@@ -436,7 +434,6 @@ Fragment selectedFragment;
 
 
 
-*/
 
 
 
@@ -460,7 +457,7 @@ Fragment selectedFragment;
 
                 prod_img1.setImageBitmap(bitmap);
                 prod_img.setImageBitmap(bitmap);
-                uploadImage(bitmap);
+                uploadImage(getResizedBitmap(bitmap,100,100));
                 Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
@@ -550,6 +547,26 @@ Fragment selectedFragment;
     public void onClick(View v) {
 
     }
+
+
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
+
 
 
 

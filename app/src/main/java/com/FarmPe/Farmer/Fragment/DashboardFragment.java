@@ -28,13 +28,14 @@ public class DashboardFragment extends Fragment {
     SessionManager sessionManager;
 
     TextView farmer1,farms1,looking_for1;
-  public static NestedScrollView scrollView;
+    public static NestedScrollView scrollView;
 
 
     public static DashboardFragment newInstance() {
         DashboardFragment fragment = new DashboardFragment();
         return fragment;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

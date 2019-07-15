@@ -31,6 +31,7 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
     public static LinearLayout next_arw;
     public static String first;
     public static CardView cardView;
+    public static String farm_type_id;
 
     public List_Farm_Adapter2(Activity activity, List<List_Farm_Bean> moviesList) {
         this.productList = moviesList;
@@ -44,6 +45,7 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
         public ImageView image;
         public TextView actninfo;
         public RadioButton list_farm1;
+        public LinearLayout farm_type_id_layout;
 
 
 
@@ -53,6 +55,7 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
             image=view.findViewById(R.id.image);
             list_farm1=view.findViewById(R.id.list_farm1);
+            farm_type_id_layout=view.findViewById(R.id.linear_layout);
 
             //linearLayout=view.findViewById(R.id.dialog_list);
             //confirmbutton=view.findViewById(R.id.delivery2);
@@ -75,6 +78,14 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
         holder.list_farm1.setText(products.getFarm_list_name());
 
+
+        holder.farm_type_id_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                farm_type_id=products.getFarm_list_id();
+            }
+        });
+
         boolean selectedval= products.isIsselected()? true : false;
 
         holder.list_farm1.setChecked(selectedval);
@@ -89,7 +100,7 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
                 holder.list_farm1.setChecked(selectedval);
 
-             //   farm_listid = products.getFarm_list_id();
+             //  farm_listid = products.getFarm_list_id();
 
                 for(int i = 0;i<productList.size();i++) {
                     System.out.println("111uuuudwd" + i);

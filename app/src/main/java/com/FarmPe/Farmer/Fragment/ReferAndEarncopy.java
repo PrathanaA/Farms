@@ -393,6 +393,7 @@ public class ReferAndEarncopy extends Fragment {
                 startActivity(chooserIntent);
             } else {
                 Toast.makeText(getActivity(), "No app to share.", Toast.LENGTH_LONG).show();
+
             }
         }
     }

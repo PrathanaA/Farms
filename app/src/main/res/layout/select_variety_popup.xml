@@ -13,10 +13,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="5dp"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/close_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_black"
+            android:layout_gravity="right"
+
+            />
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/search_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingRight="15dp"
         android:paddingLeft="10dp"
-        android:background="#000"
+        android:layout_margin="10dp"
+        android:background="@drawable/black_border"
         android:paddingVertical="10dp"
         android:weightSum="100"
         >
@@ -25,14 +47,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="92">
 
-            <TextView
+            <EditText
                 android:id="@+id/popup_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-
-                android:text="State"
-                android:textColor="@color/white"
+                android:background="@android:color/transparent"
+                android:textColor="#000"
                 android:textSize="16dp"
                 android:textStyle="bold"
 
@@ -45,10 +66,9 @@
             android:layout_marginLeft="25dp">
 
             <ImageView
-                android:id="@+id/close_popup"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/places_ic_search"
                 android:layout_gravity="right"
                 android:layout_weight="8"
 
@@ -56,43 +76,43 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </android.support.v7.widget.SearchView>
 
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingRight="15dp"
-        android:background="#1ba261"
-        android:weightSum="100"
-        android:paddingVertical="10dp"
-        >
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:paddingRight="15dp"
+         android:background="#1ba261"
+         android:weightSum="100"
+         android:paddingVertical="10dp"
+         >
 
 
-        <TextView
-            android:id="@+id/popup_heading"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="State"
-            android:textStyle="bold"
-            android:layout_weight="90"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
+         <TextView
+             android:id="@+id/popup_heading"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:text="State"
+             android:textStyle="bold"
+             android:layout_weight="90"
+             android:layout_marginLeft="10dp"
+             android:textColor="@color/white"
+             android:textSize="20dp"
 
-            />
-        <ImageView
-            android:id="@+id/close_popup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_close"
-            android:layout_weight="10"
-            android:layout_gravity="right"
-            />
+             />
+         <ImageView
+             android:id="@+id/close_popup"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:src="@drawable/ic_close"
+             android:layout_weight="10"
+             android:layout_gravity="right"
+             />
 
-    </LinearLayout>
+     </LinearLayout>
 
--->
+ -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,24 +130,24 @@
 
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--&gt;-->
-            <!--<TextView-->
-                <!--android:id="@+id/selling_item_name"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="10"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--&gt;-->
+        <!--<TextView-->
+        <!--android:id="@+id/selling_item_name"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="10"-->
 
-                <!--android:background="#fff"-->
-                <!--android:fontFamily="@font/segoeui"-->
-                <!--android:text="Karnataka"-->
-                <!--android:textSize="14dp"-->
-                <!--android:padding="10dp"-->
-                <!--android:gravity="start"-->
-                <!--android:textColor="#000000"-->
-                <!--/>-->
+        <!--android:background="#fff"-->
+        <!--android:fontFamily="@font/segoeui"-->
+        <!--android:text="Karnataka"-->
+        <!--android:textSize="14dp"-->
+        <!--android:padding="10dp"-->
+        <!--android:gravity="start"-->
+        <!--android:textColor="#000000"-->
+        <!--/>-->
 
         <!--</LinearLayout>-->
 
@@ -139,24 +159,24 @@
 
 
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--&gt;-->
-            <!--<TextView-->
-                <!--android:id="@+id/office"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="10"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--&gt;-->
+        <!--<TextView-->
+        <!--android:id="@+id/office"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="10"-->
 
-                <!--android:background="#fff"-->
-                <!--android:fontFamily="@font/segoeui"-->
-                <!--android:text="Karnataka"-->
-                <!--android:textSize="14dp"-->
-                <!--android:padding="10dp"-->
-                <!--android:gravity="start"-->
-                <!--android:textColor="#000000"-->
-                <!--/>-->
+        <!--android:background="#fff"-->
+        <!--android:fontFamily="@font/segoeui"-->
+        <!--android:text="Karnataka"-->
+        <!--android:textSize="14dp"-->
+        <!--android:padding="10dp"-->
+        <!--android:gravity="start"-->
+        <!--android:textColor="#000000"-->
+        <!--/>-->
 
         <!--</LinearLayout>-->
 
@@ -164,4 +184,3 @@
     </LinearLayout>
 
 </LinearLayout>
-

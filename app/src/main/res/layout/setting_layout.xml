@@ -343,7 +343,7 @@
                     android:id="@+id/refer_ern"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Refer n Earn"
+                    android:text="Refer"
                     android:textSize="14dp"
                     android:layout_gravity="center_vertical"
                     android:textColor="#fff"

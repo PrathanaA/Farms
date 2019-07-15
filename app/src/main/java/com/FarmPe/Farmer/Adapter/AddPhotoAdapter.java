@@ -31,13 +31,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyViewHolder> {
-    private List<AddPhotoBean> productList;
+    public static    List<AddPhotoBean> productList;
     Activity activity;
     Fragment selectedFragment;
     public static final int GET_FROM_GALLERY = 3;
     Bitmap bitmap;
     public static TextView add_text_image;
 
+    private static int RESULT_LOAD_IMG = 100;
 
     public LinearLayout linearLayout;
     public static LinearLayout next_arw;
@@ -51,10 +52,8 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
 
     }
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
-
 
         public MyViewHolder(View view) {
             super(view);
@@ -78,30 +77,41 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
         final AddPhotoBean products = productList.get(position);
         //holder.agri_text.setText(products.getAgri_text());
 
-        if (position == productList.size() - 1) {
+        if (position == productList.size()-1 ) {
             add_text_image.setVisibility(View.VISIBLE);
             holder.image.setBackgroundColor(Color.parseColor("#e6e6e6"));
+        }else {
+            add_text_image.setVisibility(View.GONE);
+            holder.image.setImageBitmap(products.getImage_upload());
         }
 
         add_text_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = AddPhotoFragmentSub.newInstance();
-                FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
-                transaction.commit();
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                activity.startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
             }
         });
 
-        System.out.println("imagegegegegeg" + products.getImage_upload());
-       /* Glide.with(activity).load(products.getImage_upload())
-                 .asBitmap()
+        System.out.println("imagegegegegeg11111" + products.getImage_upload());
+
+
+    }
+
+
+
+/*
+
+        Glide.with(activity).load(products.getImage_upload())
+                .asBitmap()
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.image);*/
+                .into(holder.image);
+    }
+*/
 
-        Glide.with(activity)
+       /* Glide.with(activity)
                 .load(products.getImage_upload())    // you can pass url too
                 .asBitmap()
                 .placeholder(R.drawable.cow)
@@ -112,10 +122,10 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
 
                         holder.image.setImageBitmap(resource);
                     }
-                });
+                });*/
 
 
-    }
+
 
    /* @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -149,7 +159,6 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
         System.out.println("lengthhhhhhh" + productList.size());
         return productList.size();
     }
-
 
 
 }

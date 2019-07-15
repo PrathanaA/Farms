@@ -140,11 +140,12 @@ public class AddFirstLookingFor extends Fragment {
                             JSONObject jsonObject1=cropsListArray.getJSONObject(i);
 
                             String lookingfor=jsonObject1.getString("LookingFor");
+                            String LookingForIcon =jsonObject1.getString("LookingForIcon");
 
                             String id=jsonObject1.getString("Id");
 
 
-                              AddTractorBean crops = new AddTractorBean("", lookingfor,id);
+                              AddTractorBean crops = new AddTractorBean(LookingForIcon, lookingfor,id);
                               newOrderBeansList.add(crops);
 
                           /*  if(!latts.equals("") | !langgs.equals("")) {

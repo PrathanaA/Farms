@@ -87,6 +87,7 @@ public class AddModelAdapter extends RecyclerView.Adapter<AddModelAdapter.MyView
             }
         });
 
+
         Glide.with(activity).load(products.getImage())
 
                 .thumbnail(0.5f)

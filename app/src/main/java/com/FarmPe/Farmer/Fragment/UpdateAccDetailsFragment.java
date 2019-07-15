@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -229,8 +230,8 @@ public class UpdateAccDetailsFragment extends Fragment {
 
 
 
-     //   profile_passwrd.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(12) });
-      //  profile_mail.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(50) });
+        //   profile_passwrd.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(12) });
+        //  profile_mail.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(50) });
         // profile_name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
 
 
@@ -292,7 +293,6 @@ public class UpdateAccDetailsFragment extends Fragment {
 
                                 .thumbnail(0.5f)
                                 //  .crossFade()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .error(R.drawable.avatarmale)
                                 .into(prod_img);
 
@@ -479,7 +479,7 @@ public class UpdateAccDetailsFragment extends Fragment {
                     //  uploadImage(bitmap);
                 } else  {
                     // imageUpload(filePath);
-                    uploadImage(bitmap);
+                    uploadImage(getResizedBitmap(bitmap,100,100));
                 }
                 // update_profile_details();
                 //     uploadImage(b);*/
@@ -556,7 +556,7 @@ public class UpdateAccDetailsFragment extends Fragment {
                     tv.setGravity(Gravity.CENTER_HORIZONTAL);
                 }
                 snackbar.show();
-              //  Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -577,46 +577,47 @@ public class UpdateAccDetailsFragment extends Fragment {
 
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.Update_Profile_Details,
                 new Response.Listener<NetworkResponse>(){
-                  @Override
+                    @Override
                     public void onResponse(NetworkResponse response) {
-                        Log.e(TAG,"afaeftagsbillvalue"+response.data);
+                        Log.e(TAG,"afaeftagsbillvalue"+response);
                         Log.e(TAG,"afaeftagsbillvalue"+response);
                         progressDialog.dismiss();
 
 
-                      if(profile_passwrd.getText().toString().length()<=12 && profile_passwrd.getText().toString().length()>=6){
+                        if(profile_passwrd.getText().toString().length()<=12 && profile_passwrd.getText().toString().length()>=6){
 
-                          if(!myDb.isEmailExists(profile_phone.getText().toString())) {
+                            if(!myDb.isEmailExists(profile_phone.getText().toString())) {
 
-                              AddData(profile_phone.getText().toString(), profile_passwrd.getText().toString());
-                          }
-                      }
+                                AddData(profile_phone.getText().toString(), profile_passwrd.getText().toString());
+                            }
+                        }
 
-                      else{
+                        else{
 
-                      }
+                        }
 
-
-                       // sessionManager.save_name(userObject.getString("FullName"),userObject.getString("PhoneNo"),userObject.getString("ProfilePic"));
-
-
-
-                      Snackbar snackbar = Snackbar
-                              .make(linearLayout, "Profile Details Updated Successfully", Snackbar.LENGTH_LONG);
-                      View snackbarView = snackbar.getView();
-                      TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                      tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
-                      tv.setTextColor(Color.WHITE);
-
-                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                          tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                      } else {
-                          tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                      }
-                      snackbar.show();
+                        HomeMenuFragment.prod_img.setImageBitmap(bitmap);
+                        HomeMenuFragment.prod_img1.setImageBitmap(bitmap);
+                        // sessionManager.save_name(userObject.getString("FullName"),userObject.getString("PhoneNo"),userObject.getString("ProfilePic"));
 
 
-                   //     Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                        Snackbar snackbar = Snackbar
+                                .make(linearLayout, "Profile Details Updated Successfully", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
+
+
+                        //     Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
                         selectedFragment = SettingFragment.newInstance();
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.frame_layout,selectedFragment);
@@ -644,6 +645,8 @@ public class UpdateAccDetailsFragment extends Fragment {
 
                 params.put("Password",profile_passwrd.getText().toString());
                 Log.e(TAG,"afaeftagsparams"+params);
+
+
                 return params;
             }
             @Override
@@ -652,7 +655,7 @@ public class UpdateAccDetailsFragment extends Fragment {
                 long imagename = System.currentTimeMillis();
 
                 Log.e(TAG,"Im here " + params);
-                  if (bitmap!=null) {
+                if (bitmap!=null) {
                     params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
 
                 }
@@ -730,6 +733,32 @@ public class UpdateAccDetailsFragment extends Fragment {
     }
 
 
+
+
+
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        if (bm==null){
+
+            return null;
+        }else {
+            int width = bm.getWidth();
+            int height = bm.getHeight();
+            float scaleWidth = ((float) newWidth) / width;
+            float scaleHeight = ((float) newHeight) / height;
+            // CREATE A MATRIX FOR THE MANIPULATION
+            Matrix matrix = new Matrix();
+            // RESIZE THE BIT MAP
+            matrix.postScale(scaleWidth, scaleHeight);
+
+            // "RECREATE" THE NEW BITMAP
+            Bitmap resizedBitmap = Bitmap.createBitmap(
+                    bm, 0, 0, width, height, matrix, false);
+            bm.recycle();
+            return resizedBitmap;
+        }
+
+    }
 
 }
 

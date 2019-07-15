@@ -28,7 +28,7 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
     Fragment selectedFragment;
 
     public LinearLayout linearLayout;
-   public static LinearLayout next_arw;
+    public static LinearLayout next_arw;
     public static String first;
     public static CardView cardView;
     public AddFirstLookingForAdapter(Activity activity, List<AddTractorBean> moviesList) {
@@ -37,7 +37,6 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
 //        session=new SessionManager(activity);
 
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -76,12 +75,14 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
       //holder.agri_text.setText(products.getAgri_text());
         holder.prod_price.setText(products.getProd_name());
 
-        Glide.with(activity).load("https://xohricontentimages.s3.us-east-2.amazonaws.com/Tractors/Mahindra/MAHINDRA+JIVO+225+DI+2WD.jpg")
+        Glide.with(activity).load(products.getImage())
 
                 .thumbnail(0.5f)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
+
+
 
 
         holder.item.setOnClickListener(new View.OnClickListener() {

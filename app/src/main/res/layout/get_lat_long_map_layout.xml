@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+  <!--  <fragment
+        android:id="@+id/autocomplete_fragment"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />-->
+    <!--<fragment-->
+        <!--android:id="@+id/autocomplete_fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="10"-->
+        <!--android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"-->
+        <!--/>-->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="80"
+      >
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/nomap"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#928F8F"-->
+            <!--android:orientation="horizontal" />-->
+
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_target"
+            app:fabSize="mini"
+            app:backgroundTint="@android:color/white"
+            app:layout_anchorGravity="bottom|right|end" />
+
+
+
+            <ImageView
+                android:id="@+id/left_arrw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_left_arrow_blk"
+                android:layout_gravity="top|start"
+                android:layout_marginRight="320dp"
+                android:layout_marginTop="20dp"
+               />
+        </fragment>
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/location_pin_location" />
+
+
+
+    </RelativeLayout>
+
+
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="20">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Your Current Location"
+            android:textSize="13dp"
+            android:textColor="@color/black"
+           />
+
+
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="20dp"
+             android:textSize="12dp"
+             android:text="Location"/>
+
+
+         <TextView
+             android:id="@+id/curr_address"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center_vertical"
+             android:layout_marginTop="7dp"
+             android:text ="Location"
+             android:textColor="#000"
+            />
+
+
+     </LinearLayout>
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+
+        >
+
+    <Button
+        android:id="@+id/choose_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_border_layout"
+        android:text="Confirm location"
+
+        />
+    </LinearLayout>
+</LinearLayout>

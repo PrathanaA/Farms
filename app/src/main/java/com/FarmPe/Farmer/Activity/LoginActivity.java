@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
     String mob_no;
     SessionManager sessionManager;
     public static  Dialog dialog;
-    public static TextView welcome_back, createaccount, change_lang,farmPe_title ,enterPassword, forgotPassword;
+    public static TextView welcome_back, createaccount, change_lang,popup_heading,farmPe_title ,enterPassword, forgotPassword;
 
 
     private void checkConnection() {
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     textView.setGravity(Gravity.CENTER_HORIZONTAL);
                 }
                 snackbar.show();
-                snackbar.show();
+
 
                 //setting connectivity to false only on executing "Good! Connected to Internet"
                 connectivity_check=false;
@@ -128,10 +128,26 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         }  else {
             message = "No Internet Connection";
             color = Color.RED;
-            //setting connectivity to true only on executing "Sorry! Not connected to internet"
             connectivity_check=true;
+
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG);
+            View sb = snackbar.getView();
+            TextView textView = (TextView) sb.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.orange));
+            textView.setTextColor(Color.WHITE);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            } else {
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            }
+
+
+            snackbar.show();
+            //setting connectivity to true only on executing "Sorry! Not connected to internet"
+
             // Snackbar snackbar = Snackbar.make(coordinatorLayout,message, Snackbar.LENGTH_LONG);
-            Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG).show();
+           // Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG).show();
 
           /*  View sbView = snackbar.getView();
             TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
@@ -150,8 +166,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         // register connection status listener
         MyApplication.getInstance().setConnectivityListener(this);
 
-
-
     }
 
 
@@ -159,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in);
+        setContentView(R.layout.login_layoutt);
         checkConnection();
         welcome_back = findViewById(R.id.welcome_back);
         createaccount = findViewById(R.id.create_acc);
@@ -176,6 +190,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         forgot_pass =findViewById(R.id.forgot_pass_login);
         //farmPe_title =findViewById(R.id.farmPe_title);
         mobile_no = findViewById(R.id.mob_no);
+
         pass = findViewById(R.id.pass);
         //back_xlogin = view.findViewById(R.id.arrow_layout);
         coordinatorLayout =findViewById(R.id.main_layou1);
@@ -257,6 +272,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 log_in.setText(lngObject.getString("Login"));
                 welcome_back.setText(lngObject.getString("Login"));
                 createaccount.setText(lngObject.getString("Register"));
+              // popup_heading.setText(lngObject.getString("ChangeLanguage"));
               //  farmPe_title.setText(lngObject.getString("FarmPe"));
 
 
@@ -295,10 +311,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
             public void onClick(View v) {
 
 
+
+
                 System.out.println("jhfdyug");
 
                 RecyclerView recyclerView;
-                final TextView yes1,no1;
+
                 final LinearLayout close_layout;
 
                 System.out.println("aaaaaaaaaaaa");
@@ -307,8 +325,24 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                  dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                  dialog.setCancelable(false);
 
-                close_layout =  dialog.findViewById(R.id.close_layout);
-                recyclerView =  dialog.findViewById(R.id.recycler_change_lang);
+                 close_layout =  dialog.findViewById(R.id.close_layout);
+                 recyclerView =  dialog.findViewById(R.id.recycler_change_lang);
+                 popup_heading = dialog.findViewById(R.id.popup_heading);
+
+
+                try {
+                    lngObject = new JSONObject(sessionManager.getRegId("language"));
+
+                    popup_heading.setText(lngObject.getString("ChangeLanguage"));
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
 
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(LoginActivity.this);
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -592,6 +626,10 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
                     try{
                         sessionManager.saveLanguage(result.toString());
+
+
+                        String lang_title1 = result.getString("ChangeLanguage");
+
                         String log_login = result.getString("Login");
                         String log_mobile = result.getString("DigitMobileNumber");
                         String log_password = result.getString("Password");
@@ -609,11 +647,11 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
 
 
-
-                        remember_me.setText(log_remember_me);
-                        log_in.setText(log_login);
-                        text_mobile.setHint(log_mobile);
-                        //farmPe_title.setText(log_title);
+                            popup_heading.setText(lang_title1);
+                            remember_me.setText(log_remember_me);
+                           log_in.setText(log_login);
+                           text_mobile.setHint(log_mobile);
+                         //farmPe_title.setText(log_title);
 
                         forgot_pass.setText(log_forgot_passwrd+"?");
                         text_pass.setHint(log_password);

@@ -25,7 +25,6 @@
             app:titleTextColor="@android:color/white"
             >
 
-
             <LinearLayout
                 android:id="@+id/back_feed"
                 android:layout_width="50dp"

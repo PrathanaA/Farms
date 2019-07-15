@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FarmPe Farmer</string>
+    <string name="app_name">Farmer</string>
     <string name="forgtpass">Please enter your mobile number so that we can look up your password</string>
     <string name="thankpage">Please enter the OTP below for Reset Password.</string>
     <string name="enterotp">Please enter the OTP below for registration.</string>
@@ -10,7 +10,6 @@
     <string name="Terms">Terms &amp; Conditions</string>
     <string name="Help">Help &amp; Support</string>
     <string name="Help1">Tigers are the largest felines in the world and as such, many cultures consider the tiger to be a symbol of strength, courage.</string>
-
     <string name="Refer_text">Get a scratch card (min Rs.25 cashback) on your friends first app sharing</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.FarmPe.Farmer.Fragment;
 
 
-
 import android.app.Dialog;
 import android.graphics.Color;
 
@@ -95,17 +94,13 @@ public class  Add_New_Address_Fragment extends Fragment {
     Fragment selectedFragment = null;
     JSONObject lngObject;
     LinearLayout linearLayout;
-
-
     String s_addtype,entername,entermno,inncrtmno,enterhno,enterstreetad,enterlandmark,entercity,enterpincode,entervalidpin,selectstate,selectdistrict,selecttaluk,selecthobli,selectvillage,newaddressadded,addnotadded,adddeleted ;
     public static EditText name,mobile,pincode_no,house_numb,street_name,landmrk,city,state,taluk,hobli,district,village,select_address;
     String status,message;
     String Id;
-
     SessionManager sessionManager;
     public static Dialog grade_dialog;
     int selected_id,selected_id_time;
-
 
 
     public static Add_New_Address_Fragment newInstance() {
@@ -117,14 +112,16 @@ public class  Add_New_Address_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.select_your_region_layout, container, false);
 
-        getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+       getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+       // getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
-        select_address = view.findViewById(R.id.select_address);
-        name = view.findViewById(R.id.full_name);
-        mobile = view.findViewById(R.id.mobile_no);
-        back_feed = view.findViewById(R.id.back_feed);
-        pincode_no = view.findViewById(R.id.pincode);
+         select_address = view.findViewById(R.id.select_address);
+         name = view.findViewById(R.id.full_name);
+         mobile = view.findViewById(R.id.mobile_no);
+         back_feed = view.findViewById(R.id.back_feed);
+         pincode_no = view.findViewById(R.id.pincode);
         //house_numb = view.findViewById(R.id.house_no);
         street_name = view.findViewById(R.id.street);
         //landmrk = view.findViewById(R.id.landmark_1);
@@ -244,6 +241,7 @@ public class  Add_New_Address_Fragment extends Fragment {
         select_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.select_address_popup);
 
@@ -440,6 +438,7 @@ public class  Add_New_Address_Fragment extends Fragment {
         state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 // submit.setVisibility(View.GONE);
                 drawer.openDrawer(GravityCompat.END);
                 search_status="state";
@@ -468,6 +467,7 @@ public class  Add_New_Address_Fragment extends Fragment {
         district.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 // submit.setVisibility(View.INVISIBLE);
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
@@ -501,6 +501,7 @@ public class  Add_New_Address_Fragment extends Fragment {
         taluk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 //submit.setVisibility(View.INVISIBLE);
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
@@ -523,6 +524,7 @@ public class  Add_New_Address_Fragment extends Fragment {
         hobli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 //  submit.setVisibility(View.INVISIBLE);
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
@@ -549,6 +551,7 @@ public class  Add_New_Address_Fragment extends Fragment {
         village.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                 // submit.setVisibility(View.VISIBLE);
 
                 drawer.openDrawer(GravityCompat.END);
@@ -556,17 +559,29 @@ public class  Add_New_Address_Fragment extends Fragment {
                 search.setQuery("",false);
              //   search.setQueryHint("");
                 // stateBeanList.clear();
+
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
-
                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                //    villageAdapter = new VillageAdapter(villageBeanList);
+                villageAdapter = new VillageAdapter(villageBeanList,getActivity());
                 recyclerView.setAdapter(villageAdapter);
 
                 prepareVillageData();
+
+//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//                recyclerView.setLayoutManager(mLayoutManager);
+//
+//                final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//                recyclerView.setLayoutManager(layoutManager);
+//                recyclerView.setItemAnimator(new DefaultItemAnimator());
+//                //    villageAdapter = new VillageAdapter(villageBeanList);
+//                recyclerView.setAdapter(villageAdapter);
+//
+//                prepareVillageData();
 
 
             }
@@ -887,7 +902,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                             talukBeanList.add(stateBean);
 
                         }
-                        // sorting(talukBeanList);
+                        sorting(talukBeanList);
 
                         talukAdapter.notifyDataSetChanged();
                         // grade_dialog.show();
@@ -932,7 +947,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                             hobliBeanList.add(stateBean);
 
                         }
-                        // sorting(hobliBeanList);
+                        sorting(hobliBeanList);
 
                         hoblisAdapter.notifyDataSetChanged();
                         //  grade_dialog.show();
@@ -975,7 +990,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                             villageBeanList.add(stateBean);
                         }
 
-                        //sorting(villageBeanList);
+                        sorting(villageBeanList);
 
                         villageAdapter.notifyDataSetChanged();
                         //   grade_dialog.show();
@@ -1017,7 +1032,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                             stateBean = new StateBean(jsonObject1.getString("State").trim(),jsonObject1.getString("StateId"));
                             stateBeanList.add(stateBean);
                         }
-                        //sorting(stateBeanList);
+                        sorting(stateBeanList);
 
                         stateApdater.notifyDataSetChanged();
                         grade_dialog.show();
@@ -1063,7 +1078,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                             districtBeanList.add(stateBean);
                         }
 
-                        //    sorting(districtBeanList);
+                           sorting(districtBeanList);
 
 
                         districtAdapter.notifyDataSetChanged();
@@ -1226,8 +1241,6 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
 
-
-
                         }else{
 
                             // Toast.makeText(getActivity(),"Your Address not Added ",Toast.LENGTH_SHORT).show();
@@ -1244,10 +1257,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                             }
                             snackbar.show();
 
-
-
                         }
-
 
 
                     }catch (Exception e){
@@ -1330,45 +1340,6 @@ public class  Add_New_Address_Fragment extends Fragment {
         System.out.println("lllllllllllllllljjjjjjj"+stateBeanList.size());
 
         final String text = filter_text.toLowerCase();
-
-      /*  searchresultAraaylist.clear();
-
-        if (search_status.equals("state")){
-            for (int i=0;i<stateBeanList.size();i++){
-                System.out.println("lllllllllllllllljjjjjjj"+stateBeanList.size());
-
-                final String text = stateBeanList.get(i).getName().toLowerCase().trim();
-
-
-                if (text.contains(filter_text)){
-
-                    searchresultAraaylist.add(stateBeanList.get(i));
-                }
-            }
-
-
-            stateApdater = new StateApdater(searchresultAraaylist,getActivity());
-
-            recyclerView.setAdapter(stateApdater);
-       }else if (search_status.equals("district")){
-
-            for (int i=0;i<stateBeanList.size();i++){
-                System.out.println("lllllllllllllllljjjjjjj"+stateBeanList.size());
-
-                final String text = searchresultAraaylist;
-
-
-                if (text.contains(filter_text)){
-
-                    searchresultAraaylist.add(stateBeanList.get(i));
-                }
-            }
-
-
-            stateApdater = new StateApdater(searchresultAraaylist,getActivity());
-
-            recyclerView.setAdapter(stateApdater);
-        }*/
 
 
 

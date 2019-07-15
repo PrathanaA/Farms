@@ -27,7 +27,7 @@
             android:padding="10dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/ic_filter_state"
+            android:background="@drawable/ripple_effect"
             >
 
 
@@ -90,7 +90,7 @@
 
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/farm_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Farm Name"
@@ -102,7 +102,7 @@
                 />
 
             <EditText
-                android:id="@+id/contact"
+                android:id="@+id/cont_person_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contact Person Name"
@@ -114,6 +114,7 @@
                 />
 
             <EditText
+                android:id="@+id/mobile_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mobile Number"
@@ -128,7 +129,7 @@
 
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/email_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email Id"

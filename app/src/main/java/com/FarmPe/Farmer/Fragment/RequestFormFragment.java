@@ -1,10 +1,15 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,18 +46,19 @@ public class RequestFormFragment extends Fragment {
 
     public static RecyclerView recyclerView;
     public static AddHpAdapter farmadapter;
-    TextView toolbar_title,request,address_text;
+    TextView toolbar_title,request,address_text,purchase_tractor,finance_requirement;
     Fragment selectedFragment;
     RadioGroup radioGroup,radioGroup_finance;
-    RadioButton radioButton,finance_yes,finance_no,radioButton1;
-    LinearLayout back_feed,address_layout;
+    RadioButton radioButton1;
+    RadioButton radioButton;
+    LinearLayout back_feed,address_layout,main_layout;
     CheckBox check_box;
     SessionManager sessionManager;
     View view;
     String addId;
     String time_period;
     boolean finance;
-    String finance_status;
+    String finance_status,button_status;
     public static int selectedId,selectedId_time_recent;
     int finance_selected,time_selected;
     Add_New_Address_Bean add_new_address_bean;
@@ -75,8 +81,16 @@ public class RequestFormFragment extends Fragment {
         radioGroup_finance=view.findViewById(R.id.radioGroup_finance);
         request=view.findViewById(R.id.request);
         address_text=view.findViewById(R.id.address_text);
+        main_layout=view.findViewById(R.id.main_layout);
+        purchase_tractor=view.findViewById(R.id.purchase_tractor);
+        finance_requirement=view.findViewById(R.id.finance_requirement);
         toolbar_title.setText("Request for Quotation");
         sessionManager=new SessionManager(getActivity());
+
+        check_box.setChecked(true);
+        purchase_tractor.setText("When are you planning to purchase "+AddFirstAdapter.purchase_tractor.replace("Price","")+"?");
+
+        finance_requirement.setText("Are you looking for finance / loan for "+AddFirstAdapter.purchase_tractor.replace("Price","")+"purchase?");
 
         Bundle bundle=getArguments();
         if (bundle==null){
@@ -85,13 +99,14 @@ public class RequestFormFragment extends Fragment {
         }else{
             finance_selected=bundle.getInt("selected_id2");
             time_selected=bundle.getInt("selected_id_time1");
-          //  gettingAddress();
+            //  gettingAddress();
 
-            // System.out.println("tiiiiimmmee"+time_selected);
+
             addId=bundle.getString("add_id");
             String city=bundle.getString("city");
             address_text.setText(city);
-           radioGroup.check(bundle.getInt("selected_id_time1"));
+            System.out.println("tiiiiimmmee"+city);
+            radioGroup.check(bundle.getInt("selected_id_time1"));
             radioGroup_finance.check(finance_selected);
 
 
@@ -143,7 +158,69 @@ public class RequestFormFragment extends Fragment {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestForm();
+                System.out.println("dhyuehd"+button_status);
+
+                if (button_status==null){
+                    Snackbar snackbar = Snackbar
+                            .make(main_layout, "Please select when are you planning to purchase Tractor", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+                    snackbar.show();
+
+                }
+                else if (finance_status==null){
+                    Snackbar snackbar = Snackbar
+                            .make(main_layout, "Please select are you looking for finance / loan", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+                    snackbar.show();
+
+                }
+                else if (address_text.getText().toString().equals("")){
+                    Snackbar snackbar = Snackbar
+                            .make(main_layout, "Please add your address", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+                    snackbar.show();
+                }else if (!(check_box.isChecked())){
+                    Snackbar snackbar = Snackbar
+                            .make(main_layout, "Please select checkbox to agree terms and conditions", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+                    snackbar.show();
+                }
+                else{
+                    RequestForm();
+                }
+
               /*  selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
@@ -160,8 +237,6 @@ public class RequestFormFragment extends Fragment {
                 System.out.println("checkinggg"+radioButton.getText().toString());
                 finance_status=radioButton.getTag().toString();
 
-
-
             }
         });
 
@@ -172,8 +247,13 @@ public class RequestFormFragment extends Fragment {
                 radioButton1 = (RadioButton)view.findViewById(selectedId_time_recent);
                 time_period=String.valueOf(radioButton1.getText());
                 System.out.println("valueee"+time_period);
+                button_status=radioButton1.getTag().toString();
+                System.out.println("dhyuehd"+button_status);
             }
         });
+
+
+
 
        /* final String value =
                 ((RadioButton)view.findViewById(radioGroup.getCheckedRadioButtonId()))
@@ -250,7 +330,7 @@ public class RequestFormFragment extends Fragment {
         try{
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put("UserId",sessionManager.getRegId("userId"));
-           // jsonObject.put("PickUpFrom",pickUPFrom);
+            // jsonObject.put("PickUpFrom",pickUPFrom);
             System.out.println("aaaaaaaaaaaaadddd" + sessionManager.getRegId("userId"));
 
             Crop_Post.crop_posting(getActivity(), Urls.Get_New_Address, jsonObject, new VoleyJsonObjectCallback() {
@@ -266,9 +346,9 @@ public class RequestFormFragment extends Fragment {
                             JSONObject jsonObject1 = get_address_array.getJSONObject(i);
 
 
-                           // add_new_address_bean = new Add_New_Address_Bean(jsonObject1.getString("Name"),jsonObject1.getString("StreeAddress"),jsonObject1.getString("StreeAddress1"),jsonObject1.getString("LandMark"),jsonObject1.getString("City"),jsonObject1.getString("Pincode"),jsonObject1.getString("MobileNo"),
-                                    //jsonObject1.getString("PickUpFrom"),jsonObject1.getString("State"),jsonObject1.getString("District"),jsonObject1.getString("Taluk"),jsonObject1.getString("Hoblie"),jsonObject1.getString("Village"),jsonObject1.getString("Id"),jsonObject1.getBoolean("IsDefaultAddress"));
-                           // new_address_beanArrayList.add(add_new_address_bean);
+                            // add_new_address_bean = new Add_New_Address_Bean(jsonObject1.getString("Name"),jsonObject1.getString("StreeAddress"),jsonObject1.getString("StreeAddress1"),jsonObject1.getString("LandMark"),jsonObject1.getString("City"),jsonObject1.getString("Pincode"),jsonObject1.getString("MobileNo"),
+                            //jsonObject1.getString("PickUpFrom"),jsonObject1.getString("State"),jsonObject1.getString("District"),jsonObject1.getString("Taluk"),jsonObject1.getString("Hoblie"),jsonObject1.getString("Village"),jsonObject1.getString("Id"),jsonObject1.getBoolean("IsDefaultAddress"));
+                            // new_address_beanArrayList.add(add_new_address_bean);
 
                             if (jsonObject1.getBoolean("IsDefaultAddress")){
                                 addId=jsonObject1.getString("Id");
@@ -278,11 +358,11 @@ public class RequestFormFragment extends Fragment {
 
                         }
 
-                       // item_list = String.valueOf(new_address_beanArrayList.size());
-                      //  address_list.setText(item_list+" " + ad_list );
+                        // item_list = String.valueOf(new_address_beanArrayList.size());
+                        //  address_list.setText(item_list+" " + ad_list );
 
 
-                       // mAdapter.notifyDataSetChanged();
+                        // mAdapter.notifyDataSetChanged();
 
 
 

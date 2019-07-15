@@ -114,7 +114,7 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width_px = Resources.getSystem().getDisplayMetrics().widthPixels;
         int height_px =Resources.getSystem().getDisplayMetrics().heightPixels;
-        int height_set=(int)(height_px*0.6);
+        int height_set=(int)(height_px*0.4);
         System.out.println("height&Width"+width_px+","+height_px);
         LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width_px,height_set);
         linear_looking_main.setLayoutParams(parms);

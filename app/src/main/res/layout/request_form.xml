@@ -28,42 +28,23 @@
             >
 
 
-
             <LinearLayout
                 android:id="@+id/back_feed"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:gravity="center"
-                android:background="@drawable/ic_filter_state">
+                android:background="@drawable/ripple_effect"
+                android:gravity="left">
+
 
                 <ImageView
-                    android:id="@+id/b_arrow"
-                    android:layout_width="wrap_content"
+                    android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_go_back_left_arrow_"
+
                     />
+
             </LinearLayout>
-
-
-            <!--<LinearLayout-->
-                <!--android:id="@+id/back_feed"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:background="@drawable/ripple_effect"-->
-                <!--android:gravity="left">-->
-
-
-                <!--<ImageView-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:src="@drawable/ic_go_back_left_arrow_"-->
-
-                    <!--/>-->
-
-            <!--</LinearLayout>-->
 
 
             <TextView
@@ -83,15 +64,15 @@
 
 
 
-   <!-- <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_what_looking"
-        android:layout_width="match_parent"
-        android:background="#000"
-        android:layout_marginBottom="20dp"
-       android:layout_marginHorizontal="10dp"
-        android:layout_height="wrap_content">
+    <!-- <android.support.v7.widget.RecyclerView
+         android:id="@+id/recycler_what_looking"
+         android:layout_width="match_parent"
+         android:background="#000"
+         android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="10dp"
+         android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>-->
+     </android.support.v7.widget.RecyclerView>-->
 
 
     <LinearLayout
@@ -104,7 +85,7 @@
         android:layout_marginBottom="10dp"
         android:weightSum="100"
         android:layout_marginHorizontal="10dp"
-       >
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,59 +97,60 @@
             android:background="#ffff"
 
             >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="When are you planning to purchase Tractor?"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_marginHorizontal="10dp"
-           />
-
-
-
-        <RadioGroup
-            android:id="@+id/radio_group_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:weightSum="100"
-            >
-
-            <RadioButton
+            <TextView
+                android:id="@+id/purchase_tractor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="Immediately"
-                android:text="Immediately"
-
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1 Month"
-                android:tag="1 Month"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="3Months"
-                android:text="3Months"
-
-                />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tag="After 3 Months"
-                android:text="After 3 Months"
-
+                android:text="When are you planning to purchase Tractor?"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:layout_marginHorizontal="10dp"
                 />
 
 
-        </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radio_group_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:weightSum="100"
+                >
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="Immediately"
+                    android:text="Immediately"
+
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 Month"
+                    android:tag="1 Month"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="3Months"
+                    android:text="3Months"
+
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="After 3 Months"
+                    android:text="After 3 Months"
+
+                    />
+
+
+            </RadioGroup>
 
         </LinearLayout>
 
@@ -181,42 +163,43 @@
             android:background="#ffff"
 
             >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Are you looking for finance / loan for Tractor purchase?"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_marginHorizontal="10dp"
-            />
+            <TextView
+                android:id="@+id/finance_requirement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Are you looking for finance / loan for Tractor purchase?"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:layout_marginHorizontal="10dp"
+                />
 
-        <RadioGroup
-            android:id="@+id/radioGroup_finance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:weightSum="100"
-            >
+            <RadioGroup
+                android:id="@+id/radioGroup_finance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:weightSum="100"
+                >
 
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:text="Yes"
-            android:tag="True"
-            />
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:text="Yes"
+                    android:tag="True"
+                    />
 
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:text="No"
-            android:tag="False"
-            />
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:text="No"
+                    android:tag="False"
+                    />
 
-        </RadioGroup>
+            </RadioGroup>
 
         </LinearLayout>
 
@@ -236,18 +219,19 @@
                 android:id="@+id/address_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Your Address"
+                android:hint="Add Your Address"
                 android:textSize="14dp"
+                android:textColorHint="#000"
                 android:textColor="#000"
                 android:drawableLeft="@drawable/ic_location_sign"
                 android:drawablePadding="5dp"
                 android:layout_marginHorizontal="10dp"
                 />
 
-           <!-- <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_right_arrow"/>-->
+            <!-- <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/ic_right_arrow"/>-->
         </LinearLayout>
 
         <CheckBox
@@ -275,20 +259,20 @@
 
             >
 
-        <TextView
-            android:id="@+id/request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:textSize="16dp"
-            android:textColor="#fff"
-            android:background="@drawable/border_filled_red"
-            android:paddingVertical="20dp"
-            android:gravity="center"
-            android:paddingHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="20dp"
-            />
+            <TextView
+                android:id="@+id/request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:textSize="16dp"
+                android:textColor="#fff"
+                android:background="@drawable/border_filled_red"
+                android:paddingVertical="20dp"
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                />
 
         </LinearLayout>
 

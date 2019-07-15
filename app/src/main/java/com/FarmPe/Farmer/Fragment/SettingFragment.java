@@ -108,7 +108,7 @@ public class SettingFragment extends Fragment {
          //   setting_tittle.setText(lngObject.getString("Settings"));
             acc_info1.setText(lngObject.getString("AccountInfo"));
             your_addresss.setText(lngObject.getString("YourAddress"));
-            refer_ern.setText(lngObject.getString("Refer_Earn"));
+          //  refer_ern.setText(lngObject.getString("Refer_Earn"));
             change_language.setText(lngObject.getString("ChangeLanguage"));
             polic_1.setText(lngObject.getString("PrivacyPolicy"));
 

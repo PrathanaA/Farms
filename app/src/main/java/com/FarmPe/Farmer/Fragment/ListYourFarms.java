@@ -86,10 +86,11 @@ public class ListYourFarms extends Fragment {
             @Override
             public void onClick(View v) {
                 selectedFragment = HomeMenuFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
                 // transaction.addToBackStack("looking");
-                transaction.commit();
+
             }
         });
 

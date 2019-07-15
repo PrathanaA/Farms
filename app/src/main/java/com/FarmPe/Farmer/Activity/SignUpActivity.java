@@ -52,7 +52,7 @@ import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
-   public static TextView create_acc, continue_sign_up, change_lang, backtologin, referal_text;
+   public static TextView create_acc, continue_sign_up, change_lang, popup_heading,backtologin, referal_text;
     LinearLayout back_feed;
     SessionManager sessionManager;
     public static EditText name, mobile_no, password, referal_code;
@@ -108,6 +108,13 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                 TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this,R.color.orange));
                 textView.setTextColor(Color.WHITE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                } else {
+                    textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                }
+
                 snackbar.show();
 
                 //setting connectivity to false only on executing "Good! Connected to Internet"
@@ -121,8 +128,20 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
             //setting connectivity to true only on executing "Sorry! Not connected to internet"
             connectivity_check=true;
             // Snackbar snackbar = Snackbar.make(coordinatorLayout,message, Snackbar.LENGTH_LONG);
-            Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG).show();
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), toast_nointernet, Snackbar.LENGTH_LONG);
+            View sb = snackbar.getView();
+            TextView textView = (TextView) sb.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setBackgroundColor(ContextCompat.getColor(SignUpActivity.this, R.color.orange));
+            textView.setTextColor(Color.WHITE);
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            } else {
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            }
+
+
+            snackbar.show();
           /*  View sbView = snackbar.getView();
             TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(color);
@@ -216,7 +235,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
 
                 create_acc.setText(lngObject.getString("Register"));
                 sign_name.setHint(lngObject.getString("FullName"));
-                sign_mobile.setHint(lngObject.getString("DigitMobileNumber"));
+                sign_mobile.setHint(lngObject.getString("PhoneNo"));
                 sign_pass.setHint(lngObject.getString("Password"));
                // textInputLayout_name.setHint(lngObject.getString("FullName"));
               //  textInputLayout_pass.setHint(lngObject.getString("EnterPassword"));
@@ -327,6 +346,24 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setCancelable(false);
                 close_layout = dialog.findViewById(R.id.close_layout);
+
+
+
+                popup_heading = dialog.findViewById(R.id.popup_heading);
+
+
+                try {
+                    lngObject = new JSONObject(sessionManager.getRegId("language"));
+
+                    popup_heading.setText(lngObject.getString("ChangeLanguage"));
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
 
                 recyclerView = dialog.findViewById(R.id.recycler_change_lang);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(SignUpActivity.this);
@@ -757,7 +794,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
 
                         String log_regi = result.getString("Register");
                         String log_name = result.getString("FullName");
-                        String log_mobile = result.getString("DigitMobileNumber");
+                        String log_mobile = result.getString("PhoneNo");
                         String log_password = result.getString("Password");
                         String log_register = result.getString("Register");
 

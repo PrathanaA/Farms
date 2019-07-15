@@ -1,6 +1,7 @@
 package com.FarmPe.Farmer.Fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -8,25 +9,51 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.FarmPe.Farmer.Activity.LandingPageActivity;
 import com.FarmPe.Farmer.Adapter.AddPhotoAdapter;
+import com.FarmPe.Farmer.Adapter.DistrictAdapter;
+import com.FarmPe.Farmer.Adapter.HoblisAdapter;
+import com.FarmPe.Farmer.Adapter.List_Farm_Adapter;
+import com.FarmPe.Farmer.Adapter.List_Farm_Adapter2;
+import com.FarmPe.Farmer.Adapter.StateApdater;
+import com.FarmPe.Farmer.Adapter.TalukAdapter;
+import com.FarmPe.Farmer.Adapter.VillageAdapter;
 import com.FarmPe.Farmer.Bean.AddPhotoBean;
 import com.FarmPe.Farmer.R;
-import java.util.ArrayList;
-import java.util.List;
+import com.FarmPe.Farmer.SessionManager;
+import com.FarmPe.Farmer.Urls;
+import com.FarmPe.Farmer.volleypost.VolleyMultipartRequest;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.android.volley.VolleyLog.TAG;
 
 
 public class ListYourFarmsFive extends Fragment {
@@ -36,10 +63,13 @@ public class ListYourFarmsFive extends Fragment {
     public static AddPhotoAdapter farmadapter;
     LinearLayout back_feed,add_photo_layout2,add_photo_layout1;
     Fragment selectedFragment;
-    TextView toolbar_title,upload_1;
+    TextView toolbar_title,continue_update,skip;
     Bitmap bitmap = null;
     public static final int GET_FROM_GALLERY = 3;
     ImageView cover_image;
+    SessionManager sessionManager;
+    String home;
+    String json_string,json_address_string;
 
 
     public static ListYourFarmsFive newInstance() {
@@ -47,36 +77,25 @@ public class ListYourFarmsFive extends Fragment {
         return fragment;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_farm_fifth_layout_item, container, false);
         recyclerView=view.findViewById(R.id.recycler_photo);
         back_feed=view.findViewById(R.id.back_feed);
-        upload_1=view.findViewById(R.id.upload_1);
+        continue_update=view.findViewById(R.id.continue_update);
+        skip=view.findViewById(R.id.skip);
+
+        sessionManager=new SessionManager(getActivity());
+
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack ("lookingFourth", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            }
-        });
-
-
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
-
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack ("lookingFourth", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    return true;
-                }
-                return false;
+                selectedFragment = HomeMenuFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                // transaction.addToBackStack("looking");
+                transaction.commit();
             }
         });
 
@@ -89,24 +108,156 @@ public class ListYourFarmsFive extends Fragment {
             AddPhotoBean img1=new AddPhotoBean(bitmap);
             newOrderBeansList.add(img1);
         }*/
-            System.out.println("bittttttttttttt"+AddPhotoFragmentSub.bitmap);
-            AddPhotoBean img1=new AddPhotoBean(AddPhotoFragmentSub.bitmap);
-            newOrderBeansList.add(img1);
-            farmadapter=new AddPhotoAdapter(getActivity(),newOrderBeansList);
-            recyclerView.setAdapter(farmadapter);
+        System.out.println("hhhhhhhhhhh"+ LandingPageActivity.selectedImage);
+        AddPhotoBean img1=new AddPhotoBean( LandingPageActivity.selectedImage);
+        newOrderBeansList.add(img1);
+        farmadapter=new AddPhotoAdapter(getActivity(),newOrderBeansList);
+        recyclerView.setAdapter(farmadapter);
 
+        System.out.println("upload_image"+LandingPageActivity.selectedImage);
 
-            upload_1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+          continue_update.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              uploadImage(LandingPageActivity.selectedImage);
+           }
+          });
 
-                }
-            });
-
-
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                home="home";
+                uploadImage(LandingPageActivity.selectedImage);
+               /* selectedFragment = HomeMenuFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                // transaction.addToBackStack("looking");
+                transaction.commit();*/
+            }
+        });
 
         return view;
     }
+
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 10, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    private void uploadImage(final Bitmap bitmap){
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
+                "Loading....Please wait.");
+
+        progressDialog.show();
+
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject_location=new JSONObject();
+        JSONObject jsonObject_address=new JSONObject();
+        try {
+            jsonObject.put("FarmCategoryId", List_Farm_Adapter.farm_listid);
+            jsonObject.put("FarmTypeId", List_Farm_Adapter2.farm_type_id);
+            jsonObject.put("FarmName",ListYourFarmsFour.farm_name_string);
+            jsonObject.put("ContactPersonName",ListYourFarmsFour.cont_name);
+            jsonObject.put("MobileNumber",ListYourFarmsFour.mob_no);
+            jsonObject.put("EmailId",ListYourFarmsFour.email_id_strg);
+            jsonObject.put("Id","0");
+            jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
+
+            jsonObject_location.put("Id",0);
+            jsonObject_location.put("Latitude","13.21321");
+            jsonObject_location.put("Longitude","33.21321");
+
+            jsonObject.put("FarmLocation",jsonObject_location);
+
+
+            jsonObject_address.put("Id","0");
+            jsonObject_address.put("StreeAddress",ListYourFarmsThird.street_string);
+            jsonObject_address.put("StateId", StateApdater.stateid);
+            jsonObject_address.put("DistrictId", DistrictAdapter.districtid);
+            jsonObject_address.put("TalukId", TalukAdapter.talukid);
+            jsonObject_address.put("HobliId", HoblisAdapter.hobliid);
+            jsonObject_address.put("VillageId", VillageAdapter.villageid);
+            jsonObject_address.put("Pincode",ListYourFarmsThird.pincode_string);
+
+
+            jsonObject.put("FarmAddress",jsonObject_address);
+
+            json_string=jsonObject.toString();
+
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.AddUpdateFarms,
+                new Response.Listener<NetworkResponse>(){
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        progressDialog.dismiss();
+
+
+                      System.out.println("bdjvknjvhv"+response);
+                      if (home==null){
+
+                      }else{
+                          selectedFragment = HomeMenuFragment.newInstance();
+                          FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                          transaction.replace(R.id.frame_layout, selectedFragment);
+                          // transaction.addToBackStack("looking");
+                          transaction.commit();
+                      }
+
+
+
+//                        Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
+//                        selectedFragment = SettingFragment.newInstance();
+//                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//                        ft.replace(R.id.frame_layout,selectedFragment);
+//                        ft.commit();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }) {
+
+
+
+
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+              long imagename = System.currentTimeMillis();
+               params.put("farmimage", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+
+                return params;
+            }
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("farmsdetail",json_string);
+                return params;
+            }
+
+        };
+        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(2000 * 60, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //adding the request to volley
+        Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
+    }
+
 
 
 }

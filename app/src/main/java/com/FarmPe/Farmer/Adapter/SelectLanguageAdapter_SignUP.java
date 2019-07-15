@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.FarmPe.Farmer.Activity.LoginActivity;
 import com.FarmPe.Farmer.Activity.SignUpActivity;
 import com.FarmPe.Farmer.Bean.SelectLanguageBean;
 import com.FarmPe.Farmer.R;
@@ -110,13 +111,14 @@ public class SelectLanguageAdapter_SignUP extends RecyclerView.Adapter<SelectLan
 
 
                         String log_name = result.getString("FullName");
-                        String log_mobile = result.getString("DigitMobileNumber");
+                        String log_mobile = result.getString("PhoneNo");
                         String log_password = result.getString("Password");
                         String log_register = result.getString("Register");
+                        String lang_title1 = result.getString("ChangeLanguage");
 
 
 
-
+                        SignUpActivity.popup_heading.setText(lang_title1);
                         SignUpActivity.sign_name.setHint(log_name);
                         SignUpActivity.create_acc.setText(log_register);
                         SignUpActivity.sign_mobile.setHint(log_mobile);
@@ -131,7 +133,6 @@ public class SelectLanguageAdapter_SignUP extends RecyclerView.Adapter<SelectLan
                         SignUpActivity.mobile_registered_toast = result.getString("Thismobilehasalreadyregistered");
                         SignUpActivity.toast_internet = result.getString("GoodConnectedtoInternet");
                         SignUpActivity.toast_nointernet = result.getString("NoInternetConnection");
-
 
 
 
