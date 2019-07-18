@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.FarmPe.Farmer.Adapter.FarmsImageAdapter;
 import com.FarmPe.Farmer.Adapter.NotificationAdapter;
@@ -33,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class LookingForFragment extends Fragment {
 
     public static List<FarmsImageBean> newOrderBeansList = new ArrayList<>();
@@ -41,8 +42,10 @@ public class LookingForFragment extends Fragment {
 
     public static RecyclerView recyclerView;
     public static FarmsImageAdapter farmadapter;
+    Fragment selectedFragment = null;
     boolean doubleBackToExitPressedOnce = false;
     String location;
+    TextView filter_text;
     SessionManager sessionManager;
 
 
@@ -56,6 +59,7 @@ public class LookingForFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.looking_for_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_looking);
+        filter_text=view.findViewById(R.id.filter_text);
         newOrderBeansList.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager_farm);
@@ -86,6 +90,24 @@ public class LookingForFragment extends Fragment {
             }
         });
 
+
+
+
+
+
+        filter_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                selectedFragment = Comming_soon_looking.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.addToBackStack("looking_edit");
+                transaction.commit();
+
+
+            }
+        });
 
 /*
 

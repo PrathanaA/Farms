@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.FarmPe.Farmer.Adapter.FarmsHomeAdapter;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
@@ -34,6 +36,8 @@ public class FarmsHomePageFragment extends Fragment {
 
     public static List<FarmsImageBean> newOrderBeansList = new ArrayList<>();
     private List<FarmsImageBean> pagination_list = new ArrayList<>();
+    TextView filter_text;
+    Fragment selectedFragment = null;
 
     public static RecyclerView recyclerView;
     public static FarmsHomeAdapter farmadapter;
@@ -44,6 +48,8 @@ public class FarmsHomePageFragment extends Fragment {
     int count1 = 1;
     SessionManager sessionManager;
 
+
+
     public static FarmsHomePageFragment newInstance() {
         FarmsHomePageFragment fragment = new FarmsHomePageFragment();
         return fragment;
@@ -53,7 +59,10 @@ public class FarmsHomePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.looking_for_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_looking);
+        filter_text = view.findViewById(R.id.filter_text);
         newOrderBeansList.clear();
+
+
         final GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager_farm);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -77,6 +86,23 @@ public class FarmsHomePageFragment extends Fragment {
                     return true;
                 }
                 return false;
+            }
+        });
+
+
+
+        filter_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                selectedFragment = Comming_soon_farms.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.addToBackStack("looking_edit1");
+                transaction.commit();
+
+
             }
         });
 

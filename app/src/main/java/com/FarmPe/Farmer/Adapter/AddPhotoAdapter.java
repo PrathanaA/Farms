@@ -38,7 +38,7 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
     Bitmap bitmap;
     public static TextView add_text_image;
 
-    private static int RESULT_LOAD_IMG = 100;
+    private static int RESULT_LOAD_IMG = 200;
 
     public LinearLayout linearLayout;
     public static LinearLayout next_arw;

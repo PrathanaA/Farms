@@ -233,6 +233,20 @@
           />
 
 
+      <TextView
+          android:id="@+id/invitation"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Invitations"
+          android:layout_marginTop="20dp"
+          android:textSize="16dp"
+          android:drawableLeft="@drawable/ic_quote"
+          android:drawablePadding="10dp"
+          android:fontFamily="@font/segoeui"
+          android:textColor="#000"
+          />
+
+
 
       <TextView
           android:id="@+id/list_farm"

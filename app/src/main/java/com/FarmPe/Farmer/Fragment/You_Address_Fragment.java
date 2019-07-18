@@ -1,7 +1,5 @@
 package com.FarmPe.Farmer.Fragment;
 
-
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -20,8 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-
 import com.FarmPe.Farmer.Adapter.You_Address_Adapter;
 import com.FarmPe.Farmer.Bean.Add_New_Address_Bean;
 import com.FarmPe.Farmer.R;
@@ -29,11 +25,9 @@ import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Crop_Post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 

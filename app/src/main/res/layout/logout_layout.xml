@@ -28,155 +28,148 @@
             android:orientation="vertical"
 
             >
-          <!--  <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingRight="15dp"
-                android:paddingLeft="10dp"
-                android:paddingVertical="10dp"
-                android:weightSum="100"
-                android:background="@drawable/border_white_border"
+            <!--  <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:paddingRight="15dp"
+                  android:paddingLeft="10dp"
+                  android:paddingVertical="10dp"
+                  android:weightSum="100"
+                  android:background="@drawable/border_white_border"
 
-                >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="92">
+                  >
+                  <LinearLayout
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="92">
 
-                    <TextView
-                        android:id="@+id/popup_heading"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="Logout   "
-                        android:textColor="#fff"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
+                      <TextView
+                          android:id="@+id/popup_heading"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="5dp"
+                          android:text="Logout   "
+                          android:textColor="#fff"
+                          android:textSize="16dp"
+                          android:textStyle="bold"
 
-                        />
-                </LinearLayout>
+                          />
+                  </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/close_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                  <LinearLayout
+                      android:id="@+id/close_layout"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/close_popup"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_close"
-                        android:layout_gravity="right"
-                        android:layout_weight="8"
+                      <ImageView
+                          android:id="@+id/close_popup"
+                          android:layout_width="match_parent"
+                          android:layout_height="20dp"
+                          android:src="@drawable/ic_close"
+                          android:layout_gravity="right"
+                          android:layout_weight="8"
 
-                        />
+                          />
 
-                </LinearLayout>
+                  </LinearLayout>
 
-            </LinearLayout>-->
+              </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingRight="15dp"
+                android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:background="#000"
                 android:paddingVertical="10dp"
                 android:weightSum="100"
                 >
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="92">
+                    android:layout_weight="100">
 
                     <TextView
                         android:id="@+id/popup_heading"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="Logout   "
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-
-                        />
+                        android:text="Log Out"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/close_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:focusableInTouchMode="true">
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:focusableInTouchMode="true"
+                    android:background="@drawable/ic_filter_state"
+                    android:gravity="center"
+                    >
 
                     <ImageView
                         android:id="@+id/close_popup"
-                        android:layout_width="match_parent"
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_close"
-                        android:layout_gravity="right"
-
-
-
-                        />
+                        android:layout_gravity="center|center_horizontal" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
+        </LinearLayout>
 
+
+        <TextView
+            android:id="@+id/text_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/segoeui"
+            android:layout_gravity="center"
+            android:text="@string/logout"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#000"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/text_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/segoeui"
-                android:layout_gravity="center"
-                android:text="@string/logout"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="#000"
-                android:textSize="16dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:id="@+id/no_1"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
                 android:gravity="center"
-                android:layout_marginTop="40dp"
-                android:orientation="horizontal">
+                android:fontFamily="@font/segoeui"
+                android:text="Cancel"
+                android:clickable="true"
+                android:textColor="#000000"
+                android:background="@drawable/border_grey_filled"
+                android:textSize="14dp" />
 
-                <TextView
-                    android:id="@+id/no_1"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:fontFamily="@font/segoeui"
-                    android:text="Cancel"
-                    android:clickable="true"
-                    android:textColor="#000000"
-                    android:background="@drawable/border_grey_filled"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/yes_1"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:fontFamily="@font/segoeui"
-                    android:gravity="center"
-                    android:text="Confirm"
-                    android:background="@drawable/border_grey_filled"
-                    android:layout_marginLeft="18dp"
-                    android:layout_gravity="end"
-                    android:textColor="#000000"
-                    android:textSize="14dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/yes_1"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/segoeui"
+                android:gravity="center"
+                android:text="Confirm"
+                android:background="@drawable/border_grey_filled"
+                android:layout_marginLeft="18dp"
+                android:layout_gravity="end"
+                android:textColor="#000000"
+                android:textSize="14dp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
-
-

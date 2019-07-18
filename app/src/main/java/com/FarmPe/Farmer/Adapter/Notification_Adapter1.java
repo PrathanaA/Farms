@@ -6,14 +6,17 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.FarmPe.Farmer.Bean.Notification_recy_bean;
 
+import com.FarmPe.Farmer.Fragment.Notification_Recyc_Fragment;
 import com.FarmPe.Farmer.R;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -28,6 +31,7 @@ public class Notification_Adapter1 extends RecyclerView.Adapter<Notification_Ada
     public static LinearLayout next_arw;
     public static String first;
     public static CardView cardView;
+    Boolean isTouched = false;
     public Notification_Adapter1(Activity activity, List<Notification_recy_bean> moviesList) {
         this.productList = moviesList;
         this.activity=activity;
@@ -72,6 +76,28 @@ public class Notification_Adapter1 extends RecyclerView.Adapter<Notification_Ada
 
         holder.actninfo.setText(products.getNoti_txt());
 
+        holder.switch1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                isTouched = true;
+                return false;
+            }
+        });
+
+        holder.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isTouched) {
+                    isTouched = false;
+
+                    if (isChecked) {
+                        Notification_Recyc_Fragment.enable_all.setVisibility(View.VISIBLE);
+                    } else {
+                        Notification_Recyc_Fragment.enable_all.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
 
 
 

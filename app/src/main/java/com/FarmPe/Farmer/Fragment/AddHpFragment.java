@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,8 @@ public class AddHpFragment extends Fragment {
                 fm.popBackStack("brand", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
-        /*view.setFocusableInTouchMode(true);
+
+        view.setFocusableInTouchMode(true);
         view.requestFocus(View.FOCUS_UP);
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -65,11 +67,12 @@ public class AddHpFragment extends Fragment {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("brand", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
+                    return true;
                 }
                 return false;
             }
-        });*/
+        });
+
        HpList();
         newOrderBeansList.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);

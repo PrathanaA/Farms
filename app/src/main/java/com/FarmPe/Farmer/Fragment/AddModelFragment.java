@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class AddModelFragment extends Fragment {
         back_feed=view.findViewById(R.id.back_feed);
         toolbar_title.setText("Select Model");
 
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +59,8 @@ public class AddModelFragment extends Fragment {
             }
         });
 
-       /* view.setFocusableInTouchMode(true);
+
+        view.setFocusableInTouchMode(true);
         view.requestFocus(View.FOCUS_UP);
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -65,10 +68,11 @@ public class AddModelFragment extends Fragment {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("hp", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
                 }
                 return false;
             }
-        });*/
+        });
 
         ModelList();
        // newOrderBeansList.clear();

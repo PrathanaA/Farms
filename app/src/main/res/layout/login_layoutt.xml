@@ -16,10 +16,9 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_weight="20"
         >
-
 
         <ImageView
             android:layout_width="wrap_content"
@@ -38,7 +37,7 @@
         android:weightSum="100"
         android:background="#BF000000"
         android:gravity="start"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="80"
         >
 
@@ -77,7 +76,6 @@
                 android:textCursorDrawable="@drawable/cursor_color"
                 app:theme="@style/MyStyle"
                 android:textColorHint="#8c8c8c">
-
 
                 <EditText
                     android:id="@+id/mob_no"
@@ -173,45 +171,35 @@
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="20dp"
             android:weightSum="100"
-            android:layout_weight="16"
+            android:layout_weight="17"
             android:orientation="horizontal"
             >
 
-            <LinearLayout
+
+            <CheckBox
+                android:id="@+id/remember_me"
                 android:layout_width="0dp"
-                android:layout_weight="45"
-                android:layout_height="wrap_content">
-
-
-                <CheckBox
-                    android:id="@+id/remember_me"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="#999999"
-                    android:fontFamily="@font/segoeui"
-                    android:text="Remember me"
-                    android:textStyle="bold"
-                    android:textColor="#8a8b91"
-                    android:textSize="15dp" /></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="55"
                 android:layout_height="wrap_content"
-                android:gravity="right">
-                <TextView
-                    android:id="@+id/forgot_pass_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/segoeui"
-                    android:gravity="right"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:textStyle="bold"
-                    android:text="Forgot Password?"
-                    android:textColor="#8a8b91"
-                    android:textSize="15dp" />
-            </LinearLayout>
+                android:buttonTint="#999999"
+                android:layout_weight="45"
+                android:fontFamily="@font/segoeui"
+                android:text="Remember me"
+                android:textStyle="bold"
+                android:textColor="#8a8b91"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/forgot_pass_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoeui"
+                android:gravity="right"
+                android:layout_weight="55"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="5dp"
+                android:text="Forgot Password?"
+                android:textColor="#8a8b91"
+                android:textSize="15dp" />
 
 
         </LinearLayout>
@@ -220,7 +208,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="55dp"
             android:gravity="center"
             android:layout_weight="15"
             android:orientation="horizontal"
@@ -232,16 +219,16 @@
                 android:fontFamily="@font/segoeui"
                 android:text="New to FarmPe? "
                 android:textColor="#8a8b91"
-                android:textSize="22dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/create_acc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SignUP"
+                android:text="Signup"
                 android:fontFamily="@font/segoeui"
-                android:textSize="22dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="#fff"
                 />
@@ -251,11 +238,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="12"
             android:layout_marginBottom="5dp"
+            android:layout_weight="11"
             android:gravity="bottom|center"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
 
             <TextView
@@ -268,7 +254,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/segoeui"
                 android:paddingHorizontal="20dp"
-                android:paddingVertical="10dp"
+                android:paddingVertical="8dp"
                 android:text="English"
                 android:textColor="#fff"
                 android:textSize="14dp" />
@@ -282,3 +268,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

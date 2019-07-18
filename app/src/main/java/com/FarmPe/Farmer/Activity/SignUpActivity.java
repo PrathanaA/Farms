@@ -23,7 +23,10 @@ import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -211,8 +214,6 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
         }
 
 
-
-
         setupUI(linearLayout);
         String[] localize = {"+91"};
 
@@ -283,6 +284,28 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
             }
         });
 
+
+
+
+        privacy_terms.setText("");
+        SpannableString snt = new SpannableString("By Registering, you accept our Privacy policy and Terms of use.");
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                startActivity(new Intent(SignUpActivity.this, Privacy_Activity.class));
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                /*super.updateDrawState(ds);*/
+                ds.setUnderlineText(true);
+            }
+        };
+        snt.setSpan(clickableSpan,31,snt.length()-1,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        privacy_terms.setText(snt);
+//        privacy_terms.setText(Html.fromHtml("By Registering, you accept our "+"<a href='com.FarmPe.Farmer.Activity.Privacy_Activity://Kode'>Privacy policy and Terms of use.</a>"));
+        //privacy_terms.setClickable(true);
+        privacy_terms.setMovementMethod(LinkMovementMethod.getInstance());
+        privacy_terms.setHighlightColor(Color.TRANSPARENT);
        /* final InputFilter EMOJI_FILTER = new InputFilter() {
 
             @Override
@@ -544,6 +567,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                         tv.setGravity(Gravity.CENTER_HORIZONTAL);
                     }
                     snackbar.show();
+
 
                 } else if (name_text.length() < 2) {
                     Snackbar snackbar = Snackbar

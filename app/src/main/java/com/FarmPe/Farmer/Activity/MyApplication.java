@@ -13,8 +13,6 @@ public class MyApplication extends Application {
 
         mInstance = this;
 
-
-
     }
 
     public static synchronized MyApplication getInstance() {

@@ -28,7 +28,7 @@
                         android:padding="10dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="20dp"
-                        android:background="@drawable/ripple_effect"
+                        android:background="@drawable/ic_filter_state"
                         >
 
 
@@ -97,11 +97,23 @@
                 android:fontFamily="@font/segoeui"
                 android:layout_marginTop="20dp"
                 android:textColor="#000"
+                android:visibility="gone"
                 android:padding="10dp"
                 android:layout_gravity="center"
                 android:background="@drawable/border"
 
                 />
+
+
+            <EditText
+                android:id="@+id/current_adds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:fontFamily="@font/segoeui"
+                android:textSize="12dp"
+                android:textColor="#000"/>
 
             <TextView
                 android:id="@+id/set_address"

@@ -292,6 +292,7 @@ public class EnterOTP extends AppCompatActivity implements ConnectivityReceiver.
         });
 
 
+
         ReadSms.bindListener(new SmsListener() {
             @Override
             public void messageReceived(String messageText) {

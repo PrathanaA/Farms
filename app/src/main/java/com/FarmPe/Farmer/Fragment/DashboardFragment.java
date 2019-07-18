@@ -24,7 +24,6 @@ public class DashboardFragment extends Fragment {
     Fragment selectedFragment;
     JSONObject lngObject;
 
-
     SessionManager sessionManager;
 
     TextView farmer1,farms1,looking_for1;
@@ -75,10 +74,10 @@ public class DashboardFragment extends Fragment {
             }
         });*/
 
-        selectedFragment = LookingForFragment.newInstance();
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_dashboard, selectedFragment);
-        transaction.commit();
+//        selectedFragment = LookingForFragment.newInstance();
+//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.frame_dashboard, selectedFragment);
+//        transaction.commit();
 
 
        /* try {
@@ -109,10 +108,10 @@ public class DashboardFragment extends Fragment {
                 //farmer1.setTextColor(Color.parseColor("#8c8c8c"));
                 looking_for1.setTextColor(Color.parseColor("#ffffff"));
 
-                selectedFragment = LookingForFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_dashboard, selectedFragment);
-                transaction.commit();
+//                selectedFragment = LookingForFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_dashboard, selectedFragment);
+//                transaction.commit();
 
 
             }

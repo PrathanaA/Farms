@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
@@ -72,6 +73,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
     public static RecyclerView recyclerView;
     public static AddHpAdapter farmadapter;
     SessionManager sessionManager;
+    public static String back;
     TextView toolbar_title,update_btn_txt;
     JSONObject lngObject;
     String toast_name,toast_mobile,toast_passwrd,toast_new_mobile,toast_minimum_toast,toast_update,toast_image;
@@ -90,6 +92,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
         Edit_Looking_For_Fragment fragment = new Edit_Looking_For_Fragment();
         return fragment;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,6 +116,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                back = "edit_back";
 
                 selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -131,12 +135,13 @@ public class Edit_Looking_For_Fragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
+
+                    back = "edit_back";
+
                     selectedFragment = HomeMenuFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
-                    // transaction.addToBackStack("looking");
                     transaction.commit();
-
 
                     return true;
                 }

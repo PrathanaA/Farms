@@ -7,8 +7,10 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class Notification_Adapter2 extends RecyclerView.Adapter<Notification_Ada
     private List<Notification_recy_bean> productList;
     Activity activity;
     Fragment selectedFragment;
+    Boolean isTouched = false;
 
     public LinearLayout linearLayout;
     public static LinearLayout next_arw;
@@ -85,6 +88,30 @@ public class Notification_Adapter2 extends RecyclerView.Adapter<Notification_Ada
 
 
         }*/
+
+        holder.switch1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                isTouched = true;
+                return false;
+            }
+        });
+
+        holder.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isTouched) {
+                    isTouched = false;
+
+                    if (isChecked) {
+                        Notification_Recyc_Fragment.enable_all.setVisibility(View.VISIBLE);
+                    } else {
+                        Notification_Recyc_Fragment.enable_all.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
+
         holder.switch1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

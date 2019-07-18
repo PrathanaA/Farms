@@ -32,14 +32,7 @@
 
             >
 
-            <!--<RadioGroup-->
-                <!--android:id="@+id/radio_group_time"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:weightSum="100"-->
-                <!--&gt;-->
+
 
                 <RadioButton
                     android:id="@+id/list_farm1"
@@ -51,7 +44,7 @@
 
 
 
-            <!--</RadioGroup>-->
+
 
         </LinearLayout>
 

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class AddFirstFragment extends Fragment {
     public static RecyclerView recyclerView;
     public static AddFirstAdapter farmadapter;
     LinearLayout back_feed;
+    public static String tracter_title = "";
     Fragment selectedFragment;
 
 
@@ -45,6 +47,7 @@ public class AddFirstFragment extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_what_looking);
         back_feed=view.findViewById(R.id.back_feed);
 
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,19 +57,21 @@ public class AddFirstFragment extends Fragment {
             }
         });
 
-       /* view.setFocusableInTouchMode(true);
+        view.setFocusableInTouchMode(true);
         view.requestFocus(View.FOCUS_UP);
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("looking", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack("first_looking", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
                 }
                 return false;
             }
         });
-*/
+
+
 
         AddLookigFor();
         newOrderBeansList.clear();

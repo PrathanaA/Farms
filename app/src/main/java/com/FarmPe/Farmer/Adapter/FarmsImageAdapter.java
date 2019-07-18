@@ -96,6 +96,22 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
         //   holder.duration.setText(products.getDuration());
         // holder.farmer_name.setText(products.getFarmer_name());
         // holder.location.setText(products.getLocation());
+
+
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //looking_forId=products.getId();
+
+                selectedFragment = Edit_Looking_For_Fragment.newInstance();
+                FragmentTransaction transaction = ((FragmentActivity) activity).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("looking1");
+                transaction.commit();
+            }
+        });
+
+
         try {
             Glide.with(activity).load(products.getImage())
                     //  Glide.with(activity).load(R.drawable.tractor_sonalika)
@@ -120,18 +136,7 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
         linear_looking_main.setLayoutParams(parms);
 
 
-        holder.image_looking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //looking_forId=products.getId();
 
-                selectedFragment = Edit_Looking_For_Fragment.newInstance();
-                FragmentTransaction transaction = ((FragmentActivity) activity).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("farmer");
-                transaction.commit();
-            }
-        });
 //
 //        holder.shortlist_layout.setOnClickListener(new View.OnClickListener() {
 //            @Override

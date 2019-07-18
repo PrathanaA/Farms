@@ -206,7 +206,7 @@ public class UpdateAccDetailsFragment extends Fragment {
 
 
 
-        //  profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
+       // profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
 
         // profile_name.setFilters(new InputFilter[]{EMOJI_FILTER});
 
@@ -228,6 +228,7 @@ public class UpdateAccDetailsFragment extends Fragment {
 
         };
 
+        profile_passwrd.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(12) });
 
 
         //   profile_passwrd.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(12) });
@@ -287,7 +288,6 @@ public class UpdateAccDetailsFragment extends Fragment {
                         profile_name.setFilters(new InputFilter[]{EMOJI_FILTER});
                         profile_phone.setFilters(new InputFilter[]{EMOJI_FILTER});
                         profile_mail.setFilters(new InputFilter[]{EMOJI_FILTER});
-                        //   profile_passwrd.setFilters(new InputFilter[]{EMOJI_FILTER});
 
                         Glide.with(getActivity()).load(ProfileImage)
 

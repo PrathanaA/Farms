@@ -137,7 +137,7 @@
         >
 
     <Button
-        android:id="@+id/choose_location"
+        android:id="@+id/confirm_loc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_border_layout"

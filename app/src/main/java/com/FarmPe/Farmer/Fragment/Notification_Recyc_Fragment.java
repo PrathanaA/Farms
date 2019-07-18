@@ -51,7 +51,7 @@ public class Notification_Recyc_Fragment extends Fragment {
     JSONObject lngObject;
     String location;
    public static List<String> list;
-   TextView switchCompat,enable_all;
+   public static TextView switchCompat,enable_all;
 
     public static Notification_Recyc_Fragment newInstance() {
         Notification_Recyc_Fragment fragment = new Notification_Recyc_Fragment();
@@ -259,15 +259,18 @@ public void  getnot(){
 
 
                 try{
+                    newmember_List.clear();
+                    newOrderBeansList.clear();
+
                     noti_array = result.getJSONArray("NotificationMasterList");
                     for(int i = 0;i<noti_array.length();i++){
                         JSONObject jsonObject1 =  noti_array.getJSONObject(i);
-
 
                         if(jsonObject1.getBoolean("ToAll")) {
 
                             notification_recy_bean = new Notification_recy_bean(jsonObject1.getString("NotificationAction"), jsonObject1.getString("NotificationCode"), jsonObject1.getString("NotificationID"));
                             newOrderBeansList.add(notification_recy_bean);
+
                         }else{
 
                             notification_recy_bean = new Notification_recy_bean(jsonObject1.getString("NotificationAction"), jsonObject1.getString("NotificationCode"), jsonObject1.getString("NotificationID"));

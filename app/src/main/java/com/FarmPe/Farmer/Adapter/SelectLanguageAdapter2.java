@@ -121,12 +121,11 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
 
 
                           String log_login = result.getString("Login");
-                          String log_mobile = result.getString("DigitMobileNumber");
+                          String log_mobile = result.getString("PhoneNo");
                           String log_password = result.getString("Password");
                           String log_remember_me = result.getString("RememberMe");
                           String log_forgot_passwrd = result.getString("ForgotPassword");
                           String log_register = result.getString("Register");
-
 
                            LoginActivity.popup_heading.setText(lang_title1);
                            LoginActivity.remember_me.setText(log_remember_me);

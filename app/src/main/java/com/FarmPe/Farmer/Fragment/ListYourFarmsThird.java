@@ -54,6 +54,7 @@ public class ListYourFarmsThird extends Fragment {
     public static AddFirstListYourFramsAdapter farmadapter;
     LinearLayout back_feed,main_layout,search_bar;
     Fragment selectedFragment;
+    String address_map;
 
     TextView toolbar_title,continue_3;
     public static TextView state,district,taluk,block,village,skip,current_loc;
@@ -75,6 +76,7 @@ public class ListYourFarmsThird extends Fragment {
     VillageAdapter1 villageAdapter;
     JSONArray jsonArray,state_array,tal_array,hobli_array,village_array;
     StateBean stateBean;
+    EditText current_adds;
     public static String list_fams,list_farms_district,list_farms_taluk,list_farms_block,list_farms_village,street_string,pincode_string;
 
 
@@ -96,6 +98,7 @@ public class ListYourFarmsThird extends Fragment {
       //  recyclerView=view.findViewById(R.id.recycler_view1);
         village=view.findViewById(R.id.village);
         search_bar=view.findViewById(R.id.search_bar);
+        current_adds=view.findViewById(R.id.current_adds);
         street_add=view.findViewById(R.id.street_add);
         left_arrw=view.findViewById(R.id.left_arrw);
         pincode=view.findViewById(R.id.pincode);
@@ -105,18 +108,49 @@ public class ListYourFarmsThird extends Fragment {
 
         street_add.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30) });
 
+        address_map = getArguments().getString("status");
+
+        if (address_map.equals("default")){
+
+            current_loc.setVisibility(View.VISIBLE);
+
+
+        }else{
+            current_adds.setText(address_map);
+            current_adds.setVisibility(View.VISIBLE);
+
+        }
+
+
+        current_adds.setText(address_map);
+
+
+        back_feed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                selectedFragment = ListYourFarmsSecond.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("farm_third");
+                transaction.commit();
+
+            }
+        });
+
 
         current_loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 selectedFragment = MapFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("farm_third");
                 transaction.commit();
+
             }
         });
-
 
 
         skip.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +161,7 @@ public class ListYourFarmsThird extends Fragment {
                 selectedFragment = ListYourFarmsFour.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
+                transaction.addToBackStack("list_four");
                 transaction.commit();
             }
         });
@@ -464,17 +498,6 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
-
-        back_feed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedFragment = HomeMenuFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
-                transaction.commit();
-            }
-        });
 
         continue_3.setOnClickListener(new View.OnClickListener() {
             @Override

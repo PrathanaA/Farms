@@ -1,7 +1,6 @@
 package com.FarmPe.Farmer.Fragment;
 
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -79,6 +78,7 @@ public class NotificationSettingFragment extends Fragment {
                 return false;
             }
         });
+
 
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));

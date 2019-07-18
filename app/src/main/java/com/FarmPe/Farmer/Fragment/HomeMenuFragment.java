@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -35,6 +37,8 @@ import android.widget.Toast;
 
 import com.FarmPe.Farmer.Activity.LandingPageActivity;
 import com.FarmPe.Farmer.Activity.LoginActivity;
+import com.FarmPe.Farmer.Adapter.AddPhotoAdapter;
+import com.FarmPe.Farmer.Bean.AddPhotoBean;
 import com.FarmPe.Farmer.volleypost.VolleyMultipartRequest;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -56,7 +60,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,7 +87,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     private static int RESULT_LOAD_IMG = 1;
     private int PICK_IMAGE_REQUEST = 1;
     Bitmap bitmap;
-    TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm;
+    TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm,invitation;
     public static TextView your_farms,cart_count_text,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
@@ -89,6 +95,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     static boolean fragloaded;
     //  public static SearchView searchView;
     LinearLayout linearLayout;
+    public static Bitmap selectedImage;
 
     static Fragment myloadingfragment;
     public static NestedScrollView scrollView;
@@ -100,6 +107,9 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         HomeMenuFragment fragment = new HomeMenuFragment();
         return fragment;
     }
+
+
+
 
 
     @Override
@@ -114,6 +124,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         //scrollView=view.findViewById(R.id.scroll);
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
+        invitation = view.findViewById(R.id.invitation);
         //linear_connection = view.findViewById(R.id.linear_connection);
         //map=view.findViewById(R.id.map);
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
@@ -254,11 +265,23 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         navigationView.setNavigationItemSelectedListener(this);
         System.out.println("hhhrtryur");
 
+        if(Edit_Looking_For_Fragment.back==null) {
 
-        selectedFragment = FarmPe_Logo_Fragment.newInstance();
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.first_full_frame, selectedFragment);
-        transaction.commit();
+
+            selectedFragment = FarmPe_Logo_Fragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+
+        }else {
+
+            selectedFragment = LookingForFragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+        }
+
+
 
         plus_sign_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,13 +308,41 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
+
+        if(Comming_soon_looking.coming_back=="look_back"){
+            selectedFragment = LookingForFragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+
+        }else{
+
+        }
         your_requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                selectedFragment = LookingForFragment.newInstance();
+
+
+                    selectedFragment = LookingForFragment.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.first_full_frame, selectedFragment);
+                    transaction.addToBackStack("home");
+                    transaction.commit();
+                    drawer.closeDrawers();
+
+
+            }
+        });
+
+        invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                selectedFragment = InvitationsLeadsFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("home");
                 transaction.commit();
                 drawer.closeDrawers();
@@ -314,16 +365,28 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         });
 
 
+        if(Comming_soon_farms.back_farm=="look_farm"){
+            selectedFragment = FarmsHomePageFragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+        }else {
+
+        }
+
         your_farms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                selectedFragment = FarmsHomePageFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.first_full_frame, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-                drawer.closeDrawers();
+
+
+                    selectedFragment = FarmsHomePageFragment.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.first_full_frame, selectedFragment);
+                    transaction.addToBackStack("home");
+                    transaction.commit();
+                    drawer.closeDrawers();
+
 
             }
         });
@@ -367,8 +430,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
             }
         });
-
-
 
 
         try{
@@ -447,8 +508,29 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+      //  super.onActivityResult(requestCode, resultCode, data);
+       // Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
+
         if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
+          //  Toast.makeText(getActivity(),"Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
+            Uri imageUri = data.getData();
+          //  bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+
+               prod_img1.setImageBitmap(bitmap);
+                prod_img.setImageBitmap(bitmap);
+                uploadImage(getResizedBitmap(bitmap,100,100));
+                Toast.makeText(getActivity(), "Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
+
+
+            }   catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+      /*  if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
 
             //getting the image Uri
             Uri imageUri = data.getData();
@@ -463,17 +545,17 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
 
-    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+    public byte[] getFileDataFromDrawable(Bitmap bitmap1) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        bitmap1.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
 
-    private void uploadImage(final Bitmap bitmap){
+    private void uploadImage(final Bitmap bitmap2){
         final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
                 "Loading....Please wait.");
 
@@ -503,6 +585,23 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                     }
                 }) {
 
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+
+
+
+                Log.e(TAG,"Im here " + params);
+                if (bitmap2!=null) {
+                    params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap2)));
+
+                }
+
+                Log.e(TAG,"Im here " + params);
+                return params;
+            }
+
 
 
             @Override
@@ -511,19 +610,11 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                 params.put("UserId",sessionManager.getRegId("userId"));
                 params.put("FullName",sessionManager.getRegId("name"));
                 params.put("PhoneNo",sessionManager.getRegId("phone"));
-                params.put("EmailId","abcd@gmail.com");
                 params.put("Password",sessionManager.getRegId("pass"));
                 Log.e(TAG,"afaeftagsparams"+params);
                 return params;
             }
-            @Override
-            protected Map<String, DataPart> getByteData() {
-                Map<String, DataPart> params = new HashMap<>();
-                long imagename = System.currentTimeMillis();
-                params.put("File", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
-                Log.e(TAG,"Im here " + params);
-                return params;
-            }
+
         };
         volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(1000 * 60, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -550,26 +641,29 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // CREATE A MATRIX FOR THE MANIPULATION
-        Matrix matrix = new Matrix();
-        // RESIZE THE BIT MAP
-        matrix.postScale(scaleWidth, scaleHeight);
+    public Bitmap getResizedBitmap(Bitmap bm1, int newWidth, int newHeight) {
+        if (bm1==null){
 
-        // "RECREATE" THE NEW BITMAP
-        Bitmap resizedBitmap = Bitmap.createBitmap(
-                bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
-        return resizedBitmap;
+            return null;
+        }else {
+            System.out.println("llllllllllllllllllllllllllllll"+newHeight);
+            int width = bm1.getWidth();
+            int height = bm1.getHeight();
+            float scaleWidth = ((float) newWidth) / width;
+            float scaleHeight = ((float) newHeight) / height;
+            // CREATE A MATRIX FOR THE MANIPULATION
+            Matrix matrix = new Matrix();
+            // RESIZE THE BIT MAP
+            matrix.postScale(scaleWidth, scaleHeight);
+
+            // "RECREATE" THE NEW BITMAP
+            Bitmap resizedBitmap = Bitmap.createBitmap(
+                    bm1, 0, 0, width, height, matrix, false);
+          //  bm1.recycle();
+            return resizedBitmap;
+        }
+
     }
-
-
-
-
 
 
 

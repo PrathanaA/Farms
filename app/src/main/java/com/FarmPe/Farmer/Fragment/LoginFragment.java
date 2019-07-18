@@ -43,13 +43,13 @@ import org.json.JSONObject;
 
 public class LoginFragment extends Fragment {
     TextView register, log_in, forgot_pass,mob_text_signin;
-    public static EditText mobile_no, pass;
-    public static String mobile,loc_text;
-    LinearLayout linearLayout;
-    SessionManager sessionManager;
-    public String status,userId;
-    boolean doubleBackToExitPressedOnce = false;
-    LinearLayout back_xlogin;
+     public static EditText mobile_no, pass;
+     public static String mobile,loc_text;
+     LinearLayout linearLayout;
+     SessionManager sessionManager;
+     public String status,userId;
+     boolean doubleBackToExitPressedOnce = false;
+     LinearLayout back_xlogin;
     LinearLayout coordinatorLayout;
     public static CheckBox remember_me;
     DatabaseHelper myDb;

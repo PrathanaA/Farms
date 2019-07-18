@@ -29,6 +29,7 @@ public class Coming_soon2_Fragment extends Fragment {
 
 
 
+
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {

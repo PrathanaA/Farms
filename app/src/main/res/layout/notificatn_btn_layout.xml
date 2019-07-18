@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#000"
+    android:background="#fff"
     >
 
     <android.support.v4.widget.NestedScrollView
@@ -67,7 +67,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginHorizontal="10dp"
                             android:text="Account Info"
-                            android:textColor="#fff"
+                            android:textColor="#000"
                             android:textSize="14dp" />
 
                     </LinearLayout>

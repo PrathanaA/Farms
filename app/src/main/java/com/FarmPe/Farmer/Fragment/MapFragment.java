@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,12 +44,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.List;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback,
+
+ public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -60,17 +60,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     GoogleApiClient mGoogleApiClient;
     ImageView left_arrw;
     Location mLastLocation;
+    Button confirm_loc;
     Marker mCurrLocationMarker;
     private TextView resutText;
+    String address_txt;
+
     public static MapFragment newInstance() {
         MapFragment fragment = new MapFragment();
         return fragment;
     }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.get_lat_long_map_layout, container, false);
         resutText = (TextView) view.findViewById(R.id.curr_address);
         left_arrw = view.findViewById(R.id.left_arrw);
+        confirm_loc = view.findViewById(R.id.confirm_loc);
         //getSupportActionBar().setTitle("Map Location Activity");
         mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
@@ -96,14 +102,30 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         });
 
 
-
-
         left_arrw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectedFragment = ListYourFarmsThird.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("map");
+                transaction.commit();
+
+            }
+        });
+
+
+        confirm_loc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                address_txt = resutText.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("status",address_txt);
+                selectedFragment = ListYourFarmsThird.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                selectedFragment.setArguments(bundle);
                 transaction.addToBackStack("map");
                 transaction.commit();
 
@@ -165,8 +187,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        /*mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(1000);*/
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)

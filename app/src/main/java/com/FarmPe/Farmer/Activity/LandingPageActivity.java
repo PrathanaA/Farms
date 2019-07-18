@@ -147,29 +147,30 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        System.out.println("priyanka");
+        System.out.println("priyanka"+requestCode);
+        System.out.println("priyanka"+resultCode);
 
 
 
-        if (resultCode == RESULT_OK) {
+
+        if (requestCode == 200) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream =getContentResolver().openInputStream(imageUri);
                 selectedImage = BitmapFactory.decodeStream(imageStream);
-                System.out.println("imagebitmapppppppp"+selectedImage);
                 //profile_image.setImageBitmap(selectedImage);
                 AddPhotoBean img1=new AddPhotoBean( selectedImage);
                 if (!(selectedImage==null)){
-                    System.out.println("selecteddddddhgfysdu");
                     AddPhotoAdapter.productList.add(0,img1);
                     ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 
 
+                }else {
+                    Toast.makeText(getApplicationContext(), "You haven't picked Image",Toast.LENGTH_LONG).show();
                 }
 
             } catch (FileNotFoundException e) {
@@ -179,7 +180,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
             }
 
         }else {
-            Toast.makeText(getApplicationContext(), "You haven't picked Image",Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -271,28 +272,8 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if (doubleBackToExitPressedOnce) {
-                Intent a = new Intent(Intent.ACTION_MAIN);
-                a.addCategory(Intent.CATEGORY_HOME);
-                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(a);
-            }
-            this.doubleBackToExitPressedOnce = true;
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Please click again to exit back", Snackbar.LENGTH_LONG);
-            View sb = snackbar.getView();
-            sb.setBackgroundColor(ContextCompat.getColor(LandingPageActivity.this, R.color.orange));
-            snackbar.show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    doubleBackToExitPressedOnce=false;
-                }
-            }, 2000);
-            Log.d("KKKKKK", "onKeyDown: jyf");
-        }
-        return true;
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 //

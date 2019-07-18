@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.FarmPe.Farmer.Fragment.AddFirstFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
@@ -70,7 +71,7 @@ public class AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final AddTractorBean products = productList.get(position);
         //holder.agri_text.setText(products.getAgri_text());
         holder.prod_price.setText(products.getProd_name());
@@ -87,6 +88,8 @@ public class AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyView
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                AddFirstFragment.tracter_title = holder.prod_price.getText().toString().toLowerCase().replace(" price","");
                 looinkgId=products.getId();
                 System.out.println("lookingidd"+products.getId());
                 selectedFragment = AddBrandFragment.newInstance();

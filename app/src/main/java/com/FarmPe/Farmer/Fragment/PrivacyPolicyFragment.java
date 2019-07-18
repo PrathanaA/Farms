@@ -14,18 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-
-import com.FarmPe.Farmer.Activity.Privacy_Activity;
-import com.FarmPe.Farmer.Activity.ResetPasswordNew;
 import com.FarmPe.Farmer.Activity.SignUpActivity;
-import com.FarmPe.Farmer.Activity.Thank_U_New;
 import com.FarmPe.Farmer.Bean.AgriBean;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
+
 
 public class PrivacyPolicyFragment extends Fragment {
     Fragment selectedFragment;
@@ -48,8 +45,9 @@ public class PrivacyPolicyFragment extends Fragment {
         PrivacyPolicyFragment fragment = new PrivacyPolicyFragment();
         return fragment;
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.privacy_policy, container, false);
         back_feed=view.findViewById(R.id.back_feed);
         privacypolicytxt=view.findViewById(R.id.toolbar_title);

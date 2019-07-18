@@ -265,7 +265,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 //  createaccount.setHint(lngObject.getString("Createanaccount"));
                 //mob_text_signin.setHint(lngObject.getString("Signintoyouraccount"));
 
-                text_mobile.setHint(lngObject.getString("DigitMobileNumber"));
+                text_mobile.setHint(lngObject.getString("PhoneNo"));
                 text_pass.setHint(lngObject.getString("Password"));
                 remember_me.setText(lngObject.getString("RememberMe"));
                 forgot_pass.setText(lngObject.getString("ForgotPassword") + "?");
@@ -631,7 +631,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                         String lang_title1 = result.getString("ChangeLanguage");
 
                         String log_login = result.getString("Login");
-                        String log_mobile = result.getString("DigitMobileNumber");
+                        String log_mobile = result.getString("PhoneNo");
                         String log_password = result.getString("Password");
                         String log_remember_me = result.getString("RememberMe");
                         String log_forgot_passwrd = result.getString("ForgotPassword");

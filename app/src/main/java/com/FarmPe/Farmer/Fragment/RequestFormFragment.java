@@ -1,15 +1,10 @@
 package com.FarmPe.Farmer.Fragment;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Adapter.AddHpAdapter;
 import com.FarmPe.Farmer.Adapter.AddModelAdapter;
@@ -31,7 +25,6 @@ import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Crop_Post;
 import com.FarmPe.Farmer.Volly_class.Login_post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,23 +39,22 @@ public class RequestFormFragment extends Fragment {
 
     public static RecyclerView recyclerView;
     public static AddHpAdapter farmadapter;
-    TextView toolbar_title,request,address_text,purchase_tractor,finance_requirement;
+    TextView toolbar_title,request,address_text;
     Fragment selectedFragment;
     RadioGroup radioGroup,radioGroup_finance;
-    RadioButton radioButton1;
-    RadioButton radioButton;
-    LinearLayout back_feed,address_layout,main_layout;
+    RadioButton radioButton,finance_yes,finance_no,radioButton1;
+    LinearLayout back_feed,address_layout;
     CheckBox check_box;
     SessionManager sessionManager;
     View view;
     String addId;
     String time_period;
     boolean finance;
-    String finance_status,button_status;
+    String finance_status;
     public static int selectedId,selectedId_time_recent;
     int finance_selected,time_selected;
     Add_New_Address_Bean add_new_address_bean;
-
+    TextView whenPurchase, lookingForFinance;
     JSONArray get_address_array;
 
     public static RequestFormFragment newInstance() {
@@ -76,21 +68,19 @@ public class RequestFormFragment extends Fragment {
         toolbar_title=view.findViewById(R.id.toolbar_title);
         back_feed=view.findViewById(R.id.back_feed);
         check_box=view.findViewById(R.id.check_box);
+        whenPurchase = view.findViewById(R.id.whenPurchase);
+
+        whenPurchase.setText("When are you planning to purchase "+ AddFirstFragment.tracter_title+"?");
+        lookingForFinance = view.findViewById(R.id.lookingForFinance);
+        lookingForFinance.setText("Are you looking for finance / loan for "+AddFirstFragment.tracter_title+" purchase?");
+
         address_layout=view.findViewById(R.id.address_layout);
         radioGroup=view.findViewById(R.id.radio_group_time);
         radioGroup_finance=view.findViewById(R.id.radioGroup_finance);
         request=view.findViewById(R.id.request);
         address_text=view.findViewById(R.id.address_text);
-        main_layout=view.findViewById(R.id.main_layout);
-        purchase_tractor=view.findViewById(R.id.purchase_tractor);
-        finance_requirement=view.findViewById(R.id.finance_requirement);
         toolbar_title.setText("Request for Quotation");
         sessionManager=new SessionManager(getActivity());
-
-        check_box.setChecked(true);
-        purchase_tractor.setText("When are you planning to purchase "+AddFirstAdapter.purchase_tractor.replace("Price","")+"?");
-
-        finance_requirement.setText("Are you looking for finance / loan for "+AddFirstAdapter.purchase_tractor.replace("Price","")+"purchase?");
 
         Bundle bundle=getArguments();
         if (bundle==null){
@@ -101,18 +91,17 @@ public class RequestFormFragment extends Fragment {
             time_selected=bundle.getInt("selected_id_time1");
             //  gettingAddress();
 
-
+            // System.out.println("tiiiiimmmee"+time_selected);
             addId=bundle.getString("add_id");
             String city=bundle.getString("city");
             address_text.setText(city);
-            System.out.println("tiiiiimmmee"+city);
             radioGroup.check(bundle.getInt("selected_id_time1"));
             radioGroup_finance.check(finance_selected);
 
 
         }
 
-        check_box.setText("I agree that by clicking 'Request for Tractor Price' button, I am explicitly soliciting a call from FarmPe Farmer App users on my 'Mobile' in order to assist me with my tractor purchase.");
+        check_box.setText("I agree that by clicking 'Request for "+AddFirstFragment.tracter_title+"' button, I am explicitly soliciting a call from FarmPe Farmer App users on my 'Mobile' in order to assist me with my "+AddFirstFragment.tracter_title+" purchase.");
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,69 +147,7 @@ public class RequestFormFragment extends Fragment {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("dhyuehd"+button_status);
-
-                if (button_status==null){
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Please select when are you planning to purchase Tractor", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-
-                }
-                else if (finance_status==null){
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Please select are you looking for finance / loan", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-
-                }
-                else if (address_text.getText().toString().equals("")){
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Please add your address", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-                }else if (!(check_box.isChecked())){
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Please select checkbox to agree terms and conditions", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-                }
-                else{
-                    RequestForm();
-                }
-
+                RequestForm();
               /*  selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
@@ -237,6 +164,8 @@ public class RequestFormFragment extends Fragment {
                 System.out.println("checkinggg"+radioButton.getText().toString());
                 finance_status=radioButton.getTag().toString();
 
+
+
             }
         });
 
@@ -247,13 +176,8 @@ public class RequestFormFragment extends Fragment {
                 radioButton1 = (RadioButton)view.findViewById(selectedId_time_recent);
                 time_period=String.valueOf(radioButton1.getText());
                 System.out.println("valueee"+time_period);
-                button_status=radioButton1.getTag().toString();
-                System.out.println("dhyuehd"+button_status);
             }
         });
-
-
-
 
        /* final String value =
                 ((RadioButton)view.findViewById(radioGroup.getCheckedRadioButtonId()))

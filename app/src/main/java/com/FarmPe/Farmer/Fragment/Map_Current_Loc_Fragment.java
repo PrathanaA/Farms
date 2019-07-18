@@ -73,7 +73,7 @@ public class Map_Current_Loc_Fragment extends Fragment implements OnMapReadyCall
        // nomap = view.findViewById(R.id.nomap);
         current_address = view.findViewById(R.id.curr_address);
 
-        choose_loc = view.findViewById(R.id.choose_location);
+       // choose_loc = view.findViewById(R.id.choose_location);
         fab_icon = view.findViewById(R.id.fab);
         left_arrw = view.findViewById(R.id.left_arrw);
 
@@ -340,7 +340,7 @@ public class Map_Current_Loc_Fragment extends Fragment implements OnMapReadyCall
 
       googleMap.addMarker(new MarkerOptions().position(india).title("India"));
 
-    googleMap.moveCamera(CameraUpdateFactory.newLatLng(india));
+      googleMap.moveCamera(CameraUpdateFactory.newLatLng(india));
 
         googleMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude) ,15) );// with zoom without movement
 

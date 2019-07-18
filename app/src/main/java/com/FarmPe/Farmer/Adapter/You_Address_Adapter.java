@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -248,6 +250,13 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
                                             TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                                             tv.setBackgroundColor(ContextCompat.getColor(activity,R.color.orange));
                                             tv.setTextColor(Color.WHITE);
+
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                            } else {
+                                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                            }
+
                                             snackbar.show();
 
 
@@ -306,7 +315,21 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
 
                                 if(status1.equals("1")){
 
-                                    Toast.makeText(activity,message1, Toast.LENGTH_SHORT).show();
+                               //     Toast.makeText(activity,message1, Toast.LENGTH_SHORT).show();
+
+                                    Snackbar snackbar = Snackbar
+                                            .make(linearLayout, message1, Snackbar.LENGTH_LONG);
+                                    View snackbarView = snackbar.getView();
+                                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                                    tv.setBackgroundColor(ContextCompat.getColor(activity,R.color.orange));
+                                    tv.setTextColor(Color.WHITE);
+
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                    } else {
+                                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    }
+
 
                                     selectedFragment = You_Address_Fragment.newInstance();
                                     FragmentTransaction transaction = ((FragmentActivity) activity).getSupportFragmentManager().beginTransaction();

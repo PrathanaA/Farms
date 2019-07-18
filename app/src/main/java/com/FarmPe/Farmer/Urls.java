@@ -19,7 +19,11 @@ public class Urls {
     public static final String Languages=ROOT_URL+"MasterTable/GetLanguages";
     public static final String Forgot_Password=ROOT_URL+"Auth/ForgotPassword";
     public static final String ChangePassword=ROOT_URL+"Auth/ChangePassword";
-    public static final String ResendOTP=ROOT_URL+"ResendOTP";
+    public static final String ResendOTP=ROOT_URL +"Auth/ResendOTP";
+
+
+
+
     public static final String VerifyOTPNewUser=ROOT_URL+"Auth/VerifyOTPNewUser";
 
     public static final String GetUserDetails=ROOT_URL+"GetUserDetails";
@@ -86,5 +90,8 @@ public class Urls {
     public static final String Farm_Type_List = ROOT_URL+"MasterTable/GetFarmTypesList";
     public static final String Farm_Details = ROOT_URL+"MasterTable/AddUpdateFarms";
     public static final String AddUpdateFarms = ROOT_URL+"MasterTable/AddUpdateFarms";
+    public static final String Invitation_Farm = ROOT_URL+"MasterTable/GetInvitationList";
+
+
 
 }

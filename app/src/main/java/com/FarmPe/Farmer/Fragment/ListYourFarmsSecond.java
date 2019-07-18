@@ -1,18 +1,24 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.FarmPe.Farmer.Adapter.AddFirstListYourFramsAdapter;
 import com.FarmPe.Farmer.Adapter.List_Farm_Adapter;
@@ -37,7 +43,7 @@ public class ListYourFarmsSecond extends Fragment {
     public static RecyclerView recyclerView;
     JSONArray farm_list2_array;
     List_Farm_Bean list_farm_bean;
-    LinearLayout back_feed;
+    LinearLayout back_feed,linearLayout;
     List_Farm_Adapter2 farmadapter1;
     Fragment selectedFragment;
     TextView toolbar_title,continue_2;
@@ -60,7 +66,7 @@ public class ListYourFarmsSecond extends Fragment {
 
 
         view.setFocusableInTouchMode(true);
-        view.requestFocus();
+
         view.setOnKeyListener(new View.OnKeyListener() {
 
 
@@ -93,11 +99,20 @@ public class ListYourFarmsSecond extends Fragment {
         continue_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = ListYourFarmsThird.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                 transaction.addToBackStack("lookingSecond");
-                transaction.commit();
+
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("status","default");
+                    selectedFragment = ListYourFarmsThird.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    selectedFragment.setArguments(bundle);
+                    transaction.addToBackStack("lookingSecond");
+                    transaction.commit();
+
+
+
             }
         });
 
