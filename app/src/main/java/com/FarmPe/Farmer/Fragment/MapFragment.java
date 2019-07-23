@@ -65,6 +65,7 @@ import java.util.List;
     private TextView resutText;
     String address_txt;
 
+
     public static MapFragment newInstance() {
         MapFragment fragment = new MapFragment();
         return fragment;
@@ -134,6 +135,8 @@ import java.util.List;
 
         return view;
     }
+
+
     @Override
     public void onPause() {
         super.onPause();
@@ -144,6 +147,8 @@ import java.util.List;
         configureCameraIdle();
         }
     }
+
+
     @Override
     public void onMapReady(GoogleMap googleMap)
     {
@@ -217,6 +222,8 @@ import java.util.List;
         //move map camera
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18));
     }
+
+
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -249,6 +256,7 @@ import java.util.List;
             }
         }
     }
+
     private void configureCameraIdle() {
         onCameraIdleListener = new GoogleMap.OnCameraIdleListener() {
             @Override

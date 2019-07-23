@@ -1,16 +1,17 @@
 package com.FarmPe.Farmer;
 
-public class Urls {
+
+  public class Urls {
 
 
-   private static final String ROOT_URL = "http://3.17.6.57:9393/api/";///DEV
+   private static final String ROOT_URL = "http://13.232.185.209:909/api/";///DEV
+  // private static final String ROOT_URL = "http://3.17.6.57:9393/api/";///DEV
    // private static final String ROOT_URL = "http://3.17.6.57:8888//api/";//PRO
 
-
-    public static final String IMAGE_ROOT_URL = "http://3.17.6.57:9393";//Image root
-
+    public static final String IMAGE_ROOT_URL = "http://13.232.185.209:909";//Image root
     public static final String Add_New_Address = ROOT_URL+"MasterTable/AddUserAddress";
- public static final String GetFarmerDetailsList = ROOT_URL+"MasterTable/GetFarmersList";
+    public static final String GetFarmerDetailsList = ROOT_URL+"MasterTable/GetFarmersList";
+
 
     public static final String LOGIN=ROOT_URL+"Auth/ValidateUser";
     public static final String SIGNUP=ROOT_URL+"Auth/RegisterUser";
@@ -20,21 +21,18 @@ public class Urls {
     public static final String Forgot_Password=ROOT_URL+"Auth/ForgotPassword";
     public static final String ChangePassword=ROOT_URL+"Auth/ChangePassword";
     public static final String ResendOTP=ROOT_URL +"Auth/ResendOTP";
-
-
-
-
     public static final String VerifyOTPNewUser=ROOT_URL+"Auth/VerifyOTPNewUser";
-
     public static final String GetUserDetails=ROOT_URL+"GetUserDetails";
     public static final String ValidateReferalCode=ROOT_URL+"ValidateRefferalCode";
-
     public static final String CHANGE_LANGUAGE= ROOT_URL+"Lang/ChangeCurrentCulture";
+
+
+
 
     public static final String Get_New_Address = ROOT_URL+"MasterTable/GetUserAddress";
     // Wallet
     public static final String GetFarmDetailsList = ROOT_URL+"MasterTable/GetFarmsList";
-    public static final String GetFarmsListByUserId = "http://3.17.6.57:9393/api/MasterTable/GetFarmsListByUserId";
+    public static final String GetFarmsListByUserId = "http://13.232.185.209:909/api/MasterTable/GetFarmsListByUserId";
 
 
     // Refer n Earn

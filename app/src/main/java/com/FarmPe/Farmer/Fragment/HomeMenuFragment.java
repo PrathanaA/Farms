@@ -74,6 +74,7 @@ import static com.android.volley.VolleyLog.TAG;
 
 
 public class HomeMenuFragment extends Fragment implements  View.OnClickListener, NavigationView.OnNavigationItemSelectedListener{
+
     Fragment selectedFragment;
     public static DrawerLayout drawer;
     ImageView plus_sign_add;
@@ -110,8 +111,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.activity_navigation_menu_home, container, false);
@@ -119,39 +118,36 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
         menu=view.findViewById(R.id.menu);
-        // searchView=view.findViewById(R.id.search1);
-        // linearLayout=view.findViewById(R.id.search);
-        //scrollView=view.findViewById(R.id.scroll);
+
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
         invitation = view.findViewById(R.id.invitation);
         //linear_connection = view.findViewById(R.id.linear_connection);
-        //map=view.findViewById(R.id.map);
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
         settings=view.findViewById(R.id.settings);
         prod_img=view.findViewById(R.id.prod_img);
         prod_img1=view.findViewById(R.id.prod_img1);
-       /* looking_for=view.findViewById(R.id.looking_for);
-        farms=view.findViewById(R.id.farms);phone_no
-        farmer=view.findViewById(R.id.farmer);*/
+
         looking_view=view.findViewById(R.id.looking_view);
         farms_view=view.findViewById(R.id.farms_view);
         farmer_view=view.findViewById(R.id.farmer_view);
 
-        //   connections=view.findViewById(R.id.connections);
+
         your_farms=view.findViewById(R.id.your_farms);
         your_requests=view.findViewById(R.id.your_requests);
         list_farm=view.findViewById(R.id.list_farm);
 
-        // nw_request=view.findViewById(R.id.nw_request);
-        //nearby=view.findViewById(R.id.nearby);
+
 
         plus_sign_add=view.findViewById(R.id.plus_sign_add);
         user_name_menu=view.findViewById(R.id.user_name_menu);
-        // near_by=view.findViewById(R.id.near_by);
         sessionManager = new SessionManager(getActivity());
         userid=sessionManager.getRegId("userId");
+
+
+
+
 
 
         prod_img1.setOnClickListener(new View.OnClickListener() {
@@ -164,14 +160,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         });
 
 
-        if (LoginActivity.change_lang.getText().toString().equals("English")){
-            isEng = true;
-            Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
-        }
-        else{
-            isEng = false;
-            Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
-        }
+
 
 
         //      ComingSoonFragment.backfeed.setVisibility(View.GONE);
@@ -233,6 +222,17 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
         System.out.println("lajfdhsjkd");
+
+
+
+        if (LoginActivity.change_lang.getText().toString().equals("English")){
+            isEng = true;
+            Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
+        }
+        else{
+            isEng = false;
+            Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
+        }
 
 
 
@@ -335,6 +335,8 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
+
+
         invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -377,7 +379,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         your_farms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 
                     selectedFragment = FarmsHomePageFragment.newInstance();
@@ -616,17 +617,12 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
 
         };
+
         volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(1000 * 60, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //adding the request to volley
         Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
     }
-
-
-
-
-
-
 
 
     @Override

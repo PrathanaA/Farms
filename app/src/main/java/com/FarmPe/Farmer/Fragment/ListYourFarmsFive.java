@@ -1,24 +1,18 @@
 package com.FarmPe.Farmer.Fragment;
 
-import android.app.Activity;
+
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
+
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
+
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +47,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +73,7 @@ public class ListYourFarmsFive extends Fragment {
     String json_string,json_address_string;
 
 
+
     public static ListYourFarmsFive newInstance() {
         ListYourFarmsFive fragment = new ListYourFarmsFive();
         return fragment;
@@ -98,11 +93,34 @@ public class ListYourFarmsFive extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = HomeMenuFragment.newInstance();
+                selectedFragment = ListYourFarmsFour.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 // transaction.addToBackStack("looking");
                 transaction.commit();
+            }
+        });
+
+
+
+        view.setFocusableInTouchMode(true);
+
+        view.setOnKeyListener(new View.OnKeyListener() {
+
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+
+                    selectedFragment = ListYourFarmsFour.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    // transaction.addToBackStack("looking");
+                    transaction.commit();
+
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -115,6 +133,7 @@ public class ListYourFarmsFive extends Fragment {
             AddPhotoBean img1=new AddPhotoBean(bitmap);
             newOrderBeansList.add(img1);
         }*/
+
         System.out.println("hhhhhhhhhhh"+ LandingPageActivity.selectedImage);
         AddPhotoBean img1=new AddPhotoBean( LandingPageActivity.selectedImage);
         newOrderBeansList.add(img1);
@@ -146,11 +165,14 @@ public class ListYourFarmsFive extends Fragment {
         return view;
     }
 
+
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 10, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
+
+
 
     private void uploadImage(final Bitmap bitmap){
         final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
@@ -162,6 +184,7 @@ public class ListYourFarmsFive extends Fragment {
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject_location=new JSONObject();
         JSONObject jsonObject_address=new JSONObject();
+
         try {
             jsonObject.put("FarmCategoryId", List_Farm_Adapter.farm_listid);
             jsonObject.put("FarmTypeId", List_Farm_Adapter2.farm_type_id);
@@ -172,10 +195,11 @@ public class ListYourFarmsFive extends Fragment {
             jsonObject.put("Id","0");
             jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
 
+
+
             jsonObject_location.put("Id",0);
             jsonObject_location.put("Latitude","13.21321");
             jsonObject_location.put("Longitude","33.21321");
-
             jsonObject.put("FarmLocation",jsonObject_location);
 
 

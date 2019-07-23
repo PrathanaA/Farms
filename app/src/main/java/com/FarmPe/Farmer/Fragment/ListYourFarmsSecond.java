@@ -65,6 +65,7 @@ public class ListYourFarmsSecond extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_2);
 
 
+
         view.setFocusableInTouchMode(true);
 
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -78,6 +79,7 @@ public class ListYourFarmsSecond extends Fragment {
 
                     return true;
                 }
+
                 return false;
             }
         });
@@ -123,6 +125,7 @@ public class ListYourFarmsSecond extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         farmadapter1 = new List_Farm_Adapter2(getActivity(),list_farm_beanList);
         recyclerView.setAdapter(farmadapter1);
+
 
 
         try{

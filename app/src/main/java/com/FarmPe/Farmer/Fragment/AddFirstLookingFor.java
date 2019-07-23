@@ -80,6 +80,7 @@ public class AddFirstLookingFor extends Fragment {
         });
 
 
+
         AddLookigFor();
         newOrderBeansList.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
@@ -132,17 +133,19 @@ public class AddFirstLookingFor extends Fragment {
                 public void onSuccessResponse(JSONObject result) {
                     System.out.println("cropsresult"+result);
                     JSONArray cropsListArray=null;
+
+
                     try {
                         cropsListArray=result.getJSONArray("LookingForList");
-                        System.out.println("e     e e ddd"+cropsListArray.length());
+                        System.out.println("eeeddd"+cropsListArray.length());
+
                         for (int i=0;i<cropsListArray.length();i++){
                             JSONObject jsonObject1=cropsListArray.getJSONObject(i);
 
-                            String lookingfor=jsonObject1.getString("LookingFor");
-                            String LookingForIcon =jsonObject1.getString("LookingForIcon");
+                             String lookingfor=jsonObject1.getString("LookingFor");
+                             String LookingForIcon =jsonObject1.getString("LookingForIcon");
 
-                            String id=jsonObject1.getString("Id");
-
+                             String id=jsonObject1.getString("Id");
 
                               AddTractorBean crops = new AddTractorBean(LookingForIcon, lookingfor,id);
                               newOrderBeansList.add(crops);

@@ -147,6 +147,7 @@ public class EnterOTP extends AppCompatActivity implements ConnectivityReceiver.
 
     }
 
+
     @Override
     public void onPause() {
         super.onPause();

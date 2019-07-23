@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,6 +18,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,6 +127,31 @@ public class ListYourFarmsThird extends Fragment {
         current_adds.setText(address_map);
 
 
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+//                    FragmentManager fm = getActivity().getSupportFragmentManager();
+//                    fm.popBackStack("list_four", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                    selectedFragment = ListYourFarmsSecond.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.addToBackStack("farm_third");
+                    transaction.commit();
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,13 +196,10 @@ public class ListYourFarmsThird extends Fragment {
 
 
 
-
         state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 search_status="state";
-
-
                 list_fams="state";
                 grade_dialog= new Dialog(getActivity());
                 grade_dialog.setContentView(R.layout.select_variety_popup);
@@ -327,7 +351,7 @@ public class ListYourFarmsThird extends Fragment {
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+//
                 search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
@@ -342,6 +366,8 @@ public class ListYourFarmsThird extends Fragment {
                         return false;
 
                     }
+
+
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
@@ -498,7 +524,6 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
-
         continue_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -561,11 +586,8 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
-
-
         return view;
     }
-
 
 
 
@@ -818,6 +840,7 @@ public class ListYourFarmsThird extends Fragment {
         }
 
     }
+
 
 
     public void sorting(List<StateBean> arrayList){

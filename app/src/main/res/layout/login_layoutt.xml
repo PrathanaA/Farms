@@ -188,12 +188,14 @@
                 android:textColor="#8a8b91"
                 android:textSize="15dp" />
 
+
             <TextView
                 android:id="@+id/forgot_pass_login"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/segoeui"
                 android:gravity="right"
+                android:textStyle="bold"
                 android:layout_weight="55"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="5dp"

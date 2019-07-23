@@ -478,42 +478,46 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
 
      //  with space in between nt in starting
 
-        final InputFilter filter1 = new InputFilter() {
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                //String filtered = "";
-                for (int i = start; i < end; i++) {
-                    char character = source.charAt(i);
-                    if (Character.isWhitespace(source.charAt(i))) {
-                        if (dstart == 0)
-                            return "";
-                    }
-                }
-                return null;
-            }
-
-        };
-
-        name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
-
+//        final InputFilter filter1 = new InputFilter() {
+//            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+//                //String filtered = "";
+//                for (int i = start; i < end; i++) {
+//                    char character = source.charAt(i);
+//                    if (Character.isWhitespace(source.charAt(i))) {
+//                        if (dstart == 0)
+//                            return "";
+//                    }
+//                }
+//                return null;
+//            }
+//
+//        };
+//
+//        name.setFilters(new InputFilter[] {filter1,new InputFilter.LengthFilter(30) });
+//
 
        //without space
-        final InputFilter filter = new InputFilter() {
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                String filtered = "";
-                for (int i = start; i < end; i++) {
-                    char character = source.charAt(i);
-                    if (!Character.isWhitespace(character)) {
-                        filtered += character;
-                    }
-                }
-                return filtered;
-            }
+//        final InputFilter filter = new InputFilter() {
+//            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+//                String filtered = "";
+//                for (int i = start; i < end; i++) {
+//                    char character = source.charAt(i);
+//                    if (!Character.isWhitespace(character)) {
+//                        filtered += character;
+//                    }
+//                }
+//                return filtered;
+//            }
+//
+//        };
 
-        };
 
-
-        password.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(12)});
+       // password.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(12)});
        // name.setFilters(new InputFilter[]{filter, new InputFilter.LengthFilter(30)});
+
+
+        name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30)});
+        password.setFilters(new InputFilter[] {EMOJI_FILTER1,new InputFilter.LengthFilter(12) });
 
 
         continue_sign_up.setOnClickListener(new View.OnClickListener() {
@@ -550,8 +554,8 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                     } else {
                         tv.setGravity(Gravity.CENTER_HORIZONTAL);
                     }
-
                     snackbar.show();
+
                 } else if (name_text.equals("")) {
 
                     //Toast.makeText(SignUp.this, "Enter Your Name", Toast.LENGTH_SHORT).show();
@@ -583,6 +587,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                         tv.setGravity(Gravity.CENTER_HORIZONTAL);
                     }
                     snackbar.show();
+
 
                 } else if (name_text.startsWith(" ")) {
                     Snackbar snackbar = Snackbar
@@ -837,7 +842,7 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
                         create_acc.setText(log_regi);
                         continue_sign_up.setText(log_register);
 
-                       name.setFilters(new InputFilter[]{EMOJI_FILTER});
+                     //  name.setFilters(new InputFilter[]{EMOJI_FILTER});
 //
 //                        name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(12) });
 
@@ -853,26 +858,33 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
     }
 
 
+
     public static InputFilter EMOJI_FILTER = new InputFilter() {
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             boolean keepOriginal = true;
+            String specialChars = ".1/*!@#$%^&*()\"{}_[]|\\?/<>,.:-'';§£¥₹...%&+=€π|";
             StringBuilder sb = new StringBuilder(end - start);
             for (int index = start; index < end; index++) {
                 int type = Character.getType(source.charAt(index));
-                if (type == Character.SURROGATE || type == Character.OTHER_SYMBOL) {
+                if (type == Character.SURROGATE || type == Character.OTHER_SYMBOL||type==Character.MATH_SYMBOL||specialChars.contains("" + source)) {
                     return "";
                 }
                 for (int i = start; i < end; i++) {
                     if (Character.isWhitespace(source.charAt(i))) {
-                   if (dstart == 0)
+                        if (dstart == 0)
                             return "";
+                    }else if(Character.isDigit(source.charAt(i))) {
+                        return "";
                     }
                 }
                 return null;
-
+      /*  char c = source.charAt(index);
+        if (isCharAllowed(c))
+            sb.append(c);
+        else
+            keepOriginal = false;*/
             }
-
             if (keepOriginal)
                 return null;
             else {
@@ -886,6 +898,91 @@ public class SignUpActivity extends AppCompatActivity implements ConnectivityRec
             }
         }
     };
+
+/////////////////////////////////////////////////
+
+    public static InputFilter EMOJI_FILTER1 = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            boolean keepOriginal = true;
+            StringBuilder sb = new StringBuilder(end - start);
+
+            for (int index = start; index < end; index++) {
+                int type = Character.getType(source.charAt(index));
+                if (type == Character.SURROGATE || type == Character.OTHER_SYMBOL) {
+                    return "";
+                }
+
+                String filtered = "";
+                for (int i = start; i < end; i++) {
+                    char character = source.charAt(i);
+                    if (!Character.isWhitespace(character)) {
+                        filtered += character;
+                    }
+                }
+                return filtered;
+//                for (int i = start; i < end; i++) {
+//                    if (Character.isWhitespace(source.charAt(i))) {
+//                        if (dstart == 0)
+//                            return "";
+//                    }
+//                }
+                // return null;
+      /*  char c = source.charAt(index);
+        if (isCharAllowed(c))
+            sb.append(c);
+        else
+            keepOriginal = false;*/
+            }
+            if (keepOriginal)
+                return null;
+            else {
+                if (source instanceof Spanned) {
+                    SpannableString sp = new SpannableString(sb);
+                    TextUtils.copySpansFrom((Spanned) source, start, sb.length(), null, sp, 0);
+                    return sp;
+                } else {
+                    return sb;
+                }
+            }
+        }
+    };
+
+
+//
+//    public static InputFilter EMOJI_FILTER = new InputFilter() {
+//        @Override
+//        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+//            boolean keepOriginal = true;
+//            StringBuilder sb = new StringBuilder(end - start);
+//            for (int index = start; index < end; index++) {
+//                int type = Character.getType(source.charAt(index));
+//                if (type == Character.SURROGATE || type == Character.OTHER_SYMBOL) {
+//                    return "";
+//                }
+//                for (int i = start; i < end; i++) {
+//                    if (Character.isWhitespace(source.charAt(i))) {
+//                   if (dstart == 0)
+//                            return "";
+//                    }
+//                }
+//                return null;
+//
+//            }
+//
+//            if (keepOriginal)
+//                return null;
+//            else {
+//                if (source instanceof Spanned) {
+//                    SpannableString sp = new SpannableString(sb);
+//                    TextUtils.copySpansFrom((Spanned) source, start, sb.length(), null, sp, 0);
+//                    return sp;
+//                } else {
+//                    return sb;
+//                }
+//            }
+//        }
+//    };
 
     @Override
     public void onBackPressed() {

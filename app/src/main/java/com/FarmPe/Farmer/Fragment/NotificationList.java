@@ -141,7 +141,7 @@ public class NotificationList extends Fragment {
 
                     try {
                         cropsListArray=result.getJSONArray("NotificationList");
-                        System.out.println("e     e e ddd"+cropsListArray.length());
+                        System.out.println("eeeddd"+cropsListArray.length());
                         for (int i=0;i<cropsListArray.length();i++){
                             JSONObject jsonObject1=cropsListArray.getJSONObject(i);
 //                            JSONObject jsonObject2=jsonObject1.getJSONObject("Address");
@@ -191,12 +191,6 @@ public class NotificationList extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
-
-
 
 
         return view;
