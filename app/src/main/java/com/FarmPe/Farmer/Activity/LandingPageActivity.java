@@ -156,7 +156,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
 
 
-
         if (requestCode == 200) {
             try {
                 final Uri imageUri = data.getData();

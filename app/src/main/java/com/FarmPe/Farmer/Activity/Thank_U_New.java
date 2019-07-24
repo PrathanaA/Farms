@@ -246,6 +246,7 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
         });
 
     }
+
     @Override
     public void onBackPressed() {
         //System.exit(0);
