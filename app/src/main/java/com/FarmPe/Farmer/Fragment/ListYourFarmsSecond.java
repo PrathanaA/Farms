@@ -116,7 +116,7 @@ public class ListYourFarmsSecond extends Fragment {
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
                     selectedFragment.setArguments(bundle);
-                    transaction.addToBackStack("lookingSecond");
+                    transaction.addToBackStack("list_two");
                     transaction.commit();
 
 
@@ -131,7 +131,6 @@ public class ListYourFarmsSecond extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         farmadapter1 = new List_Farm_Adapter2(getActivity(),list_farm_beanList);
         recyclerView.setAdapter(farmadapter1);
-
 
 
         try{

@@ -21,6 +21,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,6 +56,8 @@ public class ListYourFarmsFour extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_farm_fourth_layout_item, container, false);
+
+        getActivity().getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         //recyclerView=view.findViewById(R.id.recycler_what_looking);
         back_feed=view.findViewById(R.id.back_feed);
         continue_4=view.findViewById(R.id.continue_4);
@@ -68,6 +71,8 @@ public class ListYourFarmsFour extends Fragment {
         email_id=view.findViewById(R.id.email_id);
         main_layout=view.findViewById(R.id.main_layout);
         final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+
 
         farm_name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30) });
         cont_person_name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30) });

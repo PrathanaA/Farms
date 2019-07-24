@@ -153,12 +153,12 @@ public class ListYourFarmsFive extends Fragment {
             @Override
             public void onClick(View v) {
                 home="home";
-                uploadImage(LandingPageActivity.selectedImage);
-               /* selectedFragment = HomeMenuFragment.newInstance();
+
+               // uploadImage(LandingPageActivity.selectedImage);
+                selectedFragment = ComingSoonFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
-                transaction.commit();*/
+                transaction.commit();
             }
         });
 
@@ -216,8 +216,6 @@ public class ListYourFarmsFive extends Fragment {
             jsonObject.put("FarmAddress",jsonObject_address);
 
             json_string=jsonObject.toString();
-
-
 
 
 
