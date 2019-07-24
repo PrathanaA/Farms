@@ -14,11 +14,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.FarmPe.Farmer.Bean.List_Farm_Bean;
-import com.FarmPe.Farmer.Bean.Notification_recy_bean;
-
 import com.FarmPe.Farmer.R;
-import com.google.firebase.messaging.FirebaseMessaging;
-
 import java.util.List;
 
 
@@ -29,15 +25,18 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
     Fragment selectedFragment;
     public LinearLayout linearLayout;
     public static LinearLayout next_arw;
-    public static String first;
+    public static String first,listname;
     public static CardView cardView;
     public static String farm_listid;
     public static int selected_position = 0;
 
 
+
     public List_Farm_Adapter(Activity activity, List<List_Farm_Bean> moviesList) {
         this.productList = moviesList;
         this.activity=activity;
+
+        System.out.println("dsfsf" + moviesList.size());
 //        session=new SessionManager(activity);
 
     }
@@ -79,6 +78,8 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
          System.out.println("111wadwd" + products.isIsselected());
 
          holder.list_farm1.setText(products.getFarm_list_name());
+
+
 /*
 
          if (products.isIsselected()){
@@ -97,14 +98,16 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
 
 
 
-
         holder.list_farm1.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
 
+
+
              boolean selectedval= products.isIsselected()? false : true;
 
              holder.list_farm1.setChecked(selectedval);
+
 
              farm_listid = products.getFarm_list_id();
 
@@ -112,6 +115,7 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
                  System.out.println("111uuuudwd" + i);
 
                  if (i==position){
+                     listname = products.getFarm_list_name();
                      products.setIsselected(true);
 
                  }else {
@@ -123,7 +127,6 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
 
 
              notifyDataSetChanged();
-
 
 
 

@@ -45,7 +45,7 @@ public class LookingForFragment extends Fragment {
     Fragment selectedFragment = null;
     boolean doubleBackToExitPressedOnce = false;
     String location;
-    TextView filter_text;
+    TextView filter_text,delete_req;
     SessionManager sessionManager;
 
 
@@ -60,6 +60,8 @@ public class LookingForFragment extends Fragment {
         View view = inflater.inflate(R.layout.looking_for_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_looking);
         filter_text=view.findViewById(R.id.filter_text);
+        delete_req =view.findViewById(R.id.delete_req);
+
         newOrderBeansList.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager_farm);
@@ -160,6 +162,7 @@ public class LookingForFragment extends Fragment {
 //                return false;
 //            }
 //        });
+
 
 
         return view;

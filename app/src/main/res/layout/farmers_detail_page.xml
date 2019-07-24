@@ -238,7 +238,7 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3Months"
+                            android:text="3 Months"
                             />
                         <RadioButton
                             android:layout_width="wrap_content"
@@ -310,7 +310,7 @@
                     android:orientation="horizontal"
                     android:paddingVertical="20dp"
                     android:paddingHorizontal="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/border"
 
                     >
@@ -343,17 +343,17 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/check_box"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="start"
-                    android:buttonTint="#D81B60"
-                    android:fontFamily="@font/segoeui"
-                    android:textSize="12dp" />
+                <!--<CheckBox-->
+                    <!--android:id="@+id/check_box"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_marginRight="15dp"-->
+                    <!--android:gravity="start"-->
+                    <!--android:buttonTint="#D81B60"-->
+                    <!--android:fontFamily="@font/segoeui"-->
+                    <!--android:textSize="12dp" />-->
 
 
 
@@ -361,9 +361,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-
                     android:background="#ffff"
-
                     >
 
                     <TextView
@@ -373,7 +371,7 @@
                         android:text="Update"
                         android:textSize="16dp"
                         android:textColor="#fff"
-                        android:background="@drawable/border_filled_pink"
+                        android:background="@drawable/border_filled_red"
                         android:paddingVertical="20dp"
                         android:gravity="center"
                         android:paddingHorizontal="20dp"
@@ -383,7 +381,9 @@
 
                 </LinearLayout>
 
+
                 <TextView
+                    android:id="@+id/delete_req"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Delete"

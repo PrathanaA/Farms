@@ -16,6 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.FarmPe.Farmer.Fragment.Edit_Looking_For_Fragment;
+import com.FarmPe.Farmer.Urls;
+import com.FarmPe.Farmer.Volly_class.Crop_Post;
+import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
@@ -34,11 +37,12 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
     Fragment selectedFragment;
     JSONObject lngObject;
     public LinearLayout linearLayout;
-   public static LinearLayout next_arw,linear_looking_main;
-    public static String first,looking_forId;
- SessionManager session;
+    public static LinearLayout next_arw,linear_looking_main;
+    public static String first,looking_forId,model_id,timeline,looking_for,address;
+    SessionManager session;
     boolean flag;
     public static CardView cardView;
+
     public FarmsImageAdapter(Activity activity, List<FarmsImageBean> moviesList) {
         this.productList = moviesList;
         this.activity=activity;
@@ -65,15 +69,11 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
             farmer_name=view.findViewById(R.id.farmer_name);
             linear_looking_main=view.findViewById(R.id.linear_looking_main);
 
-           // location=view.findViewById(R.id.location);
+
             image_looking=view.findViewById(R.id.image_looking);
             edit=view.findViewById(R.id.edit);
 
 
-           // short_list_image=view.findViewById(R.id.short_list_image);
-          //  shortlist_layout=view.findViewById(R.id.shortlist_layout);
-            //linearLayout=view.findViewById(R.id.dialog_list);
-            //confirmbutton=view.findViewById(R.id.delivery2);
         }
 
     }
@@ -97,11 +97,19 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
         // holder.farmer_name.setText(products.getFarmer_name());
         // holder.location.setText(products.getLocation());
 
+        looking_forId=products.getId();
+        model_id = products.getModelname();
+        timeline = products.getDuration();
+        address = products.getLocation();
+
+
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //looking_forId=products.getId();
+
+
+                edit_request();
 
                 selectedFragment = Edit_Looking_For_Fragment.newInstance();
                 FragmentTransaction transaction = ((FragmentActivity) activity).getSupportFragmentManager().beginTransaction();
@@ -160,6 +168,35 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void edit_request() {
+        try{
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId",session.getRegId("userId"));
+            jsonObject.put("ModelId",model_id);
+            jsonObject.put("PurchaseTimeline",timeline);
+            jsonObject.put("LookingForFinance","yes");
+            jsonObject.put("AddressId",address);
+            jsonObject.put("IsAgreed","true");
+            jsonObject.put("LookingForDetailsId",looking_forId);
+
+
+            Crop_Post.crop_posting(activity, Urls.Edit_Request, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.print("11111eeeee" + result);
+
+                }
+            });
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
     @Override

@@ -9,10 +9,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.SpannableString;
@@ -20,6 +23,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.FarmPe.Farmer.Activity.EnterOTP;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -83,7 +88,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
     EditText profile_name,profile_phone,profile_mail,profile_passwrd;
     CircleImageView prod_img;
 
-    TextView farmer_name,farmer_phone,farmer_email,farmer_loc;
+    TextView farmer_name,farmer_phone,farmer_email,farmer_loc,delete_req;
     LinearLayout back_feed;
     Fragment selectedFragment;
 
@@ -106,8 +111,8 @@ public class Edit_Looking_For_Fragment extends Fragment {
         farmer_email=view.findViewById(R.id.email);
         farmer_loc=view.findViewById(R.id.loc);
         prod_img=view.findViewById(R.id.prod_img);
-
-
+        delete_req=view.findViewById(R.id.delete_req);
+        sessionManager = new SessionManager(getActivity());
 
 
 
@@ -150,57 +155,125 @@ public class Edit_Looking_For_Fragment extends Fragment {
         });
 
 
-        try{
-
-            JSONObject jsonObject = new JSONObject();
-            JSONObject post_object = new JSONObject();
-
-            jsonObject.put("Id", FarmsImageAdapter.looking_forId);
-            post_object.put("objUser",jsonObject);
-            System.out.println("ggpgpgpg" + post_object);
+        delete_req.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
 
 
-            Crop_Post.crop_posting(getActivity(), Urls.Get_Profile_Details, post_object, new VoleyJsonObjectCallback() {
-                @Override
-                public void onSuccessResponse(JSONObject result) {
-                    System.out.println("ggpgpgpg" + result);
-
-                    try{
-
-                        JSONObject jsonObject1 = result.getJSONObject("user");
-                        String ProfileName1 = jsonObject1.getString("FullName");
-                        System.out.println("11111" + jsonObject1.getString("FullName"));
-                        String ProfilePhone = jsonObject1.getString("MaskedPhoneNo");
-                        String ProfileEmail = jsonObject1.getString("EmailId");
-                        String ProfileImage = jsonObject1.getString("ProfilePic");
-                        System.out.println("11111" + ProfileName1);
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("UserId",sessionManager.getRegId("userId"));
+                    jsonObject.put("Id",FarmsImageAdapter.looking_forId);
 
 
+                    Crop_Post.crop_posting(getActivity(), Urls.Delete_Request, jsonObject, new VoleyJsonObjectCallback() {
+                        @Override
+                        public void onSuccessResponse(JSONObject result) {
+                            System.out.print("wwwwwefsdddd" + result);
 
-                        farmer_name.setText(ProfileName1);
-                        farmer_phone.setText(ProfilePhone);
-                        farmer_email.setText(ProfileEmail);
+                            try{
 
-
-                        Glide.with(getActivity()).load(ProfileImage)
-
-                                .thumbnail(0.5f)
-                                //  .crossFade()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .error(R.drawable.avatarmale)
-                                .into(prod_img);
+                                String status = result.getString("Status");
+                                String message = result.getString("Message");
 
 
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+                                if(status.equals("1")){
 
+                                    Snackbar snackbar = Snackbar
+                                            .make(linearLayout,message, Snackbar.LENGTH_LONG);
+                                    View snackbarView = snackbar.getView();
+                                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                                    tv.setTextColor(Color.WHITE);
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                    } else {
+                                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    }
+                                    snackbar.show();
+
+                                    selectedFragment = LookingForFragment.newInstance();
+                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.frame_layout, selectedFragment);
+                                    transaction.commit();
+
+
+
+
+                                }else{
+
+                                    Toast.makeText(getActivity(), "Request Quotation not deleted", Toast.LENGTH_SHORT).show();
+                                }
+
+
+
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-            });
+            }
+        });
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+
+//        try{
+//
+//            JSONObject jsonObject = new JSONObject();
+//            JSONObject post_object = new JSONObject();
+//
+//            jsonObject.put("Id", FarmsImageAdapter.looking_forId);
+//            post_object.put("objUser",jsonObject);
+//            System.out.println("ggpgpgpg" + post_object);
+//
+//
+//            Crop_Post.crop_posting(getActivity(), Urls.Get_Profile_Details, post_object, new VoleyJsonObjectCallback() {
+//                @Override
+//                public void onSuccessResponse(JSONObject result) {
+//                    System.out.println("ggpgpgpg" + result);
+//
+//                    try{
+//
+//                        JSONObject jsonObject1 = result.getJSONObject("user");
+//                        String ProfileName1 = jsonObject1.getString("FullName");
+//                        System.out.println("11111" + jsonObject1.getString("FullName"));
+//                        String ProfilePhone = jsonObject1.getString("MaskedPhoneNo");
+//                        String ProfileEmail = jsonObject1.getString("EmailId");
+//                        String ProfileImage = jsonObject1.getString("ProfilePic");
+//                        System.out.println("11111" + ProfileName1);
+//
+//
+//
+//                        farmer_name.setText(ProfileName1);
+//                        farmer_phone.setText(ProfilePhone);
+//                        farmer_email.setText(ProfileEmail);
+//
+//
+//                        Glide.with(getActivity()).load(ProfileImage)
+//
+//                                .thumbnail(0.5f)
+//                                //  .crossFade()
+//                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                                .error(R.drawable.avatarmale)
+//                                .into(prod_img);
+//
+//
+//                    }catch (Exception e){
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            });
+
+
 
 
 

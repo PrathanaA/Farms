@@ -1231,7 +1231,7 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
                                 bundle.putString("add_id",status);
-                                // bundle.putString("city",city.getText().toString());
+                                bundle.putString("streetname",street_name.getText().toString());
                                 bundle.putInt("selected_id2",selected_id);
                                 bundle.putInt("selected_id_time1",selected_id_time);
                                 selectedFragment = RequestFormFragment.newInstance();

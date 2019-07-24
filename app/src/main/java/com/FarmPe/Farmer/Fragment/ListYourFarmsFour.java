@@ -317,7 +317,7 @@ public class ListYourFarmsFour extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (farm_name.getText().toString().equals("") || cont_person_name.getText().toString().equals("") || mobile_no.getText().toString().equals("") || email_id.getText().toString().equals("")) {
+                if (farm_name.getText().toString().equals("") && cont_person_name.getText().toString().equals("") && mobile_no.getText().toString().equals("") && email_id.getText().toString().equals("")) {
                     Snackbar snackbar = Snackbar
                             .make(main_layout, "Please enter all the details", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
@@ -332,6 +332,7 @@ public class ListYourFarmsFour extends Fragment {
                         tv.setGravity(Gravity.CENTER_HORIZONTAL);
                     }
                     snackbar.show();
+
 
                 }else if(farm_name.getText().toString().equals("")){
 
@@ -352,8 +353,7 @@ public class ListYourFarmsFour extends Fragment {
 
 
 
-
-                }else if(farm_name.length()<2){
+                }else if(farm_name.getText().toString().length()<2){
 
                     Snackbar snackbar = Snackbar
                             .make(main_layout, "Farm Name Should contain minimum Two characters", Snackbar.LENGTH_LONG);
@@ -411,7 +411,7 @@ public class ListYourFarmsFour extends Fragment {
                     snackbar.show();
 
 
-                }else if(mobile_no.length()<10) {
+                }else if(mobile_no.getText().toString().length()<10) {
 
                     Snackbar snackbar = Snackbar
                             .make(main_layout, "Enter 10 digits mobile number", Snackbar.LENGTH_LONG);
@@ -427,6 +427,27 @@ public class ListYourFarmsFour extends Fragment {
                         tv.setGravity(Gravity.CENTER_HORIZONTAL);
                     }
                     snackbar.show();
+
+
+
+
+                }else if(email_id.getText().toString().equals("")) {
+
+                    Snackbar snackbar = Snackbar
+                            .make(main_layout, "Enter Your EmailID", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+                    snackbar.show();
+
 
                 }else if ((!(email_id.getText().toString().equals(""))&&((! email_id.getText().toString().matches(emailPattern))))) {
 
@@ -503,6 +524,7 @@ public class ListYourFarmsFour extends Fragment {
             }
         }
     };
+
 
     public static InputFilter EMOJI_FILTER1 = new InputFilter() {
         @Override

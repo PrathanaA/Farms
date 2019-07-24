@@ -41,6 +41,8 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
     }
 
 
+
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView actninfo;

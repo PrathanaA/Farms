@@ -40,6 +40,7 @@ public class InvitationsLeadsFragment extends Fragment {
     ImageView filter;
 
 
+
     public static InvitationsLeadsFragment newInstance() {
         InvitationsLeadsFragment fragment = new InvitationsLeadsFragment();
         return fragment;
@@ -115,16 +116,20 @@ public class InvitationsLeadsFragment extends Fragment {
         farmadapter=new InvitationLeadAdapter(getActivity(),newOrderBeansList);
         recyclerView.setAdapter(farmadapter);
 
+
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
+
 
             Crop_Post.crop_posting(getActivity(), Urls.Invitation_Farm, jsonObject, new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
                     System.out.println("fdfddsfds" + result);
 
+
                     try{
+
 
 
                     }catch (Exception e){

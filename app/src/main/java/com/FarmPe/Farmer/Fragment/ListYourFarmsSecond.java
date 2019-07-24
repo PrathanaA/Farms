@@ -46,7 +46,8 @@ public class ListYourFarmsSecond extends Fragment {
     LinearLayout back_feed,linearLayout;
     List_Farm_Adapter2 farmadapter1;
     Fragment selectedFragment;
-    TextView toolbar_title,continue_2;
+    String text_farm;
+    TextView toolbar_title,continue_2,headin_name;
 
 
 
@@ -63,6 +64,13 @@ public class ListYourFarmsSecond extends Fragment {
         back_feed=view.findViewById(R.id.back_feed);
         continue_2=view.findViewById(R.id.continue_2);
         recyclerView=view.findViewById(R.id.recycler_2);
+        headin_name = view.findViewById(R.id.headin_name);
+
+
+
+        text_farm =  List_Farm_Adapter.listname;
+
+        headin_name.setText("Select your " + text_farm);
 
 
 
@@ -101,8 +109,6 @@ public class ListYourFarmsSecond extends Fragment {
         continue_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
                     Bundle bundle = new Bundle();
                     bundle.putString("status","default");

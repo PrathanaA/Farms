@@ -3,7 +3,6 @@ package com.FarmPe.Farmer;
 
   public class Urls {
 
-
    private static final String ROOT_URL = "http://13.232.185.209:909/api/";///DEV
   // private static final String ROOT_URL = "http://3.17.6.57:9393/api/";///DEV
    // private static final String ROOT_URL = "http://3.17.6.57:8888//api/";//PRO
@@ -11,7 +10,6 @@ package com.FarmPe.Farmer;
     public static final String IMAGE_ROOT_URL = "http://13.232.185.209:909";//Image root
     public static final String Add_New_Address = ROOT_URL+"MasterTable/AddUserAddress";
     public static final String GetFarmerDetailsList = ROOT_URL+"MasterTable/GetFarmersList";
-
 
     public static final String LOGIN=ROOT_URL+"Auth/ValidateUser";
     public static final String SIGNUP=ROOT_URL+"Auth/RegisterUser";
@@ -25,9 +23,6 @@ package com.FarmPe.Farmer;
     public static final String GetUserDetails=ROOT_URL+"GetUserDetails";
     public static final String ValidateReferalCode=ROOT_URL+"ValidateRefferalCode";
     public static final String CHANGE_LANGUAGE= ROOT_URL+"Lang/ChangeCurrentCulture";
-
-
-
 
     public static final String Get_New_Address = ROOT_URL+"MasterTable/GetUserAddress";
     // Wallet
@@ -89,6 +84,14 @@ package com.FarmPe.Farmer;
     public static final String Farm_Details = ROOT_URL+"MasterTable/AddUpdateFarms";
     public static final String AddUpdateFarms = ROOT_URL+"MasterTable/AddUpdateFarms";
     public static final String Invitation_Farm = ROOT_URL+"MasterTable/GetInvitationList";
+
+
+    //Request Quoatation
+
+   public static final String Delete_Request = ROOT_URL + "MasterTable/DeleteRequestForQuotation";
+   public static final String Edit_Request = ROOT_URL + "MasterTable/AddUpdateRequestForQuotation";
+
+
 
 
 

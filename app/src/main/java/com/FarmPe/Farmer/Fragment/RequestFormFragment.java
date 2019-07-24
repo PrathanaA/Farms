@@ -93,8 +93,8 @@ public class RequestFormFragment extends Fragment {
 
             // System.out.println("tiiiiimmmee"+time_selected);
             addId=bundle.getString("add_id");
-            String city=bundle.getString("city");
-            address_text.setText(city);
+            String stret_name=bundle.getString("streetname");
+            address_text.setText(stret_name);
             radioGroup.check(bundle.getInt("selected_id_time1"));
             radioGroup_finance.check(finance_selected);
 

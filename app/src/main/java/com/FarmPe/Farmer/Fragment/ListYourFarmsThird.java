@@ -152,6 +152,7 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,7 +181,8 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
-        skip.setOnClickListener(new View.OnClickListener() {
+
+         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 street_string = street_add.getText().toString();

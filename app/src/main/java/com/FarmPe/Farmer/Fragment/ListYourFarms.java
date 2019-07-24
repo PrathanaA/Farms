@@ -150,6 +150,13 @@ public class ListYourFarms extends Fragment {
 
                         }
 
+             if (list_farm_beanList.size()>0){
+
+            List_Farm_Adapter.listname = list_farm_beanList.get(0).getFarm_list_name();
+
+
+    }
+
                         farmadapter.notifyDataSetChanged();
 
 
@@ -167,7 +174,6 @@ public class ListYourFarms extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
-
 
 
 

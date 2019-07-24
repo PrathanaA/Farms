@@ -69,6 +69,7 @@
 
             >
             <TextView
+                android:id="@+id/headin_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Select your livestock"
@@ -80,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Adding your farm location helps us recommend the right opportunities around you."
+                android:text="Give us the farm specification to find your preference and customize our services."
                 android:textSize="14dp"
                 android:fontFamily="@font/segoeui"
                 android:layout_marginTop="10dp"
