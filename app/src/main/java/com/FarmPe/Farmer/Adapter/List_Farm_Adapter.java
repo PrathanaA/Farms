@@ -101,8 +101,9 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
         holder.list_farm1.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
+             System.out.println("111uuuudwdselected_position" + selected_position);
 
-
+selected_position=position;
 
              boolean selectedval= products.isIsselected()? false : true;
 

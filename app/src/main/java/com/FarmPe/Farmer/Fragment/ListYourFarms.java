@@ -44,6 +44,7 @@ public class ListYourFarms extends Fragment {
     Fragment selectedFragment;
     TextView toolbar_title,continue_1;
 
+    int radiobutonStatus;
 
     public static ListYourFarms newInstance() {
         ListYourFarms fragment = new ListYourFarms();
@@ -60,6 +61,7 @@ public class ListYourFarms extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_2);
 
 
+        radiobutonStatus = getArguments().getInt("RB_S");
 
 
         view.setFocusableInTouchMode(true);
@@ -98,7 +100,13 @@ public class ListYourFarms extends Fragment {
         continue_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("RB_S",-1);
                 selectedFragment = ListYourFarmsSecond.newInstance();
+                selectedFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                  transaction.addToBackStack("list_farm1");
@@ -136,7 +144,7 @@ public class ListYourFarms extends Fragment {
 
                             JSONObject jsonObject1 = list_farm_array.getJSONObject(i);
                             System.out.println("wwwww" + jsonObject1.getString("FarmCategoryId"));
-                            if (i==0){
+                            if (i== radiobutonStatus){
                                 list_farm_bean = new List_Farm_Bean(jsonObject1.getString("FarmCategory"),jsonObject1.getString("FarmCategoryId"),true);
                                 list_farm_beanList.add(list_farm_bean);
 

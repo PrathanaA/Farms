@@ -190,7 +190,7 @@ public class LookingForFragment extends Fragment {
                             String model=jsonObject1.getString("Model");
                             String purchaseTimeline=jsonObject1.getString("PurchaseTimeline");
                             String image=jsonObject1.getString("ModelImage");
-                            String id=jsonObject1.getString("CreatedBy");
+                            String id=jsonObject1.getString("Id");
                             String name=jsonObject2.getString("Name");
                             String city=jsonObject2.getString("City");
                             String state=jsonObject2.getString("State");

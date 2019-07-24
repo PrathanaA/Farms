@@ -112,6 +112,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
         farmer_loc=view.findViewById(R.id.loc);
         prod_img=view.findViewById(R.id.prod_img);
         delete_req=view.findViewById(R.id.delete_req);
+        linearLayout=view.findViewById(R.id.linearLayout);
         sessionManager = new SessionManager(getActivity());
 
 
@@ -165,6 +166,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
                     jsonObject.put("UserId",sessionManager.getRegId("userId"));
                     jsonObject.put("Id",FarmsImageAdapter.looking_forId);
 
+                    System.out.print("wwwwwefsdwwwwwefsdddddddwwwwwefsdwwwwwefsddddddd" + jsonObject);
 
                     Crop_Post.crop_posting(getActivity(), Urls.Delete_Request, jsonObject, new VoleyJsonObjectCallback() {
                         @Override

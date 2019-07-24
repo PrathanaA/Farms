@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.FarmPe.Farmer.Bean.List_Farm_Bean;
 import com.FarmPe.Farmer.Bean.Notification_recy_bean;
 
+import com.FarmPe.Farmer.Fragment.ListYourFarmsSecond;
 import com.FarmPe.Farmer.R;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -32,6 +33,7 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
     public static String first;
     public static CardView cardView;
     public static String farm_type_id;
+    public static int position_1;
 
     public List_Farm_Adapter2(Activity activity, List<List_Farm_Bean> moviesList) {
         this.productList = moviesList;
@@ -97,15 +99,14 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
             @Override
             public void onClick(View view) {
 
-
+                ListYourFarmsSecond.selected=true;
                 boolean selectedval= products.isIsselected()? false : true;
 
                 holder.list_farm1.setChecked(selectedval);
-
+                position_1=position;
              //  farm_listid = products.getFarm_list_id();
 
                 for(int i = 0;i<productList.size();i++) {
-                    System.out.println("111uuuudwd" + i);
 
                     if (i == position) {
                         products.setIsselected(true);

@@ -29,6 +29,8 @@ import android.widget.TextView;
 import com.FarmPe.Farmer.Adapter.AddFirstListYourFramsAdapter;
 import com.FarmPe.Farmer.Adapter.DistrictAdapter1;
 import com.FarmPe.Farmer.Adapter.HoblisAdapter1;
+import com.FarmPe.Farmer.Adapter.List_Farm_Adapter;
+import com.FarmPe.Farmer.Adapter.List_Farm_Adapter2;
 import com.FarmPe.Farmer.Adapter.StateApdater1;
 import com.FarmPe.Farmer.Adapter.TalukAdapter;
 import com.FarmPe.Farmer.Adapter.TalukAdapter1;
@@ -136,13 +138,14 @@ public class ListYourFarmsThird extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("list_two", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-//                    selectedFragment = ListYourFarmsSecond.newInstance();
-//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                    transaction.replace(R.id.frame_layout, selectedFragment);
-//                    transaction.commit();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("RB_S", List_Farm_Adapter2.position_1);
+                    selectedFragment = ListYourFarmsSecond.newInstance();
+                    selectedFragment.setArguments(bundle);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.addToBackStack("list_farm1");
+                    transaction.commit();
 
                     return true;
                 }
@@ -156,9 +159,13 @@ public class ListYourFarmsThird extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Bundle bundle = new Bundle();
+                bundle.putInt("RB_S",-1);
                 selectedFragment = ListYourFarmsSecond.newInstance();
+                selectedFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("list_farm1");
                 transaction.commit();
 
             }

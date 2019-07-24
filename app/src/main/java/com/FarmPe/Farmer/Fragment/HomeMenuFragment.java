@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.FarmPe.Farmer.Activity.LandingPageActivity;
 import com.FarmPe.Farmer.Activity.LoginActivity;
 import com.FarmPe.Farmer.Adapter.AddPhotoAdapter;
+import com.FarmPe.Farmer.Adapter.List_Farm_Adapter2;
 import com.FarmPe.Farmer.Bean.AddPhotoBean;
 import com.FarmPe.Farmer.volleypost.VolleyMultipartRequest;
 import com.android.volley.AuthFailureError;
@@ -355,8 +356,10 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         list_farm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Bundle bundle = new Bundle();
+                bundle.putInt("RB_S", 0);
                 selectedFragment = ListYourFarms.newInstance();
+                selectedFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("list_farm");

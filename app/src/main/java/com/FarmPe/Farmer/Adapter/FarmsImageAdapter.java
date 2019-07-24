@@ -102,14 +102,14 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
         timeline = products.getDuration();
         address = products.getLocation();
 
-
+System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.getId());
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                looking_forId=products.getId();
 
-
-                edit_request();
+          //      edit_request();
 
                 selectedFragment = Edit_Looking_For_Fragment.newInstance();
                 FragmentTransaction transaction = ((FragmentActivity) activity).getSupportFragmentManager().beginTransaction();
