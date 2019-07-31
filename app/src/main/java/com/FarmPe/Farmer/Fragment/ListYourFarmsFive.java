@@ -3,15 +3,20 @@ package com.FarmPe.Farmer.Fragment;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.FarmPe.Farmer.Activity.LandingPageActivity;
+import com.FarmPe.Farmer.Activity.LoginActivity;
 import com.FarmPe.Farmer.Adapter.AddPhotoAdapter;
 import com.FarmPe.Farmer.Adapter.DistrictAdapter;
 import com.FarmPe.Farmer.Adapter.HoblisAdapter;
@@ -66,6 +72,7 @@ public class ListYourFarmsFive extends Fragment {
     Fragment selectedFragment;
     TextView toolbar_title,continue_update,skip;
     Bitmap bitmap = null;
+    LinearLayout linearLayout;
     public static final int GET_FROM_GALLERY = 3;
     ImageView cover_image;
     SessionManager sessionManager;
@@ -85,6 +92,7 @@ public class ListYourFarmsFive extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_photo);
         back_feed=view.findViewById(R.id.back_feed);
         continue_update=view.findViewById(R.id.continue_update);
+        linearLayout=view.findViewById(R.id.linearLayout);
         skip=view.findViewById(R.id.skip);
 
         sessionManager=new SessionManager(getActivity());
@@ -96,7 +104,6 @@ public class ListYourFarmsFive extends Fragment {
                 selectedFragment = ListYourFarmsFour.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                // transaction.addToBackStack("looking");
                 transaction.commit();
             }
         });
@@ -115,7 +122,6 @@ public class ListYourFarmsFive extends Fragment {
                     selectedFragment = ListYourFarmsFour.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
-                    // transaction.addToBackStack("looking");
                     transaction.commit();
 
                     return true;
@@ -143,15 +149,64 @@ public class ListYourFarmsFive extends Fragment {
         System.out.println("upload_image"+LandingPageActivity.selectedImage);
 
 
+
           continue_update.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              uploadImage(LandingPageActivity.selectedImage);
 
-              selectedFragment = HomeMenuFragment.newInstance();
-              FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-              transaction.replace(R.id.frame_layout, selectedFragment);
-              transaction.commit();
+
+
+              if(AddPhotoAdapter.productList.size()>3) {
+
+
+                  Snackbar snackbar = Snackbar
+                          .make(linearLayout, "Upload only 2 images", Snackbar.LENGTH_LONG);
+                  View snackbarView = snackbar.getView();
+                  TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                  tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                  tv.setTextColor(Color.WHITE);
+
+                  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                      tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                  } else {
+                      tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                  }
+
+                  snackbar.show();
+                  //  Toast.makeText(getActivity(), "Upload only 2 images", Toast.LENGTH_SHORT).show();
+              }
+
+//              else if(AddPhotoAdapter.imageView.getDrawable() == null){
+//                  Toast.makeText(getActivity(), "Pick any Image", Toast.LENGTH_SHORT).show();
+//              }
+              else {
+                  uploadImage(LandingPageActivity.selectedImage);
+
+
+
+                  Snackbar snackbar = Snackbar
+                          .make(linearLayout,"Your Details Updated Successfully", Snackbar.LENGTH_LONG);
+                  View snackbarView = snackbar.getView();
+                  TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                  tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                  tv.setTextColor(Color.WHITE);
+
+                  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                      tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                  } else {
+                      tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                  }
+
+                  snackbar.show();
+
+
+                  selectedFragment = HomeMenuFragment.newInstance();
+                  FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                  transaction.replace(R.id.frame_layout, selectedFragment);
+                  transaction.commit();
+
+              }
+
            }
           });
 
@@ -161,7 +216,7 @@ public class ListYourFarmsFive extends Fragment {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                home="home";
+               // home="home";
 
                 selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -254,6 +309,8 @@ public class ListYourFarmsFive extends Fragment {
 
                     }
                 },
+
+
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {

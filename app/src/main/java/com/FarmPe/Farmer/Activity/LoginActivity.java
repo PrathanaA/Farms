@@ -72,10 +72,11 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
      public static TextInputLayout text_mobile,text_pass;
 
-    ConnectivityReceiver connectivityReceiver;
-    @Override
-    protected void onStop()
-    {
+     ConnectivityReceiver connectivityReceiver;
+     @Override
+     protected void onStop()
+
+     {
         unregisterReceiver(connectivityReceiver);
         super.onStop();
     }
@@ -85,18 +86,18 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
      LinearLayout coordinatorLayout;
      public static CheckBox remember_me;
      DatabaseHelper myDb;
-    public static boolean connectivity_check;
-    public static boolean isEng = false;
-     TextInputLayout textInputLayout,textInputLayout_pass;
+     public static boolean connectivity_check;
+     public static boolean isEng = false;
+
      public static  String password,mob_toast,mobile_string,pass_toast,toast_invalid,toast_click_back,toast_internet,toast_nointernet;
      EditText spn_localize;
      public static   JSONObject lngObject;
      JSONArray lng_array;
      Snackbar snackbar;
-    String mob_no;
-    SessionManager sessionManager;
-    public static  Dialog dialog;
-    public static TextView welcome_back, createaccount, change_lang,popup_heading,farmPe_title ,enterPassword, forgotPassword;
+     String mob_no;
+     SessionManager sessionManager;
+     public static  Dialog dialog;
+     public static TextView welcome_back, createaccount, change_lang,popup_heading,farmPe_title ,enterPassword, forgotPassword;
 
 
     private void checkConnection() {
@@ -389,11 +390,9 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                                               language_arrayBeanList.add(selectLanguageBean);
 
 
-
                                       }
 
                                       mAdapter.notifyDataSetChanged();
-
 
 
 
@@ -408,6 +407,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                       }catch (Exception e){
                           e.printStackTrace();
                       }
+
 
 
 //                SelectLanguageBean bean = new SelectLanguageBean("English", 1, "");

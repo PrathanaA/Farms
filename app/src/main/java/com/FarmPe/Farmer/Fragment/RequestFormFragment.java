@@ -1,10 +1,15 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Adapter.AddHpAdapter;
 import com.FarmPe.Farmer.Adapter.AddModelAdapter;
@@ -51,6 +58,8 @@ public class RequestFormFragment extends Fragment {
     String time_period;
     boolean finance;
     String finance_status;
+    public static String back;
+    LinearLayout linearLayout;
     public static int selectedId,selectedId_time_recent;
     int finance_selected,time_selected;
     Add_New_Address_Bean add_new_address_bean;
@@ -79,6 +88,7 @@ public class RequestFormFragment extends Fragment {
         radioGroup_finance=view.findViewById(R.id.radioGroup_finance);
         request=view.findViewById(R.id.request);
         address_text=view.findViewById(R.id.address_text);
+        linearLayout=view.findViewById(R.id.linearLayout);
         toolbar_title.setText("Request for Quotation");
         sessionManager=new SessionManager(getActivity());
 
@@ -202,9 +212,9 @@ public class RequestFormFragment extends Fragment {
         System.out.println("finance"+time_period);
 
         try {
-            newOrderBeansList.clear();
 
             JSONObject userRequestjsonObject = new JSONObject();
+
             userRequestjsonObject.put("UserId",sessionManager.getRegId("userId"));
             userRequestjsonObject.put("TractorId", AddModelAdapter.tractor_id);
             userRequestjsonObject.put("PurchaseTimeline", time_period);
@@ -218,25 +228,50 @@ public class RequestFormFragment extends Fragment {
           /*  JSONObject postjsonObject = new JSONObject();
             postjsonObject.put("objCropDetails", userRequestjsonObject);
 */
+
             System.out.println("postObj"+userRequestjsonObject.toString());
+
 
             Login_post.login_posting(getActivity(), Urls.AddRequestForQuotation,userRequestjsonObject,new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
                     System.out.println("cropsresult"+result);
 
+                    newOrderBeansList.clear();
+
                     try {
                         String status=result.getString("Status");
                         String message=result.getString("Message");
 
+
+                       // Toast.makeText(getActivity(), "Your Request Added Successfully", Toast.LENGTH_SHORT).show();
+
+                        Snackbar snackbar = Snackbar
+                                .make(linearLayout,"Your Request Added Successfully", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+
+                        snackbar.show();
+
+                        //back = "add_back";
+
                         selectedFragment = HomeMenuFragment.newInstance();
-                        FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
                         transaction.commit();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
 
 
                 }

@@ -184,7 +184,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

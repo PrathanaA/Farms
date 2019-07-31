@@ -22,7 +22,8 @@ import com.FarmPe.Farmer.R;
 
 import java.util.List;
 
-public class AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyViewHolder>  {
+public class
+AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyViewHolder>  {
     private List<AddTractorBean> productList;
     Activity activity;
     Fragment selectedFragment;

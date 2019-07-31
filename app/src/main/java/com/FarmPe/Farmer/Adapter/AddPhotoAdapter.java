@@ -30,20 +30,21 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyViewHolder> {
+public class  AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyViewHolder> {
     public static    List<AddPhotoBean> productList;
     Activity activity;
     Fragment selectedFragment;
     public static final int GET_FROM_GALLERY = 3;
     Bitmap bitmap;
     public static TextView add_text_image;
-
     private static int RESULT_LOAD_IMG = 200;
-
     public LinearLayout linearLayout;
     public static LinearLayout next_arw;
+    public static  ImageView imageView;
     public static String first, looinkgId;
     public static CardView cardView;
+
+
 
     public AddPhotoAdapter(Activity activity, List<AddPhotoBean> moviesList) {
         this.productList = moviesList;
@@ -52,13 +53,16 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
 
     }
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
+        public ImageView delete;
 
         public MyViewHolder(View view) {
             super(view);
-            image = view.findViewById(R.id.prod_img);
+
+            imageView = view.findViewById(R.id.prod_img);
             add_text_image = view.findViewById(R.id.add_text_image);
+            delete = view.findViewById(R.id.filter_check);
 
         }
 
@@ -72,19 +76,20 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
 
     }
 
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final AddPhotoBean products = productList.get(position);
         //holder.agri_text.setText(products.getAgri_text());
-
         if (position == productList.size()-1 ) {
             add_text_image.setVisibility(View.VISIBLE);
-            holder.image.setBackgroundColor(Color.parseColor("#e6e6e6"));
+        imageView.setBackgroundColor(Color.parseColor("#e6e6e6"));
         }else {
             add_text_image.setVisibility(View.GONE);
-            holder.image.setImageBitmap(products.getImage_upload());
+            imageView.setImageBitmap(products.getImage_upload());
+            holder.delete.setVisibility(View.VISIBLE);
+            add_text_image.setText("");
         }
-
         add_text_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,10 +98,18 @@ public class AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyView
                 activity.startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
             }
         });
-
         System.out.println("imagegegegegeg11111" + products.getImage_upload());
 
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //remove list
+                productList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, productList.size());
 
+            }
+        });
     }
 
 

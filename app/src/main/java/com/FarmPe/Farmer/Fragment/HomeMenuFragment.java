@@ -310,8 +310,18 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
+//        if(RequestFormFragment.back == "add_back"){
+//
+//            selectedFragment = LookingForFragment.newInstance();
+//            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.first_full_frame, selectedFragment);
+//            transaction.commit();
+//
+//        }
+
 
         if(Comming_soon_looking.coming_back=="look_back"){
+
             selectedFragment = LookingForFragment.newInstance();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.first_full_frame, selectedFragment);
@@ -341,6 +351,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         connections.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 selectedFragment = ConnectionsFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
@@ -351,11 +362,9 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-
         invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 selectedFragment = InvitationsLeadsFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -366,6 +375,8 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
             }
         });
+
+
 
         list_farm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,6 +395,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         });
 
 
+
         if(Comming_soon_farms.back_farm=="look_farm"){
             selectedFragment = FarmsHomePageFragment.newInstance();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -392,6 +404,8 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         }else {
 
         }
+
+
 
         your_farms.setOnClickListener(new View.OnClickListener() {
             @Override

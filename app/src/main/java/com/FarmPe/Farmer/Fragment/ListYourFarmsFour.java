@@ -119,10 +119,10 @@ public class ListYourFarmsFour extends Fragment {
         });
 
 
+
         whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 
                 if (packageName.contains("com.whatsapp")) {

@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.FarmPe.Farmer.Adapter.AddBrandAdapter;
 import com.FarmPe.Farmer.Adapter.AddModelAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
@@ -20,13 +19,13 @@ import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Login_post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class AddModelFragment extends Fragment {
 
@@ -35,6 +34,7 @@ public class AddModelFragment extends Fragment {
     public static AddModelAdapter farmadapter;
     TextView toolbar_title;
     LinearLayout back_feed;
+
 
 
     public static AddModelFragment newInstance() {
@@ -122,6 +122,7 @@ public class AddModelFragment extends Fragment {
 
           /*  JSONObject postjsonObject = new JSONObject();
             postjsonObject.put("objCropDetails", userRequestjsonObject);
+
 */
             System.out.println("postObj"+userRequestjsonObject.toString());
 
@@ -132,7 +133,7 @@ public class AddModelFragment extends Fragment {
                     JSONArray cropsListArray=null;
                     try {
                         cropsListArray=result.getJSONArray("TractorList");
-                        System.out.println("e     e e ddd"+cropsListArray.length());
+                        System.out.println("eeeddd"+cropsListArray.length());
                         for (int i=0;i<cropsListArray.length();i++){
                             JSONObject jsonObject1=cropsListArray.getJSONObject(i);
                             String model=jsonObject1.getString("Model");
@@ -142,6 +143,7 @@ public class AddModelFragment extends Fragment {
                             System.out.println("madelslistt"+newOrderBeansList.size());
                             AddTractorBean crops = new AddTractorBean(image, model,id);
                             newOrderBeansList.add(crops);
+
                           /*  if(!latts.equals("") | !langgs.equals("")) {
 
                                 CropListBean crops = new CropListBean(cropName, crop_variety, location, crop_grade,
@@ -150,6 +152,7 @@ public class AddModelFragment extends Fragment {
                                 newOrderBeansList.add(crops);
                             }*/
                         }
+
                         farmadapter=new AddModelAdapter(getActivity(),newOrderBeansList);
                         recyclerView.setAdapter(farmadapter);
                     } catch (JSONException e) {

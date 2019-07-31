@@ -76,6 +76,7 @@ public class AddHpAdapter extends RecyclerView.Adapter<AddHpAdapter.MyViewHolder
       //holder.agri_text.setText(products.getAgri_text());
         holder.prod_price.setText(products.getProd_name());
 
+
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

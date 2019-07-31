@@ -222,6 +222,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/create_acc"
                 android:layout_width="wrap_content"
