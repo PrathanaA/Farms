@@ -41,6 +41,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.FarmPe.Farmer.Activity.EnterOTP;
+import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
+import com.FarmPe.Farmer.Adapter.AddModelAdapter;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -98,11 +100,15 @@ public class Edit_Looking_For_Fragment extends Fragment {
     RadioButton month_1,month_2,month_3,month_4,finance_yes,finance_no;
     CircleImageView prod_img;
 
-    TextView farmer_name,farmer_phone,farmer_email,farmer_loc,delete_req,hp_power,address_text;
+    TextView farmer_name,farmer_phone,farmer_email,farmer_loc,delete_req,hp_power,address_text,request;
     LinearLayout back_feed;
     Fragment selectedFragment;
+    RadioGroup radio_group_time,radioGroup_finance;
+    String time_period,lookingfordetails_id,modelid;
+    boolean finance;
+    public static int selectedId_time_recent;
 
-
+    String id;
     public static Edit_Looking_For_Fragment newInstance() {
         Edit_Looking_For_Fragment fragment = new Edit_Looking_For_Fragment();
         return fragment;
@@ -111,7 +117,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.farmers_detail_page, container, false);
+        final View view = inflater.inflate(R.layout.farmers_detail_page, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         toolbar_title=view.findViewById(R.id.toolbar_title);
@@ -136,7 +142,9 @@ public class Edit_Looking_For_Fragment extends Fragment {
         address_text=view.findViewById(R.id.address_text);
         sessionManager = new SessionManager(getActivity());
 
-
+        request=view.findViewById(R.id.request);
+        radio_group_time=view.findViewById(R.id.radio_group_time);
+        radioGroup_finance=view.findViewById(R.id.radioGroup_finance);
 
 
         back_feed.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +160,44 @@ public class Edit_Looking_For_Fragment extends Fragment {
                 transaction.commit();
             }
         });
+
+
+
+        radioGroup_finance.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                selectedId_time_recent = radioGroup_finance.getCheckedRadioButtonId();
+                RadioButton  radioButton = (RadioButton)view.findViewById(selectedId_time_recent);
+                if (String.valueOf(radioButton.getText()).equals("yes")){
+                    finance=true;
+                }else {
+                    finance=false;
+                }
+            }
+        });
+
+        radio_group_time.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                selectedId_time_recent = radio_group_time.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton)view.findViewById(selectedId_time_recent);
+                time_period=String.valueOf(radioButton.getText());
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         view.setFocusableInTouchMode(true);
@@ -194,7 +240,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
                             JSONObject jsonObject1 = edit_req_array.getJSONObject(i);
                             JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
 
-                            String id = jsonObject1.getString("Id");
+                            id = jsonObject1.getString("Id");
                             String purchasetimeline = jsonObject1.getString("PurchaseTimeline");
                             Boolean lookin_true = jsonObject1.getBoolean("LookingForFinance");
                             String brand_name = jsonObject1.getString("BrandName");
@@ -209,6 +255,8 @@ public class Edit_Looking_For_Fragment extends Fragment {
                             String state = jsonObject2.getString("State");
                             String district = jsonObject2.getString("District");
                             String taluk = jsonObject2.getString("Taluk");
+                             lookingfordetails_id = jsonObject1.getString("LookingForDetailsId");
+                             modelid = jsonObject1.getString("ModelId");
 
 
                             brand.setText("Brand - " + brand_name);

@@ -96,12 +96,17 @@
             android:name=".Activity.Privacy_Activity"
             android:screenOrientation="portrait" />
 
+        <service
+            android:name=".GpsService"
+            />
+
+
 
         <receiver
             android:name=".Activity.ConnectivityReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android." />
             </intent-filter>
         </receiver> <!-- Firebase Notifications -->
         <service android:name=".MyFirebaseMessagingService">

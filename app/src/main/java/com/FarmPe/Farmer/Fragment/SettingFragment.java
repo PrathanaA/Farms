@@ -301,6 +301,7 @@ public class SettingFragment extends Fragment {
                     jsonObject.put("UserId",sessionManager.getRegId("userId"));
                     jsonObject.put("PickUpFrom",pickUPFrom);
                     System.out.println("aaaaaaaaaaaaadddd" + sessionManager.getRegId("userId"));
+                    System.out.println("ggggggggggaaaaaaa"+jsonObject);
 
                     Crop_Post.crop_posting(getActivity(), Urls.Get_New_Address, jsonObject, new VoleyJsonObjectCallback() {
                         @Override

@@ -90,17 +90,22 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final FarmsImageBean products = productList.get(position);
-        //holder.agri_text.setText(products.getAgri_text());
-        holder.prod_price.setText(products.getProd_price());
-        holder.prod_name.setText(products.getModelname() + " " + products.getHp());
-        //   holder.duration.setText(products.getDuration());
-        // holder.farmer_name.setText(products.getFarmer_name());
-        // holder.location.setText(products.getLocation());
 
-        looking_forId=products.getId();
-        model_id = products.getModelname();
-        timeline = products.getDuration();
-        address = products.getLocation();
+        try {
+            //holder.agri_text.setText(products.getAgri_text());
+            holder.prod_price.setText(products.getProd_price());
+            holder.prod_name.setText(products.getModelname() + " " + products.getHp());
+            //   holder.duration.setText(products.getDuration());
+            // holder.farmer_name.setText(products.getFarmer_name());
+            // holder.location.setText(products.getLocation());
+
+            looking_forId = products.getId();
+            model_id = products.getModelname();
+            timeline = products.getDuration();
+            address = products.getLocation();
+        }catch (Exception e){
+
+        }
 
 System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.getId());
 
@@ -133,7 +138,7 @@ System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.ge
             e.printStackTrace();
         }
 
-
+        try {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width_px = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -143,6 +148,10 @@ System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.ge
         LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width_px,height_set);
         linear_looking_main.setLayoutParams(parms);
 
+        } catch (
+                Exception e) {
+            e.printStackTrace();
+        }
 
 
 //
