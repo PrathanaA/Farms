@@ -92,6 +92,7 @@ public class  Add_New_Address_Fragment extends Fragment {
     public static String search_status="status";
     public static TextView add_new_address;
     Fragment selectedFragment = null;
+    String selected_addresstype;
     JSONObject lngObject;
     LinearLayout linearLayout;
     String s_addtype,entername,entermno,inncrtmno,enterhno,enterstreetad,enterlandmark,entercity,enterpincode,entervalidpin,selectstate,selectdistrict,selecttaluk,selecthobli,selectvillage,newaddressadded,addnotadded,adddeleted ;
@@ -164,6 +165,8 @@ public class  Add_New_Address_Fragment extends Fragment {
         hobli.setText(getArguments().getString("Addr_hobli"));
         village.setText(getArguments().getString("Addr_village"));
         select_address.setText(getArguments().getString("Addr_pickup_from"));
+        selected_addresstype = getArguments().getString("Addr_pickup_from");
+
 
 
 
@@ -278,6 +281,9 @@ public class  Add_New_Address_Fragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         select_address.setText(home.getText().toString());
+
+                        selected_addresstype = "Home";
+
                         dialog.dismiss();
                     }
                 });
@@ -288,6 +294,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         select_address.setText(ware_house.getText().toString());
+                        selected_addresstype = "Warehouse";
                         dialog.dismiss();
 
                     }
@@ -297,6 +304,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         select_address.setText(farm.getText().toString());
+                        selected_addresstype = "Farm";
                         dialog.dismiss();
 
                     }
@@ -306,6 +314,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         select_address.setText(others.getText().toString());
+                        selected_addresstype = "Others";
                         dialog.dismiss();
 
                     }
@@ -482,7 +491,6 @@ public class  Add_New_Address_Fragment extends Fragment {
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-
                 districtAdapter= new DistrictAdapter( districtBeanList,getActivity());
                 recyclerView.setAdapter(districtAdapter);
 
@@ -523,6 +531,7 @@ public class  Add_New_Address_Fragment extends Fragment {
 
             }
         });
+
         hobli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1110,7 +1119,7 @@ public class  Add_New_Address_Fragment extends Fragment {
             // jsonObject.put("City",city.getText().toString());
             jsonObject.put("MobileNo",mobile.getText().toString());
             jsonObject.put("Name",name.getText().toString());
-            jsonObject.put("PickUpFrom",select_address.getText().toString());
+            jsonObject.put("PickUpFrom",selected_addresstype);
             jsonObject.put("Pincode",pincode_no.getText().toString());
             jsonObject.put("StateId",StateApdater.stateid);
             jsonObject.put("TalukId",TalukAdapter.talukid);

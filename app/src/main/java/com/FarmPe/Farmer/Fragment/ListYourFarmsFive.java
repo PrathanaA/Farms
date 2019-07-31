@@ -142,20 +142,28 @@ public class ListYourFarmsFive extends Fragment {
 
         System.out.println("upload_image"+LandingPageActivity.selectedImage);
 
+
           continue_update.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               uploadImage(LandingPageActivity.selectedImage);
+
+              selectedFragment = HomeMenuFragment.newInstance();
+              FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+              transaction.replace(R.id.frame_layout, selectedFragment);
+              transaction.commit();
            }
           });
+
+
+
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 home="home";
 
-               // uploadImage(LandingPageActivity.selectedImage);
-                selectedFragment = ComingSoonFragment.newInstance();
+                selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();
@@ -195,13 +203,10 @@ public class ListYourFarmsFive extends Fragment {
             jsonObject.put("Id","0");
             jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
 
-
-
             jsonObject_location.put("Id",0);
             jsonObject_location.put("Latitude","13.21321");
             jsonObject_location.put("Longitude","33.21321");
             jsonObject.put("FarmLocation",jsonObject_location);
-
 
             jsonObject_address.put("Id","0");
             jsonObject_address.put("StreeAddress",ListYourFarmsThird.street_string);
@@ -211,7 +216,6 @@ public class ListYourFarmsFive extends Fragment {
             jsonObject_address.put("HobliId", HoblisAdapter.hobliid);
             jsonObject_address.put("VillageId", VillageAdapter.villageid);
             jsonObject_address.put("Pincode",ListYourFarmsThird.pincode_string);
-
 
             jsonObject.put("FarmAddress",jsonObject_address);
 
@@ -229,9 +233,9 @@ public class ListYourFarmsFive extends Fragment {
                     public void onResponse(NetworkResponse response) {
                         progressDialog.dismiss();
 
-
                       System.out.println("bdjvknjvhv"+response);
                       if (home==null){
+
 
                       }else{
                           selectedFragment = HomeMenuFragment.newInstance();
@@ -240,7 +244,6 @@ public class ListYourFarmsFive extends Fragment {
                           // transaction.addToBackStack("looking");
                           transaction.commit();
                       }
-
 
 
 //                        Toast.makeText(getActivity(),"Profile Details Updated Successfully", Toast.LENGTH_SHORT).show();
@@ -258,8 +261,6 @@ public class ListYourFarmsFive extends Fragment {
                         progressDialog.dismiss();
                     }
                 }) {
-
-
 
 
 

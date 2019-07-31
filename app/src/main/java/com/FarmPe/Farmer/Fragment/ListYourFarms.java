@@ -72,6 +72,7 @@ public class ListYourFarms extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
@@ -87,7 +88,7 @@ public class ListYourFarms extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = HomeMenuFragment.newInstance();
+              //  selectedFragment = HomeMenuFragment.newInstance();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 

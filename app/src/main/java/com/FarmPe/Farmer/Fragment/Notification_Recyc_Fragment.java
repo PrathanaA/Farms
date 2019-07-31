@@ -139,6 +139,8 @@ public class Notification_Recyc_Fragment extends Fragment {
 
           enable_all();
 
+          enable_all.setVisibility(View.GONE);
+
 
 
 
@@ -221,10 +223,6 @@ public class Notification_Recyc_Fragment extends Fragment {
 
                         list = new ArrayList<String>(Arrays.asList(ProfileName1.split(",")));
                          getnot();
-
-
-
-
 
 
 

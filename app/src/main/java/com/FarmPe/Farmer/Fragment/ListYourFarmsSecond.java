@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.FarmPe.Farmer.Activity.LoginActivity;
 import com.FarmPe.Farmer.Adapter.AddFirstListYourFramsAdapter;
 import com.FarmPe.Farmer.Adapter.List_Farm_Adapter;
 import com.FarmPe.Farmer.Adapter.List_Farm_Adapter2;
@@ -47,13 +48,11 @@ public class ListYourFarmsSecond extends Fragment {
     List_Farm_Adapter2 farmadapter1;
     Fragment selectedFragment;
     String text_farm;
+
     TextView toolbar_title,continue_2,headin_name;
 
-
-   public static boolean selected=false;
-   int radiobutonStatus;
-
-
+    public static boolean selected=false;
+    int radiobutonStatus;
 
 
     public static ListYourFarmsSecond newInstance() {
@@ -69,12 +68,13 @@ public class ListYourFarmsSecond extends Fragment {
         continue_2=view.findViewById(R.id.continue_2);
         recyclerView=view.findViewById(R.id.recycler_2);
         headin_name = view.findViewById(R.id.headin_name);
+        linearLayout = view.findViewById(R.id.linearLayout);
 
         selected=false;
 
         text_farm =  List_Farm_Adapter.listname;
-
         headin_name.setText("Select your " + text_farm);
+
 
 
         radiobutonStatus = getArguments().getInt("RB_S");
@@ -95,7 +95,6 @@ public class ListYourFarmsSecond extends Fragment {
                     selectedFragment.setArguments(bundle);
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.addToBackStack("list_farm");
                     transaction.commit();
 
                     return true;
@@ -131,7 +130,6 @@ public class ListYourFarmsSecond extends Fragment {
             }
         });*/
 
-
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +142,6 @@ public class ListYourFarmsSecond extends Fragment {
                 selectedFragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("list_farm");
                 transaction.commit();
             }
         });
@@ -156,8 +153,6 @@ public class ListYourFarmsSecond extends Fragment {
             public void onClick(View v) {
 
                 if (selected){
-
-
 
                     Bundle bundle = new Bundle();
                     bundle.putString("status","default");
@@ -171,8 +166,22 @@ public class ListYourFarmsSecond extends Fragment {
 
                 }else {
 
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, "Please Select any 1 item", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
 
-                    Toast.makeText(getActivity(),"Please Select",Toast.LENGTH_LONG).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+
+                    snackbar.show();
+
+                   // Toast.makeText(getActivity(),"Please Select",Toast.LENGTH_LONG).show();
                 }
 
 

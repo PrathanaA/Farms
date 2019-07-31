@@ -1,6 +1,8 @@
 package com.FarmPe.Farmer.Fragment;
 
+
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +33,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +61,8 @@ import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 import com.FarmPe.Farmer.Volly_class.VolleySingletonQuee;
 import com.FarmPe.Farmer.volleypost.VolleyMultipartRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -79,16 +86,19 @@ public class Edit_Looking_For_Fragment extends Fragment {
     public static AddHpAdapter farmadapter;
     SessionManager sessionManager;
     public static String back;
-    TextView toolbar_title,update_btn_txt;
+    ImageView tractor_img;
+    TextView toolbar_title,update_btn_txt,brand;
     JSONObject lngObject;
-    String toast_name,toast_mobile,toast_passwrd,toast_new_mobile,toast_minimum_toast,toast_update,toast_image;
+    JSONArray edit_req_array;
+    String toast_name,toast_mobile,toast_passwrd,toast_new_mobile,toast_minimum_toast,  toast_update,toast_image;
     LinearLayout update_btn,linearLayout;
     private static int RESULT_LOAD_IMG = 1;
     Bitmap selectedImage,imageB;
     EditText profile_name,profile_phone,profile_mail,profile_passwrd;
+    RadioButton month_1,month_2,month_3,month_4,finance_yes,finance_no;
     CircleImageView prod_img;
 
-    TextView farmer_name,farmer_phone,farmer_email,farmer_loc,delete_req;
+    TextView farmer_name,farmer_phone,farmer_email,farmer_loc,delete_req,hp_power,address_text;
     LinearLayout back_feed;
     Fragment selectedFragment;
 
@@ -109,10 +119,21 @@ public class Edit_Looking_For_Fragment extends Fragment {
         farmer_name=view.findViewById(R.id.farmer_name);
         farmer_phone=view.findViewById(R.id.phone_no);
         farmer_email=view.findViewById(R.id.email);
+        brand=view.findViewById(R.id.brand);
         farmer_loc=view.findViewById(R.id.loc);
         prod_img=view.findViewById(R.id.prod_img);
+        hp_power=view.findViewById(R.id.hp_power);
         delete_req=view.findViewById(R.id.delete_req);
+        month_1=view.findViewById(R.id.month_1);
+        month_2=view.findViewById(R.id.month_2);
+        month_3=view.findViewById(R.id.month_3);
+        month_4=view.findViewById(R.id.month_4);
+        finance_yes=view.findViewById(R.id.finance_yes);
+        finance_no=view.findViewById(R.id.finance_no);
+        tractor_img=view.findViewById(R.id.tractor_img);
+
         linearLayout=view.findViewById(R.id.linearLayout);
+        address_text=view.findViewById(R.id.address_text);
         sessionManager = new SessionManager(getActivity());
 
 
@@ -131,6 +152,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
                 transaction.commit();
             }
         });
+
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -155,73 +177,154 @@ public class Edit_Looking_For_Fragment extends Fragment {
             }
         });
 
+        try{
+
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId",sessionManager.getRegId("userId"));
+
+            Crop_Post.crop_posting(getActivity(), Urls.Get_Edit_Request, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.println("dfdsfsf" + result);
+                    try{
+
+                        edit_req_array = result.getJSONArray("LookingForList");
+                        for(int i=0;i<edit_req_array.length();i++){
+
+                            JSONObject jsonObject1 = edit_req_array.getJSONObject(i);
+                            JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
+
+                            String id = jsonObject1.getString("Id");
+                            String purchasetimeline = jsonObject1.getString("PurchaseTimeline");
+                            Boolean lookin_true = jsonObject1.getBoolean("LookingForFinance");
+                            String brand_name = jsonObject1.getString("BrandName");
+                            String model_name = jsonObject1.getString("Model");
+                            String model_image = jsonObject1.getString("ModelImage");
+                            String horse_range = jsonObject1.getString("HorsePowerRange");
+                            String addrss_id = jsonObject2.getString("Id");
+                            String addrss_name = jsonObject2.getString("Name");
+                            String mobile_no = jsonObject2.getString("MobileNo");
+                            String street_address = jsonObject2.getString("StreeAddress1");
+                            String pincode = jsonObject2.getString("Pincode");
+                            String state = jsonObject2.getString("State");
+                            String district = jsonObject2.getString("District");
+                            String taluk = jsonObject2.getString("Taluk");
+
+
+                            brand.setText("Brand - " + brand_name);
+                            hp_power.setText("HP - " + horse_range);
+                            hp_power.setText("Model - " + model_name);
+                            address_text.setText(street_address + " , " + state + " , " + pincode);
+
+
+
+                            if(lookin_true){
+                                finance_yes.setChecked(true);
+
+                            }else{
+
+                                finance_no.setChecked(true);
+                            }
+
+
+                            if(purchasetimeline.equals("Immediately")){
+
+                                month_1.setChecked(true);
+
+                            }else if(purchasetimeline.equals("1 Month")){
+
+                                month_2.setChecked(true);
+
+
+                            }else if(purchasetimeline.equals("3 Months")){
+
+                                month_3.setChecked(true);
+
+
+                            }else if(purchasetimeline.equals("After 3 Months")){
+                                month_4.setChecked(true);
+
+
+                            }
+
+//
+//                            Glide.with(getActivity()).load(model_image)
+//
+//                                    .thumbnail(0.5f)
+//                                    .crossFade()
+//                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                                    .into(tractor_img);
+//
+
+
+                        }
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
 
         delete_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
 
 
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("UserId",sessionManager.getRegId("userId"));
-                    jsonObject.put("Id",FarmsImageAdapter.looking_forId);
-
-                    System.out.print("wwwwwefsdwwwwwefsdddddddwwwwwefsdwwwwwefsddddddd" + jsonObject);
-
-                    Crop_Post.crop_posting(getActivity(), Urls.Delete_Request, jsonObject, new VoleyJsonObjectCallback() {
-                        @Override
-                        public void onSuccessResponse(JSONObject result) {
-                            System.out.print("wwwwwefsdddd" + result);
-
-                            try{
-
-                                String status = result.getString("Status");
-                                String message = result.getString("Message");
-
-
-                                if(status.equals("1")){
-
-                                    Snackbar snackbar = Snackbar
-                                            .make(linearLayout,message, Snackbar.LENGTH_LONG);
-                                    View snackbarView = snackbar.getView();
-                                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
-                                    tv.setTextColor(Color.WHITE);
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                    } else {
-                                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                                    }
-                                    snackbar.show();
-
-                                    selectedFragment = LookingForFragment.newInstance();
-                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                    transaction.replace(R.id.frame_layout, selectedFragment);
-                                    transaction.commit();
+                final TextView yes1,no1,text_desctxt,popup_headingtxt;
+                final LinearLayout close_layout;
+                System.out.println("aaaaaaaaaaaa");
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.logout_layout);
+                text_desctxt =  dialog.findViewById(R.id.text_desc);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setCancelable(false);
+                yes1 =  dialog.findViewById(R.id.yes_1);
+                no1 =  dialog.findViewById(R.id.no_1);
+                popup_headingtxt =  dialog.findViewById(R.id.popup_heading);
 
 
 
+                close_layout =  dialog.findViewById(R.id.close_layout);
+                no1.setOnClickListener(new View.OnClickListener() {
 
-                                }else{
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                close_layout.setOnClickListener(new View.OnClickListener() {
 
-                                    Toast.makeText(getActivity(), "Request Quotation not deleted", Toast.LENGTH_SHORT).show();
-                                }
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                yes1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        delete_request();
+
+                        dialog.dismiss();
+                    }
+                });
+
+
+                dialog.show();
 
 
 
 
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-
-                        }
-                    });
-
-
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
             }
         });
 
@@ -288,6 +391,75 @@ public class Edit_Looking_For_Fragment extends Fragment {
         return view;
     }
 
+    private void delete_request() {
+
+        try{
+
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId",sessionManager.getRegId("userId"));
+            jsonObject.put("Id",FarmsImageAdapter.looking_forId);
+
+            System.out.print("wwwwwefsdwwwwwefsdddddddwwwwwefsdwwwwwefsddddddd" + jsonObject);
+
+            Crop_Post.crop_posting(getActivity(), Urls.Delete_Request, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.print("wwwwwefsdddd" + result);
+
+                    try{
+
+                        String status = result.getString("Status");
+                        String message = result.getString("Message");
+
+
+                        if(status.equals("1")){
+
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayout,message, Snackbar.LENGTH_LONG);
+                            View snackbarView = snackbar.getView();
+                            TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                            tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                            tv.setTextColor(Color.WHITE);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
+
+
+                            snackbar.show();
+                            back = "edit_back";
+
+                            selectedFragment = HomeMenuFragment.newInstance();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.frame_layout, selectedFragment);
+                            transaction.commit();
+
+
+                        }else{
+
+                            Toast.makeText(getActivity(), "Request Quotation not deleted", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
+    }
 
 
     public static InputFilter EMOJI_FILTER = new InputFilter() {
@@ -562,3 +734,4 @@ public class Edit_Looking_For_Fragment extends Fragment {
 
 
 }
+

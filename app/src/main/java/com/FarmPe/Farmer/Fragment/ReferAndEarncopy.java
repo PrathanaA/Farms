@@ -281,23 +281,20 @@ public class ReferAndEarncopy extends Fragment {
             public void onClick(View v) {
 
 
-                try
-                {
-                    // Check if the Twitter app is installed on the phone.
-                    getActivity().getPackageManager().getPackageInfo("com.facebook.katana", 0);
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setClassName("com.twitter.android", "com.twitter.android.composer.ComposerActivity");
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app");
-                    startActivity(intent);
-
+                if (packageName.contains("com.facebook.katana")) {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app");
+                    sendIntent.setType("text/plain");
+                    sendIntent.setPackage("com.facebook.katana");
+                    try {
+                        startActivity(sendIntent);
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(getActivity(), "Facebook is not installed on this device ", Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(getActivity(), "Facebook is not installed on this device ", Toast.LENGTH_LONG).show();
                 }
-                catch (Exception e)
-                {
-                    Toast.makeText(getActivity(),"Facebook is not installed on this device",Toast.LENGTH_LONG).show();
-
-                }
-
 
 
             }

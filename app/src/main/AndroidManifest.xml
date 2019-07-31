@@ -37,7 +37,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCERehB3M-n1I60wXJAVhAtD1zqK66JjRg" />
+            android:value="AIzaSyAEC7lt1xYl-YKTfHLwoAo1mTCwbQzRhpk" />
 
         <activity
             android:name=".Activity.ForgotPasswordNew"

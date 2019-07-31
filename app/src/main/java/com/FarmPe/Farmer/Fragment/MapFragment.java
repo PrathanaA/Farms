@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -35,9 +37,15 @@ import com.FarmPe.Farmer.R;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -46,9 +54,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.android.volley.VolleyLog.TAG;
 
 
- public class MapFragment extends Fragment implements OnMapReadyCallback,
+public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -64,7 +76,7 @@ import java.util.List;
     Marker mCurrLocationMarker;
     private TextView resutText;
     String address_txt;
-
+    protected static final int REQUEST_CHECK_SETTINGS = 0x1;
 
     public static MapFragment newInstance() {
         MapFragment fragment = new MapFragment();
@@ -75,13 +87,22 @@ import java.util.List;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.get_lat_long_map_layout, container, false);
+        displayLocationSettingsRequest(getActivity());
         resutText = (TextView) view.findViewById(R.id.curr_address);
         left_arrw = view.findViewById(R.id.left_arrw);
         confirm_loc = view.findViewById(R.id.confirm_loc);
         //getSupportActionBar().setTitle("Map Location Activity");
         mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
-
+        final LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        /*new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    displayLocationSettingsRequest(getActivity());
+                }
+            }
+        }, 0, 10000);*/
 
 
            view.setFocusableInTouchMode(true);
@@ -93,8 +114,13 @@ import java.util.List;
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack ("farm_third", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("status","default");
+                    selectedFragment = ListYourFarmsThird.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    selectedFragment.setArguments(bundle);
+                    transaction.commit();
 
 
                 }
@@ -103,14 +129,19 @@ import java.util.List;
         });
 
 
+
         left_arrw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("status","default");
                 selectedFragment = ListYourFarmsThird.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("map");
+                selectedFragment.setArguments(bundle);
                 transaction.commit();
+
 
             }
         });
@@ -144,7 +175,7 @@ import java.util.List;
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
           mapFrag.getMapAsync(this);
-        configureCameraIdle();
+        //configureCameraIdle();
         }
     }
 
@@ -186,7 +217,43 @@ import java.util.List;
     }
 
 
+     private void displayLocationSettingsRequest(Context context) {
+         GoogleApiClient googleApiClient = new GoogleApiClient.Builder(context)
+                 .addApi(LocationServices.API).build();
+         googleApiClient.connect();
+         LocationRequest locationRequest = LocationRequest.create();
+         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+         locationRequest.setInterval(10000);
+         locationRequest.setFastestInterval(10000 / 2);
+         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+         builder.setAlwaysShow(true);
+         PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
+         result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+             @Override
+             public void onResult(LocationSettingsResult result) {
+                 final Status status = result.getStatus();
+                 switch (status.getStatusCode()) {
+                     case LocationSettingsStatusCodes.SUCCESS:
+                         Log.i(TAG, "All location settings are satisfied.");
+                         break;
+                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                         Log.i(TAG, "Location settings are not satisfied. Show the user a dialog to upgrade location settings ");
+                         try {
+                             // Show the dialog by calling startResolutionForResult(), and check the result
+                             // in onActivityResult().
+                             status.startResolutionForResult(getActivity(), REQUEST_CHECK_SETTINGS);
+                         } catch (IntentSender.SendIntentException e) {
+                             Log.i(TAG, "PendingIntent unable to execute request.");
+                         }
+                         break;
+                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                         Log.i(TAG, "Location settings are inadequate, and cannot be fixed here. Dialog not created.");
+                         break;
+                 }
+             }
+         });
 
+     }
 
 
     @Override

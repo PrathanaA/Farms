@@ -212,6 +212,7 @@ public class ListYourFarmsThird extends Fragment {
                 grade_dialog.setContentView(R.layout.select_variety_popup);
                 EditText popup_heading = (EditText) grade_dialog.findViewById(R.id.popup_heading);
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
+                LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
                 SearchView search = (SearchView) grade_dialog.findViewById(R.id.search_1);
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
 
@@ -260,7 +261,7 @@ public class ListYourFarmsThird extends Fragment {
 
                 stateList();
 
-                image.setOnClickListener(new View.OnClickListener() {
+                close_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         grade_dialog.dismiss();
@@ -281,6 +282,7 @@ public class ListYourFarmsThird extends Fragment {
 
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
                 EditText popup_heading = (EditText)grade_dialog.findViewById(R.id.popup_heading);
+                LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
                 SearchView search = (SearchView) grade_dialog.findViewById(R.id.search_1);
 
@@ -327,7 +329,7 @@ public class ListYourFarmsThird extends Fragment {
 
                 district();
 
-                image.setOnClickListener(new View.OnClickListener() {
+                close_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         grade_dialog.dismiss();
@@ -348,6 +350,7 @@ public class ListYourFarmsThird extends Fragment {
 
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
                 EditText popup_heading = (EditText)grade_dialog.findViewById(R.id.popup_heading);
+                LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
                 SearchView search = (SearchView) grade_dialog.findViewById(R.id.search_1);
 
@@ -395,7 +398,7 @@ public class ListYourFarmsThird extends Fragment {
 
                 taluk_list();
 
-                image.setOnClickListener(new View.OnClickListener() {
+                close_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         grade_dialog.dismiss();
@@ -417,6 +420,7 @@ public class ListYourFarmsThird extends Fragment {
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
                 SearchView search = (SearchView) grade_dialog.findViewById(R.id.search_1);
+                LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
 
                 search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
@@ -461,7 +465,7 @@ public class ListYourFarmsThird extends Fragment {
 
                 block_list();
 
-                image.setOnClickListener(new View.OnClickListener() {
+                close_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         grade_dialog.dismiss();
@@ -481,6 +485,7 @@ public class ListYourFarmsThird extends Fragment {
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
                 EditText popup_heading = (EditText)grade_dialog.findViewById(R.id.popup_heading);
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
+                LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
                 SearchView search = (SearchView) grade_dialog.findViewById(R.id.search_1);
 
                 search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -520,7 +525,7 @@ public class ListYourFarmsThird extends Fragment {
                 recyclerView.setAdapter(villageAdapter);
                 popup_heading.setHint("Village");
                 village_list();
-                image.setOnClickListener(new View.OnClickListener() {
+                close_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         grade_dialog.dismiss();
@@ -586,6 +591,7 @@ public class ListYourFarmsThird extends Fragment {
                     selectedFragment = ListYourFarmsFour.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.addToBackStack("list_four");
                     // transaction.addToBackStack("looking");
                     transaction.commit();
                 }
@@ -721,6 +727,7 @@ public class ListYourFarmsThird extends Fragment {
         }
 
     }
+
 
     private void district() {
         try{

@@ -198,12 +198,15 @@
        android:orientation="vertical"
        >
 
+
+
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="0dp"
        android:orientation="vertical"
        android:paddingLeft="30dp"
        >
+
 
 
       <TextView
@@ -218,6 +221,7 @@
        android:fontFamily="@font/segoeui"
        android:textColor="#000"
        />
+
 
       <TextView
           android:id="@+id/your_requests"
@@ -234,6 +238,19 @@
 
 
       <TextView
+          android:id="@+id/connections"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Connections"
+          android:layout_marginTop="20dp"
+          android:textSize="16dp"
+          android:drawableLeft="@drawable/ic_network"
+          android:drawablePadding="10dp"
+          android:fontFamily="@font/segoeui"
+          android:textColor="#000"
+          />
+
+      <TextView
           android:id="@+id/invitation"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -245,7 +262,6 @@
           android:fontFamily="@font/segoeui"
           android:textColor="#000"
           />
-
 
 
       <TextView
@@ -260,9 +276,6 @@
           android:fontFamily="@font/segoeui"
           android:textColor="#000"
           />
-
-
-
 
 
       <TextView

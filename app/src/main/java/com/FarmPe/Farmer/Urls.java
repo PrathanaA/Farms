@@ -84,14 +84,20 @@ package com.FarmPe.Farmer;
     public static final String Farm_Details = ROOT_URL+"MasterTable/AddUpdateFarms";
     public static final String AddUpdateFarms = ROOT_URL+"MasterTable/AddUpdateFarms";
     public static final String Invitation_Farm = ROOT_URL+"MasterTable/GetInvitationList";
+    public static final String Invitn_accpt_cancel = ROOT_URL+"MasterTable/RespondToConnectionRequest";
+
+
 
 
     //Request Quoatation
+    public static final String Get_Edit_Request = ROOT_URL + "MasterTable/GetLookingForListsById";
+    public static final String Delete_Request = ROOT_URL + "MasterTable/DeleteRequestForQuotation";
+    public static final String Edit_Request = ROOT_URL + "MasterTable/AddUpdateRequestForQuotation";
 
-   public static final String Delete_Request = ROOT_URL + "MasterTable/DeleteRequestForQuotation";
-   public static final String Edit_Request = ROOT_URL + "MasterTable/AddUpdateRequestForQuotation";
 
+  //Connections
 
+   public static final String Get_Connection_List = ROOT_URL + "MasterTable/GetConnectionList";
 
 
 

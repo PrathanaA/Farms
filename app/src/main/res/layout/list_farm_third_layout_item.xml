@@ -17,6 +17,7 @@
             android:layout_height="0dp"
             android:layout_weight="10"
             android:background="#fff"
+            android:gravity="center_vertical"
             android:orientation="vertical"
             >
 
@@ -27,7 +28,6 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="20dp"
                         android:background="@drawable/ic_filter_state"
                         >
 
@@ -44,30 +44,28 @@
                             />
 
                     </LinearLayout>
-
-
-
-
-
-
         </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90"
+        android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="80"
+        android:layout_height="wrap_content"
         android:background="#fff"
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical"
-        >
+        android:weightSum="100">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="100"
             android:layout_marginHorizontal="10dp"
             android:orientation="vertical"
-            android:background="#ffff"
-
-            >
+            android:layout_marginTop="10dp"
+            android:background="#ffff">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,7 +136,7 @@
                 android:text="OR"
                 android:textSize="14dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="@font/segoeui"
                 android:textColor="#000"
                 />
@@ -286,14 +284,15 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_height="wrap_content"
         android:background="#fff"
         android:orientation="vertical"
+        android:gravity="bottom"
         >
 
 <View
@@ -306,8 +305,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
-        android:gravity="right"
-        android:layout_marginTop="15dp"
+        android:gravity="right|bottom"
+        android:paddingVertical="5dp"
         android:orientation="horizontal"
         >
         <TextView
@@ -336,6 +335,7 @@
     </LinearLayout>
 
     </LinearLayout>
-
+    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

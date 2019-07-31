@@ -123,6 +123,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
         invitation = view.findViewById(R.id.invitation);
+        connections = view.findViewById(R.id.connections);
         //linear_connection = view.findViewById(R.id.linear_connection);
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
@@ -335,6 +336,19 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
             }
         });
+
+
+        connections.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFragment = ConnectionsFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("home");
+                transaction.commit();
+            }
+        });
+
 
 
 

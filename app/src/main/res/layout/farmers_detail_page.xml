@@ -54,20 +54,20 @@
                     </LinearLayout>
 
                     <!--<LinearLayout-->
-                        <!--android:id="@+id/back_feed"-->
-                        <!--android:layout_width="50dp"-->
-                        <!--android:layout_height="50dp"-->
-                        <!--android:background="@drawable/ripple_effect"-->
-                        <!--android:gravity="left">-->
+                    <!--android:id="@+id/back_feed"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:background="@drawable/ripple_effect"-->
+                    <!--android:gravity="left">-->
 
 
-                        <!--<ImageView-->
-                            <!--android:layout_width="20dp"-->
-                            <!--android:layout_height="20dp"-->
-                            <!--android:layout_gravity="center_vertical"-->
-                            <!--android:src="@drawable/ic_go_back_left_arrow_"-->
+                    <!--<ImageView-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:src="@drawable/ic_go_back_left_arrow_"-->
 
-                            <!--/>-->
+                    <!--/>-->
 
                     <!--</LinearLayout>-->
 
@@ -119,6 +119,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/brand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Brand - Mahindra Tractors"
@@ -128,6 +129,7 @@
                         />
 
                     <ImageView
+                        android:id="@+id/tractor_img"
                         android:layout_width="300dp"
                         android:layout_height="100dp"
                         android:src="@drawable/tractor_sonalika"
@@ -145,6 +147,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/hp_power"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HP - Upto 20HP"
@@ -222,6 +225,7 @@
                         >
 
                         <RadioButton
+                            android:id="@+id/month_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Immediately"
@@ -229,18 +233,20 @@
                             />
 
                         <RadioButton
+                            android:id="@+id/month_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:text="1 Month"
                             />
 
                         <RadioButton
+                            android:id="@+id/month_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="3 Months"
                             />
                         <RadioButton
+                            android:id="@+id/month_4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="After 3 Months"
@@ -344,16 +350,16 @@
                 </LinearLayout>
 
                 <!--<CheckBox-->
-                    <!--android:id="@+id/check_box"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginTop="20dp"-->
-                    <!--android:layout_marginRight="15dp"-->
-                    <!--android:gravity="start"-->
-                    <!--android:buttonTint="#D81B60"-->
-                    <!--android:fontFamily="@font/segoeui"-->
-                    <!--android:textSize="12dp" />-->
+                <!--android:id="@+id/check_box"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:layout_marginRight="15dp"-->
+                <!--android:gravity="start"-->
+                <!--android:buttonTint="#D81B60"-->
+                <!--android:fontFamily="@font/segoeui"-->
+                <!--android:textSize="12dp" />-->
 
 
 
@@ -406,3 +412,4 @@
     </ScrollView>
 
 </LinearLayout>
+

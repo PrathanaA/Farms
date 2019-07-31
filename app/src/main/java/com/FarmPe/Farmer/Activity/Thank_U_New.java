@@ -21,11 +21,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.ReadSms;
 import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.SmsListener;
+import com.FarmPe.Farmer.Urls;
+import com.FarmPe.Farmer.Volly_class.Login_post;
+import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +38,7 @@ import org.json.JSONObject;
 public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
    LinearLayout back_thank_u;
-   TextView thanktu_submit,otp_text,thank_title;
+   TextView thanktu_submit,otp_text,thank_title,resend_otp;
    EditText enter_otp,otp_forgot_pass;
     JSONObject lngObject;
     public  static String toast_otp,toast_invalid_otp,toast_internet,toast_nointernet;
@@ -44,6 +48,7 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
     private static final int REQUEST=1;
    BroadcastReceiver receiver;
     SessionManager sessionManager;
+    String toast_number_exceeded;
 
 
 
@@ -148,6 +153,11 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
         otp_text=findViewById(R.id.thanktu);
         thank_title=findViewById(R.id.thank);
 
+        resend_otp=findViewById(R.id.f_resend);
+
+
+
+
 
         setupUI(linearLayout);
         sessionId= getIntent().getStringExtra("otp_forgot");
@@ -161,7 +171,6 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
 
-
             thanktu_submit.setText(lngObject.getString("SendOTP"));
             thank_title.setText(lngObject.getString("OneTimePassword"));
             otp_text.setText(lngObject.getString("PleaseentertheOTPbelowtoresetpassword"));
@@ -170,11 +179,11 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
             toast_invalid_otp = lngObject.getString("InvalidOTP");
             toast_internet = lngObject.getString("GoodConnectedtoInternet");
             toast_nointernet = lngObject.getString("NoInternetConnection");
+            toast_number_exceeded = lngObject.getString("Youhaveexceededthelimitofresendingotp");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
 //
 //        if (checkAndRequestPermissions()) {
@@ -200,6 +209,79 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
 
             }
         });
+
+
+
+
+        resend_otp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    JSONObject postjsonObject = new JSONObject();
+                    postjsonObject.put("UserName", ForgotPasswordNew.forgot_mob_no );
+                    System.out.println("rrrrrrrrrrrrrrrrrrrr" + postjsonObject);
+
+                    Login_post.login_posting(Thank_U_New.this, Urls.Forgot_Password, postjsonObject, new VoleyJsonObjectCallback() {
+                        @Override
+                        public void onSuccessResponse(JSONObject result) {
+
+                            System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk" + result.toString());
+
+                            try{
+
+                                String  Otp = result.getString("OTP");
+                                sessionId=Otp;
+                                String  Message = result.getString("Message");
+                                int  status= result.getInt("Status");
+
+                                if (status==1){
+                                    Snackbar snackbar = Snackbar
+                                            .make(linearLayout,Message, Snackbar.LENGTH_LONG);
+                                    //snackbar.setActionTextColor(R.color.colorAccent);
+                                    View snackbarView = snackbar.getView();
+                                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                                    tv.setBackgroundColor(ContextCompat.getColor(Thank_U_New.this,R.color.orange));
+                                    tv.setTextColor(Color.WHITE);
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                    } else {
+                                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    }
+                                    snackbar.show();
+                                }else  if (status==2){
+                                    Snackbar snackbar = Snackbar
+                                            .make(linearLayout,toast_number_exceeded, Snackbar.LENGTH_LONG);
+                                    //snackbar.setActionTextColor(R.color.colorAccent);
+                                    View snackbarView = snackbar.getView();
+                                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                                    tv.setBackgroundColor(ContextCompat.getColor(Thank_U_New.this,R.color.orange));
+                                    tv.setTextColor(Color.WHITE);
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                    } else {
+                                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                                    }
+                                    snackbar.show();
+                                }
+
+                                else {
+                                    Toast.makeText(Thank_U_New.this, Message, Toast.LENGTH_LONG).show();
+                                }
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
+
 
         thanktu_submit.setOnClickListener(new View.OnClickListener() {
             @Override

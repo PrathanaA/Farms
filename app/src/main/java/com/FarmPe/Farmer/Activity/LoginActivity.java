@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
@@ -16,13 +17,16 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -183,12 +187,13 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
 
 
+
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         log_in = findViewById(R.id.login_button);
-        // setLocale("kn");
+
         forgot_pass =findViewById(R.id.forgot_pass_login);
-        //farmPe_title =findViewById(R.id.farmPe_title);
+
         mobile_no = findViewById(R.id.mob_no);
 
         pass = findViewById(R.id.pass);
@@ -199,10 +204,17 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         setupUI(coordinatorLayout);
         myDb = new DatabaseHelper(this);
         edittext_move(mobile_no, pass);
-
-
-
         remember_me.setChecked(true);
+
+
+
+        forgot_pass.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.segoeui));
+        remember_me.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.segoeui));
+
+        forgot_pass.setTypeface(null, Typeface.BOLD);
+        remember_me.setTypeface(null, Typeface.BOLD);
+
+
 
         if( sessionManager.getRegId("language_name").equals("")){
 
@@ -211,44 +223,48 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         }else{
 
             change_lang.setText(sessionManager.getRegId("language_name"));
+
         }
        // if(sessionManager.getLanguage())
 
 
-
-
-        final InputFilter EMOJI_FILTER = new InputFilter() {
-            @Override
-
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                for (int index = start; index < end; index++) {
-                    int type = Character.getType(source.charAt(index));
-                    if (type == Character.SURROGATE) {
-                        return "";
-                    }
-                }
-                return null;
-            }
-        };
-
-        pass.setFilters(new InputFilter[]{EMOJI_FILTER});
-
-        final InputFilter filter = new InputFilter() {
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                String filtered = "";
-                for (int i = start; i < end; i++) {
-                    char character = source.charAt(i);
-                    if (!Character.isWhitespace(character)) {
-                        filtered += character;
-                    }
-                }
-                return filtered;
-            }
-        };
-
-        pass.setFilters(new InputFilter[] {filter,new InputFilter.LengthFilter(12) });
+//
+//        final InputFilter EMOJI_FILTER = new InputFilter() {
+//            @Override
+//
+//            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+//                for (int index = start; index < end; index++) {
+//                    int type = Character.getType(source.charAt(index));
+//                    if (type == Character.SURROGATE) {
+//                        return "";
+//                    }
+//                }
+//                return null;
+//            }
+//        };
+//
+//
+//        pass.setFilters(new InputFilter[]{EMOJI_FILTER});
+//
+//        final InputFilter filter = new InputFilter() {
+//            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+//                String filtered = "";
+//                for (int i = start; i < end; i++) {
+//                    char character = source.charAt(i);
+//                    if (!Character.isWhitespace(character)) {
+//                        filtered += character;
+//                    }
+//                }
+//                return filtered;
+//            }
+//        };
+//
+//        pass.setFilters(new InputFilter[] {filter,new InputFilter.LengthFilter(12) });
         // sessionManager = new SessionManager(this);
         // sessionManager.getRegId("lng_object");
+
+        pass.setFilters(new InputFilter[] {EMOJI_FILTER1,new InputFilter.LengthFilter(12) });
+
         System.out.println("llllllllllll" + sessionManager.getRegId("language"));
 
         try {
@@ -304,6 +320,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 startActivity(intent);
             }
         });
+
 
 
         change_lang.setOnClickListener(new View.OnClickListener() {
@@ -835,6 +852,53 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         }
     }
 
+
+
+
+    public static InputFilter EMOJI_FILTER1 = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            boolean keepOriginal = true;
+            StringBuilder sb = new StringBuilder(end - start);
+            for (int index = start; index < end; index++) {
+                int type = Character.getType(source.charAt(index));
+                if (type == Character.SURROGATE || type == Character.OTHER_SYMBOL) {
+                    return "";
+                }
+                String filtered = "";
+                for (int i = start; i < end; i++) {
+                    char character = source.charAt(i);
+                    if (!Character.isWhitespace(character)) {
+                        filtered += character;
+                    }
+                }
+                return filtered;
+//                for (int i = start; i < end; i++) {
+//                    if (Character.isWhitespace(source.charAt(i))) {
+//                        if (dstart == 0)
+//                            return "";
+//                    }
+//                }
+                // return null;
+      /*  char c = source.charAt(index);
+        if (isCharAllowed(c))
+            sb.append(c);
+        else
+            keepOriginal = false;*/
+            }
+            if (keepOriginal)
+                return null;
+            else {
+                if (source instanceof Spanned) {
+                    SpannableString sp = new SpannableString(sb);
+                    TextUtils.copySpansFrom((Spanned) source, start, sb.length(), null, sp, 0);
+                    return sp;
+                } else {
+                    return sb;
+                }
+            }
+        }
+    };
 
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {

@@ -282,8 +282,21 @@ public class You_Address_Fragment extends Fragment {
 
                         }
 
-                        item_list = String.valueOf(new_address_beanArrayList.size());
-                        address_list.setText(item_list+" " + "Addresses are added" );
+
+
+                        if(new_address_beanArrayList.size()<=1){
+
+                            item_list = String.valueOf(new_address_beanArrayList.size());
+                            address_list.setText(item_list+" " + "Address is added" );
+
+                        }else{
+
+                            item_list = String.valueOf(new_address_beanArrayList.size());
+                            address_list.setText(item_list+" " + "Addresses are added" );
+
+                        }
+
+
 
 
                         mAdapter.notifyDataSetChanged();

@@ -8,6 +8,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+
     <include
         layout="@layout/home_tab_menu"
         android:layout_width="match_parent"
@@ -21,6 +22,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
          >
+
 
        <include
            layout="@layout/nav_header_navigation"

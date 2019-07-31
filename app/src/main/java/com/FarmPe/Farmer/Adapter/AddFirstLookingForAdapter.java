@@ -27,6 +27,7 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
     Activity activity;
     Fragment selectedFragment;
 
+
     public LinearLayout linearLayout;
     public static LinearLayout next_arw;
     public static String first;
@@ -37,7 +38,6 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
 //        session=new SessionManager(activity);
 
     }
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
@@ -58,7 +58,6 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
             //linearLayout=view.findViewById(R.id.dialog_list);
             //confirmbutton=view.findViewById(R.id.delivery2);
         }
-
     }
 
     @Override
