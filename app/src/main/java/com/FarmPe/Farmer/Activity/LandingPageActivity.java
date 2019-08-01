@@ -423,8 +423,8 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
         }});
 
         Vision.Images.Annotate annotateRequest =
-                vision.images().annotate(batchAnnotateImagesRequest);
-        // Due to a bug: requests to Vision API containing large images fail when GZipped.
+                  vision.images().annotate(batchAnnotateImagesRequest);
+      // Due to a bug: requests to Vision API containing large images fail when GZipped.
         annotateRequest.setDisableGZipContent(true);
         Log.d(TAG, "created Cloud Vision request object, sending request");
 
@@ -446,13 +446,14 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
         }
 
+
         @Override
         protected void onPreExecute() {
 
             progressDialog.setMessage("Please wait");
             progressDialog.show();
             super.onPreExecute();
-        }
+         }
 
 //        progressDialog.setMessage(" Loading....Please wait");
 //        progressDialog.show();
@@ -474,11 +475,13 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
             return "Cloud Vision API request failed. Check logs for details.";
         }
 
+
+
         protected void onPostExecute(String result) {
 
             LandingPageActivity activity = mActivityWeakReference.get();
             if (activity != null && !activity.isFinishing()) {
-progressDialog.dismiss();
+              progressDialog.dismiss();
 
                 if (result.equals("APPROVE")){
 
@@ -486,23 +489,13 @@ progressDialog.dismiss();
                     AddPhotoAdapter.productList.add(0,img1);
                     ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 
-                    Toast.makeText(activity,"Image contain below details"+annotation.getViolence()+"\n"
-                            +annotation.getSpoof()+"\n"+annotation.getMedical()+"\n"+annotation.getAdult(),Toast.LENGTH_LONG).show();
-
-
                 }else {
-                    Toast.makeText(activity,"You can't upload image,Image contain below details"+annotation.getViolence()+"\n"
-                            +annotation.getSpoof()+"\n"+annotation.getMedical()+"\n"+annotation.getAdult(),Toast.LENGTH_LONG).show();
 
                 }
-
-
-
 
             }
         }
     }
-
 
     private String convertResponseToString(BatchAnnotateImagesResponse response) {
         StringBuilder message = new StringBuilder("");
@@ -515,14 +508,10 @@ progressDialog.dismiss();
                 message.append("APPROVE");
 
 
-
-
             }else {
                 message.append("DECLINE");
 
             }
-
-
 
         } else {
             message.append("nothing");

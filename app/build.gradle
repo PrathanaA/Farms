@@ -6,6 +6,8 @@ android {
         applicationId "com.FarmPe.Farmer"
         minSdkVersion 16
         targetSdkVersion 28
+        multiDexEnabled true
+
         versionCode 1
         versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

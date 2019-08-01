@@ -549,8 +549,8 @@ public class ListYourFarmsThird extends Fragment {
         continue_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((current_adds.getVisibility() == View.GONE) || (current_adds.getVisibility() == View.VISIBLE || current_adds.getText().toString().equals(""))) {
-                    if (street_add.getText().toString().equals("") || state.getText().toString().equals("") || district.getText().toString().equals("") || taluk.getText().toString().equals("") || block.getText().toString().equals("") || village.getText().toString().equals("") || village.getText().toString().equals("") || street_add.getText().toString().equals("") || pincode.getText().toString().equals("")) {
+                //if ((current_adds.getVisibility() == View.GONE) || (current_adds.getVisibility() == View.VISIBLE || current_adds.getText().toString().equals(""))) {
+                    if (street_add.getText().toString().equals("") && state.getText().toString().equals("") && district.getText().toString().equals("") && taluk.getText().toString().equals("") && block.getText().toString().equals("") && village.getText().toString().equals("") && village.getText().toString().equals("") && street_add.getText().toString().equals("") && pincode.getText().toString().equals("")) {
                         Snackbar snackbar = Snackbar
                                 .make(main_layout, "Please enter all the details", Snackbar.LENGTH_LONG);
                         View snackbarView = snackbar.getView();
@@ -721,13 +721,13 @@ public class ListYourFarmsThird extends Fragment {
                         // transaction.addToBackStack("looking");
                         transaction.commit();
                     }
-                } else {
-                    selectedFragment = ListYourFarmsFour.newInstance();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.addToBackStack("list_four");
-                    transaction.commit();
-                }
+//                } else {
+//                    selectedFragment = ListYourFarmsFour.newInstance();
+//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.frame_layout, selectedFragment);
+//                    transaction.addToBackStack("list_four");
+//                    transaction.commit();
+//                }
             }
         });
 

@@ -1,5 +1,6 @@
 package com.FarmPe.Farmer.Adapter;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,19 +14,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
 import com.FarmPe.Farmer.Fragment.AddFirstFragment;
 import com.FarmPe.Farmer.R;
-
 import java.util.List;
+
+
+
 
 public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLookingForAdapter.MyViewHolder>  {
     private List<AddTractorBean> productList;
     Activity activity;
     Fragment selectedFragment;
+
 
 
     public LinearLayout linearLayout;
@@ -43,7 +46,6 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
         public ImageView image;
         public LinearLayout item;
         public TextView prod_price,prod_name,duration,farmer_name,location,connect;
-
 
 
 
@@ -67,6 +69,7 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
         return new MyViewHolder(itemView);
 
     }
+
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
