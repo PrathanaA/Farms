@@ -80,7 +80,6 @@ public class ListYourFarmsFive extends Fragment {
     String json_string,json_address_string;
 
 
-
     public static ListYourFarmsFive newInstance() {
         ListYourFarmsFive fragment = new ListYourFarmsFive();
         return fragment;
@@ -183,7 +182,6 @@ public class ListYourFarmsFive extends Fragment {
                   uploadImage(LandingPageActivity.selectedImage);
 
 
-
                   Snackbar snackbar = Snackbar
                           .make(linearLayout,"Your Details Updated Successfully", Snackbar.LENGTH_LONG);
                   View snackbarView = snackbar.getView();
@@ -199,7 +197,6 @@ public class ListYourFarmsFive extends Fragment {
 
                   snackbar.show();
 
-
                   selectedFragment = HomeMenuFragment.newInstance();
                   FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                   transaction.replace(R.id.frame_layout, selectedFragment);
@@ -209,9 +206,6 @@ public class ListYourFarmsFive extends Fragment {
 
            }
           });
-
-
-
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override

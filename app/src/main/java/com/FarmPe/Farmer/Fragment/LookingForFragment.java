@@ -2,14 +2,13 @@ package com.FarmPe.Farmer.Fragment;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,13 +17,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.FarmPe.Farmer.Adapter.FarmsImageAdapter;
-import com.FarmPe.Farmer.Adapter.NotificationAdapter;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Crop_Post;
-import com.FarmPe.Farmer.Volly_class.Login_post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 
 import org.json.JSONArray;
@@ -54,14 +51,12 @@ public class LookingForFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.looking_for_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_looking);
         filter_text=view.findViewById(R.id.filter_text);
         delete_req =view.findViewById(R.id.delete_req);
-
         newOrderBeansList.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager_farm);
@@ -72,7 +67,10 @@ public class LookingForFragment extends Fragment {
        System.out.println("bbbbbbbbbbbbbbbbb"+ "+1-333-444-5678".replaceAll("\\d{4}(?=\\d)", "*"));
       // System.out.println("bbbbbbbbbbbbbbbbbbbb"+ "+1-333-444-5678".replaceAll("\\d{4}(?=\\d)", "*"));
 
+
         LookingForList();
+
+
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -83,6 +81,10 @@ public class LookingForFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     HomeMenuFragment.drawer.openDrawer(Gravity.START);
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
                     /*FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("list_farm1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 */
@@ -91,9 +93,6 @@ public class LookingForFragment extends Fragment {
                 return false;
             }
         });
-
-
-
 
 
 
@@ -106,7 +105,6 @@ public class LookingForFragment extends Fragment {
                 transaction.replace(R.id.first_full_frame, selectedFragment);
                 transaction.addToBackStack("looking_edit");
                 transaction.commit();
-
 
             }
         });
@@ -164,7 +162,6 @@ public class LookingForFragment extends Fragment {
 //        });
 
 
-
         return view;
     }
     private void LookingForList() {
@@ -180,13 +177,14 @@ public class LookingForFragment extends Fragment {
                     System.out.println("YourRequestttttttttttttttttt"+result);
                     JSONArray cropsListArray=null;
 
+
                     try {
                         cropsListArray=result.getJSONArray("LookingForList");
-                        System.out.println("e     e e ddd"+cropsListArray.length());
+                        System.out.println("eeeddd"+cropsListArray.length());
+
                         for (int i=0;i<cropsListArray.length();i++){
                             JSONObject jsonObject1=cropsListArray.getJSONObject(i);
                             JSONObject jsonObject2=jsonObject1.getJSONObject("Address");
-
                             String model=jsonObject1.getString("Model");
                             String purchaseTimeline=jsonObject1.getString("PurchaseTimeline");
                             String image=jsonObject1.getString("ModelImage");
@@ -197,19 +195,20 @@ public class LookingForFragment extends Fragment {
                             String hp_range=jsonObject1.getString("HorsePowerRange");
                             location=city+", "+state;
 
+
+
+
                          /*   if (city.equals("")){
                                 location="Bangalore"+", "+state;
                             }else{
                                 location=city+", "+state;
                             }
+
 */
-
-
                             System.out.println("madelslistt"+newOrderBeansList.size());
 
                             FarmsImageBean crops = new FarmsImageBean(image,"Tractor Price",model,hp_range,purchaseTimeline,name,location,id);
                             newOrderBeansList.add(crops);
-
 
 
                           /*  if(!latts.equals("") | !langgs.equals("")) {
@@ -219,7 +218,10 @@ public class LookingForFragment extends Fragment {
                                         UserName,latts,langgs,CropImg,category);
                                 newOrderBeansList.add(crops);
                             }*/
+
+
                         }
+
                         farmadapter=new FarmsImageAdapter(getActivity(),newOrderBeansList);
                         recyclerView.setAdapter(farmadapter);
 

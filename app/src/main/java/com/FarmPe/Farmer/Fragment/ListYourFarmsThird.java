@@ -545,12 +545,13 @@ public class ListYourFarmsThird extends Fragment {
 
         });
 
-
         continue_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if ((current_adds.getVisibility() == View.GONE) || (current_adds.getVisibility() == View.VISIBLE || current_adds.getText().toString().equals(""))) {
-                    if (street_add.getText().toString().equals("") && state.getText().toString().equals("") && district.getText().toString().equals("") && taluk.getText().toString().equals("") && block.getText().toString().equals("") && village.getText().toString().equals("") && village.getText().toString().equals("") && street_add.getText().toString().equals("") && pincode.getText().toString().equals("")) {
+                if ((current_adds.getVisibility() == View.GONE) || (current_adds.getVisibility() == View.VISIBLE && current_adds.getText().toString().equals(""))) {
+
+                  System.out.println("kjyhgvkhygf" + "onClick: nbvMHfgdfmgluhg");
+                     if (street_add.getText().toString().equals("") && state.getText().toString().equals("") && district.getText().toString().equals("") && taluk.getText().toString().equals("") && block.getText().toString().equals("") && village.getText().toString().equals("") && village.getText().toString().equals("") && street_add.getText().toString().equals("") && pincode.getText().toString().equals("")) {
                         Snackbar snackbar = Snackbar
                                 .make(main_layout, "Please enter all the details", Snackbar.LENGTH_LONG);
                         View snackbarView = snackbar.getView();
@@ -566,137 +567,109 @@ public class ListYourFarmsThird extends Fragment {
 
 
                     }  else if (street_add.getText().toString().equals("")) {
-
-                            Snackbar snackbar = Snackbar
-                                    .make(main_layout, "Enter Street Address", Snackbar.LENGTH_LONG);
-                            View snackbarView = snackbar.getView();
-                            TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                            tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                            tv.setTextColor(Color.WHITE);
-
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                            } else {
-                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                            }
-
-                            snackbar.show();
+                        Snackbar snackbar = Snackbar
+                                .make(main_layout, "Enter Street Address", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
 
 
+                    }else if (state.getText().toString().equals("")) {
+                        Snackbar snackbar = Snackbar
+                                .make(main_layout, "Select State", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
 
-                }else if (state.getText().toString().equals("")) {
 
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Select State", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
+                    }else if (district.getText().toString().equals("")) {
+                        Snackbar snackbar = Snackbar
+                                .make(main_layout, "Select District", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
                     }
-
-                    snackbar.show();
-
-
-                 }else if (district.getText().toString().equals("")) {
-
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Select District", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-
-                    snackbar.show();
-
-
-                }
                     else if (taluk.getText().toString().equals("")) {
+                        Snackbar snackbar = Snackbar
+                                .make(main_layout, "Select Taluk", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
 
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Select Taluk", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }else if (block.getText().toString().equals("")) {
+                        Snackbar snackbar = Snackbar
+                                .make(main_layout, "Select Block", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
+
+                    }else if (village.getText().toString().equals("")) {
+                        Snackbar snackbar = Snackbar
+                                .make(main_layout, "Select Village", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
+
+                    }else if (pincode.getText().toString().equals("")) {
+                        Snackbar snackbar = Snackbar
+                                .make(main_layout, "Enter Pincode", Snackbar.LENGTH_LONG);
+                        View snackbarView = snackbar.getView();
+                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+                        tv.setTextColor(Color.WHITE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        } else {
+                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                        }
+                        snackbar.show();
                     }
 
-                    snackbar.show();
-
-
-
-
-                }else if (block.getText().toString().equals("")) {
-
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Select Block", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-
-                    snackbar.show();
-
-
-                 }else if (village.getText().toString().equals("")) {
-
-                Snackbar snackbar = Snackbar
-                        .make(main_layout, "Select Village", Snackbar.LENGTH_LONG);
-                View snackbarView = snackbar.getView();
-                TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                tv.setTextColor(Color.WHITE);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                } else {
-                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                }
-
-                snackbar.show();
-
-
-            }else if (pincode.getText().toString().equals("")) {
-
-                Snackbar snackbar = Snackbar
-                        .make(main_layout, "Enter Pincode", Snackbar.LENGTH_LONG);
-                View snackbarView = snackbar.getView();
-                TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                tv.setTextColor(Color.WHITE);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                } else {
-                    tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                }
-
-                snackbar.show();
-
-            }
-
-              else if (pincode.getText().toString().length() < 6) {
+                    else if (pincode.getText().toString().length() < 6) {
                         // Toast.makeText(getActivity(), "Enter a valid Pincode", Toast.LENGTH_SHORT).show();
                         Snackbar snackbar = Snackbar
                                 .make(main_layout, "Enter 6 Digit Pincode", Snackbar.LENGTH_LONG);
@@ -710,7 +683,6 @@ public class ListYourFarmsThird extends Fragment {
                             tv.setGravity(Gravity.CENTER_HORIZONTAL);
                         }
                         snackbar.show();
-
                     } else {
                         street_string = street_add.getText().toString();
                         pincode_string = pincode.getText().toString();
@@ -721,13 +693,13 @@ public class ListYourFarmsThird extends Fragment {
                         // transaction.addToBackStack("looking");
                         transaction.commit();
                     }
-//                } else {
-//                    selectedFragment = ListYourFarmsFour.newInstance();
-//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                    transaction.replace(R.id.frame_layout, selectedFragment);
-//                    transaction.addToBackStack("list_four");
-//                    transaction.commit();
-//                }
+                } else {
+                    selectedFragment = ListYourFarmsFour.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.addToBackStack("list_four");
+                    transaction.commit();
+                }
             }
         });
 

@@ -91,13 +91,13 @@ public class AddHpAdapter extends RecyclerView.Adapter<AddHpAdapter.MyViewHolder
             }
         });
 
+
         Glide.with(activity).load(products.getImage())
 
                 .thumbnail(0.5f)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
-
 
     }
 

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -81,6 +82,9 @@ public class FarmsHomePageFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     HomeMenuFragment.drawer.openDrawer(Gravity.START);
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     /*FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("list_farm1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 */
@@ -239,7 +243,6 @@ public class FarmsHomePageFragment extends Fragment {
 
                             FarmsImageBean crops = new FarmsImageBean(image,farm_name,"","","Commertial Dairy Farming Training,Consulting Project Reporting","Jagdish Kumar",village,id);
                             newOrderBeansList.add(crops);
-
 
 
 

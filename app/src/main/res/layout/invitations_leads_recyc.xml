@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:minHeight="?attr/actionBarSize"
@@ -63,11 +64,13 @@
                 app:contentInsetEnd="0dp">
 
 
+
                 <LinearLayout
                     android:id="@+id/back_feed"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/ic_filter_state">
+
 
                     <ImageView
                         android:layout_width="20dp"

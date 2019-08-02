@@ -74,12 +74,13 @@ public class LokingForDetailsFragment extends Fragment {
     SessionManager sessionManager;
     TextView toolbar_title,update_btn_txt;
     JSONObject lngObject;
-    String toast_name,toast_mobile,toast_passwrd,toast_new_mobile,toast_minimum_toast,toast_update,toast_image;
-    LinearLayout update_btn,linearLayout;
+    String toast_update,toast_image;
+    LinearLayout linearLayout;
     private static int RESULT_LOAD_IMG = 1;
     Bitmap selectedImage,imageB;
     EditText profile_name,profile_phone,profile_mail,profile_passwrd;
     CircleImageView prod_img;
+
 
     TextView farmer_name,farmer_phone,farmer_email,farmer_loc;
     LinearLayout back_feed;

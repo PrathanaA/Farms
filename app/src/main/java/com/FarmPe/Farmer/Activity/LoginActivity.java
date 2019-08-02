@@ -147,7 +147,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 textView.setGravity(Gravity.CENTER_HORIZONTAL);
             }
 
-
             snackbar.show();
             //setting connectivity to true only on executing "Sorry! Not connected to internet"
 
@@ -161,6 +160,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         }
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -173,20 +173,18 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layoutt);
         checkConnection();
+
         welcome_back = findViewById(R.id.welcome_back);
         createaccount = findViewById(R.id.create_acc);
         change_lang = findViewById(R.id.change_lang);
         text_mobile = findViewById(R.id.text_name);
         text_pass = findViewById(R.id.text_pass);
-
-
 
 
         sessionManager = new SessionManager(this);
@@ -211,6 +209,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
         forgot_pass.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.segoeui));
         remember_me.setTypeface(ResourcesCompat.getFont(getApplicationContext(), R.font.segoeui));
+
 
         forgot_pass.setTypeface(null, Typeface.BOLD);
         remember_me.setTypeface(null, Typeface.BOLD);
@@ -289,8 +288,9 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 log_in.setText(lngObject.getString("Login"));
                 welcome_back.setText(lngObject.getString("Login"));
                 createaccount.setText(lngObject.getString("Register"));
-              // popup_heading.setText(lngObject.getString("ChangeLanguage"));
-              //  farmPe_title.setText(lngObject.getString("FarmPe"));
+
+                // popup_heading.setText(lngObject.getString("ChangeLanguage"));
+                // farmPe_title.setText(lngObject.getString("FarmPe"));
 
 
                 pass_toast = lngObject.getString("EnterPassword");
@@ -299,7 +299,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 toast_click_back = lngObject.getString("PleaseclickBACKagaintoexit");
                 toast_internet = lngObject.getString("GoodConnectedtoInternet");
                 toast_nointernet = lngObject.getString("NoInternetConnection");
-
 
             }
         } catch (JSONException e) {
@@ -328,16 +327,10 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
             @Override
             public void onClick(View v) {
 
-
-
-
-                System.out.println("jhfdyug");
-
-                RecyclerView recyclerView;
-
-                final LinearLayout close_layout;
-
-                System.out.println("aaaaaaaaaaaa");
+                 System.out.println("jhfdyug");
+                 RecyclerView recyclerView;
+                 final LinearLayout close_layout;
+                 System.out.println("aaaaaaaaaaaa");
                  dialog = new Dialog(LoginActivity.this);
                  dialog.setContentView(R.layout.change_lang_login);
                  dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -363,6 +356,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
 
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(LoginActivity.this);
+
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
 

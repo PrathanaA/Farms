@@ -50,6 +50,7 @@ public class InvitationsLeadsFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.invitations_leads_recyc, container, false);
@@ -84,7 +85,6 @@ public class InvitationsLeadsFragment extends Fragment {
 
 
 
-
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +112,7 @@ public class InvitationsLeadsFragment extends Fragment {
         recyclerView.setAdapter(farmadapter);
 
 
+
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
@@ -124,6 +125,7 @@ public class InvitationsLeadsFragment extends Fragment {
 
                     try{
 
+                        newOrderBeansList.clear();
                         invitan_array = result.getJSONArray("invitationList");
                         for(int i=0;i<invitan_array.length();i++){
 
@@ -131,22 +133,20 @@ public class InvitationsLeadsFragment extends Fragment {
                              JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
                              invitation_bean = new Invitation_Bean(jsonObject1.getString("FullName"),jsonObject1.getString("RelatedDetail"),jsonObject1.getString("ProfilePic"),jsonObject1.getString("Id"),jsonObject2.getString("City"));
                              newOrderBeansList.add(invitation_bean);
-
                         }
 
                         farmadapter.notifyDataSetChanged();
 
                         if(newOrderBeansList.size()<=1){
                             item_size = String.valueOf(newOrderBeansList.size());
-
                             item_count.setText("You have " + item_size + " new invitation");
 
                         }else{
 
                             item_size = String.valueOf(newOrderBeansList.size());
                             item_count.setText("You have " + item_size + " new invitations");
-                        }
 
+                        }
 
                     }catch (Exception e){
                         e.printStackTrace();

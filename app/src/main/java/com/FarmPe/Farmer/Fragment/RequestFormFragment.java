@@ -52,6 +52,7 @@ public class RequestFormFragment extends Fragment {
     RadioButton radioButton,finance_yes,finance_no,radioButton1;
     LinearLayout back_feed,address_layout;
     CheckBox check_box;
+    boolean check_boxx= false;
     SessionManager sessionManager;
     View view;
     String addId;
@@ -148,7 +149,7 @@ public class RequestFormFragment extends Fragment {
                 selectedFragment = Add_New_Address_Fragment.newInstance();
                 FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("request");
+                transaction.addToBackStack("request1");
                 selectedFragment.setArguments(bundle1);
                 transaction.commit();
             }
@@ -157,14 +158,21 @@ public class RequestFormFragment extends Fragment {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestForm();
+
+
+                if(address_text.getText().toString().equals("")){
+                    Toast.makeText(getActivity(), "Select Address", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    RequestForm();
               /*  selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();*/
-
+                }
             }
         });
+
 
         radioGroup_finance.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -173,7 +181,6 @@ public class RequestFormFragment extends Fragment {
                 radioButton = (RadioButton)view.findViewById(selectedId);
                 System.out.println("checkinggg"+radioButton.getText().toString());
                 finance_status=radioButton.getTag().toString();
-
 
 
             }
@@ -204,8 +211,6 @@ public class RequestFormFragment extends Fragment {
         return view;
     }
     private void RequestForm() {
-
-
 
 
         System.out.println("purchase"+time_period);
@@ -261,8 +266,7 @@ public class RequestFormFragment extends Fragment {
 
                         snackbar.show();
 
-                        //back = "add_back";
-
+                        back = "nav_back";
                         selectedFragment = HomeMenuFragment.newInstance();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);

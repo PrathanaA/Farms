@@ -45,27 +45,27 @@ public class Map_Current_Loc_Fragment extends Fragment implements OnMapReadyCall
     int attempts = 0, permission_attempt = 0, gps_attempt = 0;
     Fragment selectedFragment = null;
     public static double latitude, longitude;
-
     TextView current_address;
-
-
     FloatingActionButton fab_icon;
-
     Button choose_loc;
     public static String LAT_LONG;
     ImageView left_arrw;
-
     boolean loc_frst_set;
+
+
 
     SupportMapFragment mapFragment;
     String text_address;
     GoogleMap mMap;
-    double currentLat,currentLng;
+    double currentLat, currentLng;
+
+
 
     public static Map_Current_Loc_Fragment newInstance() {
         Map_Current_Loc_Fragment fragment = new Map_Current_Loc_Fragment();
         return fragment;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,12 +78,6 @@ public class Map_Current_Loc_Fragment extends Fragment implements OnMapReadyCall
         left_arrw = view.findViewById(R.id.left_arrw);
 
 
-
-
-
-
-
-
         fab_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,9 +86,9 @@ public class Map_Current_Loc_Fragment extends Fragment implements OnMapReadyCall
               //  mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude) ,15) );
           mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLat,currentLng), 12.0f));
 
-
             }
         });
+
 
         // mapFragment = (SupportMapFragment)getActivity().getSupportFragmentManager()
         //  .findFragmentById(R.id.map);
@@ -149,6 +143,7 @@ public class Map_Current_Loc_Fragment extends Fragment implements OnMapReadyCall
 //            }
 //        });
 //
+
 
         mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map); //intialize map(fragment - give as getChildFragmentMAnager)

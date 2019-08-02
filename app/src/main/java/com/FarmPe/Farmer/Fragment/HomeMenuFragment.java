@@ -310,14 +310,15 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
-//        if(RequestFormFragment.back == "add_back"){
-//
-//            selectedFragment = LookingForFragment.newInstance();
-//            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.first_full_frame, selectedFragment);
-//            transaction.commit();
-//
-//        }
+
+        if(RequestFormFragment.back == "nav_back"){
+
+            selectedFragment = LookingForFragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+
+        }
 
 
         if(Comming_soon_looking.coming_back=="look_back"){

@@ -85,6 +85,7 @@ public class ConnectionsFragment extends Fragment {
             }
         });
 
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +95,6 @@ public class ConnectionsFragment extends Fragment {
 
             }
         });
-
 
 
 
@@ -144,7 +144,7 @@ public class ConnectionsFragment extends Fragment {
                     System.out.println("fsfsdfcc" + result);
 
                     try{
-
+                         newOrderBeansList.clear();
                         connectn_array = result.getJSONArray("connectionList");
                         for(int i = 0;i<connectn_array.length();i++){
 
