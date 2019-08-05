@@ -122,10 +122,10 @@
              />
 
          <TextView
-             android:id="@+id/connections"
+             android:id="@+id/your_request"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="Connections"
+             android:text="Your Requests"
              android:textSize="14dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
@@ -145,19 +145,31 @@
           android:background="#000"
           >
 
-         <ImageView
-             android:layout_width="25dp"
-             android:layout_height="25dp"
-             android:paddingBottom="5dp"
-
-             android:src="@drawable/target"
-             />
 
          <TextView
-             android:id="@+id/nearby"
+             android:id="@+id/farm_count"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="Near by"
+             android:text="0"
+             android:textSize="16dp"
+             android:gravity="center"
+             android:paddingBottom="5dp"
+             android:textColor="#fff"
+             />
+
+         <!--<ImageView-->
+             <!--android:layout_width="25dp"-->
+             <!--android:layout_height="25dp"-->
+             <!--android:paddingBottom="5dp"-->
+
+             <!--android:src="@drawable/target"-->
+             <!--/>-->
+
+         <TextView
+             android:id="@+id/your_farms_tab"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Your Farms"
              android:textSize="14dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
@@ -187,7 +199,7 @@
              android:id="@+id/nw_request"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="New Request"
+             android:text="Make a Request"
              android:textSize="14dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
@@ -387,7 +399,7 @@
           android:id="@+id/list_farm"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="List your Farm"
+          android:text="List Your Farm"
           android:layout_marginTop="30dp"
           android:textSize="16dp"
           android:drawableLeft="@drawable/ic_farm_list"
@@ -401,7 +413,7 @@
           android:id="@+id/your_farms"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Your Farms"
+          android:text="Your Address"
           android:layout_marginTop="30dp"
           android:textSize="16dp"
           android:drawableLeft="@drawable/ic_barn"
@@ -416,7 +428,7 @@
           android:id="@+id/settings"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Settings"
+          android:text="Your Profile"
           android:layout_marginTop="30dp"
           android:textSize="16dp"
           android:drawableLeft="@drawable/ic_settings"

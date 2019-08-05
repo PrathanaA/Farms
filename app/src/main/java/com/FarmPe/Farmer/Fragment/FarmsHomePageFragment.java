@@ -228,45 +228,57 @@ public class FarmsHomePageFragment extends Fragment {
             Login_post.login_posting(getActivity(), Urls.GetFarmsListByUserId,userRequestjsonObject,new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
-                    System.out.println("cropsresult"+result);
-                    JSONArray cropsListArray=null;
-                    try {
-                        cropsListArray=result.getJSONArray("FarmsList");
-                        System.out.println("e     e e ddd"+cropsListArray.length());
-                        for (int i=0;i<cropsListArray.length();i++){
-                            JSONObject jsonObject1=cropsListArray.getJSONObject(i);
-                            String farm_name=jsonObject1.getString("FarmName");
-                           // String location=jsonObject1.getString("Location");
-                            String image=jsonObject1.getString("FarmImages");
-                            String id=jsonObject1.getString("Id");
-                            String village=jsonObject1.getJSONObject("FarmAddress").getString("Village");
-
-
-                            System.out.println("madelslistt"+newOrderBeansList.size());
-
-                            FarmsImageBean crops = new FarmsImageBean(image,farm_name,"","","Commertial Dairy Farming Training,Consulting Project Reporting","Jagdish Kumar",village,id);
-                            newOrderBeansList.add(crops);
+                    System.out.println("cropsresult" + result);
+                    JSONArray cropsListArray = null;
 
 
 
 
+                        try {
+                            cropsListArray = result.getJSONArray("FarmsList");
+                            System.out.println("e     e e ddd" + cropsListArray.length());
+
+                            if (cropsListArray.length() == 0) {
+                                selectedFragment = No_List_Farms_Fragment.newInstance();
+                                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.frame_layout, selectedFragment);
+                                transaction.commit();
+
+                            } else {
+
+                                for (int i = 0; i < cropsListArray.length(); i++) {
+                                    JSONObject jsonObject1 = cropsListArray.getJSONObject(i);
+                                    String farm_name = jsonObject1.getString("FarmName");
+                                    // String location=jsonObject1.getString("Location");
+                                    String image = jsonObject1.getString("FarmImages");
+                                    String id = jsonObject1.getString("Id");
+                                    String village = jsonObject1.getJSONObject("FarmAddress").getString("Village");
+                                    System.out.println("madelslistt" + newOrderBeansList.size());
+
+                                    FarmsImageBean crops = new FarmsImageBean(image, farm_name, "", "", "Commertial Dairy Farming Training,Consulting Project Reporting", "Jagdish Kumar", village, id);
+                                    newOrderBeansList.add(crops);
+
+
+                                }
+                            }
+
+                            if (newOrderBeansList.size() < 6) {
+                                pagination_list = newOrderBeansList.subList(0, newOrderBeansList.size());
+                                farmadapter = new FarmsHomeAdapter(getActivity(), pagination_list);
+                                recyclerView.setAdapter(farmadapter);
+
+
+                            } else {
+                                pagination_list = newOrderBeansList.subList(0, 6);
+                                farmadapter = new FarmsHomeAdapter(getActivity(), pagination_list);
+                                recyclerView.setAdapter(farmadapter);
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
-                        if (newOrderBeansList.size()<6){
-                            pagination_list=newOrderBeansList.subList(0,newOrderBeansList.size());
-                            farmadapter=new FarmsHomeAdapter(getActivity(),pagination_list);
-                            recyclerView.setAdapter(farmadapter);
-
-
-                        }else {
-                            pagination_list=newOrderBeansList.subList(0,6);
-                            farmadapter=new FarmsHomeAdapter(getActivity(),pagination_list);
-                            recyclerView.setAdapter(farmadapter);
-
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
             });
         } catch (Exception e) {

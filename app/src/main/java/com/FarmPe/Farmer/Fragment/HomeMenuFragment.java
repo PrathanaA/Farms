@@ -87,7 +87,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     String mob_no;
     String userid;
     Bitmap bitmap;
-    TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm,invitation;
+    TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm,invitation,your_request,your_farms_tab;
     public static TextView your_farms,cart_count_text,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
@@ -118,9 +118,9 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
-        invitation = view.findViewById(R.id.invitation);
-        connections = view.findViewById(R.id.connections);
-        //linear_connection = view.findViewById(R.id.linear_connection);
+        your_farms_tab = view.findViewById(R.id.your_farms_tab);
+        your_request = view.findViewById(R.id.your_request);
+
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
         settings=view.findViewById(R.id.settings);
@@ -133,7 +133,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
         your_farms=view.findViewById(R.id.your_farms);
-        your_requests=view.findViewById(R.id.your_requests);
+      //  your_requests=view.findViewById(R.id.your_requests);
         list_farm=view.findViewById(R.id.list_farm);
 
 
@@ -146,10 +146,30 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
+        your_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedFragment = LookingForFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.commit();
+                drawer.closeDrawers();
+
+            }
+        });
 
 
+        your_farms_tab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
+                selectedFragment = FarmsHomePageFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.commit();
+               drawer.closeDrawers();
+            }
+        });
 
 
         user_name_menu.setText(sessionManager.getRegId("name"));
@@ -258,19 +278,19 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                selectedFragment = AddFirstLookingFor.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-                drawer.closeDrawers();
-
-            }
-        });
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                selectedFragment = AddFirstLookingFor.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
+//                drawer.closeDrawers();
+//
+//            }
+//        });
 
 //        if(RequestFormFragment.back == "add_back"){
 //
@@ -283,51 +303,51 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-        your_requests.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        your_requests.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//                    selectedFragment = LookingForFragment.newInstance();
+//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.first_full_frame, selectedFragment);
+//                    transaction.addToBackStack("home");
+//                    transaction.commit();
+//                    drawer.closeDrawers();
+//
+//
+//            }
+//        });
 
 
+//        connections.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                selectedFragment = ConnectionsFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
+//            }
+//        });
+//
+//
 
-                    selectedFragment = LookingForFragment.newInstance();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.first_full_frame, selectedFragment);
-                    transaction.addToBackStack("home");
-                    transaction.commit();
-                    drawer.closeDrawers();
-
-
-            }
-        });
-
-
-        connections.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                selectedFragment = ConnectionsFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-            }
-        });
-
-
-
-        invitation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                selectedFragment = InvitationsLeadsFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
-                transaction.commit();
-                drawer.closeDrawers();
-
-            }
-        });
+//        invitation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                selectedFragment = InvitationsLeadsFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
+//                drawer.closeDrawers();
+//
+//            }
+//        });
 
 
 

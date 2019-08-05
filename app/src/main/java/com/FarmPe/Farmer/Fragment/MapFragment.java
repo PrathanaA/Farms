@@ -227,6 +227,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
          builder.setAlwaysShow(true);
          PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
 
+
          result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
              @Override
              public void onResult(LocationSettingsResult result) {
@@ -255,6 +256,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
      }
 
+
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
@@ -267,6 +269,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
+
     @Override
     public void onConnectionSuspended(int i) {}
     @Override

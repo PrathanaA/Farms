@@ -172,26 +172,36 @@ public class LookingForFragment extends Fragment {
             Crop_Post.crop_posting(getActivity(), Urls.YourRequest, jsonObject, new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
-                    System.out.println("YourRequestttttttttttttttttt"+result);
-                    JSONArray cropsListArray=null;
+                    System.out.println("YourRequestttttttttttttttttt" + result);
+                    JSONArray cropsListArray = null;
 
 
                     try {
-                        cropsListArray=result.getJSONArray("LookingForList");
-                        System.out.println("eeeddd"+cropsListArray.length());
+                        cropsListArray = result.getJSONArray("LookingForList");
+                        System.out.println("eeeddd" + cropsListArray.length());
 
-                        for (int i=0;i<cropsListArray.length();i++){
-                            JSONObject jsonObject1=cropsListArray.getJSONObject(i);
-                            JSONObject jsonObject2=jsonObject1.getJSONObject("Address");
-                            String model=jsonObject1.getString("Model");
-                            String purchaseTimeline=jsonObject1.getString("PurchaseTimeline");
-                            String image=jsonObject1.getString("ModelImage");
-                            String id=jsonObject1.getString("Id");
-                            String name=jsonObject2.getString("Name");
-                            String city=jsonObject2.getString("City");
-                            String state=jsonObject2.getString("State");
-                            String hp_range=jsonObject1.getString("HorsePowerRange");
-                            location=city+", "+state;
+                        if (cropsListArray.length() == 0) {
+
+                            selectedFragment = No_Request_Fragment.newInstance();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.frame_layout, selectedFragment);
+                            transaction.commit();
+
+                        } else {
+
+
+                            for (int i = 0; i < cropsListArray.length(); i++) {
+                                JSONObject jsonObject1 = cropsListArray.getJSONObject(i);
+                                JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
+                                String model = jsonObject1.getString("Model");
+                                String purchaseTimeline = jsonObject1.getString("PurchaseTimeline");
+                                String image = jsonObject1.getString("ModelImage");
+                                String id = jsonObject1.getString("Id");
+                                String name = jsonObject2.getString("Name");
+                                String city = jsonObject2.getString("City");
+                                String state = jsonObject2.getString("State");
+                                String hp_range = jsonObject1.getString("HorsePowerRange");
+                                location = city + ", " + state;
 
 
 
@@ -203,10 +213,10 @@ public class LookingForFragment extends Fragment {
                             }
 
 */
-                            System.out.println("madelslistt"+newOrderBeansList.size());
+                                System.out.println("madelslistt" + newOrderBeansList.size());
 
-                            FarmsImageBean crops = new FarmsImageBean(image,"Tractor Price",model,hp_range,purchaseTimeline,name,location,id);
-                            newOrderBeansList.add(crops);
+                                FarmsImageBean crops = new FarmsImageBean(image, "Tractor Price", model, hp_range, purchaseTimeline, name, location, id);
+                                newOrderBeansList.add(crops);
 
 
                           /*  if(!latts.equals("") | !langgs.equals("")) {
@@ -218,9 +228,10 @@ public class LookingForFragment extends Fragment {
                             }*/
 
 
+                            }
                         }
 
-                        farmadapter=new FarmsImageAdapter(getActivity(),newOrderBeansList);
+                        farmadapter = new FarmsImageAdapter(getActivity(), newOrderBeansList);
                         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(mLayoutManager_farm);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -229,6 +240,8 @@ public class LookingForFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+
                 }
             });
 
