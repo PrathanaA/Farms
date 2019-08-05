@@ -226,9 +226,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
          LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
          builder.setAlwaysShow(true);
          PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
+
          result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
              @Override
              public void onResult(LocationSettingsResult result) {
+
                  final Status status = result.getStatus();
                  switch (status.getStatusCode()) {
                      case LocationSettingsStatusCodes.SUCCESS:
@@ -252,7 +254,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
          });
 
      }
-
 
     @Override
     public void onConnected(Bundle bundle) {

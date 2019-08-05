@@ -133,7 +133,9 @@ public class InvitationsLeadsFragment extends Fragment {
                              JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
                              invitation_bean = new Invitation_Bean(jsonObject1.getString("FullName"),jsonObject1.getString("RelatedDetail"),jsonObject1.getString("ProfilePic"),jsonObject1.getString("Id"),jsonObject2.getString("City"));
                              newOrderBeansList.add(invitation_bean);
+
                         }
+
 
                         farmadapter.notifyDataSetChanged();
 
