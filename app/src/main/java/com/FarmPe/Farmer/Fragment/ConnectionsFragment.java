@@ -131,6 +131,7 @@ public class ConnectionsFragment extends Fragment {
         return view;
     }
 
+
     private void ConnectionList() {
 
         try{

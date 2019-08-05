@@ -17,7 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.FarmPe.Farmer.Activity.LandingPageActivity;
 import com.FarmPe.Farmer.Bean.AddPhotoBean;
 import com.FarmPe.Farmer.Fragment.AddPhotoFragmentSub;
 import com.FarmPe.Farmer.R;
@@ -88,21 +90,31 @@ public class  AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyVie
             add_text_image.setVisibility(View.GONE);
             imageView.setImageBitmap(products.getImage_upload());
             holder.delete.setVisibility(View.VISIBLE);
-            add_text_image.setText("");
+           // add_text_image.setText("");
         }
         add_text_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                activity.startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
-            }
+                System.out.println("imagegegegegeg11111hhhhhhhhhhhhh" +productList.size());
+                if (productList.size()<3){
+                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                    photoPickerIntent.setType("image/*");
+                    activity.startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+                }else {
+                    Toast.makeText(activity,"You can't upload more than two images",Toast.LENGTH_LONG).show();
+                }
+                }
+
+
         });
         System.out.println("imagegegegegeg11111" + products.getImage_upload());
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 //remove list
                 productList.remove(position);
                 notifyItemRemoved(position);

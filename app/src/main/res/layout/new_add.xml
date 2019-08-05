@@ -514,7 +514,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/segoeui"
-                            android:hint="Hobli"
+                            android:hint="Area"
                             android:background="@drawable/border_grey_filled"
                             android:textSize="14dp"
                             android:editable="false"
@@ -530,33 +530,33 @@
                             />
 
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="4dp"
-                            android:background="#ffffff"
-                            />
+                        <!--<View-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="4dp"-->
+                            <!--android:background="#ffffff"-->
+                            <!--/>-->
 
 
-                        <EditText
-                        android:id="@+id/village_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/segoeui"
-                        android:hint="Village"
-                        android:editable="false"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:background="@drawable/border_grey_filled"
-                        android:textSize="14dp"
-                        android:gravity="start"
-                        android:textColorHint="#181818"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-                            android:drawableRight="@drawable/ic_right_angle_arrow"
-                        android:paddingVertical="10dp"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="#181818 "
-                        />
+                        <!--<EditText-->
+                        <!--android:id="@+id/village_1"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:fontFamily="@font/segoeui"-->
+                        <!--android:hint="Village"-->
+                        <!--android:editable="false"-->
+                        <!--android:clickable="false"-->
+                        <!--android:focusable="false"-->
+                        <!--android:background="@drawable/border_grey_filled"-->
+                        <!--android:textSize="14dp"-->
+                        <!--android:gravity="start"-->
+                        <!--android:textColorHint="#181818"-->
+                        <!--android:layout_marginTop="3dp"-->
+                        <!--android:layout_marginBottom="3dp"-->
+                            <!--android:drawableRight="@drawable/ic_right_angle_arrow"-->
+                        <!--android:paddingVertical="10dp"-->
+                        <!--android:paddingHorizontal="10dp"-->
+                        <!--android:textColor="#181818 "-->
+                        <!--/>-->
 
 
                         <View

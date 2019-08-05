@@ -16,11 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-import com.FarmPe.Farmer.Adapter.AddFirstListYourFramsAdapter;
 import com.FarmPe.Farmer.Adapter.List_Farm_Adapter;
-import com.FarmPe.Farmer.Adapter.Notification_Adapter1;
-import com.FarmPe.Farmer.Adapter.Notification_Adapter2;
-import com.FarmPe.Farmer.Bean.AddTractorBean;
+
 import com.FarmPe.Farmer.Bean.List_Farm_Bean;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.Urls;

@@ -151,13 +151,16 @@ public class Edit_Looking_For_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                back = "edit_back";
+                HomeMenuFragment.onBack_status = "looking_frg";
 
-                selectedFragment = HomeMenuFragment.newInstance();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack("looking1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+            /*    selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 // transaction.addToBackStack("looking");
-                transaction.commit();
+                transaction.commit();*/
             }
         });
 
@@ -210,12 +213,10 @@ public class Edit_Looking_For_Fragment extends Fragment {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
 
-                    back = "edit_back";
+                    HomeMenuFragment.onBack_status = "looking_frg";
 
-                    selectedFragment = HomeMenuFragment.newInstance();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.commit();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("looking1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
                     return true;
                 }

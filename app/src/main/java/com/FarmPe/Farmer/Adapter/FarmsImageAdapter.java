@@ -37,7 +37,7 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
     Fragment selectedFragment;
     JSONObject lngObject;
     public LinearLayout linearLayout;
-    public static LinearLayout next_arw,linear_looking_main;
+    public static LinearLayout next_arw;
     public static String first,looking_forId,model_id,timeline,looking_for,address;
     SessionManager session;
     boolean flag;
@@ -57,6 +57,7 @@ public class FarmsImageAdapter extends RecyclerView.Adapter<FarmsImageAdapter.My
         public TextView prod_price,prod_name,duration,farmer_name,location,connect;
         public LinearLayout shortlist_layout;
 
+        public  LinearLayout linear_looking_main;
 
 
         public MyViewHolder(View view) {
@@ -145,8 +146,9 @@ System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.ge
         int height_px =Resources.getSystem().getDisplayMetrics().heightPixels;
         int height_set=(int)(height_px*0.4);
         System.out.println("height&Width"+width_px+","+height_px);
+
         LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width_px,height_set);
-        linear_looking_main.setLayoutParams(parms);
+            holder.linear_looking_main.setLayoutParams(parms);
 
         } catch (
                 Exception e) {

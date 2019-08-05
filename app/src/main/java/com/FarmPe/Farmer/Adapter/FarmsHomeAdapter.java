@@ -116,7 +116,7 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
                 selectedFragment = ComingSoonFragment.newInstance();
                 FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
+                transaction.addToBackStack("your_farm");
                 transaction.commit();
 
 //                Bundle bundle=new Bundle();
@@ -150,7 +150,6 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
-
 
     }
 

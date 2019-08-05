@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -82,9 +81,6 @@ public class FarmsHomePageFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     HomeMenuFragment.drawer.openDrawer(Gravity.START);
-
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     /*FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("list_farm1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 */
@@ -99,6 +95,7 @@ public class FarmsHomePageFragment extends Fragment {
         filter_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HomeMenuFragment.onBack_status="farms";
 
 
                 selectedFragment = Comming_soon_farms.newInstance();
@@ -182,7 +179,7 @@ public class FarmsHomePageFragment extends Fragment {
                             System.out.println("llllllllllllllllllllllll"+pagination_list.size());
 
                             // List<ModelName> list = arrl.subList(x-10, x-1);
-                            if ((newOrderBeansList.size()-pagination_list.size())<4){
+                            if ((newOrderBeansList.size()-pagination_list.size())<=4){
                                 canLoadMoreData=false;
                                 pagination_list=newOrderBeansList.subList(0,newOrderBeansList.size());
                               /*  mAdapter = new Sell_Sub_Categories_Adapter(getActivity(),pagination_list);
@@ -192,8 +189,14 @@ public class FarmsHomePageFragment extends Fragment {
 
                             }else {
                                 canLoadMoreData=true;
+                                try {
+                                    pagination_list=newOrderBeansList.subList(0,x-1);
 
-                                pagination_list=newOrderBeansList.subList(0,x-1);
+                                }catch (Exception e){
+                                    canLoadMoreData=false;
+
+                                }
+
                                /* mAdapter = new Sell_Sub_Categories_Adapter(getActivity(),pagination_list);
                                 recyclerView.setAdapter(mAdapter)  ;
 
@@ -243,6 +246,7 @@ public class FarmsHomePageFragment extends Fragment {
 
                             FarmsImageBean crops = new FarmsImageBean(image,farm_name,"","","Commertial Dairy Farming Training,Consulting Project Reporting","Jagdish Kumar",village,id);
                             newOrderBeansList.add(crops);
+
 
 
 

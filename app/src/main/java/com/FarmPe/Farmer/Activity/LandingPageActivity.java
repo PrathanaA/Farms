@@ -86,6 +86,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
     public  static Activity activity;
     public static String toast_click_back;
     boolean doubleBackToExitPressedOnce = false;
+    private static final int MAX_DIMENSION = 200;
 
     private static final String TAG = LandingPageActivity.class.getSimpleName();
 
@@ -202,7 +203,8 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
                 //profile_image.setImageBitmap(selectedImage);
                 AddPhotoBean img1=new AddPhotoBean( selectedImage);
                 if (!(selectedImage==null)){
-                    callCloudVision(selectedImage);
+
+                    callCloudVision(  scaleBitmapDown(selectedImage,MAX_DIMENSION));
                   //  AddPhotoAdapter.productList.add(0,img1);
                   //  ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 
@@ -363,7 +365,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
 
 
-
     private Vision.Images.Annotate prepareAnnotationRequest(final Bitmap bitmap) throws IOException {
         HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
         JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
@@ -423,8 +424,8 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
         }});
 
         Vision.Images.Annotate annotateRequest =
-                  vision.images().annotate(batchAnnotateImagesRequest);
-      // Due to a bug: requests to Vision API containing large images fail when GZipped.
+                vision.images().annotate(batchAnnotateImagesRequest);
+        // Due to a bug: requests to Vision API containing large images fail when GZipped.
         annotateRequest.setDisableGZipContent(true);
         Log.d(TAG, "created Cloud Vision request object, sending request");
 
@@ -446,14 +447,13 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
         }
 
-
         @Override
         protected void onPreExecute() {
 
             progressDialog.setMessage("Please wait");
             progressDialog.show();
             super.onPreExecute();
-         }
+        }
 
 //        progressDialog.setMessage(" Loading....Please wait");
 //        progressDialog.show();
@@ -475,13 +475,12 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
             return "Cloud Vision API request failed. Check logs for details.";
         }
 
-
-
         protected void onPostExecute(String result) {
+            System.out.println("lllllllllllllllllllllll"+result);
 
             LandingPageActivity activity = mActivityWeakReference.get();
             if (activity != null && !activity.isFinishing()) {
-              progressDialog.dismiss();
+progressDialog.dismiss();
 
                 if (result.equals("APPROVE")){
 
@@ -489,29 +488,47 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
                     AddPhotoAdapter.productList.add(0,img1);
                     ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 
+                   /* Toast.makeText(LandingPageActivity.this,"Image contain below details"+annotation.getViolence()+"\n"
+                            +annotation.getSpoof()+"\n"+annotation.getMedical()+"\n"+annotation.getAdult(),Toast.LENGTH_LONG).show();*/
+
+
                 }else {
+                    Toast.makeText(LandingPageActivity.this,"Image is inappropriate, choose related image.",Toast.LENGTH_LONG).show();
 
                 }
+
+
+
 
             }
         }
     }
 
+
     private String convertResponseToString(BatchAnnotateImagesResponse response) {
         StringBuilder message = new StringBuilder("");
 
-        System.out.println(""+response);
+        System.out.println("kkkkkkkkkkkkkkkkkkk"+response);
          annotation = response.getResponses().get(0).getSafeSearchAnnotation();
         if (annotation != null) {
+            if (annotation.getAdult().equals("LIKELY")&&annotation.getSpoof().equals("LIKELY")&&annotation.getSpoof().equals("LIKELY")&&annotation.getViolence().equals("LIKELY")){
+                message.append("DECLINE");
 
-            if (annotation.getAdult().equals("VERY_UNLIKELY")&&annotation.getSpoof().equals("VERY_UNLIKELY")&&annotation.getSpoof().equals("VERY_UNLIKELY")&&annotation.getViolence().equals("VERY_UNLIKELY")){
-                message.append("APPROVE");
 
 
-            }else {
+
+            }
+         else  if (annotation.getAdult().equals("POSSIBLE")||annotation.getSpoof().equals("POSSIBLE")||annotation.getSpoof().equals("POSSIBLE")||annotation.getViolence().equals("POSSIBLE")){
                 message.append("DECLINE");
 
             }
+
+            else {
+                message.append("APPROVE");
+
+            }
+
+
 
         } else {
             message.append("nothing");
@@ -519,5 +536,32 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
         return message.toString();
     }
+
+
+
+
+    private Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
+
+        int originalWidth = bitmap.getWidth();
+        int originalHeight = bitmap.getHeight();
+        int resizedWidth = maxDimension;
+        int resizedHeight = maxDimension;
+
+        if (originalHeight > originalWidth) {
+            resizedHeight = maxDimension;
+            resizedWidth = (int) (resizedHeight * (float) originalWidth / (float) originalHeight);
+        } else if (originalWidth > originalHeight) {
+            resizedWidth = maxDimension;
+            resizedHeight = (int) (resizedWidth * (float) originalHeight / (float) originalWidth);
+        } else if (originalHeight == originalWidth) {
+            resizedHeight = maxDimension;
+            resizedWidth = maxDimension;
+        }
+        return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
+    }
+
+
+
+
 
 }

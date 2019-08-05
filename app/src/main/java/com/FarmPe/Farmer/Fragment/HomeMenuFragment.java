@@ -79,15 +79,13 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     Fragment selectedFragment;
     public static DrawerLayout drawer;
     ImageView plus_sign_add;
-    RelativeLayout menu,prof_tab;
-    LinearLayout update_acc_layout,near_by,linear_connection;
+    RelativeLayout menu;
+    LinearLayout update_acc_layout;
     SessionManager sessionManager;
     public static CircleImageView prod_img,prod_img1;
     public static boolean isEng = false;
     String mob_no;
     String userid;
-    private static int RESULT_LOAD_IMG = 1;
-    private int PICK_IMAGE_REQUEST = 1;
     Bitmap bitmap;
     TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm,invitation;
     public static TextView your_farms,cart_count_text,user_name_menu,phone_no;
@@ -97,11 +95,9 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     static boolean fragloaded;
     //  public static SearchView searchView;
     LinearLayout linearLayout;
-    public static Bitmap selectedImage;
 
-    static Fragment myloadingfragment;
-    public static NestedScrollView scrollView;
-    boolean doubleBackToExitPressedOnce = false;
+    public static String onBack_status=null;
+
 
 
     public static HomeMenuFragment newInstance() {
@@ -152,46 +148,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-        prod_img1.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("NewApi")
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // to go to gallery
-                startActivityForResult(i, 100); // on activity method will execute
-            }
-        });
 
-
-
-
-
-        //      ComingSoonFragment.backfeed.setVisibility(View.GONE);
-
-        // searchView.setBackgroundColor(Color.parseColor("#1ba261"));
-
-
-
-
-//                searchView.setOnSearchClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        // back_feed.setVisibility(View.GONE);
-//                        // title.setVisibility(View.GONE);
-//                        searchView.setMaxWidth(Integer.MAX_VALUE);
-//                        searchView.setBackgroundColor(Color.WHITE);
-//                    }
-//                });
-
-//
-//                searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-//                    @Override
-//                    public boolean onClose() {
-//                        // back_feed.setVisibility(View.VISIBLE);
-//                        //title.setVisibility(View.VISIBLE);
-//                        searchView.setBackgroundColor(Color.parseColor("#000000"));
-//                        return false;
-//                    }
-//                });
 
 
 
@@ -201,24 +158,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-      /*  Glide.with(getActivity()).load(sessionManager.getRegId("image"))
-
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.avatarmale)
-                .into(prod_img);
-
-
-
-        Glide.with(getActivity()).load(sessionManager.getRegId("image"))
-
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.avatarmale)
-                .into(prod_img1);
-*/
 
         drawer = (DrawerLayout)view.findViewById(R.id.drawer_layout);
 
@@ -244,16 +183,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             lngObject = new JSONObject(sessionManager.getRegId("language"));
 
 
-//            connections.setText(lngObject.getString("Connections"));
-//            nw_request.setText(lngObject.getString("NewRequest"));
-//            nearby.setText(lngObject.getString("Nearby"));
-//            home.setText(lngObject.getString("Message"));
-//            settings.setText(lngObject.getString("Settings"));
-//
-//            connection_nw.setText(lngObject.getString("Connections"));
-//            list_farm.setText(lngObject.getString("ListyourFarm"));
-//            your_requests.setText(lngObject.getString("YourRequests"));
-
 
 
 
@@ -261,13 +190,12 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             e.printStackTrace();
         }
 
-        // scrollView.requestFocus(View.FOCUS_UP);
 
         NavigationView navigationView = (NavigationView)view.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         System.out.println("hhhrtryur");
 
-        if(Edit_Looking_For_Fragment.back==null) {
+        if(onBack_status==null) {
 
 
             selectedFragment = FarmPe_Logo_Fragment.newInstance();
@@ -275,13 +203,47 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             transaction.replace(R.id.first_full_frame, selectedFragment);
             transaction.commit();
 
-        }else {
+        }
+
+
+      else if(onBack_status.equals("looking_frg")){
 
             selectedFragment = LookingForFragment.newInstance();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.first_full_frame, selectedFragment);
             transaction.commit();
+
         }
+        else if(onBack_status.equals("farms")){
+
+            selectedFragment = FarmsHomePageFragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+
+        }
+
+      else{
+
+            selectedFragment = LookingForFragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+
+        }
+
+
+
+
+        prod_img1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // to go to gallery
+                startActivityForResult(i, 100); // on activity method will execute
+            }
+        });
+
 
 
 
@@ -310,27 +272,17 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
+//        if(RequestFormFragment.back == "add_back"){
+//
+//            selectedFragment = LookingForFragment.newInstance();
+//            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.first_full_frame, selectedFragment);
+//            transaction.commit();
+//
+//        }
 
-        if(RequestFormFragment.back == "nav_back"){
-
-            selectedFragment = LookingForFragment.newInstance();
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.first_full_frame, selectedFragment);
-            transaction.commit();
-
-        }
 
 
-        if(Comming_soon_looking.coming_back=="look_back"){
-
-            selectedFragment = LookingForFragment.newInstance();
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.first_full_frame, selectedFragment);
-            transaction.commit();
-
-        }else{
-
-        }
         your_requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -396,15 +348,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         });
 
 
-
-        if(Comming_soon_farms.back_farm=="look_farm"){
-            selectedFragment = FarmsHomePageFragment.newInstance();
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.first_full_frame, selectedFragment);
-            transaction.commit();
-        }else {
-
-        }
 
 
 

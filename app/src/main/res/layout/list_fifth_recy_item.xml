@@ -58,6 +58,7 @@
                         android:id="@+id/filter_check"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
+                        android:visibility="gone"
                         android:background="@drawable/ic_cancel"
                         android:layout_gravity="right|top"
                         android:layout_marginBottom="2dp"

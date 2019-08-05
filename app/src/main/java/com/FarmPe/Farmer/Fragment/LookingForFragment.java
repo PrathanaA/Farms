@@ -58,9 +58,7 @@ public class LookingForFragment extends Fragment {
         filter_text=view.findViewById(R.id.filter_text);
         delete_req =view.findViewById(R.id.delete_req);
         newOrderBeansList.clear();
-        GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(mLayoutManager_farm);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
         sessionManager = new SessionManager(getActivity());
       // System.out.println("bbbbbbbbbbbbbbbbb"+ "+1-333-444-5678".replaceAll("[^\\d\\+]", "").replaceAll("\\d(?=\\d{4})", "*"));
@@ -223,6 +221,9 @@ public class LookingForFragment extends Fragment {
                         }
 
                         farmadapter=new FarmsImageAdapter(getActivity(),newOrderBeansList);
+                        GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.VERTICAL, false);
+                        recyclerView.setLayoutManager(mLayoutManager_farm);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
                         recyclerView.setAdapter(farmadapter);
 
                     } catch (JSONException e) {
@@ -317,25 +318,25 @@ public class LookingForFragment extends Fragment {
     }
 
 
-    public  void sorting(String filter_text){
-
-        searchresultAraaylist.clear();
-        for (FarmsImageBean composeMsgOrderSecondBean: newOrderBeansList) {
-            System.out.println("llllllllllllllll"+composeMsgOrderSecondBean.getProd_price());
-            final String text = composeMsgOrderSecondBean.getProd_price().toLowerCase();
-            final String text1 = composeMsgOrderSecondBean.getModelname().toLowerCase();
-            final String text2 = composeMsgOrderSecondBean.getFarmer_name().toLowerCase();
-            final String text3 = composeMsgOrderSecondBean.getLocation().toLowerCase();
-
-            if (text.contains(filter_text)||text1.contains(filter_text)||text2.contains(filter_text)||text3.contains(filter_text)){
-
-                searchresultAraaylist.add(composeMsgOrderSecondBean);
-            }
-        }
-
-        farmadapter=new FarmsImageAdapter(getActivity(),searchresultAraaylist);
-        recyclerView.setAdapter(farmadapter);
-
-    }
+//    public  void sorting(String filter_text){
+//
+//        searchresultAraaylist.clear();
+//        for (FarmsImageBean composeMsgOrderSecondBean: newOrderBeansList) {
+//            System.out.println("llllllllllllllll"+composeMsgOrderSecondBean.getProd_price());
+//            final String text = composeMsgOrderSecondBean.getProd_price().toLowerCase();
+//            final String text1 = composeMsgOrderSecondBean.getModelname().toLowerCase();
+//            final String text2 = composeMsgOrderSecondBean.getFarmer_name().toLowerCase();
+//            final String text3 = composeMsgOrderSecondBean.getLocation().toLowerCase();
+//
+//            if (text.contains(filter_text)||text1.contains(filter_text)||text2.contains(filter_text)||text3.contains(filter_text)){
+//
+//                searchresultAraaylist.add(composeMsgOrderSecondBean);
+//            }
+//        }
+//
+//        farmadapter=new FarmsImageAdapter(getActivity(),searchresultAraaylist);
+//        recyclerView.setAdapter(farmadapter);
+//
+//    }
 
 }
