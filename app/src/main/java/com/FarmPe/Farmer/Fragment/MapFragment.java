@@ -106,8 +106,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
 
            view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
+           view.requestFocus();
+          view.setOnKeyListener(new View.OnKeyListener() {
 
 
             @Override
@@ -151,14 +151,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onClick(View view) {
 
-                address_txt = resutText.getText().toString();
-                Bundle bundle = new Bundle();
-                bundle.putString("status",address_txt);
-                selectedFragment = ListYourFarmsThird.newInstance();
+//                address_txt = resutText.getText().toString();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("status",address_txt);
+                selectedFragment = ListYourFarmsFour.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                selectedFragment.setArguments(bundle);
-                transaction.addToBackStack("map");
                 transaction.commit();
 
             }

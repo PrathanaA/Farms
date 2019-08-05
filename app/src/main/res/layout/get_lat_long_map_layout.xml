@@ -63,7 +63,7 @@
                 android:id="@+id/left_arrw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_left_arrow_blk"
+                android:src="@drawable/ic_close_black"
                 android:layout_gravity="top|start"
                 android:layout_marginRight="320dp"
                 android:layout_marginTop="20dp"

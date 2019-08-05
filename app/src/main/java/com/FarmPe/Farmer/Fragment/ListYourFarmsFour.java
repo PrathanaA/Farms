@@ -73,7 +73,7 @@ public class ListYourFarmsFour extends Fragment {
         facebook=view.findViewById(R.id.facebook);
         instagram=view.findViewById(R.id.insta);
         mobile_no=view.findViewById(R.id.mobile_no);
-        email_id=view.findViewById(R.id.email_id);
+     //   email_id=view.findViewById(R.id.email_id);
         main_layout=view.findViewById(R.id.main_layout);
         final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -81,7 +81,7 @@ public class ListYourFarmsFour extends Fragment {
 
         farm_name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30) });
         cont_person_name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30) });
-        email_id.setFilters(new InputFilter[] {EMOJI_FILTER1,new InputFilter.LengthFilter(30) });
+        //email_id.setFilters(new InputFilter[] {EMOJI_FILTER1,new InputFilter.LengthFilter(30) });
 
 
         Resources resources = getResources();
@@ -150,6 +150,7 @@ public class ListYourFarmsFour extends Fragment {
                     whatsappIntent.setPackage("com.whatsapp");
                     //whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Text");
                     whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app!");
+
                     try {
                         startActivity(whatsappIntent);
                     } catch (android.content.ActivityNotFoundException ex) {
@@ -183,7 +184,6 @@ public class ListYourFarmsFour extends Fragment {
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
                     tv.setTextColor(Color.WHITE);
-
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -383,7 +383,7 @@ public class ListYourFarmsFour extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (farm_name.getText().toString().equals("") && cont_person_name.getText().toString().equals("") && mobile_no.getText().toString().equals("") && email_id.getText().toString().equals("")) {
+                if (farm_name.getText().toString().equals("") && cont_person_name.getText().toString().equals("") && mobile_no.getText().toString().equals("") ){
                     Snackbar snackbar = Snackbar
                             .make(main_layout, "Please enter all the details", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
@@ -497,41 +497,41 @@ public class ListYourFarmsFour extends Fragment {
 
 
 
-                }else if(email_id.getText().toString().equals("")) {
-
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Enter Your EmailID", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-
-
-                }else if ((!(email_id.getText().toString().equals(""))&&((! email_id.getText().toString().matches(emailPattern))))) {
-
-
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Enter a valid Email id", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
+//                }else if(email_id.getText().toString().equals("")) {
+//
+//                    Snackbar snackbar = Snackbar
+//                            .make(main_layout, "Enter Your EmailID", Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                    } else {
+//                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                    }
+//                    snackbar.show();
+//
+//
+//                }else if ((!(email_id.getText().toString().equals(""))&&((! email_id.getText().toString().matches(emailPattern))))) {
+//
+//
+//                    Snackbar snackbar = Snackbar
+//                            .make(main_layout, "Enter a valid Email id", Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                    } else {
+//                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                    }
+//                    snackbar.show();
 
 
 
@@ -539,7 +539,6 @@ public class ListYourFarmsFour extends Fragment {
                     farm_name_string = farm_name.getText().toString();
                     cont_name = cont_person_name.getText().toString();
                     mob_no = mobile_no.getText().toString();
-                    email_id_strg = email_id.getText().toString();
                     selectedFragment = ListYourFarmsFive.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
