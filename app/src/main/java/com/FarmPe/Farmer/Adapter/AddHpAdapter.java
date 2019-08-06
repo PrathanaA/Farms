@@ -82,12 +82,19 @@ public class AddHpAdapter extends RecyclerView.Adapter<AddHpAdapter.MyViewHolder
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
                 bundle.putString("hpId",products.getId());
-                selectedFragment = AddModelFragment.newInstance();
-                FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("hp");
-                selectedFragment.setArguments(bundle);
-                transaction.commit();
+
+
+                for (int i = 0; i < productList.size(); i++) {
+                    productList.get(i).setSelected(false);
+                }
+                productList.get(position).setSelected(true);
+                notifyDataSetChanged();
+//                selectedFragment = AddModelFragment.newInstance();
+//                FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("hp");
+//                selectedFragment.setArguments(bundle);
+//                transaction.commit();
             }
         });
 
@@ -98,6 +105,13 @@ public class AddHpAdapter extends RecyclerView.Adapter<AddHpAdapter.MyViewHolder
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
+
+        if (productList.get(position).isSelected()){
+            holder.item.setBackgroundResource(R.drawable.grey_background_drawable);
+
+        }else {
+            holder.item.setBackgroundResource(R.drawable.border_transperent);
+        }
 
     }
 

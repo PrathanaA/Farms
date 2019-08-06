@@ -34,10 +34,11 @@ public class AddFirstFragment extends Fragment {
     public static RecyclerView recyclerView;
     public static AddFirstAdapter farmadapter;
     LinearLayout back_feed;
+    TextView continue_button;
     public static String tracter_title = "";
     Fragment selectedFragment;
 
-    TextView continue_button;
+
 
 
     public static AddFirstFragment newInstance() {

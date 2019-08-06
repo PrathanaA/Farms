@@ -3,6 +3,7 @@ package com.FarmPe.Farmer.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,7 +33,8 @@ public class AddModelFragment extends Fragment {
     public static List<AddTractorBean> newOrderBeansList = new ArrayList<>();
     public static RecyclerView recyclerView;
     public static AddModelAdapter farmadapter;
-    TextView toolbar_title;
+    Fragment selectedFragment = null;
+    TextView toolbar_title,continue_button;
     LinearLayout back_feed;
 
 
@@ -48,6 +50,7 @@ public class AddModelFragment extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_what_looking);
         toolbar_title=view.findViewById(R.id.toolbar_title);
         back_feed=view.findViewById(R.id.back_feed);
+        continue_button=view.findViewById(R.id.continue_button);
         toolbar_title.setText("Select Model");
 
 
@@ -73,6 +76,18 @@ public class AddModelFragment extends Fragment {
                 return false;
             }
         });
+
+        continue_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedFragment = RequestFormFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("first");
+                transaction.commit();
+            }
+        });
+
 
         ModelList();
        // newOrderBeansList.clear();

@@ -102,7 +102,7 @@ public class No_Request_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                selectedFragment = AddFirstLookingFor.newInstance();
+                selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();

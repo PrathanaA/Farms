@@ -3,6 +3,7 @@ package com.FarmPe.Farmer.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class AddHpFragment extends Fragment {
     public static List<AddTractorBean> newOrderBeansList = new ArrayList<>();
     public static RecyclerView recyclerView;
     public static AddHpAdapter farmadapter;
-    TextView toolbar_title;
+    TextView toolbar_title,continue_button;
     LinearLayout back_feed;
     Fragment selectedFragment;
 
@@ -49,6 +50,7 @@ public class AddHpFragment extends Fragment {
         recyclerView=view.findViewById(R.id.recycler_what_looking);
         toolbar_title=view.findViewById(R.id.toolbar_title);
         back_feed=view.findViewById(R.id.back_feed);
+        continue_button=view.findViewById(R.id.continue_button);
         toolbar_title.setText("Select HP");
 
         back_feed.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +76,19 @@ public class AddHpFragment extends Fragment {
         });
 
 
-       HpList();
+        continue_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedFragment = AddModelFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("first");
+                transaction.commit();
+            }
+        });
+
+
+        HpList();
 
         newOrderBeansList.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);

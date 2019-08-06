@@ -79,11 +79,17 @@ public class AddModelAdapter extends RecyclerView.Adapter<AddModelAdapter.MyView
             @Override
             public void onClick(View v) {
                 tractor_id=products.getId();
-                selectedFragment = RequestFormFragment.newInstance();
-                FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("model");
-                transaction.commit();
+
+                for (int i = 0; i < productList.size(); i++) {
+                    productList.get(i).setSelected(false);
+                }
+                productList.get(position).setSelected(true);
+                notifyDataSetChanged();
+//                selectedFragment = RequestFormFragment.newInstance();
+//                FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("model");
+//                transaction.commit();
             }
         });
 
@@ -94,6 +100,13 @@ public class AddModelAdapter extends RecyclerView.Adapter<AddModelAdapter.MyView
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
+
+        if (productList.get(position).isSelected()){
+            holder.item.setBackgroundResource(R.drawable.grey_background_drawable);
+
+        }else {
+            holder.item.setBackgroundResource(R.drawable.border_transperent);
+        }
 
 
     }

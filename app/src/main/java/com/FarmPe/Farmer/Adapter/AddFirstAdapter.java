@@ -88,11 +88,10 @@ AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyViewHolder>  {
                 .into(holder.image);
 
         if (productList.get(position).isSelected()){
-            holder.item.setBackgroundResource(R.drawable.border_1_layout);
+            holder.item.setBackgroundResource(R.drawable.grey_background_drawable);
 
         }else {
-            holder.item.setBackgroundColor(Color.WHITE);
-
+            holder.item.setBackgroundResource(R.drawable.border_transperent);
         }
 
         holder.item.setOnClickListener(new View.OnClickListener() {

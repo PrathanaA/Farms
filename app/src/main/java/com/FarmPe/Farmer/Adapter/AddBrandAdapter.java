@@ -81,11 +81,17 @@ public class AddBrandAdapter extends RecyclerView.Adapter<AddBrandAdapter.MyView
             @Override
             public void onClick(View v) {
                 brandId=products.getId();
-                selectedFragment = AddHpFragment.newInstance();
-                FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("brand");
-                transaction.commit();
+
+                for (int i = 0; i < productList.size(); i++) {
+                    productList.get(i).setSelected(false);
+                }
+                productList.get(position).setSelected(true);
+                notifyDataSetChanged();
+//                selectedFragment = AddHpFragment.newInstance();
+//                FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("brand");
+//                transaction.commit();
             }
         });
 
@@ -95,6 +101,14 @@ public class AddBrandAdapter extends RecyclerView.Adapter<AddBrandAdapter.MyView
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
+
+
+        if (productList.get(position).isSelected()){
+                      holder.item.setBackgroundResource(R.drawable.grey_background_drawable);
+
+        }else {
+            holder.item.setBackgroundResource(R.drawable.border_transperent);
+        }
 
 
     }
