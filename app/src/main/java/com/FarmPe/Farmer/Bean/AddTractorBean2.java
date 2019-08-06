@@ -1,27 +1,16 @@
 package com.FarmPe.Farmer.Bean;
 
-public class AddTractorBean {
+public class AddTractorBean2 {
 
-   private String image;
+   private int image;
     private String prod_name,id;
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    private  boolean isSelected;
    /// private  int image;
 
-    public AddTractorBean(String image, String prod_name, String id,boolean isSelected) {
+    public AddTractorBean2(int image, String prod_name, String id) {
 
         this.image = image;
         this.prod_name = prod_name;
         this.id = id;
-        this.isSelected = isSelected;
 
     }
 
@@ -34,7 +23,7 @@ public class AddTractorBean {
         return id;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 

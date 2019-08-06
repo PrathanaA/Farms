@@ -38,11 +38,9 @@ public class  AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyVie
     Fragment selectedFragment;
     public static final int GET_FROM_GALLERY = 3;
     Bitmap bitmap;
-    public static TextView add_text_image;
     private static int RESULT_LOAD_IMG = 200;
     public LinearLayout linearLayout;
     public static LinearLayout next_arw;
-    public static  ImageView imageView;
     public static String first, looinkgId;
     public static CardView cardView;
 
@@ -58,6 +56,8 @@ public class  AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyVie
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView delete;
+        public   ImageView imageView;
+        public  TextView add_text_image;
 
         public MyViewHolder(View view) {
             super(view);
@@ -83,16 +83,23 @@ public class  AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyVie
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final AddPhotoBean products = productList.get(position);
         //holder.agri_text.setText(products.getAgri_text());
+        System.out.println("imagegegegegeg11111hhhhhhhhhhhhhposition" +position);
+
+
         if (position == productList.size()-1 ) {
-            add_text_image.setVisibility(View.VISIBLE);
-        imageView.setBackgroundColor(Color.parseColor("#e6e6e6"));
+            holder. imageView.setBackgroundColor(Color.parseColor("#40e6e6e6"));
+
+            holder.add_text_image.setVisibility(View.VISIBLE);
+            holder.delete.setVisibility(View.GONE);
+
         }else {
-            add_text_image.setVisibility(View.GONE);
-            imageView.setImageBitmap(products.getImage_upload());
             holder.delete.setVisibility(View.VISIBLE);
+
+            //   add_text_image.setVisibility(View.GONE);
+            holder.imageView.setImageBitmap(products.getImage_upload());
            // add_text_image.setText("");
         }
-        add_text_image.setOnClickListener(new View.OnClickListener() {
+        holder.add_text_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("imagegegegegeg11111hhhhhhhhhhhhh" +productList.size());
@@ -126,58 +133,6 @@ public class  AddPhotoAdapter extends RecyclerView.Adapter<AddPhotoAdapter.MyVie
 
 
 
-/*
-
-        Glide.with(activity).load(products.getImage_upload())
-                .asBitmap()
-                .thumbnail(0.5f)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.image);
-    }
-*/
-
-       /* Glide.with(activity)
-                .load(products.getImage_upload())    // you can pass url too
-                .asBitmap()
-                .placeholder(R.drawable.cow)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        // you can do something with loaded bitmap here
-
-                        holder.image.setImageBitmap(resource);
-                    }
-                });*/
-
-
-
-
-   /* @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // super.onActivityResult(requestCode, resultCode, data);
-
-
-        //Detects request codes
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), selectedImage);
-                System.out.println("bbbiiitttmmaaappp"+bitmap.toString());
-                // cover_image.setImageBitmap(bitmap);
-                AddPhotoBean img1=new AddPhotoBean(bitmap);
-                //  newOrderBeansList.add(img1);
-
-
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }*/
 
     @Override
     public int getItemCount() {

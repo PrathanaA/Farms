@@ -139,13 +139,11 @@ public class ListYourFarmsFive extends Fragment {
             newOrderBeansList.add(img1);
         }*/
 
-        System.out.println("hhhhhhhhhhh"+ LandingPageActivity.selectedImage);
         AddPhotoBean img1=new AddPhotoBean( LandingPageActivity.selectedImage);
         newOrderBeansList.add(img1);
         farmadapter=new AddPhotoAdapter(getActivity(),newOrderBeansList);
         recyclerView.setAdapter(farmadapter);
 
-        System.out.println("upload_image"+LandingPageActivity.selectedImage);
 
 
 

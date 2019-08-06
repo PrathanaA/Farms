@@ -143,7 +143,7 @@ public class AddBrandFragment extends Fragment {
                             String BrandIcon=jsonObject1.getString("BrandIcon");
 
 
-                           AddTractorBean crops = new AddTractorBean(BrandIcon, brand_name,id);
+                           AddTractorBean crops = new AddTractorBean(BrandIcon, brand_name,id,false);
                            newOrderBeansList.add(crops);
 
                           /*  if(!latts.equals("") | !langgs.equals("")) {

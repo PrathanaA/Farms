@@ -3,6 +3,7 @@ package com.FarmPe.Farmer.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
@@ -35,6 +37,8 @@ public class AddFirstFragment extends Fragment {
     public static String tracter_title = "";
     Fragment selectedFragment;
 
+    TextView continue_button;
+
 
     public static AddFirstFragment newInstance() {
         AddFirstFragment fragment = new AddFirstFragment();
@@ -45,6 +49,7 @@ public class AddFirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_first_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_what_looking);
+        continue_button=view.findViewById(R.id.continue_button);
         back_feed=view.findViewById(R.id.back_feed);
 
 
@@ -54,6 +59,17 @@ public class AddFirstFragment extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.popBackStack("first_looking", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
+            }
+        });
+
+        continue_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedFragment = AddBrandFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("first");
+                transaction.commit();
             }
         });
 
@@ -138,7 +154,7 @@ public class AddFirstFragment extends Fragment {
                             String lookingForId=jsonObject1.getString("Id");
 
 
-                            AddTractorBean crops = new AddTractorBean(LookingForDetailsIcon, getPrice,lookingForId);
+                            AddTractorBean crops = new AddTractorBean(LookingForDetailsIcon, getPrice,lookingForId,false);
                             newOrderBeansList.add(crops);
 
                           /*  if(!latts.equals("") | !langgs.equals("")) {

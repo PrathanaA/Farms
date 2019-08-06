@@ -141,7 +141,7 @@ public class AddModelFragment extends Fragment {
                             String image=jsonObject1.getString("ModelImage");
                             String id=jsonObject1.getString("Id");
                             System.out.println("madelslistt"+newOrderBeansList.size());
-                            AddTractorBean crops = new AddTractorBean(image, model,id);
+                            AddTractorBean crops = new AddTractorBean(image, model,id,false);
                             newOrderBeansList.add(crops);
 
                           /*  if(!latts.equals("") | !langgs.equals("")) {

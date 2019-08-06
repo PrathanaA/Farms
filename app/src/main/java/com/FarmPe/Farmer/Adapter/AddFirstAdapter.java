@@ -1,6 +1,7 @@
 package com.FarmPe.Farmer.Adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -85,6 +86,13 @@ AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyViewHolder>  {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
+        if (productList.get(position).isSelected()){
+            holder.item.setBackgroundColor(Color.BLACK);
+
+        }else {
+            holder.item.setBackgroundColor(Color.WHITE);
+
+        }
 
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,12 +100,18 @@ AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyViewHolder>  {
 
                 AddFirstFragment.tracter_title = holder.prod_price.getText().toString().toLowerCase().replace(" price","");
                 looinkgId=products.getId();
-                System.out.println("lookingidd"+products.getId());
-                selectedFragment = AddBrandFragment.newInstance();
+
+
+                for (int i = 0; i < productList.size(); i++) {
+                    productList.get(i).setSelected(false);
+                }
+                productList.get(position).setSelected(true);
+                notifyDataSetChanged();
+              /*  selectedFragment = AddBrandFragment.newInstance();
                 FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("first");
-                transaction.commit();
+                transaction.commit();*/
             }
         });
 

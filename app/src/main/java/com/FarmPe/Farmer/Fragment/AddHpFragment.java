@@ -143,7 +143,7 @@ public class AddHpFragment extends Fragment {
                             String id=jsonObject1.getString("Id");
 
 
-                            AddTractorBean hp = new AddTractorBean(image, horsepower,id);
+                            AddTractorBean hp = new AddTractorBean(image, horsepower,id,false);
                             newOrderBeansList.add(hp);
 
 

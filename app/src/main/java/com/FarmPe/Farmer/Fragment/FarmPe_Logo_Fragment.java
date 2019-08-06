@@ -2,6 +2,7 @@ package com.FarmPe.Farmer.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,11 +22,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.FarmPe.Farmer.Adapter.HomePage1_Adapter;
+import com.FarmPe.Farmer.Adapter.HomePage_Adapter;
+import com.FarmPe.Farmer.Bean.AddTractorBean1;
+import com.FarmPe.Farmer.Bean.AddTractorBean2;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FarmPe_Logo_Fragment extends Fragment {
     Fragment selectedFragment;
@@ -33,6 +44,15 @@ LinearLayout linearLayout;
     SessionManager sessionManager;
     public static String toast_click_back;
     boolean doubleBackToExitPressedOnce = false;
+    HomePage_Adapter homePage_adapter;
+    HomePage1_Adapter homePage1_adapter;
+    RecyclerView recyclerView,recyclerView1;
+    public static List<AddTractorBean1> newOrderBeansList = new ArrayList<>();
+    public static List<AddTractorBean2> newOrderBeansList2 = new ArrayList<>();
+
+
+
+
     public static FarmPe_Logo_Fragment newInstance() {
         FarmPe_Logo_Fragment fragment = new FarmPe_Logo_Fragment();
         return fragment;
@@ -48,6 +68,9 @@ LinearLayout linearLayout;
 
         linearLayout= view.findViewById(R.id.layout);
         sessionManager = new SessionManager(getActivity());
+        recyclerView= view.findViewById(R.id.recylr_2);
+        recyclerView1= view.findViewById(R.id.recylr_1);
+
 
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
@@ -107,8 +130,72 @@ LinearLayout linearLayout;
             }
         });
 
+        newOrderBeansList2.clear();
+        GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(mLayoutManager_farm);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+// recyclerView.addItemDecoration(new ItemDecorator( -80));
+
+        AddTractorBean2 img1=new AddTractorBean2( R.drawable.tractor_red," ","");
+        newOrderBeansList2.add(img1);
+
+        AddTractorBean2 img2=new AddTractorBean2( R.drawable.gyrovator," ","");
+        newOrderBeansList2.add(img2);
+
+        AddTractorBean2 img3=new AddTractorBean2( R.drawable.tractor_green," ","");
+        newOrderBeansList2.add(img3);
+
+
+        homePage_adapter=new HomePage_Adapter(getActivity(),newOrderBeansList2);
+        recyclerView.setAdapter(homePage_adapter);
+
+
+
+
+
+        newOrderBeansList.clear();
+        GridLayoutManager mLayoutManager_farm1 = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
+        recyclerView1.setLayoutManager(mLayoutManager_farm1);
+// recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView1.addItemDecoration(new ItemDecorator( -80));
+
+        AddTractorBean1 img4=new AddTractorBean1( R.drawable.cow_dairy," ","");
+        newOrderBeansList.add(img4);
+
+        AddTractorBean1 img5=new AddTractorBean1( R.drawable.poultry," ","");
+        newOrderBeansList.add(img5);
+
+        AddTractorBean1 img6=new AddTractorBean1( R.drawable.tiger_pic," ","");
+        newOrderBeansList.add(img6);
+
+        AddTractorBean1 img7=new AddTractorBean1( R.drawable.cow," ","");
+        newOrderBeansList.add(img7);
+
+        homePage1_adapter=new HomePage1_Adapter(getActivity(),newOrderBeansList);
+        recyclerView1.setAdapter(homePage1_adapter);
+
+
+
+
 
         return view;
     }
+
+    public class ItemDecorator extends RecyclerView.ItemDecoration{
+        private  final int mSpace;
+
+        public  ItemDecorator(int space) {
+            this.mSpace = space;
+        }
+        @Override
+        public  void  getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state){
+            int position = parent.getChildAdapterPosition(view);
+            if(position !=0)
+                // outRect.top = mSpace;
+                outRect.left = mSpace;
+        }
+
+    }
+
 }
 

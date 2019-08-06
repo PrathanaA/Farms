@@ -204,9 +204,11 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
                 AddPhotoBean img1=new AddPhotoBean( selectedImage);
                 if (!(selectedImage==null)){
 
-                    callCloudVision(  scaleBitmapDown(selectedImage,MAX_DIMENSION));
+
+
+                     callCloudVision(  scaleBitmapDown(selectedImage,MAX_DIMENSION));
                   //  AddPhotoAdapter.productList.add(0,img1);
-                  //  ListYourFarmsFive.farmadapter.notifyDataSetChanged();
+                   // ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 
 
                 }else {
@@ -488,6 +490,7 @@ progressDialog.dismiss();
                     AddPhotoAdapter.productList.add(0,img1);
                     ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 
+
                    /* Toast.makeText(LandingPageActivity.this,"Image contain below details"+annotation.getViolence()+"\n"
                             +annotation.getSpoof()+"\n"+annotation.getMedical()+"\n"+annotation.getAdult(),Toast.LENGTH_LONG).show();*/
 
@@ -511,18 +514,21 @@ progressDialog.dismiss();
         System.out.println("kkkkkkkkkkkkkkkkkkk"+response);
          annotation = response.getResponses().get(0).getSafeSearchAnnotation();
         if (annotation != null) {
-            if (annotation.getAdult().equals("LIKELY")&&annotation.getSpoof().equals("LIKELY")&&annotation.getSpoof().equals("LIKELY")&&annotation.getViolence().equals("LIKELY")){
+            if (annotation.getAdult().equals("LIKELY")||annotation.getSpoof().equals("LIKELY")||annotation.getMedical().equals("LIKELY")||annotation.getViolence().equals("LIKELY")){
                 message.append("DECLINE");
 
 
 
 
             }
-         else  if (annotation.getAdult().equals("POSSIBLE")||annotation.getSpoof().equals("POSSIBLE")||annotation.getSpoof().equals("POSSIBLE")||annotation.getViolence().equals("POSSIBLE")){
+         else  if (annotation.getAdult().equals("POSSIBLE")||annotation.getSpoof().equals("POSSIBLE")||annotation.getMedical().equals("POSSIBLE")||annotation.getViolence().equals("POSSIBLE")){
                 message.append("DECLINE");
 
             }
+            else  if (annotation.getAdult().equals("VERY_LIKELY")||annotation.getSpoof().equals("VERY_LIKELY")||annotation.getMedical().equals("VERY_LIKELY")||annotation.getViolence().equals("VERY_LIKELY")){
+                message.append("DECLINE");
 
+            }
             else {
                 message.append("APPROVE");
 

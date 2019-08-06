@@ -4,63 +4,251 @@
     android:id="@+id/layout"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#000"
+    android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@android:color/white"
-        android:background="#000"
-        android:gravity="left"
-        android:layout_gravity="left"
-        android:contentInsetLeft="0dp"
-        android:contentInsetStart="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="10dp"
-        android:contentInsetRight="0dp"
-        android:contentInsetEnd="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp">
+        android:layout_height="match_parent">
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/back_feed1"-->
-            <!--android:layout_width="35dp"-->
-            <!--android:layout_height="50dp"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
 
-            <!--&gt;-->
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="20"
+                android:background="@color/light_grey1"
+                android:layout_weight="20">
 
+                <ImageView
 
-            <!--<ImageView-->
-                <!--android:id="@+id/b_arrow"-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:src="@drawable/ic_left_arrow_white"-->
-                <!--style="@style/SelectableItemBackground"-->
-                <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                    android:layout_width="60dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="10"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/android_logo_red"/>
 
-
-                <!--/>-->
-
-        <!--</LinearLayout>-->
-
-
-
-    </android.support.v7.widget.Toolbar>
-
-
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/farmer_nandi_logo"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginLeft="25dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:text="Welcome,"/>
 
 
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:text="Jagdish Kumar"/>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:textSize="14dp"
+                        android:text="@string/son"/>
 
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:gravity="center"
+                    android:textColor="@color/navy_blue"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Farms Listed"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:gravity="center"
+                    android:textColor="@color/navy_blue"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="20">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recylr_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_gravity="center_horizontal"
+
+                    android:background="#fff">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <!--  <ImageView
+                      android:layout_width="match_parent"
+                      android:layout_height="100dp"
+                      android:layout_gravity="center"
+                      android:src="@drawable/brinjal"/>-->
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="    List your farm"
+                android:padding="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/orange_border"
+                android:layout_gravity="center"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dcdcdc"
+                android:layout_marginTop="20dp">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:gravity="center"
+                    android:textColor="@color/navy_blue"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Requests Made"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    />
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:gravity="center"
+                    android:textColor="@color/navy_blue"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="20"
+                android:layout_marginTop="10dp"
+                android:layout_weight="20">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recylr_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="left"
+                    android:background="#fff">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <!-- <ImageView
+                     android:layout_width="match_parent"
+                     android:layout_height="100dp"
+                     android:layout_weight="10"
+                     android:src="@drawable/tractor_green"/>
+
+                 <ImageView
+                     android:layout_width="match_parent"
+                     android:layout_height="100dp"
+                     android:layout_weight="10"
+                     android:src="@drawable/tractor_red"/>
+
+                 <ImageView
+                     android:layout_width="match_parent"
+                     android:layout_height="100dp"
+                     android:layout_weight="10"
+                     android:src="@drawable/tractor_sonalika"/>-->
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Make a request"
+                android:padding="10dp"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:background="@drawable/orange_border"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>g
 </LinearLayout>

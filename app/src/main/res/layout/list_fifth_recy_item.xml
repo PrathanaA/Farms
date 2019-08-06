@@ -49,6 +49,7 @@
                 <FrameLayout
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -58,7 +59,7 @@
                         android:id="@+id/filter_check"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:background="@drawable/ic_cancel"
                         android:layout_gravity="right|top"
                         android:layout_marginBottom="2dp"
@@ -73,7 +74,6 @@
                         android:focusableInTouchMode="true"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:visibility="invisible"
                         />
 
 
@@ -81,6 +81,9 @@
                         android:id="@+id/prod_img"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
+                        android:layout_margin="25dp"
+                        android:background="#40e6e6e6"
+
                         android:scaleType="fitXY" />
 
                 </FrameLayout>
