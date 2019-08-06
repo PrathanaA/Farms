@@ -66,13 +66,13 @@
             >
 
             <TextView
-                android:id="@+id/toolbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="What are you looking for?"
                 android:textSize="20dp"
                 android:textColor="#000"
                 />
+
 
 
 

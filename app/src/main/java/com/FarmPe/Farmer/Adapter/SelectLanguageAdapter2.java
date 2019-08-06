@@ -125,7 +125,9 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
                           String log_password = result.getString("Password");
                           String log_remember_me = result.getString("RememberMe");
                           String log_forgot_passwrd = result.getString("ForgotPassword");
-                          String log_register = result.getString("Register");
+                          String log_register = result.getString("SignUp");
+                          String log_farmpe = result.getString("NewtoFarmPe");
+
 
                            LoginActivity.popup_heading.setText(lang_title1);
                            LoginActivity.remember_me.setText(log_remember_me);
@@ -134,6 +136,7 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
                            LoginActivity.text_pass.setHint(log_password);
                            LoginActivity.welcome_back.setText(log_login);
                            LoginActivity.createaccount.setText(log_register);
+                           LoginActivity.new_farmpe.setText(log_farmpe);
                            LoginActivity.text_mobile.setHint(log_mobile);
                            LoginActivity.mob_toast = result.getString("EnterPhoneNo");
                            LoginActivity.pass_toast = result.getString("EnterPassword");
@@ -141,6 +144,7 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
                            LoginActivity.toast_click_back = result.getString("PleaseclickBACKagaintoexit");
                            LoginActivity.toast_internet = result.getString("GoodConnectedtoInternet");
                            LoginActivity.toast_nointernet = result.getString("NoInternetConnection");
+
 
 
 

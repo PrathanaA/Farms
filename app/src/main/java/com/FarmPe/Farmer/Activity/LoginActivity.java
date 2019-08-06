@@ -60,7 +60,7 @@ import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
-     public static TextView register, log_in, forgot_pass,mob_text_signin;
+     public static TextView register, log_in, forgot_pass,new_farmpe,mob_text_signin;
      public static EditText mobile_no, pass;
      public static String mobile,loc_text;
      public String status,userId;
@@ -194,6 +194,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         forgot_pass =findViewById(R.id.forgot_pass_login);
 
         mobile_no = findViewById(R.id.mob_no);
+        new_farmpe = findViewById(R.id.new_farmpe);
 
         pass = findViewById(R.id.pass);
         //back_xlogin = view.findViewById(R.id.arrow_layout);
@@ -287,7 +288,8 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 forgot_pass.setText(lngObject.getString("ForgotPassword") + "?");
                 log_in.setText(lngObject.getString("Login"));
                 welcome_back.setText(lngObject.getString("Login"));
-                createaccount.setText(lngObject.getString("Register"));
+                createaccount.setText(lngObject.getString("SignUp"));
+                new_farmpe.setText(lngObject.getString("NewtoFarmPe"));
 
                 // popup_heading.setText(lngObject.getString("ChangeLanguage"));
                 // farmPe_title.setText(lngObject.getString("FarmPe"));
@@ -646,8 +648,8 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                         String log_password = result.getString("Password");
                         String log_remember_me = result.getString("RememberMe");
                         String log_forgot_passwrd = result.getString("ForgotPassword");
-                        String log_register = result.getString("Register");
-                      //  String log_title = result.getString("FarmPe");
+                        String log_register = result.getString("SignUp");
+                       String log_farmpe = result.getString("NewtoFarmPe");
 
                         mob_toast = result.getString("EnterPhoneNo");
                         pass_toast = result.getString("EnterPassword");
@@ -662,7 +664,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                             remember_me.setText(log_remember_me);
                            log_in.setText(log_login);
                            text_mobile.setHint(log_mobile);
-                         //farmPe_title.setText(log_title);
+                         new_farmpe.setText(log_farmpe);
 
                         forgot_pass.setText(log_forgot_passwrd+"?");
                         text_pass.setHint(log_password);

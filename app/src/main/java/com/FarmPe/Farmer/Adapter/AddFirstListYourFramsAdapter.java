@@ -39,12 +39,10 @@ public class AddFirstListYourFramsAdapter extends RecyclerView.Adapter<AddFirstL
     }
 
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public LinearLayout item;
         public TextView prod_price,prod_name,duration,farmer_name,location,connect;
-
 
 
 
