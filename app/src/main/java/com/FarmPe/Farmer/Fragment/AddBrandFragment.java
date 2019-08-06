@@ -85,7 +85,7 @@ public class AddBrandFragment extends Fragment {
                 selectedFragment = AddHpFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("first");
+                transaction.addToBackStack("second");
                 transaction.commit();
             }
         });

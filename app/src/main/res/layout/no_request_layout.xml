@@ -29,9 +29,10 @@
 
         <LinearLayout
             android:id="@+id/back_feed1"
-            android:layout_width="35dp"
+            android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_filter_state"
+            android:layout_marginTop="15dp"
 
             >
 
@@ -42,7 +43,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_close_black"
-
+                android:layout_marginLeft="10dp"
                 style="@style/SelectableItemBackground"
                 android:background="?attr/selectableItemBackgroundBorderless"
 
@@ -59,7 +60,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
         android:src="@drawable/ic_plus"/>

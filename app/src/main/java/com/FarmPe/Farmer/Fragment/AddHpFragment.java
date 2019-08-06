@@ -57,7 +57,7 @@ public class AddHpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("brand", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fm.popBackStack("second", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
 
@@ -68,7 +68,7 @@ public class AddHpFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("brand", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack("second", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
                 }
                 return false;
@@ -79,10 +79,11 @@ public class AddHpFragment extends Fragment {
         continue_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 selectedFragment = AddModelFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("first");
+                transaction.addToBackStack("third");
                 transaction.commit();
             }
         });

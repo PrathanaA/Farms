@@ -547,7 +547,7 @@ public class ListYourFarmsThird extends Fragment {
                 if ((current_adds.getVisibility() == View.GONE) || (current_adds.getVisibility() == View.VISIBLE && current_adds.getText().toString().equals(""))) {
 
                   System.out.println("kjyhgvkhygf" + "onClick: nbvMHfgdfmgluhg");
-                     if (street_add.getText().toString().equals("") && state.getText().toString().equals("") && district.getText().toString().equals("") && taluk.getText().toString().equals("") && block.getText().toString().equals("") && village.getText().toString().equals("") && village.getText().toString().equals("") && street_add.getText().toString().equals("") && pincode.getText().toString().equals("")) {
+                     if ( state.getText().toString().equals("") && district.getText().toString().equals("") && taluk.getText().toString().equals("") && block.getText().toString().equals("") ) {
                         Snackbar snackbar = Snackbar
                                 .make(main_layout, "Please enter all the details", Snackbar.LENGTH_LONG);
                         View snackbarView = snackbar.getView();

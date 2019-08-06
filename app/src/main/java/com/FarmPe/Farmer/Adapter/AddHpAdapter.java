@@ -30,6 +30,7 @@ public class AddHpAdapter extends RecyclerView.Adapter<AddHpAdapter.MyViewHolder
     public LinearLayout linearLayout;
    public static LinearLayout next_arw;
     public static String first;
+    public static  String hp_model;
     public static CardView cardView;
     public AddHpAdapter(Activity activity, List<AddTractorBean> moviesList) {
         this.productList = moviesList;
@@ -37,7 +38,6 @@ public class AddHpAdapter extends RecyclerView.Adapter<AddHpAdapter.MyViewHolder
 //        session=new SessionManager(activity);
 
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -80,8 +80,9 @@ public class AddHpAdapter extends RecyclerView.Adapter<AddHpAdapter.MyViewHolder
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putString("hpId",products.getId());
+//                Bundle bundle=new Bundle();
+//                bundle.putString("hpId",products.getId());
+                hp_model = products.getId();
 
 
                 for (int i = 0; i < productList.size(); i++) {

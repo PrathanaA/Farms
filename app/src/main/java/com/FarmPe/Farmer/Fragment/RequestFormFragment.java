@@ -51,7 +51,7 @@ public class RequestFormFragment extends Fragment {
     RadioGroup radioGroup,radioGroup_finance;
     RadioButton radioButton,finance_yes,finance_no,radioButton1;
     LinearLayout back_feed,address_layout;
-    CheckBox check_box;
+   // CheckBox check_box;
     SessionManager sessionManager;
     View view;
     String addId;
@@ -88,7 +88,7 @@ public class RequestFormFragment extends Fragment {
 
         toolbar_title=view.findViewById(R.id.toolbar_title);
         back_feed=view.findViewById(R.id.back_feed);
-        check_box=view.findViewById(R.id.check_box);
+      //  check_box=view.findViewById(R.id.check_box);
         whenPurchase = view.findViewById(R.id.whenPurchase);
 
         whenPurchase.setText("When are you planning to purchase "+ AddFirstFragment.tracter_title+"?");
@@ -120,16 +120,15 @@ public class RequestFormFragment extends Fragment {
             radioGroup.check(bundle.getInt("selected_id_time1"));
             radioGroup_finance.check(finance_selected);
 
-
         }
 
-        check_box.setText("I agree that by clicking 'Request for "+AddFirstFragment.tracter_title+"' button, I am explicitly soliciting a call from FarmPe Farmer App users on my 'Mobile' in order to assist me with my "+AddFirstFragment.tracter_title+" purchase.");
+        //check_box.setText("I agree that by clicking 'Request for "+AddFirstFragment.tracter_title+"' button, I am explicitly soliciting a call from FarmPe Farmer App users on my 'Mobile' in order to assist me with my "+AddFirstFragment.tracter_title+" purchase.");
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("model", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fm.popBackStack("fourth", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
 
@@ -142,7 +141,7 @@ public class RequestFormFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("model", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack("fourth", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 
                     return true;

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.FarmPe.Farmer.Adapter.AddBrandAdapter;
+import com.FarmPe.Farmer.Adapter.AddHpAdapter;
 import com.FarmPe.Farmer.Adapter.AddModelAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
 import com.FarmPe.Farmer.R;
@@ -58,7 +59,7 @@ public class AddModelFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("hp", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fm.popBackStack("third", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
 
@@ -70,7 +71,7 @@ public class AddModelFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("hp", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack("third", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
                 }
                 return false;
@@ -83,7 +84,7 @@ public class AddModelFragment extends Fragment {
                 selectedFragment = RequestFormFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("first");
+                transaction.addToBackStack("fourth");
                 transaction.commit();
             }
         });
@@ -125,7 +126,7 @@ public class AddModelFragment extends Fragment {
     }
     private void ModelList() {
         Bundle bundle=getArguments();
-        String hpId=bundle.getString("hpId");
+        String hpId  = AddHpAdapter.hp_model;
 
         try {
             newOrderBeansList.clear();

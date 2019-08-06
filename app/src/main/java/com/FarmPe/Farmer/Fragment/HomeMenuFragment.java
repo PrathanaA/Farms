@@ -148,6 +148,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                 selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("home");
                 transaction.commit();
                 drawer.closeDrawers();
             }
@@ -160,7 +161,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.first_full_frame, selectedFragment);
                 transaction.commit();
-                //drawer.closeDrawers();
+                drawer.closeDrawers();
 
             }
         });
@@ -177,6 +178,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                drawer.closeDrawers();
             }
         });
+
 
 
         user_name_menu.setText(sessionManager.getRegId("name"));
@@ -201,7 +203,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             isEng = false;
             Log.d("GGGGGGGG", "Here: "+LoginActivity.isEng);
         }
-
 
 
 

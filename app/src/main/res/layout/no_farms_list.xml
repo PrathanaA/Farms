@@ -29,8 +29,11 @@
 
         <LinearLayout
             android:id="@+id/back_feed1"
-            android:layout_width="35dp"
+            android:layout_width="40dp"
             android:layout_height="50dp"
+            android:background="@drawable/ic_filter_state"
+            android:layout_marginTop="20dp"
+
 
             >
 
@@ -41,6 +44,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_close_black"
+                android:layout_marginLeft="10dp"
                 style="@style/SelectableItemBackground"
                 android:background="?attr/selectableItemBackgroundBorderless"
 
@@ -57,7 +61,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="170dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:src="@drawable/ic_barn"/>
@@ -86,6 +90,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <TextView
             android:id="@+id/list_your_farms_nw"
             android:layout_width="match_parent"

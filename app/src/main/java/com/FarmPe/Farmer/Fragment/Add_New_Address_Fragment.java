@@ -159,7 +159,6 @@ public class  Add_New_Address_Fragment extends Fragment {
         // landmrk.setText(getArguments().getString("Addr_landmark"));
         //city.setText(getArguments().getString("Addr_city"));
 
-
         state.setText(getArguments().getString("Addr_state"));
         district.setText(getArguments().getString("Addr_district"));
         taluk.setText(getArguments().getString("Addr_taluk"));

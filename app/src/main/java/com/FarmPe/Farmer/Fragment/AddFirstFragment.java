@@ -59,7 +59,7 @@ public class AddFirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("first_looking", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fm.popBackStack("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
             }
         });
@@ -90,7 +90,7 @@ public class AddFirstFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("first_looking", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
                 }
                 return false;
