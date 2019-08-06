@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
@@ -66,11 +67,19 @@ public class AddFirstFragment extends Fragment {
         continue_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectedFragment = AddBrandFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("first");
-                transaction.commit();
+                if (AddFirstAdapter.looinkgId==null){
+                    System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkk"+AddFirstAdapter.looinkgId);
+                    selectedFragment = AddBrandFragment.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.frame_layout, selectedFragment);
+                    transaction.addToBackStack("first");
+                    transaction.commit();
+                }else {
+                    Toast.makeText(getActivity(),"Please Select any option",Toast.LENGTH_LONG).show();
+                }
+
+
+
             }
         });
 
