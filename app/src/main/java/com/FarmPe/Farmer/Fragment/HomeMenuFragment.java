@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -49,7 +50,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
@@ -61,16 +62,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
-import static com.FarmPe.Farmer.Activity.LandingPageActivity.toast_click_back;
 import static com.android.volley.VolleyLog.TAG;
 
 
@@ -120,6 +117,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         phone_no = view.findViewById(R.id.phone_no);
         your_farms_tab = view.findViewById(R.id.your_farms_tab);
         your_request = view.findViewById(R.id.your_request);
+        nw_request = view.findViewById(R.id.nw_request);
 
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
@@ -144,7 +142,16 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         userid=sessionManager.getRegId("userId");
 
 
-
+        nw_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedFragment = AddFirstFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.commit();
+                drawer.closeDrawers();
+            }
+        });
 
         your_request.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +160,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.first_full_frame, selectedFragment);
                 transaction.commit();
-                drawer.closeDrawers();
+                //drawer.closeDrawers();
 
             }
         });
@@ -270,11 +277,17 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         plus_sign_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = AddFirstLookingFor.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                selectedFragment = AddFirstFragment.newInstance();
+                FragmentTransaction transaction = (getActivity().getSupportFragmentManager().beginTransaction());
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
                 transaction.commit();
+
+                //                selectedFragment = AddFirstLookingFor.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("home");
+//                transaction.commit();
             }
         });
 

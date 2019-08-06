@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class No_Request_Fragment extends Fragment {
 
 
     TextView make_request;
+    LinearLayout back_feed1;
     Fragment selectedFragment = null;
 
 
@@ -49,23 +51,27 @@ public class No_Request_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.no_request_layout, container, false);
 
         make_request = view.findViewById(R.id.make_request);
+        back_feed1 = view.findViewById(R.id.back_feed1);
 
 
-//
-//        back_feed.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                FragmentManager fm = getActivity().getSupportFragmentManager();
-//                fm.popBackStack ("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//
-//                 /*else if(getArguments().getString("navigation_from").equals("setting")){
-//                    FragmentManager fm = getActivity().getSupportFragmentManager();
-//                    fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//
-//                }*/
-//            }
-//        });
+
+        back_feed1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectedFragment = HomeMenuFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.commit();
+                HomeMenuFragment.drawer.openDrawer(Gravity.START);//
+
+                 /*else if(getArguments().getString("navigation_from").equals("setting")){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                }*/
+            }
+        });
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -76,7 +82,7 @@ public class No_Request_Fragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack ("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack ("home1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                  /* else if(getArguments().getString("navigation_from").equals("setting")){
                         FragmentManager fm = getActivity().getSupportFragmentManager();
                         fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);

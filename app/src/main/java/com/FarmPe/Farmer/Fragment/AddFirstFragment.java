@@ -123,13 +123,14 @@ public class AddFirstFragment extends Fragment {
     }
 
     private void AddLookigFor() {
-        Bundle bundle=getArguments();
-        String looking_id=bundle.getString("looking_first_id");
+//        Bundle bundle=getArguments();
+//        String looking_id=bundle.getString("looking_first_id");
         try {
             newOrderBeansList.clear();
 
             JSONObject userRequestjsonObject = new JSONObject();
-            userRequestjsonObject.put("Id", looking_id);
+            userRequestjsonObject.put("Id", 3);
+
 
             JSONObject postjsonObject = new JSONObject();
             postjsonObject.put("LookingForObj", userRequestjsonObject);

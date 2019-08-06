@@ -24,6 +24,8 @@ package com.FarmPe.Farmer;
     public static final String ValidateReferalCode=ROOT_URL+"ValidateRefferalCode";
     public static final String CHANGE_LANGUAGE= ROOT_URL+"Lang/ChangeCurrentCulture";
 
+
+
     public static final String Get_New_Address = ROOT_URL+"MasterTable/GetUserAddress";
     // Wallet
     public static final String GetFarmDetailsList = ROOT_URL+"MasterTable/GetFarmsList";

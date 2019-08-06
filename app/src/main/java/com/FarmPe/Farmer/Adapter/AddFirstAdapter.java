@@ -86,8 +86,9 @@ AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyViewHolder>  {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.image);
+
         if (productList.get(position).isSelected()){
-            holder.item.setBackgroundColor(Color.BLACK);
+            holder.item.setBackgroundResource(R.drawable.border_1_layout);
 
         }else {
             holder.item.setBackgroundColor(Color.WHITE);

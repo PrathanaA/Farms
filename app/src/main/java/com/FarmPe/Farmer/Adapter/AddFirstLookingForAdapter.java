@@ -90,13 +90,11 @@ public class AddFirstLookingForAdapter extends RecyclerView.Adapter<AddFirstLook
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putString("looking_first_id",products.getId());
+
                 selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("first_looking");
-                selectedFragment.setArguments(bundle);
                 transaction.commit();
             }
         });
