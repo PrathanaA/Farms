@@ -160,7 +160,7 @@
             android:layout_weight="16"
             android:paddingHorizontal="15dp"
             android:paddingVertical="18dp"
-            android:text="LOGIN"
+            android:text="Sign in"
             android:textColor="#fff"
             android:textSize="16dp" />
 

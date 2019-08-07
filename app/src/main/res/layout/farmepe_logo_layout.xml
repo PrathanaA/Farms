@@ -18,7 +18,6 @@
             android:weightSum="100">
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -52,6 +51,7 @@
 
 
                     <TextView
+                        android:id="@+id/nameee"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="20dp"
                         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#000"
                         android:textSize="14dp"
-                        android:text="@string/son"/>
+                        android:text="@string/something"/>
 
 
                 </LinearLayout>
@@ -77,178 +77,189 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
-                android:layout_marginTop="20dp"
+                android:layout_weight="30"
+                android:weightSum="20"
                 android:orientation="vertical">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="5"
-                    android:gravity="center"
-                    android:textColor="@color/navy_blue"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:inputType="number"/>
+                    android:layout_weight="5"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/farmlist_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:gravity="center"
+                        android:textColor="@color/navy_blue"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:inputType="number"/>
 
-                <TextView
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Farms Listed"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:gravity="center"
+                        android:textColor="@color/navy_blue"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Farms Listed"
                     android:gravity="center"
+                    android:layout_weight="15">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recylr_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="#fff">
+                    </android.support.v7.widget.RecyclerView>
+
+                    <!--  <ImageView
+                          android:layout_width="match_parent"
+                          android:layout_height="100dp"
+                          android:layout_gravity="center"
+                          android:src="@drawable/brinjal"/>-->
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
                     android:textColor="#000"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="See All"
-                    android:gravity="center"
-                    android:textColor="@color/navy_blue"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    />
-
+                    android:text="    List your farm"
+                    android:padding="10dp"
+                    android:background="@drawable/orange_border"
+                    android:layout_gravity="center"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="20">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recylr_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_gravity="center_horizontal"
-
-                    android:background="#fff">
-
-                </android.support.v7.widget.RecyclerView>
-
-                <!--  <ImageView
-                      android:layout_width="match_parent"
-                      android:layout_height="100dp"
-                      android:layout_gravity="center"
-                      android:src="@drawable/brinjal"/>-->
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textColor="#000"
-                android:text="    List your farm"
-                android:padding="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/orange_border"
-                android:layout_gravity="center"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#dcdcdc"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
 
             </View>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:gravity="center"
-                    android:textColor="@color/navy_blue"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:inputType="number"/>
-
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Requests Made"
-                    android:gravity="center"
-                    android:textColor="#000"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    />
-
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="See All"
-                    android:gravity="center"
-                    android:textColor="@color/navy_blue"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:weightSum="20"
-                android:layout_marginTop="10dp"
-                android:layout_weight="20">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recylr_2"
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="left"
-                    android:background="#fff">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/request_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:gravity="center"
+                        android:textColor="@color/navy_blue"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:inputType="number"/>
 
-                </android.support.v7.widget.RecyclerView>
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Requests Made"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        />
 
-                <!-- <ImageView
-                     android:layout_width="match_parent"
-                     android:layout_height="100dp"
-                     android:layout_weight="10"
-                     android:src="@drawable/tractor_green"/>
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="See All"
+                        android:gravity="center"
+                        android:textColor="@color/navy_blue"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        />
 
-                 <ImageView
-                     android:layout_width="match_parent"
-                     android:layout_height="100dp"
-                     android:layout_weight="10"
-                     android:src="@drawable/tractor_red"/>
+                </LinearLayout>
 
-                 <ImageView
-                     android:layout_width="match_parent"
-                     android:layout_height="100dp"
-                     android:layout_weight="10"
-                     android:src="@drawable/tractor_sonalika"/>-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="15">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recylr_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#fff">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                    <!-- <ImageView
+                         android:layout_width="match_parent"
+                         android:layout_height="100dp"
+                         android:layout_weight="10"
+                         android:src="@drawable/tractor_green"/>
+
+                     <ImageView
+                         android:layout_width="match_parent"
+                         android:layout_height="100dp"
+                         android:layout_weight="10"
+                         android:src="@drawable/tractor_red"/>
+
+                     <ImageView
+                         android:layout_width="match_parent"
+                         android:layout_height="100dp"
+                         android:layout_weight="10"
+                         android:src="@drawable/tractor_sonalika"/>-->
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:text="Make a request"
+                    android:padding="10dp"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/orange_border"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"/>
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:text="Make a request"
-                android:padding="10dp"
-                android:textSize="16dp"
-                android:layout_gravity="center"
-                android:background="@drawable/orange_border"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"/>
-
         </LinearLayout>
-    </ScrollView>g
+    </ScrollView>
 </LinearLayout>
+

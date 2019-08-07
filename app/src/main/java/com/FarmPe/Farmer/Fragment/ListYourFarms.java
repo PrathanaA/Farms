@@ -1,12 +1,17 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,10 +41,12 @@ public class ListYourFarms extends Fragment {
     public static RecyclerView recyclerView;
     List_Farm_Bean list_farm_bean;
     public static List_Farm_Adapter farmadapter;
-    LinearLayout back_feed;
+    LinearLayout back_feed,linearLayout;
     JSONArray list_farm_array;
     Fragment selectedFragment;
     TextView toolbar_title,continue_1;
+    public static boolean issel = false;
+    public static String selRadio = "";
 
     int radiobutonStatus;
 
@@ -56,6 +63,7 @@ public class ListYourFarms extends Fragment {
         back_feed=view.findViewById(R.id.back_feed);
         continue_1=view.findViewById(R.id.continue_1);
         recyclerView=view.findViewById(R.id.recycler_2);
+        linearLayout=view.findViewById(R.id.linearLayout);
 
 
         radiobutonStatus = getArguments().getInt("RB_S");
@@ -69,7 +77,8 @@ public class ListYourFarms extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-
+                    issel = false;
+                    selRadio = "";
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
@@ -85,6 +94,9 @@ public class ListYourFarms extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                issel = false;
+                selRadio = "";
               //  selectedFragment = HomeMenuFragment.newInstance();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -98,17 +110,30 @@ public class ListYourFarms extends Fragment {
         continue_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("RB_S",-1);
-                selectedFragment = ListYourFarmsSecond.newInstance();
-                selectedFragment.setArguments(bundle);
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                 transaction.addToBackStack("list_farm1");
-                transaction.commit();
+                if (issel){
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("RB_S",-1);
+                    selectedFragment = ListYourFarmsSecond.newInstance();
+                    selectedFragment.setArguments(bundle);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.addToBackStack("list_farm1");
+                    transaction.commit();
+                }
+                else{
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, "Please choose any one option", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+                    snackbar.show();
+                }
             }
         });
 

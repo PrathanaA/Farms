@@ -168,6 +168,8 @@ public class  Add_New_Address_Fragment extends Fragment {
         selected_addresstype = getArguments().getString("Addr_pickup_from");
 
 
+        name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30)});
+        street_name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30)});
 
 
 
@@ -1314,7 +1316,49 @@ public class  Add_New_Address_Fragment extends Fragment {
         });
     }
 
-    public static InputFilter EMOJI_FILTER = new InputFilter() {
+    public static InputFilter  EMOJI_FILTER = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            boolean keepOriginal = true;
+            String specialChars = ".1/*!@#$%^&*()\"{}_[]|\\?/<>,.:-'';§£¥₹...%&+=€π|";
+            StringBuilder sb = new StringBuilder(end - start);
+            for (int index = start; index < end; index++) {
+                int type = Character.getType(source.charAt(index));
+                if (type == Character.SURROGATE || type == Character.OTHER_SYMBOL||type==Character.MATH_SYMBOL||specialChars.contains("" + source)) {
+                    return "";
+                }
+                for (int i = start; i < end; i++) {
+                    if (Character.isWhitespace(source.charAt(i))) {
+                        if (dstart == 0)
+                            return "";
+                    }else if(Character.isDigit(source.charAt(i))) {
+                        return "";
+                    }
+                }
+                return null;
+  /*  char c = source.charAt(index);
+    if (isCharAllowed(c))
+        sb.append(c);
+    else
+        keepOriginal = false;*/
+            }
+            if (keepOriginal)
+                return null;
+            else {
+                if (source instanceof Spanned) {
+                    SpannableString sp = new SpannableString(sb);
+                    TextUtils.copySpansFrom((Spanned) source, start, sb.length(), null, sp, 0);
+                    return sp;
+                } else {
+                    return sb;
+                }
+            }
+        }
+    };
+
+
+
+   /* public static InputFilter EMOJI_FILTER = new InputFilter() {
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             boolean keepOriginal = true;
@@ -1331,11 +1375,11 @@ public class  Add_New_Address_Fragment extends Fragment {
                     }
                 }
                 return null;
-          /*  char c = source.charAt(index);
+          *//*  char c = source.charAt(index);
             if (isCharAllowed(c))
                 sb.append(c);
             else
-                keepOriginal = false;*/
+                keepOriginal = false;*//*
             }
             if (keepOriginal)
                 return null;
@@ -1349,7 +1393,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 }
             }
         }
-    };
+    };*/
 
 
 

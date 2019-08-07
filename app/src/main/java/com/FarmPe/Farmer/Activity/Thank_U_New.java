@@ -180,6 +180,7 @@ public class Thank_U_New extends AppCompatActivity implements ConnectivityReceiv
             toast_internet = lngObject.getString("GoodConnectedtoInternet");
             toast_nointernet = lngObject.getString("NoInternetConnection");
             toast_number_exceeded = lngObject.getString("Youhaveexceededthelimitofresendingotp");
+            resend_otp.setText(lngObject.getString("Resend"));
 
         } catch (JSONException e) {
             e.printStackTrace();

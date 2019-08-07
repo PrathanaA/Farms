@@ -77,20 +77,20 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     public static DrawerLayout drawer;
     ImageView plus_sign_add;
     RelativeLayout menu;
-    LinearLayout update_acc_layout;
+    LinearLayout update_acc_layout,your_request,your_farms_tab,nw_request;
     SessionManager sessionManager;
     public static CircleImageView prod_img,prod_img1;
     public static boolean isEng = false;
     String mob_no;
     String userid;
     Bitmap bitmap;
-    TextView home,settings,nw_request,nearby,connections,connection_nw,your_requests,list_farm,invitation,your_request,your_farms_tab;
-    public static TextView your_farms,cart_count_text,user_name_menu,phone_no;
+    TextView home,settings,list_farm;
+    public static TextView your_farms,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
     JSONObject lngObject;
     static boolean fragloaded;
-    //  public static SearchView searchView;
+
     LinearLayout linearLayout;
 
     public static String onBack_status=null;
@@ -110,15 +110,12 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         final View view = inflater.inflate(R.layout.activity_navigation_menu_home, container, false);
 
 
-
         menu=view.findViewById(R.id.menu);
-
         home = view.findViewById(R.id.home);
         phone_no = view.findViewById(R.id.phone_no);
         your_farms_tab = view.findViewById(R.id.your_farms_tab);
         your_request = view.findViewById(R.id.your_request);
         nw_request = view.findViewById(R.id.nw_request);
-
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
         settings=view.findViewById(R.id.settings);
@@ -131,7 +128,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
         your_farms=view.findViewById(R.id.your_farms);
-      //  your_requests=view.findViewById(R.id.your_requests);
+
         list_farm=view.findViewById(R.id.list_farm);
 
 
@@ -490,7 +487,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -510,9 +506,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
         return view;
     }
-
-
-
 
 
 
@@ -539,6 +532,8 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                 e.printStackTrace();
             }
         }
+
+
 
       /*  if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
 
@@ -613,7 +608,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
 
 
-
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -643,7 +637,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     public void onClick(View v) {
 
     }
-
 
 
     public Bitmap getResizedBitmap(Bitmap bm1, int newWidth, int newHeight) {

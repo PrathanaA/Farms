@@ -1,12 +1,17 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +40,7 @@ public class AddHpFragment extends Fragment {
     public static RecyclerView recyclerView;
     public static AddHpAdapter farmadapter;
     TextView toolbar_title,continue_button;
-    LinearLayout back_feed;
+    LinearLayout back_feed,linearLayout;
     Fragment selectedFragment;
 
 
@@ -51,6 +56,7 @@ public class AddHpFragment extends Fragment {
         toolbar_title=view.findViewById(R.id.toolbar_title);
         back_feed=view.findViewById(R.id.back_feed);
         continue_button=view.findViewById(R.id.continue_button);
+        linearLayout=view.findViewById(R.id.linearLayout);
         toolbar_title.setText("Select HP");
 
         back_feed.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +86,30 @@ public class AddHpFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                selectedFragment = AddModelFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("third");
-                transaction.commit();
+                if(AddHpAdapter.hp_model == null){
+                    Snackbar snackbar = Snackbar
+                            .make(linearLayout, "Please choose any option", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                    tv.setTextColor(Color.WHITE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    } else {
+                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                    }
+
+                    snackbar.show();
+
+                }else{
+                    selectedFragment = AddModelFragment.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.addToBackStack("third");
+                    transaction.commit();
+                }
+
+
             }
         });
 

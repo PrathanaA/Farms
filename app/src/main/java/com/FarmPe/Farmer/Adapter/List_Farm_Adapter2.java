@@ -44,13 +44,11 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
 
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image;
         public TextView actninfo;
         public RadioButton list_farm1;
         public LinearLayout farm_type_id_layout;
-
 
 
         public MyViewHolder(View view) {
@@ -94,10 +92,25 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
         holder.list_farm1.setChecked(selectedval);
 
+        if (!ListYourFarmsSecond.selectedRadio.equals("") && products.getFarm_list_name().equals(ListYourFarmsSecond.selectedRadio)){
+            holder.list_farm1.setChecked(true);
+
+        }
+
+       else{
+            holder.list_farm1.setChecked(false);
+        }
+
 
         holder.list_farm1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+                ListYourFarmsSecond.selectedRadio = holder.list_farm1.getText().toString();
+
+
 
                 ListYourFarmsSecond.selected=true;
                 boolean selectedval= products.isIsselected()? false : true;

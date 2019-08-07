@@ -22,7 +22,6 @@ import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
-import com.FarmPe.Farmer.Fragment.LokingForDetailsFragment;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
 

@@ -333,7 +333,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
                 final LinearLayout close_layout;
                 System.out.println("aaaaaaaaaaaa");
                 final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.logout_layout);
+                dialog.setContentView(R.layout.delete_request_layout);
                 text_desctxt =  dialog.findViewById(R.id.text_desc);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setCancelable(false);

@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.FarmPe.Farmer.Bean.List_Farm_Bean;
+import com.FarmPe.Farmer.Fragment.ListYourFarms;
 import com.FarmPe.Farmer.R;
 import java.util.List;
 
@@ -75,6 +76,13 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final List_Farm_Bean products = productList.get(position);
 
+
+        if (!ListYourFarms.selRadio.equals("") && products.getFarm_list_name().equals(ListYourFarms.selRadio)){
+            holder.list_farm1.setChecked(true);
+        }
+        else{
+            holder.list_farm1.setChecked(false);
+        }
          System.out.println("111wadwd" + products.isIsselected());
 
          holder.list_farm1.setText(products.getFarm_list_name());
@@ -92,15 +100,18 @@ public class List_Farm_Adapter extends RecyclerView.Adapter<List_Farm_Adapter.My
          }
 */
 
-       boolean selectedval= products.isIsselected()? true : false;
+    //   boolean selectedval= products.isIsselected()? true : false;
 
-        holder.list_farm1.setChecked(selectedval);
+    //    holder.list_farm1.setChecked(selectedval);
 
 
 
         holder.list_farm1.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
+             ListYourFarms.issel = true;
+             ListYourFarms.selRadio = holder.list_farm1.getText().toString();
+
              System.out.println("111uuuudwdselected_position" + selected_position);
 
 selected_position=position;

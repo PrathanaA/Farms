@@ -179,7 +179,7 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
             @Override
             public void onClick(View v) {
 
-                final TextView yes1,no1;
+                final TextView yes1,no1,delete_text,popupheading;
                 System.out.println("aaaaaaaaaaaa");
                 final Dialog dialog = new Dialog(activity);
                 dialog.setContentView(R.layout.address_delete_popup);
@@ -205,6 +205,9 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
                 });
 
                 yes1 =  dialog.findViewById(R.id.yes_1);
+                delete_text = dialog.findViewById(R.id.text_desc);
+                popupheading = dialog.findViewById(R.id.popup_heading);
+
 
                 try {
 
@@ -214,7 +217,10 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
                     yes1.setText(lngObject.getString("Confirm"));
                     no1.setText(lngObject.getString("Cancel"));
                     deleted=lngObject.getString("Addressdeletedsuccessfully");
-                   // addlist=lngObject.getString("addressesareaddedin");
+                    delete_text.setText(lngObject.getString("Areyousureyouwanttoremovetheaddress"));
+                    popupheading.setText(lngObject.getString("Removeaddress"));
+
+                    // addlist=lngObject.getString("addressesareaddedin");
 
                 } catch (JSONException e) {
                     e.printStackTrace();

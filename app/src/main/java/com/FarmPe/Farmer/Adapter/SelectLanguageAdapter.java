@@ -46,7 +46,6 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
         this.activity=activity;
         sessionManager=new SessionManager(activity);
 
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

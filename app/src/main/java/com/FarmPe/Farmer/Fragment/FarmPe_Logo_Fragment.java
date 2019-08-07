@@ -28,7 +28,11 @@ import com.FarmPe.Farmer.Bean.AddTractorBean1;
 import com.FarmPe.Farmer.Bean.AddTractorBean2;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
+import com.FarmPe.Farmer.Urls;
+import com.FarmPe.Farmer.Volly_class.Crop_Post;
+import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,16 +45,20 @@ public class FarmPe_Logo_Fragment extends Fragment {
 
 LinearLayout linearLayout;
     JSONObject lngObject;
+    TextView reqst_count,farmlist_count,nameee;
     SessionManager sessionManager;
     public static String toast_click_back;
     boolean doubleBackToExitPressedOnce = false;
+    JSONArray count_images_array;
     HomePage_Adapter homePage_adapter;
     HomePage1_Adapter homePage1_adapter;
+
+
     RecyclerView recyclerView,recyclerView1;
     public static List<AddTractorBean1> newOrderBeansList = new ArrayList<>();
     public static List<AddTractorBean2> newOrderBeansList2 = new ArrayList<>();
 
-
+   AddTractorBean1 addTractorBean1;
 
 
     public static FarmPe_Logo_Fragment newInstance() {
@@ -60,17 +68,21 @@ LinearLayout linearLayout;
 
     @Override
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.farmepe_logo_layout, container, false);
      //   backfeed= view.findViewById(R.id.back_feed1);
 
 
 
         linearLayout= view.findViewById(R.id.layout);
+        nameee= view.findViewById(R.id.nameee);
         sessionManager = new SessionManager(getActivity());
         recyclerView= view.findViewById(R.id.recylr_2);
         recyclerView1= view.findViewById(R.id.recylr_1);
+        farmlist_count= view.findViewById(R.id.farmlist_count);
+        reqst_count= view.findViewById(R.id.request_count);
 
+        nameee.setText(sessionManager.getRegId("name"));
 
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
@@ -159,23 +171,62 @@ LinearLayout linearLayout;
 // recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.addItemDecoration(new ItemDecorator( -80));
 
-        AddTractorBean1 img4=new AddTractorBean1( R.drawable.cow_dairy," ","");
-        newOrderBeansList.add(img4);
-
-        AddTractorBean1 img5=new AddTractorBean1( R.drawable.poultry," ","");
-        newOrderBeansList.add(img5);
-
-        AddTractorBean1 img6=new AddTractorBean1( R.drawable.tiger_pic," ","");
-        newOrderBeansList.add(img6);
-
-        AddTractorBean1 img7=new AddTractorBean1( R.drawable.cow," ","");
-        newOrderBeansList.add(img7);
+//        AddTractorBean1 img4=new AddTractorBean1( R.drawable.cow_dairy," ","");
+//        newOrderBeansList.add(img4);
+//
+//        AddTractorBean1 img5=new AddTractorBean1( R.drawable.poultry," ","");
+//        newOrderBeansList.add(img5);
+//
+//        AddTractorBean1 img6=new AddTractorBean1( R.drawable.tiger_pic," ","");
+//        newOrderBeansList.add(img6);
+//
+//        AddTractorBean1 img7=new AddTractorBean1( R.drawable.cow," ","");
+//        newOrderBeansList.add(img7);
 
         homePage1_adapter=new HomePage1_Adapter(getActivity(),newOrderBeansList);
         recyclerView1.setAdapter(homePage1_adapter);
 
 
 
+
+        try{
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
+
+            Crop_Post.crop_posting(getActivity(), Urls.Home_Page_Count, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.println("fjfhffjcount" + result);
+
+                    try{
+
+                        int farm_count = result.getInt("FarmsCount");
+                        int request_count = result.getInt("RFQCount");
+
+                        count_images_array = result.getJSONArray("FarmImages");
+                        for(int i = 0;i<count_images_array.length();i++){
+                            AddTractorBean1 img4=new AddTractorBean1( count_images_array.getString(i)," ","");
+                            newOrderBeansList.add(img4);
+
+                        }
+
+
+                        reqst_count.setText(request_count);
+                        farmlist_count.setText(farm_count);
+
+                        homePage1_adapter.notifyDataSetChanged();
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
 
         return view;

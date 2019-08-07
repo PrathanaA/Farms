@@ -102,7 +102,7 @@
        android:background="#000"
        >
       <LinearLayout
-          android:id="@+id/linear_connection"
+          android:id="@+id/your_request"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
@@ -122,7 +122,7 @@
              />
 
          <TextView
-             android:id="@+id/your_request"
+             android:id="@+id/your_request1"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Your Requests"
@@ -136,7 +136,7 @@
 
 
       <LinearLayout
-          android:id="@+id/near_by"
+          android:id="@+id/your_farms_tab"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
@@ -166,7 +166,7 @@
              <!--/>-->
 
          <TextView
-             android:id="@+id/your_farms_tab"
+             android:id="@+id/your_farms_tab1"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Your Farms"
@@ -180,6 +180,7 @@
 
 
       <LinearLayout
+          android:id="@+id/nw_request"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
@@ -196,7 +197,7 @@
              />
 
          <TextView
-             android:id="@+id/nw_request"
+             android:id="@+id/nw_request1"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Make a Request"
@@ -416,7 +417,7 @@
           android:text="Your Address"
           android:layout_marginTop="30dp"
           android:textSize="16dp"
-          android:drawableLeft="@drawable/ic_barn"
+          android:drawableLeft="@drawable/ic_no_farmss"
           android:drawablePadding="10dp"
           android:fontFamily="@font/segoeui"
           android:textColor="#000"

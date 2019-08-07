@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_layout"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
@@ -74,6 +74,15 @@
                 android:textColor="#000"
                 />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Give us the Tractor specification to find your preference and customize our services."
+                android:textSize="14dp"
+                android:fontFamily="@font/segoeui"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                />
 
 
             <android.support.v7.widget.RecyclerView

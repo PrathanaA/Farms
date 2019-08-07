@@ -2,11 +2,11 @@ package com.FarmPe.Farmer.Bean;
 
 public class AddTractorBean1 {
 
-   private int image;
+   private String image;
     private String prod_name,id;
    /// private  int image;
 
-    public AddTractorBean1(int image, String prod_name, String id) {
+    public AddTractorBean1(String image, String prod_name, String id) {
 
         this.image = image;
         this.prod_name = prod_name;
@@ -23,7 +23,7 @@ public class AddTractorBean1 {
         return id;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 

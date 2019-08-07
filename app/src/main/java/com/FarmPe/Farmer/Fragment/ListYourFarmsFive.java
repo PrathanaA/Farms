@@ -195,7 +195,7 @@ public class ListYourFarmsFive extends Fragment {
 
                   snackbar.show();
 
-                  selectedFragment = HomeMenuFragment.newInstance();
+                  selectedFragment = FarmsHomePageFragment.newInstance();
                   FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                   transaction.replace(R.id.frame_layout, selectedFragment);
                   transaction.commit();

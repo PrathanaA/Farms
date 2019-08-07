@@ -48,10 +48,12 @@ public class ListYourFarmsSecond extends Fragment {
     List_Farm_Adapter2 farmadapter1;
     Fragment selectedFragment;
     String text_farm;
+    public static String selectedRadio = "";
+    public static boolean selected=false;
 
     TextView toolbar_title,continue_2,headin_name;
 
-    public static boolean selected=false;
+
     int radiobutonStatus;
 
 
@@ -167,7 +169,7 @@ public class ListYourFarmsSecond extends Fragment {
                 }else {
 
                     Snackbar snackbar = Snackbar
-                            .make(linearLayout, "Please Select any 1 item", Snackbar.LENGTH_LONG);
+                            .make(linearLayout, "Please choose any one option", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
@@ -183,8 +185,6 @@ public class ListYourFarmsSecond extends Fragment {
 
                    // Toast.makeText(getActivity(),"Please Select",Toast.LENGTH_LONG).show();
                 }
-
-
 
 
 

@@ -27,10 +27,11 @@
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
 
+
         <LinearLayout
             android:id="@+id/back_feed1"
             android:layout_width="40dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/ic_filter_state"
             android:layout_marginTop="20dp"
 

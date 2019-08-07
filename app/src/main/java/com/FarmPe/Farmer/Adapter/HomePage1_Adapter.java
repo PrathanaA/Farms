@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import com.FarmPe.Farmer.Bean.AddTractorBean1;
 import com.FarmPe.Farmer.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -53,9 +55,16 @@ public class HomePage1_Adapter extends RecyclerView.Adapter<HomePage1_Adapter.My
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final AddTractorBean1 products = productList.get(position);
-        holder.image.setImageResource(products.getImage());
+      //  holder.image.setImageResource(products.getImage());
 
 
+        Glide.with(activity).load(products.getImage())
+
+                .thumbnail(0.5f)
+                //  .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.avatarmale)
+                 .into(holder.image);
 
     }
 

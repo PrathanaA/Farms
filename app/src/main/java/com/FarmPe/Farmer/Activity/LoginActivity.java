@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
      public static TextInputLayout text_mobile,text_pass;
 
+
      ConnectivityReceiver connectivityReceiver;
      @Override
      protected void onStop()
@@ -81,14 +82,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         super.onStop();
     }
 
-
      LinearLayout back_xlogin;
      LinearLayout coordinatorLayout;
      public static CheckBox remember_me;
      DatabaseHelper myDb;
      public static boolean connectivity_check;
      public static boolean isEng = false;
-
      public static  String password,mob_toast,mobile_string,pass_toast,toast_invalid,toast_click_back,toast_internet,toast_nointernet;
      EditText spn_localize;
      public static   JSONObject lngObject;
@@ -98,6 +97,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
      SessionManager sessionManager;
      public static  Dialog dialog;
      public static TextView welcome_back, createaccount, change_lang,popup_heading,farmPe_title ,enterPassword, forgotPassword;
+
 
 
     private void checkConnection() {
@@ -288,12 +288,11 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 forgot_pass.setText(lngObject.getString("ForgotPassword") + "?");
                 log_in.setText(lngObject.getString("Login"));
                 welcome_back.setText(lngObject.getString("Login"));
-                createaccount.setText(lngObject.getString("SignUp"));
-                new_farmpe.setText(lngObject.getString("NewtoFarmPe"));
+                createaccount.setText(lngObject.getString(" " + "SignUp"));
+                new_farmpe.setText(lngObject.getString("NewtoFarmPe") + "?");
 
                 // popup_heading.setText(lngObject.getString("ChangeLanguage"));
                 // farmPe_title.setText(lngObject.getString("FarmPe"));
-
 
                 pass_toast = lngObject.getString("EnterPassword");
                 mob_toast = lngObject.getString("EnterPhoneNo");
@@ -306,6 +305,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
         createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -648,7 +648,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                         String log_password = result.getString("Password");
                         String log_remember_me = result.getString("RememberMe");
                         String log_forgot_passwrd = result.getString("ForgotPassword");
-                        String log_register = result.getString("SignUp");
+                        String log_register = result.getString(" " + "SignUp");
                        String log_farmpe = result.getString("NewtoFarmPe");
 
                         mob_toast = result.getString("EnterPhoneNo");
@@ -664,7 +664,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                             remember_me.setText(log_remember_me);
                            log_in.setText(log_login);
                            text_mobile.setHint(log_mobile);
-                         new_farmpe.setText(log_farmpe);
+                         new_farmpe.setText(log_farmpe+"?");
 
                         forgot_pass.setText(log_forgot_passwrd+"?");
                         text_pass.setHint(log_password);

@@ -37,6 +37,7 @@ public class FarmsHomePageFragment extends Fragment {
     public static List<FarmsImageBean> newOrderBeansList = new ArrayList<>();
     private List<FarmsImageBean> pagination_list = new ArrayList<>();
     TextView filter_text;
+    TextView title;
     Fragment selectedFragment = null;
 
     public static RecyclerView recyclerView;
@@ -61,6 +62,13 @@ public class FarmsHomePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.looking_for_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_looking);
         filter_text = view.findViewById(R.id.filter_text);
+
+
+
+
+
+        title = view.findViewById(R.id.toolbar_title);
+        title.setText("Your Farms");
         newOrderBeansList.clear();
 
 
