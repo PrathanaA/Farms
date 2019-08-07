@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.FarmPe.Farmer.Adapter.AddBrandAdapter;
 import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
+import com.FarmPe.Farmer.Adapter.AddHpAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.Urls;
@@ -106,9 +107,10 @@ public class AddBrandFragment extends Fragment {
                     snackbar.show();
 
                 }else{
+                    AddHpAdapter.hp_model = null;
                     selectedFragment = AddHpFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.add(R.id.frame_layout, selectedFragment);
                     transaction.addToBackStack("second");
                     transaction.commit();
 

@@ -178,9 +178,6 @@ public class Notification_Recyc_Fragment extends Fragment {
 
 
 
-
-
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -225,7 +222,6 @@ public class Notification_Recyc_Fragment extends Fragment {
                          getnot();
 
 
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -240,11 +236,7 @@ public class Notification_Recyc_Fragment extends Fragment {
 
     }
 
-
-
-
-
-public void  getnot(){
+ public void  getnot(){
     try{
 
         JSONObject jsonObject = new JSONObject();
@@ -261,6 +253,7 @@ public void  getnot(){
                     newOrderBeansList.clear();
 
                     noti_array = result.getJSONArray("NotificationMasterList");
+
                     for(int i = 0;i<noti_array.length();i++){
                         JSONObject jsonObject1 =  noti_array.getJSONObject(i);
 
@@ -274,10 +267,10 @@ public void  getnot(){
                             notification_recy_bean = new Notification_recy_bean(jsonObject1.getString("NotificationAction"), jsonObject1.getString("NotificationCode"), jsonObject1.getString("NotificationID"));
                             newmember_List.add(notification_recy_bean);
 
-
                         }
 
                     }
+
                     farmadapter.notifyDataSetChanged();
                     farmadapter1.notifyDataSetChanged();
 
@@ -288,10 +281,6 @@ public void  getnot(){
 
             }
         });
-
-
-
-
 
     }catch (Exception e){
         e.printStackTrace();

@@ -490,6 +490,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 //                    //tv.setText("abc");
 //                    snackbar.show();
 
+
                 } else if (password.equals("")) {
                     pass.requestFocus();
 
@@ -507,6 +508,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                     }
 
                     snackbar.show();
+
 
                 } else if (password.contains(" ")) {
                     pass.requestFocus();
@@ -528,7 +530,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
 
                 } else {
-
 
                     try{
 
@@ -662,9 +663,9 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 
                             popup_heading.setText(lang_title1);
                             remember_me.setText(log_remember_me);
-                           log_in.setText(log_login);
-                           text_mobile.setHint(log_mobile);
-                         new_farmpe.setText(log_farmpe+"?");
+                            log_in.setText(log_login);
+                            text_mobile.setHint(log_mobile);
+                            new_farmpe.setText(log_farmpe+"?");
 
                         forgot_pass.setText(log_forgot_passwrd+"?");
                         text_pass.setHint(log_password);

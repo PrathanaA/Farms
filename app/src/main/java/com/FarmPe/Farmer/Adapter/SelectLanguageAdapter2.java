@@ -146,8 +146,6 @@ public class SelectLanguageAdapter2 extends RecyclerView.Adapter<SelectLanguageA
                            LoginActivity.toast_nointernet = result.getString("NoInternetConnection");
 
 
-
-
                     }catch (Exception e){
                         e.printStackTrace();
                     }

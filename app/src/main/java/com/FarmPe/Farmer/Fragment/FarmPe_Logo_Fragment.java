@@ -200,13 +200,17 @@ LinearLayout linearLayout;
 
                     try{
 
-                        int farm_count = result.getInt("FarmsCount");
-                        int request_count = result.getInt("RFQCount");
+                        String farm_count = String.valueOf(result.getInt("FarmsCount"));
+                        String  request_count = String.valueOf(result.getInt("RFQCount"));
 
                         count_images_array = result.getJSONArray("FarmImages");
                         for(int i = 0;i<count_images_array.length();i++){
-                            AddTractorBean1 img4=new AddTractorBean1( count_images_array.getString(i)," ","");
-                            newOrderBeansList.add(img4);
+
+                            if (i <= 3) {
+
+                                AddTractorBean1 img4=new AddTractorBean1( count_images_array.getString(i)," ","");
+                                newOrderBeansList.add(img4);
+                            }
 
                         }
 

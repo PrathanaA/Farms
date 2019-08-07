@@ -27,6 +27,8 @@
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp">
 
+
+
         <LinearLayout
             android:id="@+id/back_feed1"
             android:layout_width="40dp"
@@ -47,30 +49,27 @@
                 style="@style/SelectableItemBackground"
                 android:background="?attr/selectableItemBackgroundBorderless"
 
-
                 />
 
         </LinearLayout>
 
 
-
     </android.support.v7.widget.Toolbar>
-
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/ic_plus_grey"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-
         >
 
         <TextView
@@ -78,23 +77,25 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="No request here"
-            android:textSize="30dp"
+            android:textSize="22dp"
             android:fontFamily="@font/segoeui"
             android:textColor="@color/black"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="20dp"/>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <TextView
             android:id="@+id/make_request"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginHorizontal="50dp"
             android:background="@drawable/border_filled_red"
             android:fontFamily="@font/segoeui"
             android:gravity="center"
@@ -104,7 +105,6 @@
             android:layout_marginTop="20dp"
             android:textColor="#fff"
             android:textSize="16dp" />
-
 
 
     </LinearLayout>

@@ -38,6 +38,7 @@ import android.widget.Toast;
 
 import com.FarmPe.Farmer.Activity.LandingPageActivity;
 import com.FarmPe.Farmer.Activity.LoginActivity;
+import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Adapter.AddPhotoAdapter;
 import com.FarmPe.Farmer.Adapter.List_Farm_Adapter2;
 import com.FarmPe.Farmer.Bean.AddPhotoBean;
@@ -142,6 +143,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         nw_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AddFirstAdapter.looinkgId = null;
                 selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
@@ -275,6 +277,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         plus_sign_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                  AddFirstAdapter.looinkgId = null;
 
                 selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = (getActivity().getSupportFragmentManager().beginTransaction());
@@ -566,6 +569,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
         progressDialog.show();
 
+
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, Urls.Update_Profile_Details,
                 new Response.Listener<NetworkResponse>(){
                     @Override
@@ -579,7 +583,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 //                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 //                        ft.replace(R.id.frame_layout,selectedFragment);
 //                        ft.commit();
-
                     }
                 },
                 new Response.ErrorListener() {

@@ -90,6 +90,8 @@ public class ListYourFarmsSecond extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"+List_Farm_Adapter.selected_position);
+                    selected=false;
+                    selectedRadio="";
 
                     Bundle bundle = new Bundle();
                     bundle.putInt("RB_S", List_Farm_Adapter.selected_position);
@@ -135,6 +137,9 @@ public class ListYourFarmsSecond extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                selected=false;
+                selectedRadio="";
 
                 System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"+List_Farm_Adapter.selected_position);
 

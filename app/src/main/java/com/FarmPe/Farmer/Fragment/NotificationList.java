@@ -103,7 +103,6 @@ public class NotificationList extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager_farm);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
        /* newOrderBeansList.add(img6);
         newOrderBeansList.add(img6);*/
 

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.FarmPe.Farmer.Activity.LoginActivity;
+import com.FarmPe.Farmer.Adapter.AddBrandAdapter;
 import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
 import com.FarmPe.Farmer.R;
@@ -95,6 +96,7 @@ public class AddFirstFragment extends Fragment {
                 //    Toast.makeText(getActivity(),"Please Select any option",Toast.LENGTH_LONG).show();
 
                 }else {
+                    AddBrandAdapter.brandId = null;
                     selectedFragment = AddBrandFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.add(R.id.frame_layout, selectedFragment);
