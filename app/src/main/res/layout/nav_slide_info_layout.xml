@@ -55,15 +55,14 @@
             >
 
 
-
-            <android.support.v7.widget.SearchView
+            <EditText
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/segoeui"
-                android:hint="Search"
-                android:gravity="center"
+                android:drawableLeft="@drawable/places_ic_search"
+                android:paddingLeft="10dp"
                 android:inputType="textCapWords|textCapSentences"
                 app:theme="@style/MyStyle"
                 android:singleLine="true"
@@ -71,6 +70,23 @@
 
 
             />
+
+
+            <!--<android.support.v7.widget.SearchView-->
+                <!--android:id="@+id/search"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:fontFamily="@font/segoeui"-->
+                <!--android:hint="Search"-->
+                <!--android:gravity="center"-->
+                <!--android:inputType="textCapWords|textCapSentences"-->
+                <!--app:theme="@style/MyStyle"-->
+                <!--android:singleLine="true"-->
+                <!--android:textStyle="bold" />-->
+
+
+            <!--/>-->
         </FrameLayout>
 
     </LinearLayout>

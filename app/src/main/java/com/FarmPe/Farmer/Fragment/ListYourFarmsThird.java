@@ -200,7 +200,6 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
-
          skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,11 +223,14 @@ public class ListYourFarmsThird extends Fragment {
                 list_fams="state";
                 grade_dialog= new Dialog(getActivity());
                 grade_dialog.setContentView(R.layout.select_variety_popup);
+                TextView title_text = grade_dialog.findViewById(R.id.title_text);
+
               //`  EditText popup_heading = (EditText) grade_dialog.findViewById(R.id.popup_heading);
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
                 LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
                 EditText editText = (EditText) grade_dialog.findViewById(R.id.search_1);
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
+                title_text.setText("Select State");
 
 //                search_status="state";
 //                search.setQueryHint("");
@@ -317,12 +319,34 @@ public class ListYourFarmsThird extends Fragment {
 
                 grade_dialog = new Dialog(getActivity());
                 grade_dialog.setContentView(R.layout.select_variety_popup);
+                TextView title_text = grade_dialog.findViewById(R.id.title_text);
 
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
              //   EditText popup_heading = (EditText)grade_dialog.findViewById(R.id.popup_heading);
                 LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
                 EditText editText = (EditText) grade_dialog.findViewById(R.id.search_1);
+                title_text.setText("Select District");
+
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        sorting1(s.toString());
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                        // TODO Auto-generated method stub
+                    }
+                });
 
 
 //                search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -353,6 +377,7 @@ public class ListYourFarmsThird extends Fragment {
 //                });
 
              //   popup_heading.setHint("District");
+
 
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -386,6 +411,7 @@ public class ListYourFarmsThird extends Fragment {
                 search_status="taluk";
                 grade_dialog= new Dialog(getActivity());
                 grade_dialog.setContentView(R.layout.select_variety_popup);
+                TextView title_text = grade_dialog.findViewById(R.id.title_text);
                 ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
            //     EditText popup_heading = (EditText)grade_dialog.findViewById(R.id.popup_heading);
                 LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
@@ -397,35 +423,27 @@ public class ListYourFarmsThird extends Fragment {
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-//
-//                editText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//                    @Override
-//                    public boolean onQueryTextSubmit(String query) {
-//
-//                        // search.clearFocus();
-//                        System.out.println("lknkknknknknknknknnk");
-//             /*   if(list.contains(query)){
-//                    adapter.getFilter().filter(query);
-//                }else{
-//                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
-//                }*/
-//                        return false;
-//
-//                    }
-//
-//                    @Override
-//                    public boolean onQueryTextChange(String newText) {
-//                        // back_feed.setVisibility(View.GONE);
-//                        //title.setVisibility(View.GONE);
-//                        System.out.println("lknkknknknknknknknnk"+newText);
-//                        sorting1(newText);
-//
-//
-//                        return false;
-//                    }
-//                });
-//
-//                popup_heading.setHint("Taluk");
+                title_text.setText("Select Taluk");
+
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        sorting1(s.toString());
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                        // TODO Auto-generated method stub
+                    }
+                });
 
                 talukAdapter = new TalukAdapter1( talukBeanList,getActivity());
                 recyclerView.setAdapter(talukAdapter);
@@ -454,6 +472,30 @@ public class ListYourFarmsThird extends Fragment {
                 recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
                 EditText editText = (EditText) grade_dialog.findViewById(R.id.search_1);
                 LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
+                TextView title_text = grade_dialog.findViewById(R.id.title_text);
+                title_text.setText("Select Area");
+
+
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        sorting1(s.toString());
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                        // TODO Auto-generated method stub
+                    }
+                });
+
 
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -477,68 +519,6 @@ public class ListYourFarmsThird extends Fragment {
             }
         });
 
-
-//        village.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                list_farms_village="village";
-//                search_status="village";
-//
-//
-//                grade_dialog= new Dialog(getActivity());
-//                grade_dialog.setContentView(R.layout.select_variety_popup);
-//                ImageView image = (ImageView) grade_dialog.findViewById(R.id.close_popup);
-//                EditText popup_heading = (EditText)grade_dialog.findViewById(R.id.popup_heading);
-//                recyclerView = grade_dialog.findViewById(R.id.recycler_view1);
-//                LinearLayout close_layout = (LinearLayout) grade_dialog.findViewById(R.id.close_layout);
-//                SearchView search = (SearchView) grade_dialog.findViewById(R.id.search_1);
-//
-//                search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//                    @Override
-//                    public boolean onQueryTextSubmit(String query) {
-//
-//                        // search.clearFocus();
-//                        System.out.println("lknkknknknknknknknnk");
-//             /*   if(list.contains(query)){
-//                    adapter.getFilter().filter(query);
-//                }else{
-//                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
-//                }*/
-//                        return false;
-//
-//                    }
-//
-//                    @Override
-//                    public boolean onQueryTextChange(String newText) {
-//                        // back_feed.setVisibility(View.GONE);
-//                        //title.setVisibility(View.GONE);
-//                        System.out.println("lknkknknknknknknknnk"+newText);
-//                        sorting1(newText);
-//
-//
-//                        return false;
-//                    }
-//                });
-//
-//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-//                recyclerView.setLayoutManager(mLayoutManager);
-//                final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                recyclerView.setLayoutManager(layoutManager);
-//                recyclerView.setItemAnimator(new DefaultItemAnimator());
-//                villageAdapter = new VillageAdapter1(villageBeanList,getActivity());
-//                recyclerView.setAdapter(villageAdapter);
-//                popup_heading.setHint("Village");
-//                village_list();
-//                close_layout.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        grade_dialog.dismiss();
-//                    }
-//                });
-//            }
-//
-//        });
 
 
         continue_3.setOnClickListener(new View.OnClickListener() {
@@ -636,34 +616,6 @@ public class ListYourFarmsThird extends Fragment {
                         }
                         snackbar.show();
 
-                    }else if (village.getText().toString().equals("")) {
-                         Snackbar snackbar = Snackbar
-                                 .make(main_layout, "Select Village", Snackbar.LENGTH_LONG);
-                         View snackbarView = snackbar.getView();
-                         TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                         tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                         tv.setTextColor(Color.WHITE);
-                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                         } else {
-                             tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                         }
-                         snackbar.show();
-
-//                    }else if (pincode.getText().toString().equals("")) {
-//                        Snackbar snackbar = Snackbar
-//                                .make(main_layout, "Enter Pincode", Snackbar.LENGTH_LONG);
-//                        View snackbarView = snackbar.getView();
-//                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-//                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-//                        tv.setTextColor(Color.WHITE);
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-//                        } else {
-//                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
-//                        }
-//                        snackbar.show();
-//                    }
                      }
                     else if (pincode.getText().toString().length() < 6) {
                         // Toast.makeText(getActivity(), "Enter a valid Pincode", Toast.LENGTH_SHORT).show();

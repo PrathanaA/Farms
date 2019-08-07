@@ -20,11 +20,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -90,7 +92,7 @@ public class  Add_New_Address_Fragment extends Fragment {
     JSONArray jsonArray,state_array,tal_array,hobli_array,village_array;
     StateBean stateBean;
     String new_add_toast;
-    SearchView search;
+    EditText search;
     public static String search_status="status";
     public static TextView add_new_address;
     Fragment selectedFragment = null;
@@ -423,33 +425,52 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
 
-
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                // search.clearFocus();
-                System.out.println("lknkknknknknknknknnk");
-             /*   if(list.contains(query)){
-                    adapter.getFilter().filter(query);
-                }else{
-                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
-                }*/
-                return false;
-
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                sorting(s.toString());
+                // TODO Auto-generated method stub
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                // back_feed.setVisibility(View.GONE);
-                //title.setVisibility(View.GONE);
-                System.out.println("lknkknknknknknknknnk"+newText);
-                sorting(newText);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                // TODO Auto-generated method stub
+            }
 
-                return false;
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // TODO Auto-generated method stub
             }
         });
+
+//        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//                // search.clearFocus();
+//                System.out.println("lknkknknknknknknknnk");
+//             /*   if(list.contains(query)){
+//                    adapter.getFilter().filter(query);
+//                }else{
+//                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+//                }*/
+//                return false;
+//
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                // back_feed.setVisibility(View.GONE);
+//                //title.setVisibility(View.GONE);
+//                System.out.println("lknkknknknknknknknnk"+newText);
+//                sorting(newText);
+//
+//
+//                return false;
+//            }
+//        });
 
 
 
@@ -462,7 +483,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 search_status="state";
               //  search.setQueryHint("");
-                search.setQuery("",false);
+              //  search.setQuery("",false);
                 stateBeanList.clear();
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -482,7 +503,6 @@ public class  Add_New_Address_Fragment extends Fragment {
         });
 
 
-
         district.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -491,7 +511,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="district";
-                search.setQuery("",false);
+              //  search.setQuery("",false);
                // search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -525,7 +545,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 // stateBeanList.clear();
                 search_status="taluk";
               //  search.setQueryHint("");
-                search.setQuery("",false);
+              //  search.setQuery("",false);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -548,7 +568,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="hobli";
-                search.setQuery("",false);
+                //search.setQuery("",false);
               //  search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(mLayoutManager);
@@ -858,7 +878,7 @@ public class  Add_New_Address_Fragment extends Fragment {
             // city.setHint(lngObject.getString("City"));
             pincode_no.setHint(lngObject.getString("Pincode"));
             state.setHint(lngObject.getString("State"));
-            hobli.setHint(lngObject.getString("Hobli"));
+         //   hobli.setHint(lngObject.getString("Hobli"));
             district.setHint(lngObject.getString("District"));
             taluk.setHint(lngObject.getString("Taluk"));
           //  village.setHint(lngObject.getString("Village"));

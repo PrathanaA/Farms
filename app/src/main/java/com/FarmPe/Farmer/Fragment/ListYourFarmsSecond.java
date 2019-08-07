@@ -72,7 +72,7 @@ public class ListYourFarmsSecond extends Fragment {
         headin_name = view.findViewById(R.id.headin_name);
         linearLayout = view.findViewById(R.id.linearLayout);
 
-        selected=false;
+
 
         text_farm =  List_Farm_Adapter.listname;
         headin_name.setText("Select your " + text_farm);

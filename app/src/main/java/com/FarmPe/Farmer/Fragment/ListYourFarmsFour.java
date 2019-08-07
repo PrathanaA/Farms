@@ -74,7 +74,7 @@ public class ListYourFarmsFour extends Fragment {
         instagram=view.findViewById(R.id.insta);
         mobile_no=view.findViewById(R.id.mobile_no);
      //   email_id=view.findViewById(R.id.email_id);
-        main_layout=view.findViewById(R.id.main_layout);
+        main_layout=view.findViewById(R.id.linearLayout);
         final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
@@ -82,7 +82,6 @@ public class ListYourFarmsFour extends Fragment {
         farm_name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30) });
         cont_person_name.setFilters(new InputFilter[] {EMOJI_FILTER,new InputFilter.LengthFilter(30) });
         //email_id.setFilters(new InputFilter[] {EMOJI_FILTER1,new InputFilter.LengthFilter(30) });
-
 
         Resources resources = getResources();
         PackageManager pm = getActivity().getPackageManager();
@@ -139,154 +138,154 @@ public class ListYourFarmsFour extends Fragment {
 
 
 
-        whatsapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        whatsapp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//                if (packageName.contains("com.whatsapp")) {
+//                    Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+//                    whatsappIntent.setType("text/plain");
+//                    whatsappIntent.setPackage("com.whatsapp");
+//                    //whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Text");
+//                    whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app!");
+//
+//                    try {
+//                        startActivity(whatsappIntent);
+//                    } catch (android.content.ActivityNotFoundException ex) {
+//
+//
+//
+//                        Snackbar snackbar = Snackbar
+//                                .make(main_layout, "Whatsapp have not been installed", Snackbar.LENGTH_LONG);
+//                        View snackbarView = snackbar.getView();
+//                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                        tv.setTextColor(Color.WHITE);
+//
+//
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                        } else {
+//                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                        }
+//                        snackbar.show();
+//
+//                    }
+//
+//                }else {
+//                   //Toast.makeText(getActivity(), "Whatsapp have not been installed.", Toast.LENGTH_SHORT);
+//
+//
+//                    Snackbar snackbar = Snackbar
+//                            .make(main_layout, "Whatsapp have not been installed", Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                    } else {
+//                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                    }
+//                    snackbar.show();
+//
+//                }
+//
+//            }
+//        });
 
 
-                if (packageName.contains("com.whatsapp")) {
-                    Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-                    whatsappIntent.setType("text/plain");
-                    whatsappIntent.setPackage("com.whatsapp");
-                    //whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Text");
-                    whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Hey , you found one app \"FarmPeFarmer\" Tap https://play.google.com/store/apps/details?id=com.renewin.FarmPeFarmer to download the app!");
+//        facebook.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (packageName.contains("com.facebook.katana")) {
+//                    Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+//                    String facebookUrl = getFacebookPageURL(getActivity());
+//                    facebookIntent.setData(Uri.parse(facebookUrl));
+//                    //   startActivity(facebookIntent);
+//                    try {
+//                        startActivity(facebookIntent);
+//                    } catch (ActivityNotFoundException e) {
+//                        Snackbar snackbar = Snackbar
+//                                .make(main_layout, "Facebook is not installed on this device", Snackbar.LENGTH_LONG);
+//                        View snackbarView = snackbar.getView();
+//                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                        tv.setTextColor(Color.WHITE);
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                        } else {
+//                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                        }
+//                        snackbar.show();
+//
+//                    }
+//                }else {
+//                    Snackbar snackbar = Snackbar
+//                            .make(main_layout, "Facebook is not installed on this device", Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                    } else {
+//                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                    }
+//                    snackbar.show();
+//                }
+//            }
+//        });
+//
 
-                    try {
-                        startActivity(whatsappIntent);
-                    } catch (android.content.ActivityNotFoundException ex) {
-
-
-
-                        Snackbar snackbar = Snackbar
-                                .make(main_layout, "Whatsapp have not been installed", Snackbar.LENGTH_LONG);
-                        View snackbarView = snackbar.getView();
-                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                        tv.setTextColor(Color.WHITE);
-
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        } else {
-                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                        }
-                        snackbar.show();
-
-                    }
-
-                }else {
-                   //Toast.makeText(getActivity(), "Whatsapp have not been installed.", Toast.LENGTH_SHORT);
-
-
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Whatsapp have not been installed", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-
-                }
-
-            }
-        });
-
-
-        facebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (packageName.contains("com.facebook.katana")) {
-                    Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                    String facebookUrl = getFacebookPageURL(getActivity());
-                    facebookIntent.setData(Uri.parse(facebookUrl));
-                    //   startActivity(facebookIntent);
-                    try {
-                        startActivity(facebookIntent);
-                    } catch (ActivityNotFoundException e) {
-                        Snackbar snackbar = Snackbar
-                                .make(main_layout, "Facebook is not installed on this device", Snackbar.LENGTH_LONG);
-                        View snackbarView = snackbar.getView();
-                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                        tv.setTextColor(Color.WHITE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        } else {
-                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                        }
-                        snackbar.show();
-
-                    }
-                }else {
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Facebook is not installed on this device", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-                }
-            }
-        });
-
-
-        twitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (packageName.contains("com.twitter")) {
-                    Uri uri = Uri.parse("https://twitter.com/FarmPe_Official");
-                    Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-                    likeIng.setPackage("com.twitter.android");
-                    try {
-                        startActivity(likeIng);
-                    } catch (ActivityNotFoundException e) {
-                        Snackbar snackbar = Snackbar
-                                .make(main_layout, "Twitter is not installed on this device", Snackbar.LENGTH_LONG);
-                        View snackbarView = snackbar.getView();
-                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                        tv.setTextColor(Color.WHITE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        } else {
-                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                        }
-                        snackbar.show();
-                    }
-
-                }else {
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Twitter is not installed on this device", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-                }
-
-            }
-        });
-
-
+//        twitter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if (packageName.contains("com.twitter")) {
+//                    Uri uri = Uri.parse("https://twitter.com/FarmPe_Official");
+//                    Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+//                    likeIng.setPackage("com.twitter.android");
+//                    try {
+//                        startActivity(likeIng);
+//                    } catch (ActivityNotFoundException e) {
+//                        Snackbar snackbar = Snackbar
+//                                .make(main_layout, "Twitter is not installed on this device", Snackbar.LENGTH_LONG);
+//                        View snackbarView = snackbar.getView();
+//                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                        tv.setTextColor(Color.WHITE);
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                        } else {
+//                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                        }
+//                        snackbar.show();
+//                    }
+//
+//                }else {
+//                    Snackbar snackbar = Snackbar
+//                            .make(main_layout, "Twitter is not installed on this device", Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                    } else {
+//                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                    }
+//                    snackbar.show();
+//                }
+//
+//            }
+//        });
+//
+//
 
 
 //
@@ -332,50 +331,50 @@ public class ListYourFarmsFour extends Fragment {
 //        });
 //
 
-
-        instagram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (packageName.contains("com.instagram")) {
-                    Uri uri = Uri.parse("https://www.instagram.com/farmpe_official/");
-                    Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-                    likeIng.setPackage("com.instagram.android");
-                    try {
-                        startActivity(likeIng);
-                    } catch (ActivityNotFoundException e) {
-      /*      startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.instagram.com/farmpe_official/")));*/
-                        Snackbar snackbar = Snackbar
-                                .make(main_layout, "Instagram is not installed on this device", Snackbar.LENGTH_LONG);
-                        View snackbarView = snackbar.getView();
-                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                        tv.setTextColor(Color.WHITE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        } else {
-                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                        }
-                        snackbar.show();
-                    }
-                }else {
-                    Snackbar snackbar = Snackbar
-                            .make(main_layout, "Instagram is not installed on this device", Snackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
-                    tv.setTextColor(Color.WHITE);
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    } else {
-                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-                    }
-                    snackbar.show();
-                }
-
-            }
-        });
+//
+//        instagram.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (packageName.contains("com.instagram")) {
+//                    Uri uri = Uri.parse("https://www.instagram.com/farmpe_official/");
+//                    Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+//                    likeIng.setPackage("com.instagram.android");
+//                    try {
+//                        startActivity(likeIng);
+//                    } catch (ActivityNotFoundException e) {
+//      /*      startActivity(new Intent(Intent.ACTION_VIEW,
+//                    Uri.parse("https://www.instagram.com/farmpe_official/")));*/
+//                        Snackbar snackbar = Snackbar
+//                                .make(main_layout, "Instagram is not installed on this device", Snackbar.LENGTH_LONG);
+//                        View snackbarView = snackbar.getView();
+//                        TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                        tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                        tv.setTextColor(Color.WHITE);
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                        } else {
+//                            tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                        }
+//                        snackbar.show();
+//                    }
+//                }else {
+//                    Snackbar snackbar = Snackbar
+//                            .make(main_layout, "Instagram is not installed on this device", Snackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+//                    tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
+//                    tv.setTextColor(Color.WHITE);
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                    } else {
+//                        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+//                    }
+//                    snackbar.show();
+//                }
+//
+//            }
+//        });
 
 
 

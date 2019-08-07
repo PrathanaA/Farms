@@ -59,6 +59,7 @@ import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Crop_Post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,6 +79,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     public static DrawerLayout drawer;
     ImageView plus_sign_add;
     RelativeLayout menu;
+    JSONArray get_address_array;
     LinearLayout update_acc_layout,your_request,your_farms_tab,nw_request;
     SessionManager sessionManager;
     public static CircleImageView prod_img,prod_img1;
@@ -85,12 +87,13 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     String mob_no;
     String userid;
     Bitmap bitmap;
-  public static  TextView home,settings,list_farm,farm_count,request_count;
+  public static  TextView home,settings,list_farm,farm_count,request_count,your_addrss;
     public static TextView your_farms,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
     JSONObject lngObject;
     static boolean fragloaded;
+    String pickUPFrom;
 
     LinearLayout linearLayout;
 
@@ -131,7 +134,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         farmer_view=view.findViewById(R.id.farmer_view);
 
 
-        your_farms=view.findViewById(R.id.your_farms);
+        your_addrss=view.findViewById(R.id.your_addrss);
 
         list_farm=view.findViewById(R.id.list_farm);
 
@@ -182,6 +185,61 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
+
+        your_addrss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try{
+                    final JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("UserId",sessionManager.getRegId("userId"));
+                    jsonObject.put("PickUpFrom",pickUPFrom);
+                    System.out.println("aaaaaaaaaaaaadddd" + sessionManager.getRegId("userId"));
+                    System.out.println("ggggggggggaaaaaaa"+jsonObject);
+
+                    Crop_Post.crop_posting(getActivity(), Urls.Get_New_Address, jsonObject, new VoleyJsonObjectCallback() {
+                        @Override
+                        public void onSuccessResponse(JSONObject result) {
+                            System.out.println("ggggggggggaaaaaaa"+result);
+
+                            try{
+                                get_address_array = result.getJSONArray("UserAddressDetails");
+
+                                if(get_address_array.length()== 0){
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("navigation_from","SETTING_FRAG");
+                                    selectedFragment = Add_New_Address_Fragment.newInstance();
+                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    selectedFragment.setArguments(bundle);
+                                    transaction.replace(R.id.frame_layout, selectedFragment);
+                                    transaction.addToBackStack("setting");
+                                    transaction.commit();
+
+                                }else {
+
+                                    selectedFragment = You_Address_Fragment.newInstance();
+                                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.frame_layout, selectedFragment);
+                                    transaction.addToBackStack("setting");
+                                    transaction.commit();
+
+                                }
+
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
 
         user_name_menu.setText(sessionManager.getRegId("name"));
@@ -390,21 +448,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
 
 
-        your_farms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                    selectedFragment = FarmsHomePageFragment.newInstance();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.first_full_frame, selectedFragment);
-                    transaction.addToBackStack("home");
-                    transaction.commit();
-                    drawer.closeDrawers();
-
-
-            }
-        });
 
 
         notification_bell.setOnClickListener(new View.OnClickListener() {

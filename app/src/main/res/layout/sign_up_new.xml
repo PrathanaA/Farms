@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/segoeui"
             android:hint="Name"
-            android:inputType="text"
+            android:inputType="textNoSuggestions"
             android:cursorVisible="true"
             android:background="@android:color/transparent"
             android:textCursorDrawable="@drawable/cursor_color"

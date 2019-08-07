@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
      public static String mobile,loc_text;
      public String status,userId;
      boolean doubleBackToExitPressedOnce = false;
-
+    String newfarmpelng,signuplng;
      List<SelectLanguageBean>language_arrayBeanList = new ArrayList<>();
      SelectLanguageBean selectLanguageBean;
      SelectLanguageAdapter2 mAdapter;
@@ -288,11 +288,17 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                 forgot_pass.setText(lngObject.getString("ForgotPassword") + "?");
                 log_in.setText(lngObject.getString("Login"));
                 welcome_back.setText(lngObject.getString("Login"));
-                createaccount.setText(lngObject.getString(" " + "SignUp"));
-                new_farmpe.setText(lngObject.getString("NewtoFarmPe") + "?");
+               /* createaccount.setText(lngObject.getString(" " + "SignUp"));
+                new_farmpe.setText(lngObject.getString("NewtoFarmPe") + "?");*/
 
                 // popup_heading.setText(lngObject.getString("ChangeLanguage"));
                 // farmPe_title.setText(lngObject.getString("FarmPe"));
+                newfarmpelng=lngObject.getString("NewtoFarmPe");
+                signuplng = lngObject.getString("SignUp");
+
+
+                new_farmpe.setText(newfarmpelng+"?");
+                createaccount.setText(" "+signuplng);
 
                 pass_toast = lngObject.getString("EnterPassword");
                 mob_toast = lngObject.getString("EnterPhoneNo");
@@ -305,6 +311,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
 
         createaccount.setOnClickListener(new View.OnClickListener() {

@@ -165,6 +165,7 @@ public class RequestFormFragment extends Fragment {
             }
         });
 
+
         address_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,17 +181,93 @@ public class RequestFormFragment extends Fragment {
             }
         });
 
-        request.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestForm();
+
+                request.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String str = address_text.getText().toString();
+                        if ((radioGroup.getCheckedRadioButtonId() == -1) && address_text.getText().toString().equals("") && radioGroup_finance.getCheckedRadioButtonId() == -1) {
+                         //1aq   Toast.makeText(getActivity(), "Select All Fields", Toast.LENGTH_SHORT).show();
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayout,"Select All Fields", Snackbar.LENGTH_LONG);
+                            View snackbarView = snackbar.getView();
+                            TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                            tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                            tv.setTextColor(Color.WHITE);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
+
+                            snackbar.show();
+
+                        } else if ((radioGroup.getCheckedRadioButtonId() == -1)) {
+
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayout,"Select Timeline", Snackbar.LENGTH_LONG);
+                            View snackbarView = snackbar.getView();
+                            TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                            tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                            tv.setTextColor(Color.WHITE);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
+
+                            snackbar.show();
+
+                        } else if (str.equalsIgnoreCase("")) {
+                            //Toast.makeText(getActivity(), "Select Your Address", Toast.LENGTH_SHORT).show();
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayout,"Select Your Address", Snackbar.LENGTH_LONG);
+                            View snackbarView = snackbar.getView();
+                            TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                            tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                            tv.setTextColor(Color.WHITE);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
+
+                            snackbar.show();
+                        }
+
+                        else if((radioGroup_finance.getCheckedRadioButtonId()==-1)) {
+
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayout,"Select finance", Snackbar.LENGTH_LONG);
+                            View snackbarView = snackbar.getView();
+                            TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                            tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                            tv.setTextColor(Color.WHITE);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                            }
+
+                            snackbar.show();
+
+                        }  else {
+
+                            RequestForm();
+                        }
+
+                    }
+                });
+
               /*  selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();*/
 
-            }
-        });
 
         radioGroup_finance.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {

@@ -66,11 +66,12 @@
             android:orientation="vertical"
             android:layout_marginTop="10dp"
             android:background="#ffff">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Where is your farm located ?"
-                android:textSize="18dp"
+                android:textSize="20dp"
                 android:fontFamily="@font/segoeui"
                 android:textColor="#000"
                 />

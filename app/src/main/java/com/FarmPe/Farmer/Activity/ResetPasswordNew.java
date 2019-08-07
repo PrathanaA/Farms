@@ -170,6 +170,7 @@ public class ResetPasswordNew extends AppCompatActivity implements ConnectivityR
 
 
             reset_text.setText(lngObject.getString("ResetPassword"));
+            to_continue_text.setText(lngObject.getString("TocontinuewithFarmPeFarmer"));
             pass_submit.setText(lngObject.getString("Submit"));
             passwd_txt.setHint(lngObject.getString("NewPassword"));
             conf_pass_txt.setHint(lngObject.getString("Confirmthepassword"));

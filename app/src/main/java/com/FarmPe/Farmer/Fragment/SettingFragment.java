@@ -325,7 +325,6 @@ public class SettingFragment extends Fragment {
 
                                     selectedFragment = You_Address_Fragment.newInstance();
                                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-
                                     transaction.replace(R.id.frame_layout, selectedFragment);
                                     transaction.addToBackStack("setting");
                                     transaction.commit();

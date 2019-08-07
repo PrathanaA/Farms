@@ -114,7 +114,7 @@
              android:id="@+id/request_count"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="0"
+             android:text=""
              android:textSize="16dp"
              android:gravity="center"
              android:paddingBottom="5dp"
@@ -150,7 +150,7 @@
              android:id="@+id/farm_count"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="0"
+             android:text=""
              android:textSize="16dp"
              android:gravity="center"
              android:paddingBottom="5dp"
@@ -411,7 +411,7 @@
 
 
       <TextView
-          android:id="@+id/your_farms"
+          android:id="@+id/your_addrss"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Your Address"
