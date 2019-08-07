@@ -16,7 +16,7 @@ import com.FarmPe.Farmer.R;
 public class Comming_soon_looking extends Fragment {
     Fragment selectedFragment;
     LinearLayout backfeed;
-    public static String coming_back;
+
 
 
     public static Comming_soon_looking newInstance() {
@@ -41,7 +41,7 @@ public class Comming_soon_looking extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
-                    coming_back = "look_back";
+                    HomeMenuFragment.onBack_status = "looking_frg";
                     selectedFragment = HomeMenuFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
@@ -58,8 +58,8 @@ public class Comming_soon_looking extends Fragment {
         backfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                coming_back = "look_back";
 
+                HomeMenuFragment.onBack_status = "looking_frg";
                 selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);

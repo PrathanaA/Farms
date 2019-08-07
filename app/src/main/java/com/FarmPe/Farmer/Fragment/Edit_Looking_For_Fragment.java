@@ -191,18 +191,6 @@ public class Edit_Looking_For_Fragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -478,7 +466,8 @@ public class Edit_Looking_For_Fragment extends Fragment {
 
 
                             snackbar.show();
-                            back = "edit_back";
+
+                            HomeMenuFragment.onBack_status = "looking_frg";
 
                             selectedFragment = HomeMenuFragment.newInstance();
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

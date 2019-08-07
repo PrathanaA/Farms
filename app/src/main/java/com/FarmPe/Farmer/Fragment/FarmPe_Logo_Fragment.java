@@ -45,7 +45,7 @@ public class FarmPe_Logo_Fragment extends Fragment {
 
 LinearLayout linearLayout;
     JSONObject lngObject;
-    TextView reqst_count,farmlist_count,nameee;
+  public static TextView reqst_count,farmlist_count,nameee;
     SessionManager sessionManager;
     public static String toast_click_back;
     boolean doubleBackToExitPressedOnce = false;
@@ -217,6 +217,8 @@ LinearLayout linearLayout;
 
                         reqst_count.setText(request_count);
                         farmlist_count.setText(farm_count);
+                        HomeMenuFragment.farm_count.setText(farm_count);
+                        HomeMenuFragment.request_count.setText(request_count);
 
                         homePage1_adapter.notifyDataSetChanged();
 

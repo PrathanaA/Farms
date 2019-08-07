@@ -85,7 +85,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     String mob_no;
     String userid;
     Bitmap bitmap;
-    TextView home,settings,list_farm;
+  public static  TextView home,settings,list_farm,farm_count,request_count;
     public static TextView your_farms,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
@@ -123,6 +123,9 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         prod_img=view.findViewById(R.id.prod_img);
         prod_img1=view.findViewById(R.id.prod_img1);
 
+        farm_count=view.findViewById(R.id.farm_count);
+        request_count=view.findViewById(R.id.request_count);
+
         looking_view=view.findViewById(R.id.looking_view);
         farms_view=view.findViewById(R.id.farms_view);
         farmer_view=view.findViewById(R.id.farmer_view);
@@ -138,6 +141,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         user_name_menu=view.findViewById(R.id.user_name_menu);
         sessionManager = new SessionManager(getActivity());
         userid=sessionManager.getRegId("userId");
+
 
 
         nw_request.setOnClickListener(new View.OnClickListener() {
@@ -282,6 +286,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                 selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = (getActivity().getSupportFragmentManager().beginTransaction());
                 transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("home");
                 transaction.commit();
 
                 //                selectedFragment = AddFirstLookingFor.newInstance();

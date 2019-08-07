@@ -67,16 +67,12 @@ public class No_Request_Fragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack ("home1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                 /* else if(getArguments().getString("navigation_from").equals("setting")){
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-                    }*/
-                   /* FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);*/
-
+                    selectedFragment = HomeMenuFragment.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.commit();
+                    HomeMenuFragment.drawer.openDrawer(Gravity.START);//
 
                     return true;
                 }
