@@ -302,6 +302,13 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             transaction.replace(R.id.first_full_frame, selectedFragment);
             transaction.commit();
 
+        } else if(onBack_status.equals("no_request")){
+
+            selectedFragment = FarmPe_Logo_Fragment.newInstance();
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.first_full_frame, selectedFragment);
+            transaction.commit();
+
         }
         else if(onBack_status.equals("farms")){
 

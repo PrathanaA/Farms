@@ -205,6 +205,7 @@ public class ListYourFarmsFive extends Fragment {
            }
           });
 
+
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,7 +255,6 @@ public class ListYourFarmsFive extends Fragment {
             jsonObject_location.put("Latitude","13.21321");
             jsonObject_location.put("Longitude","33.21321");
             jsonObject.put("FarmLocation",jsonObject_location);
-
             jsonObject_address.put("Id","0");
             jsonObject_address.put("StreeAddress",ListYourFarmsThird.street_string);
             jsonObject_address.put("StateId", StateApdater.stateid);
@@ -302,11 +302,10 @@ public class ListYourFarmsFive extends Fragment {
                     }
                 },
 
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(getActivity(),error.getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 }) {
@@ -331,6 +330,7 @@ public class ListYourFarmsFive extends Fragment {
             }
 
         };
+
         volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(2000 * 60, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //adding the request to volley

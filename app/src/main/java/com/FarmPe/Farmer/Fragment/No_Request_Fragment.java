@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.R;
 
 
@@ -44,12 +45,13 @@ public class No_Request_Fragment extends Fragment {
         back_feed1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HomeMenuFragment.onBack_status = "no_request";
 
                 selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();
-                HomeMenuFragment.drawer.openDrawer(Gravity.START);//
+               // HomeMenuFragment.drawer.openDrawer(Gravity.START);//
 
                  /*else if(getArguments().getString("navigation_from").equals("setting")){
                     FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -67,12 +69,12 @@ public class No_Request_Fragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-
+                    HomeMenuFragment.onBack_status = "no_request";
                     selectedFragment = HomeMenuFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
                     transaction.commit();
-                    HomeMenuFragment.drawer.openDrawer(Gravity.START);//
+                   // HomeMenuFragment.drawer.openDrawer(Gravity.START);//
 
                     return true;
                 }
@@ -80,13 +82,17 @@ public class No_Request_Fragment extends Fragment {
             }
         });
 
+
+
         make_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AddFirstAdapter.looinkgId = null;
 
                 selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.addToBackStack("home");
                 transaction.commit();
 
 
