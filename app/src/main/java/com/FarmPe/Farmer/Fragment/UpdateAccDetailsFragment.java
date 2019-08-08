@@ -139,11 +139,17 @@ public class UpdateAccDetailsFragment extends Fragment {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // to go to gallery
-                startActivityForResult(i, 100); // on activity method will execute
+                Bundle bundle = new Bundle();
+                bundle.putString("status","ACC_IMG");
+                selectedFragment = FullScreenImageFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                selectedFragment.setArguments(bundle);
+                transaction.commit();
+     /*   Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); // to go to gallery
+        startActivityForResult(i, 100); // on activity method will execute*/
             }
         });
-
 
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override

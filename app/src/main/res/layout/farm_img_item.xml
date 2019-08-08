@@ -4,36 +4,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="450dp"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/linear_looking_main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="100"
-    android:layout_marginTop="10dp"
-    android:tag="cards main container">
+    android:background="#fff"
+    android:layout_marginTop="10dp">
 
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
+
+        android:id="@+id/card_view"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+
+        android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+
         >
+
+
 
 
         <RelativeLayout
             android:id="@+id/menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
             android:fitsSystemWindows="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                android:background="@drawable/border_grey_looking"
-
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -43,7 +55,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:layout_gravity="center"
-                   />
+                    />
 
             </LinearLayout>
 
@@ -69,24 +81,6 @@
                     android:src="@drawable/ic_edit_pencil" />
 
 
-                <!-- <TextView
-                     android:id="@+id/connect"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:fontFamily="@font/segoeui"
-
-                     android:text="EDIT"
-                     android:layout_marginBottom="10dp"
-                     android:background="@drawable/border_red"
-                     android:paddingVertical="8dp"
-                     android:paddingHorizontal="15dp"
-                     android:layout_marginTop="15dp"
-                     android:layout_gravity="right"
-                     android:drawablePadding="10dp"
-                     android:drawableLeft="@drawable/ic_air_conditioner"
-                     android:textColor="#fff"
-                     android:textSize="14dp"
-                     android:textStyle="bold" />-->
 
 
 
@@ -110,7 +104,7 @@
                     android:fontFamily="@font/segoeui"
                     android:layout_gravity="left"
                     android:text="Tracter Price"
-                    android:textColor="#f1f1f1"
+                    android:textColor="#000"
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
@@ -122,7 +116,7 @@
                     android:fontFamily="@font/segoeui"
                     android:text="Mahindra Jivo mahi"
                     android:gravity="left"
-                    android:textColor="#f1f1f1"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:textSize="14dp" />
 
@@ -222,7 +216,7 @@
 
 
             </LinearLayout>
-    -->
+            -->
 
 
             </LinearLayout>
@@ -239,121 +233,7 @@
 
 
 
-
-        <!--
-            <LinearLayout
-                android:id="@+id/item"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:weightSum="100"
-                android:background="#fff"
-                android:gravity="center"
-                android:padding="5dp"
-                android:orientation="vertical">
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                   >
-
-
-                    <ImageView
-                        android:id="@+id/prod_img"
-                        android:layout_width="300dp"
-                        android:layout_height="300dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/fruits_banner_img"
-
-                        />
-
-                      <LinearLayout
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="10dp"
-                          android:gravity="center"
-                          android:orientation="vertical">
-
-                          <TextView
-                              android:id="@+id/prod_price"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:fontFamily="@font/segoeui"
-                              android:layout_gravity="left"
-                              android:text="Tracter Price"
-                              android:textColor="#000"
-                              android:textSize="14dp"
-                              android:textStyle="bold" />
-
-                          <TextView
-                              android:id="@+id/prod_name"
-                              android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:fontFamily="@font/segoeui"
-                              android:text="Mahindra Jivo mahi"
-                              android:gravity="left"
-                              android:textColor="#000"
-                              android:textSize="14dp" />
-
-                          <TextView
-                              android:id="@+id/duration"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:fontFamily="@font/segoeui"
-                              android:layout_gravity="left"
-                              android:text="Immediately"
-                              android:textColor="#000"
-                              android:textSize="14dp"
-                               />
-
-                          <TextView
-                              android:id="@+id/farmer_name"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:fontFamily="@font/segoeui"
-                              android:layout_gravity="left"
-                              android:text="Farmer Name"
-                              android:layout_marginTop="20dp"
-                              android:textColor="#000"
-                              android:textSize="14dp"
-                             />
-
-                          <TextView
-                              android:id="@+id/location"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:fontFamily="@font/segoeui"
-                              android:text="Rampura, Bahjoi"
-                              android:drawablePadding="4dp"
-                              android:layout_marginTop="5dp"
-                              android:gravity="center_vertical"
-                              android:layout_gravity="left"
-                              android:textColor="#000"
-                              android:textSize="14dp"
-                            />
-
-                          <TextView
-                              android:id="@+id/connect"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:fontFamily="@font/segoeui"
-                              android:layout_gravity="center"
-                              android:text="Connect"
-                              android:background="@drawable/border_empty"
-                              android:paddingVertical="8dp"
-                              android:paddingHorizontal="30dp"
-                              android:gravity="center"
-                              android:layout_marginTop="15dp"
-                              android:textColor="#000"
-                              android:textSize="14dp"
-                              android:textStyle="bold" />
-
-                      </LinearLayout>
-
-                </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 
 
@@ -361,11 +241,5 @@
 
 
 
-
-
-
-            </LinearLayout>
-        -->
-    </LinearLayout>
 </LinearLayout>
 

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="100"
 
-    android:background="#FFFFFF"
+    android:background="#000"
     >
 
     <ScrollView
@@ -50,7 +50,7 @@
                             android:layout_marginRight="15dp"
                             android:layout_marginLeft="10dp"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_close_black"
+                            android:src="@drawable/ic_go_back_left_arrow_"
                             />
                     </LinearLayout>
 
@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:text="Edit Request for Quotation"
                         android:textSize="20dp"
-                        android:textColor="#000"
+                        android:textColor="#fff"
                         android:fontFamily="@font/segoeui"
                         android:layout_marginHorizontal="10dp"
                         android:id="@+id/toolbar_title" />
@@ -125,18 +125,17 @@
                         android:layout_height="wrap_content"
                         android:text="Brand - Mahindra Tractors"
                         android:textSize="18dp"
-                        android:layout_marginTop="10dp"
                         android:textColor="#000"
                         android:layout_marginHorizontal="10dp"
                         />
 
-                    <!--<ImageView-->
-                        <!--android:id="@+id/tractor_img"-->
-                        <!--android:layout_width="300dp"-->
-                        <!--android:layout_height="100dp"-->
-                        <!--android:src="@drawable/tractor_sonalika"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--/>-->
+                    <ImageView
+                        android:id="@+id/tractor_img"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/tractor_sonalika"
+                        android:layout_gravity="center"
+                        />
 
 
                 </LinearLayout>
@@ -154,17 +153,16 @@
                         android:layout_height="wrap_content"
                         android:text="HP - Upto 20HP"
                         android:textSize="18dp"
-                        android:layout_marginTop="20dp"
                         android:textColor="#000"
                         android:layout_marginHorizontal="10dp"
                         />
 
-                    <!--<ImageView-->
-                        <!--android:layout_width="300dp"-->
-                        <!--android:layout_height="100dp"-->
-                        <!--android:src="@drawable/tractor_sonalika"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--/>-->
+                    <ImageView
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/tractor_sonalika"
+                        android:layout_gravity="center"
+                        />
 
 
                 </LinearLayout>
@@ -182,16 +180,15 @@
                         android:text="Model - Yuvraj 215 NXT"
                         android:textSize="18dp"
                         android:textColor="#000"
-                        android:layout_marginTop="20dp"
                         android:layout_marginHorizontal="10dp"
                         />
 
-                    <!--<ImageView-->
-                        <!--android:layout_width="300dp"-->
-                        <!--android:layout_height="100dp"-->
-                        <!--android:src="@drawable/tractor_sonalika"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--/>-->
+                    <ImageView
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/tractor_sonalika"
+                        android:layout_gravity="center"
+                        />
 
 
                 </LinearLayout>
@@ -204,7 +201,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="27dp"
                     android:orientation="vertical"
                     android:background="#ffff"
 
@@ -268,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:orientation="vertical"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:background="#ffff"
 
                     >
@@ -321,7 +317,7 @@
                     android:orientation="horizontal"
                     android:paddingVertical="20dp"
                     android:paddingHorizontal="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/border"
 
                     >
@@ -372,7 +368,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="20dp"
                     android:background="#ffff"
                     >
 

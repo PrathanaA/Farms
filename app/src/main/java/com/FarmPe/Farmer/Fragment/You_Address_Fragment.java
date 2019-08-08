@@ -88,7 +88,6 @@ public class You_Address_Fragment extends Fragment {
         sessionManager = new SessionManager(getActivity());
 
 
-
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -106,9 +105,11 @@ public class You_Address_Fragment extends Fragment {
                         transaction.commit();
 
 
-                    }else {
+                    } else if(getArguments().getString("navigation_from").equals("SETTING_FRAG1")){
+
                         FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        fm.popBackStack ("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
                     }
                     return true;
                 }
@@ -129,7 +130,7 @@ public class You_Address_Fragment extends Fragment {
                     transaction.commit();
 
 
-                }else {
+                }else if(getArguments().getString("navigation_from").equals("SETTING_FRAG1")){
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }

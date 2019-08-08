@@ -78,7 +78,7 @@ public class LookingForFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    HomeMenuFragment.drawer.openDrawer(Gravity.START);
+                  //  HomeMenuFragment.drawer.openDrawer(Gravity.START);
 
                     selectedFragment = HomeMenuFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

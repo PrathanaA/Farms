@@ -467,7 +467,6 @@ public class Edit_Looking_For_Fragment extends Fragment {
 
                             snackbar.show();
 
-                            HomeMenuFragment.onBack_status = "looking_frg";
 
                             selectedFragment = HomeMenuFragment.newInstance();
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

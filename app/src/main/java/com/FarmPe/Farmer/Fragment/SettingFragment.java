@@ -325,10 +325,12 @@ public class SettingFragment extends Fragment {
                                     transaction.commit();
 
                                 }else {
-
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("navigation_from","SETTING_FRAG1");
                                     selectedFragment = You_Address_Fragment.newInstance();
                                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                                     transaction.replace(R.id.frame_layout, selectedFragment);
+                                    selectedFragment.setArguments(bundle);
                                     transaction.addToBackStack("setting");
                                     transaction.commit();
 

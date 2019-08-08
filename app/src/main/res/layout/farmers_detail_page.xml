@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="100"
 
-    android:background="#000"
+    android:background="#FFFFFF"
     >
 
     <ScrollView
@@ -23,67 +23,74 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#fff"
                 android:orientation="vertical"
-                android:gravity="center_vertical"
-                tools:ignore="MissingConstraints">
+                >
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:minHeight="?attr/actionBarSize"
-                    android:layout_width="match_parent"
+
+                <LinearLayout
+                    android:id="@+id/back_feed"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:titleTextColor="@android:color/white"
+                    android:padding="10dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/ic_filter_state"
                     >
 
 
-                    <LinearLayout
-                        android:id="@+id/back_feed"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:background="@drawable/ic_filter_state">
+                    <ImageView
+                        android:id="@+id/b_arrow"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_close_black"
+                        style="@style/SelectableItemBackground"
+                        android:background="?attr/selectableItemBackgroundBorderless"
 
-                        <ImageView
-                            android:id="@+id/b_arrow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_gravity="center_vertical"
-                            android:src="@drawable/ic_go_back_left_arrow_"
-                            />
-                    </LinearLayout>
+                        />
 
-                    <!--<LinearLayout-->
-                    <!--android:id="@+id/back_feed"-->
-                    <!--android:layout_width="50dp"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:background="@drawable/ripple_effect"-->
-                    <!--android:gravity="left">-->
+                </LinearLayout>
 
 
-                    <!--<ImageView-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:src="@drawable/ic_go_back_left_arrow_"-->
 
-                    <!--/>-->
 
-                    <!--</LinearLayout>-->
+            </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="#fff"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:orientation="vertical"
+                    android:background="#ffff"
+                    >
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Edit Request for Quotation"
                         android:textSize="20dp"
-                        android:textColor="#fff"
+                        android:textColor="#000"
+                        android:textStyle="bold"
                         android:fontFamily="@font/segoeui"
                         android:layout_marginHorizontal="10dp"
                         android:id="@+id/toolbar_title" />
 
-                </android.support.v7.widget.Toolbar>
+
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -124,18 +131,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Brand - Mahindra Tractors"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
+                        android:layout_marginTop="13dp"
                         android:textColor="#000"
                         android:layout_marginHorizontal="10dp"
                         />
 
-                    <ImageView
-                        android:id="@+id/tractor_img"
-                        android:layout_width="300dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/tractor_sonalika"
-                        android:layout_gravity="center"
-                        />
+
 
 
                 </LinearLayout>
@@ -152,17 +154,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="HP - Upto 20HP"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
+                        android:layout_marginTop="20dp"
                         android:textColor="#000"
                         android:layout_marginHorizontal="10dp"
                         />
 
-                    <ImageView
-                        android:layout_width="300dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/tractor_sonalika"
-                        android:layout_gravity="center"
-                        />
+                    <!--<ImageView-->
+                    <!--android:layout_width="300dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:src="@drawable/tractor_sonalika"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--/>-->
 
 
                 </LinearLayout>
@@ -178,17 +181,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Model - Yuvraj 215 NXT"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textColor="#000"
+                        android:layout_marginTop="20dp"
                         android:layout_marginHorizontal="10dp"
                         />
 
-                    <ImageView
-                        android:layout_width="300dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/tractor_sonalika"
-                        android:layout_gravity="center"
-                        />
+                    <!--<ImageView-->
+                    <!--android:layout_width="300dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:src="@drawable/tractor_sonalika"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--/>-->
 
 
                 </LinearLayout>
@@ -201,6 +205,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="27dp"
                     android:orientation="vertical"
                     android:background="#ffff"
 
@@ -209,7 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="When are you planning to purchase Tractor?"
-                        android:textSize="18dp"
+                        android:textSize="17dp"
                         android:textColor="#000"
                         />
 
@@ -220,7 +225,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                         android:weightSum="100"
                         >
@@ -264,24 +269,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:orientation="vertical"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="#ffff"
 
                     >
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Are you looking for finance / loan for tractor purchase?"
-                        android:textSize="18dp"
+                        android:textSize="17dp"
                         android:textColor="#000"
                         />
+
 
                     <RadioGroup
                         android:id="@+id/radioGroup_finance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginLeft="10dp"
                         android:weightSum="100"
                         >
@@ -317,7 +324,7 @@
                     android:orientation="horizontal"
                     android:paddingVertical="20dp"
                     android:paddingHorizontal="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/border"
 
                     >
@@ -368,6 +375,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginTop="20dp"
                     android:background="#ffff"
                     >
 
