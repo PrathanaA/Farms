@@ -63,7 +63,7 @@
         android:layout_height="170dp"
         android:layout_gravity="center"
         android:layout_marginTop="130dp"
-        android:src="@drawable/ic_barn"/>
+        android:src="@drawable/ic_field_grey"/>
 
 
     <LinearLayout

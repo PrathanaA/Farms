@@ -1463,7 +1463,7 @@ public class  Add_New_Address_Fragment extends Fragment {
             recyclerView.setAdapter(talukAdapter);
         }
 
-        else if (search_status.equals("hobli")){
+        else if (search_status.equals("area")){
             searchresultAraaylist.clear();
             for (int i = 0; i < hobliBeanList.size(); i++) {
 

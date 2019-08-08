@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import android.support.v4.content.ContextCompat;
@@ -92,7 +93,7 @@ public class ListYourFarmsFive extends Fragment {
         back_feed=view.findViewById(R.id.back_feed);
         continue_update=view.findViewById(R.id.continue_update);
         linearLayout=view.findViewById(R.id.linearLayout);
-        skip=view.findViewById(R.id.skip);
+     //   skip=view.findViewById(R.id.skip);
 
         sessionManager=new SessionManager(getActivity());
 
@@ -100,10 +101,13 @@ public class ListYourFarmsFive extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedFragment = ListYourFarmsFour.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.commit();
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack("fourth_back", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                selectedFragment = ListYourFarmsFour.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.commit();
             }
         });
 
@@ -118,10 +122,13 @@ public class ListYourFarmsFive extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
-                    selectedFragment = ListYourFarmsFour.newInstance();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.commit();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("fourth_back", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+//                    selectedFragment = ListYourFarmsFour.newInstance();
+//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.frame_layout, selectedFragment);
+//                    transaction.commit();
 
                     return true;
                 }
@@ -153,11 +160,11 @@ public class ListYourFarmsFive extends Fragment {
 
 
 
-              if(AddPhotoAdapter.productList.size()>3) {
+              if(AddPhotoAdapter.productList.size()>0) {
 
 
                   Snackbar snackbar = Snackbar
-                          .make(linearLayout, "Upload only 2 images", Snackbar.LENGTH_LONG);
+                          .make(linearLayout, "Upload atleast one images", Snackbar.LENGTH_LONG);
                   View snackbarView = snackbar.getView();
                   TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                   tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
@@ -195,7 +202,7 @@ public class ListYourFarmsFive extends Fragment {
 
                   snackbar.show();
 
-                  selectedFragment = FarmsHomePageFragment.newInstance();
+                  selectedFragment = HomeMenuFragment.newInstance();
                   FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                   transaction.replace(R.id.frame_layout, selectedFragment);
                   transaction.commit();
@@ -206,17 +213,17 @@ public class ListYourFarmsFive extends Fragment {
           });
 
 
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // home="home";
-
-                selectedFragment = HomeMenuFragment.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.commit();
-            }
-        });
+//        skip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//               // home="home";
+//
+//                selectedFragment = HomeMenuFragment.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.commit();
+//            }
+//        });
 
         return view;
     }
@@ -250,7 +257,6 @@ public class ListYourFarmsFive extends Fragment {
             jsonObject.put("EmailId",ListYourFarmsFour.email_id_strg);
             jsonObject.put("Id","0");
             jsonObject.put("CreatedBy",sessionManager.getRegId("userId"));
-
             jsonObject_location.put("Id",0);
             jsonObject_location.put("Latitude","13.21321");
             jsonObject_location.put("Longitude","33.21321");

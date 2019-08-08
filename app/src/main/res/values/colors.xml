@@ -16,6 +16,7 @@
     <color name="dot_dark_screen1">#999999</color>
     <color name="light_gray">#DCDCDC</color>
     <color name="light_grey1">#F4F4F4</color>
+    <color name="red">#EC4848</color>
 
 
 </resources>

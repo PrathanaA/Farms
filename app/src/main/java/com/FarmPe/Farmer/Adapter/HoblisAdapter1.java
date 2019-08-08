@@ -50,15 +50,10 @@ public class HoblisAdapter1 extends RecyclerView.Adapter<HoblisAdapter1.HoblisMy
             @Override
             public void onClick(View view) {
                 hobliid=stateBean.getId();
-                if (ListYourFarmsThird.list_farms_block==null) {
-                    Add_New_Address_Fragment.hobli.setText(holder.statename.getText().toString());
-                    Add_New_Address_Fragment.drawer.closeDrawers();
-                    //  Add_New_Address_Fragment.grade_dialog.dismiss();
 
-                }else{
                     ListYourFarmsThird.block.setText(holder.statename.getText().toString());
-                    ListYourFarmsThird.grade_dialog.dismiss();
-                }
+                    ListYourFarmsThird.drawer.closeDrawers();
+
             }
         });
     }

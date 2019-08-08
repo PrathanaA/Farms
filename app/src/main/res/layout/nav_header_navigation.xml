@@ -12,7 +12,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="50"
+    android:layout_weight="55"
     android:background="#000"
     android:weightSum="100"
     android:orientation="vertical"
@@ -49,6 +49,7 @@
        android:layout_height="wrap_content"
        android:orientation="vertical"
        android:layout_weight="15"
+       android:layout_marginBottom="25dp"
        android:gravity="center"
        android:background="#000"
        >
@@ -86,8 +87,8 @@
 
    <View
        android:layout_width="match_parent"
-       android:layout_height="1dp"
-       android:background="#e5e5e5"
+       android:layout_height="0.5dp"
+       android:background="#cccccc"
        />
 
 
@@ -96,17 +97,18 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        android:weightSum="100"
+       android:layout_marginBottom="25dp"
        android:gravity="center_vertical"
        android:layout_weight="20"
-
        android:background="#000"
        >
+
       <LinearLayout
           android:id="@+id/your_request"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
-          android:layout_weight="33"
+          android:layout_weight="30"
           android:background="#000"
           >
 
@@ -125,7 +127,7 @@
              android:id="@+id/your_request1"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="Your Requests"
+             android:text="Requests"
              android:textSize="14dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
@@ -140,7 +142,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
-          android:layout_weight="33"
+          android:layout_weight="30"
           android:gravity="center"
           android:background="#000"
           >
@@ -169,7 +171,7 @@
              android:id="@+id/your_farms_tab1"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="Your Farms"
+             android:text="Farms"
              android:textSize="14dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
@@ -184,7 +186,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
-          android:layout_weight="33"
+          android:layout_weight="40"
           android:gravity="center"
           android:background="#000"
           >
@@ -326,7 +328,7 @@
    <ScrollView
        android:layout_width="match_parent"
        android:layout_height="0dp"
-       android:layout_weight="60"
+       android:layout_weight="45"
        android:orientation="vertical"
        >
 
@@ -335,6 +337,7 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="0dp"
+       android:layout_marginTop="10dp"
        android:orientation="vertical"
        android:paddingLeft="30dp"
        >
@@ -402,8 +405,8 @@
           android:layout_height="wrap_content"
           android:text="List Your Farm"
           android:layout_marginTop="30dp"
-          android:textSize="16dp"
-          android:drawableLeft="@drawable/ic_farm_list"
+          android:textSize="17dp"
+          android:drawableLeft="@drawable/ic_field"
           android:drawablePadding="10dp"
           android:fontFamily="@font/segoeui"
           android:textColor="#000"
@@ -416,8 +419,8 @@
           android:layout_height="wrap_content"
           android:text="Your Address"
           android:layout_marginTop="30dp"
-          android:textSize="16dp"
-          android:drawableLeft="@drawable/ic_no_farmss"
+          android:textSize="17dp"
+          android:drawableLeft="@drawable/ic_gps_circle"
           android:drawablePadding="10dp"
           android:fontFamily="@font/segoeui"
           android:textColor="#000"
@@ -431,8 +434,8 @@
           android:layout_height="wrap_content"
           android:text="Your Profile"
           android:layout_marginTop="30dp"
-          android:textSize="16dp"
-          android:drawableLeft="@drawable/ic_settings"
+          android:textSize="17dp"
+          android:drawableLeft="@drawable/ic_user_black"
           android:drawablePadding="10dp"
           android:fontFamily="@font/segoeui"
           android:textColor="#000"

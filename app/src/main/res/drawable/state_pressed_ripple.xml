@@ -2,11 +2,11 @@
 <ripple xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="NewApi"
-    android:color="@color/dot_dark_screen1">
+    android:color="@color/red">
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/dot_dark_screen1"/>
+            <solid android:color="@color/red"/>
         </shape>
-        <color android:color="@color/dot_dark_screen1"/>
+        <color android:color="@color/red"/>
     </item>
 </ripple>

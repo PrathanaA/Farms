@@ -126,12 +126,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:layout_weight="15">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recylr_1"
                         android:layout_width="wrap_content"
                         android:layout_height="90dp"
+
                         android:layout_marginTop="20dp"
                         android:layout_gravity="center_horizontal"
                         android:background="#fff">

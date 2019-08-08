@@ -421,7 +421,7 @@ public class ListYourFarmsFour extends Fragment {
                 }else if(farm_name.getText().toString().length()<2){
 
                     Snackbar snackbar = Snackbar
-                            .make(main_layout, "Farm Name Should contain minimum Two characters", Snackbar.LENGTH_LONG);
+                            .make(main_layout, "Farm Name should contain minimum two characters", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
@@ -440,7 +440,7 @@ public class ListYourFarmsFour extends Fragment {
                 }else if(cont_person_name.getText().toString().equals("")){
 
                     Snackbar snackbar = Snackbar
-                            .make(main_layout, "Person Name cannot be empty", Snackbar.LENGTH_LONG);
+                            .make(main_layout, "Contact Person Name cannot be empty", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
@@ -461,7 +461,7 @@ public class ListYourFarmsFour extends Fragment {
                 }else if(cont_person_name.length()<2){
 
                     Snackbar snackbar = Snackbar
-                            .make(main_layout, "Person Name Should contain minimum Two characters", Snackbar.LENGTH_LONG);
+                            .make(main_layout, "Contact Person Name should contain minimum two characters", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
@@ -535,14 +535,14 @@ public class ListYourFarmsFour extends Fragment {
 
 
                 } else {
-                    farm_name_string = farm_name.getText().toString();
-                    cont_name = cont_person_name.getText().toString();
-                    mob_no = mobile_no.getText().toString();
-                    selectedFragment = ListYourFarmsFive.newInstance();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    // transaction.addToBackStack("looking");
-                    transaction.commit();
+                     farm_name_string = farm_name.getText().toString();
+                     cont_name = cont_person_name.getText().toString();
+                     mob_no = mobile_no.getText().toString();
+                     selectedFragment = ListYourFarmsFive.newInstance();
+                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                     transaction.replace(R.id.frame_layout, selectedFragment);
+                     transaction.addToBackStack("fourth_back");
+                     transaction.commit();
                 }
             }
         });

@@ -63,6 +63,7 @@
                 android:fontFamily="@font/segoeui"
                 android:drawableLeft="@drawable/places_ic_search"
                 android:paddingLeft="10dp"
+                android:drawablePadding="10dp"
                 android:inputType="textCapWords|textCapSentences"
                 app:theme="@style/MyStyle"
                 android:singleLine="true"

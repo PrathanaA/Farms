@@ -80,7 +80,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     ImageView plus_sign_add;
     RelativeLayout menu;
     JSONArray get_address_array;
-    LinearLayout update_acc_layout,your_request,your_farms_tab,nw_request;
+    LinearLayout update_acc_layout,your_request,your_farms_tab,nw_request,farmer_title;
     SessionManager sessionManager;
     public static CircleImageView prod_img,prod_img1;
     public static boolean isEng = false;
@@ -96,7 +96,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     String pickUPFrom;
 
     LinearLayout linearLayout;
-
     public static String onBack_status=null;
 
 
@@ -120,6 +119,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         your_farms_tab = view.findViewById(R.id.your_farms_tab);
         your_request = view.findViewById(R.id.your_request);
         nw_request = view.findViewById(R.id.nw_request);
+        farmer_title = view.findViewById(R.id.farmer_title);
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
         settings=view.findViewById(R.id.settings);
@@ -145,7 +145,18 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         sessionManager = new SessionManager(getActivity());
         userid=sessionManager.getRegId("userId");
 
+        farmer_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                selectedFragment = HomeMenuFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.addToBackStack("home");
+                transaction.commit();
+
+            }
+        });
 
         nw_request.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -302,7 +313,9 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             transaction.replace(R.id.first_full_frame, selectedFragment);
             transaction.commit();
 
-        } else if(onBack_status.equals("no_request")){
+        }
+
+      else if(onBack_status.equals("no_request")){
 
             selectedFragment = FarmPe_Logo_Fragment.newInstance();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

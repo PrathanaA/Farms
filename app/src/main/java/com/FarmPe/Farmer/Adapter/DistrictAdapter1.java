@@ -48,13 +48,10 @@ public class DistrictAdapter1 extends RecyclerView.Adapter<DistrictAdapter1.MySt
             @Override
             public void onClick(View view) {
                 districtid=stateBean.getId();
-                if (ListYourFarmsThird.list_farms_district==null){
-                    Add_New_Address_Fragment.district.setText(holder.statename.getText().toString());
-                    Add_New_Address_Fragment.drawer.closeDrawers();
-                }else{
+
                     ListYourFarmsThird.district.setText(holder.statename.getText().toString());
-                    ListYourFarmsThird.grade_dialog.dismiss();
-                }
+                    ListYourFarmsThird.drawer.closeDrawers();
+
 
 
               //  Add_New_Address_Fragment.grade_dialog.dismiss();

@@ -48,13 +48,11 @@ public class StateApdater1 extends RecyclerView.Adapter<StateApdater1.MyStateHol
             public void onClick(View view) {
 
                 stateid=stateBean.getId();
-                if (ListYourFarmsThird.list_fams==null){
-                    Add_New_Address_Fragment.state.setText(holder.statename.getText().toString());
-                    Add_New_Address_Fragment.drawer.closeDrawers();
-                }else{
+
+
                     ListYourFarmsThird.state.setText(holder.statename.getText().toString());
-                    ListYourFarmsThird.grade_dialog.dismiss();
-                }
+                    ListYourFarmsThird.drawer.closeDrawers();
+
 
                 //   Add_New_Address_Fragment.grade_dialog.dismiss();
 

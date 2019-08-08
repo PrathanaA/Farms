@@ -50,15 +50,10 @@ public class TalukAdapter1 extends RecyclerView.Adapter<TalukAdapter1.TalukMyVie
                 System.out.println("checkingggggg");
                 talukid=stateBean.getId();
 
-                if (ListYourFarmsThird.list_farms_taluk==null) {
-                    Add_New_Address_Fragment.taluk.setText(holder.statename.getText().toString());
-                    Add_New_Address_Fragment.drawer.closeDrawers();
-                    //  Add_New_Address_Fragment.grade_dialog.dismiss();
 
-                }else{
                     ListYourFarmsThird.taluk.setText(holder.statename.getText().toString());
-                    ListYourFarmsThird.grade_dialog.dismiss();
-                }
+                    ListYourFarmsThird.drawer.closeDrawers();
+
 
             }
         });
