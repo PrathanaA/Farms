@@ -826,7 +826,6 @@ public class ListYourFarmsThird extends Fragment {
                         e.printStackTrace();
                     }
 
-
                 }
             });
 

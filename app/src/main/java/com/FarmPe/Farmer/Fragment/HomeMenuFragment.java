@@ -218,20 +218,20 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
                                 if(get_address_array.length()== 0){
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("navigation_from","SETTING_FRAG");
+                                    bundle.putString("navigation_from","HOME_FRAGMENT");
                                     selectedFragment = Add_New_Address_Fragment.newInstance();
                                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                                     selectedFragment.setArguments(bundle);
                                     transaction.replace(R.id.frame_layout, selectedFragment);
-                                    transaction.addToBackStack("setting");
                                     transaction.commit();
 
                                 }else {
-
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("navigation_from","HOME_FRAGMENT");
                                     selectedFragment = You_Address_Fragment.newInstance();
                                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                                     transaction.replace(R.id.frame_layout, selectedFragment);
-                                    transaction.addToBackStack("setting");
+                                    selectedFragment.setArguments(bundle);
                                     transaction.commit();
 
                                 }
@@ -340,8 +340,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             transaction.commit();
 
         }
-
-
 
 
         prod_img1.setOnClickListener(new View.OnClickListener() {
@@ -464,12 +462,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
-
-
-
-
-
-
         notification_bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -490,7 +482,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
                 selectedFragment = SettingFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("home");
                 transaction.commit();
                 drawer.closeDrawers();
 
@@ -503,7 +494,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             public void onClick(View v) {
                 drawer = (DrawerLayout)view.findViewById(R.id.drawer_layout);
                 drawer.openDrawer(GravityCompat.START);
-
 
 
             }

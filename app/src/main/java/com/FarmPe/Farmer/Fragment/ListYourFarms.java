@@ -79,8 +79,10 @@ public class ListYourFarms extends Fragment {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     issel = false;
                     selRadio = "";
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    selectedFragment = HomeMenuFragment.newInstance();
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.commit();
 
                     return true;
                 }
@@ -98,9 +100,10 @@ public class ListYourFarms extends Fragment {
                 issel = false;
                 selRadio = "";
               //  selectedFragment = HomeMenuFragment.newInstance();
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("list_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
+                selectedFragment = HomeMenuFragment.newInstance();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.commit();
                 // transaction.addToBackStack("looking");
 
             }

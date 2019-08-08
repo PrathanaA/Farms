@@ -366,8 +366,7 @@ public class RequestFormFragment extends Fragment {
 
                         //back = "add_back";
 
-                        HomeMenuFragment.onBack_status = "looking_frg";
-
+                       // HomeMenuFragment.onBack_status = "looking_frg";
 
                         selectedFragment = HomeMenuFragment.newInstance();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -377,8 +376,6 @@ public class RequestFormFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
 
                 }
             });

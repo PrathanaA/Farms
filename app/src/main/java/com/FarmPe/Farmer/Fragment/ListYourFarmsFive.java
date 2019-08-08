@@ -160,11 +160,11 @@ public class ListYourFarmsFive extends Fragment {
 
 
 
-              if(AddPhotoAdapter.productList.size()>0) {
+              if(AddPhotoAdapter.productList.size()>4) {
 
 
                   Snackbar snackbar = Snackbar
-                          .make(linearLayout, "Upload atleast one images", Snackbar.LENGTH_LONG);
+                          .make(linearLayout, "Upload any three images", Snackbar.LENGTH_LONG);
                   View snackbarView = snackbar.getView();
                   TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                   tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
@@ -183,6 +183,7 @@ public class ListYourFarmsFive extends Fragment {
 //              else if(AddPhotoAdapter.imageView.getDrawable() == null){
 //                  Toast.makeText(getActivity(), "Pick any Image", Toast.LENGTH_SHORT).show();
 //              }
+
               else {
                   uploadImage(LandingPageActivity.selectedImage);
 
