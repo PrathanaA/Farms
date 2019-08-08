@@ -56,20 +56,20 @@ public class NotificationFragment extends Fragment {
         back_feed=view.findViewById(R.id.back_feed);
 
         sessionManager = new SessionManager(getActivity());
-        back_feed.setOnClickListener(new View.OnClickListener() {
+    /*    back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack ("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-                 /*else if(getArguments().getString("navigation_from").equals("setting")){
+                 *//*else if(getArguments().getString("navigation_from").equals("setting")){
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-                }*/
+                }*//*
             }
-        });
+        });*/
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();

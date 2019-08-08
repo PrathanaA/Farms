@@ -51,10 +51,12 @@ public class DistrictAdapter1 extends RecyclerView.Adapter<DistrictAdapter1.MySt
 
                     ListYourFarmsThird.district.setText(holder.statename.getText().toString());
                     ListYourFarmsThird.drawer.closeDrawers();
+                ListYourFarmsThird.search.setText("");
 
 
 
-              //  Add_New_Address_Fragment.grade_dialog.dismiss();
+
+                //  Add_New_Address_Fragment.grade_dialog.dismiss();
             }
         });
 

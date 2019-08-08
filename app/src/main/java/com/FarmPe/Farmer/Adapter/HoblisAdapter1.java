@@ -53,6 +53,8 @@ public class HoblisAdapter1 extends RecyclerView.Adapter<HoblisAdapter1.HoblisMy
 
                     ListYourFarmsThird.block.setText(holder.statename.getText().toString());
                     ListYourFarmsThird.drawer.closeDrawers();
+                ListYourFarmsThird.search.setText("");
+
 
             }
         });

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="#000"
+    android:background="#fff"
     >
 
     <LinearLayout
@@ -18,17 +18,17 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:minHeight="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@color/light_gray"
             app:titleTextColor="@android:color/white"
             >
 
 
-            <LinearLayout
+         <!--   <LinearLayout
                 android:id="@+id/back_feed"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:gravity="center"
                 android:background="@drawable/ic_filter_state">
 
@@ -37,11 +37,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_go_back_left_arrow_"
                     />
-            </LinearLayout>
+            </LinearLayout>-->
 
 
 
@@ -67,11 +66,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notification"
-                android:textSize="20dp"
-                android:layout_gravity="center"
-                android:textColor="#fff"
-                android:layout_marginHorizontal="10dp"
+                android:text="Notifications"
+                android:textSize="16dp"
+                android:layout_gravity="left"
+                android:textColor="#000"
                 android:id="@+id/toolbar_title" />
 
         </android.support.v7.widget.Toolbar>
@@ -83,9 +81,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_noti"
         android:layout_width="match_parent"
-        android:background="#000"
-        android:layout_marginBottom="20dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 

@@ -120,7 +120,6 @@ AddFirstAdapter extends RecyclerView.Adapter<AddFirstAdapter.MyViewHolder>  {
 
     @Override
     public int getItemCount() {
-        System.out.println("lengthhhhhhh"+productList.size());
         return productList.size();
     }
 

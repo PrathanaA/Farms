@@ -67,7 +67,7 @@ public class ListYourFarmsThird extends Fragment {
     LinearLayout back_feed, main_layout, search_bar;
     Fragment selectedFragment;
     String address_map;
-    EditText search;
+    public static  EditText search;
     public static DrawerLayout drawer;
 
     TextView toolbar_title, continue_3;
@@ -89,6 +89,7 @@ public class ListYourFarmsThird extends Fragment {
     DistrictAdapter1 districtAdapter;
     TalukAdapter1 talukAdapter;
     HoblisAdapter1 hoblisAdapter;
+
     VillageAdapter1 villageAdapter;
 
 

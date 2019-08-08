@@ -158,13 +158,13 @@ public class ListYourFarmsFive extends Fragment {
           @Override
           public void onClick(View v) {
 
+System.out.println("llllllllllllllllllllllllllll"+AddPhotoAdapter.productList.size());
 
-
-              if(AddPhotoAdapter.productList.size()>4) {
+              if(AddPhotoAdapter.productList.size()==1) {
 
 
                   Snackbar snackbar = Snackbar
-                          .make(linearLayout, "Upload any three images", Snackbar.LENGTH_LONG);
+                          .make(linearLayout, "Upload atleast one images", Snackbar.LENGTH_LONG);
                   View snackbarView = snackbar.getView();
                   TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                   tv.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.orange));
@@ -183,7 +183,6 @@ public class ListYourFarmsFive extends Fragment {
 //              else if(AddPhotoAdapter.imageView.getDrawable() == null){
 //                  Toast.makeText(getActivity(), "Pick any Image", Toast.LENGTH_SHORT).show();
 //              }
-
               else {
                   uploadImage(LandingPageActivity.selectedImage);
 
@@ -275,6 +274,7 @@ public class ListYourFarmsFive extends Fragment {
 
             json_string=jsonObject.toString();
 
+            System.out.println("bdjvknjvhvbbbbbbbbbbbbbbbbbbbbb"+json_string);
 
 
         } catch (JSONException e) {
@@ -324,6 +324,9 @@ public class ListYourFarmsFive extends Fragment {
                 Map<String, DataPart> params = new HashMap<>();
               long imagename = System.currentTimeMillis();
                params.put("farmimage", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+
+
+
 
                 return params;
             }

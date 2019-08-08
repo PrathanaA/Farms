@@ -53,6 +53,8 @@ public class TalukAdapter1 extends RecyclerView.Adapter<TalukAdapter1.TalukMyVie
 
                     ListYourFarmsThird.taluk.setText(holder.statename.getText().toString());
                     ListYourFarmsThird.drawer.closeDrawers();
+                ListYourFarmsThird.search.setText("");
+
 
 
             }

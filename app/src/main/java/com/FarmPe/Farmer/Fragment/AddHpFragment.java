@@ -69,7 +69,7 @@ public class AddHpFragment extends Fragment {
         });
 
         view.setFocusableInTouchMode(true);
-        view.requestFocus(View.FOCUS_UP);
+        view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {

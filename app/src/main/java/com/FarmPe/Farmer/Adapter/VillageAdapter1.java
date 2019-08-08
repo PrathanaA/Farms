@@ -52,6 +52,8 @@ public class VillageAdapter1 extends RecyclerView.Adapter<VillageAdapter1.Hoblis
                 if (ListYourFarmsThird.list_farms_village==null) {
                     Add_New_Address_Fragment.village.setText(holder.statename.getText().toString());
                     Add_New_Address_Fragment.drawer.closeDrawers();
+                    ListYourFarmsThird.search.setText("");
+
                     // Add_New_Address_Fragment.grade_dialog.dismiss();
                 }else{
                     ListYourFarmsThird.village.setText(holder.statename.getText().toString());

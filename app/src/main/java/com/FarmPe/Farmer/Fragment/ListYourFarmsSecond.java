@@ -165,7 +165,7 @@ public class ListYourFarmsSecond extends Fragment {
                     bundle.putString("status","default");
                     selectedFragment = ListYourFarmsThird.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
+                    transaction.add(R.id.frame_layout, selectedFragment);
                     selectedFragment.setArguments(bundle);
                     transaction.addToBackStack("list_farm2");
                     transaction.commit();

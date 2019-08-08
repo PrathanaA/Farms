@@ -97,7 +97,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
     SafeSearchAnnotation annotation;
 
 
-
+    Bitmap compressedbitmap;
     private static final String CLOUD_VISION_API_KEY = "AIzaSyASLfdH5Tr931zKrsdH2alWHPxMg6NzD-A";
     public static final String FILE_NAME = "temp.jpg";
     private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
@@ -409,6 +409,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
             byte[] imageBytes = byteArrayOutputStream.toByteArray();
 
+             compressedbitmap=bitmap;
             // Base64 encode the JPEG
             base64EncodedImage.encodeContent(imageBytes);
             annotateImageRequest.setImage(base64EncodedImage);
@@ -486,7 +487,7 @@ progressDialog.dismiss();
 
                 if (result.equals("APPROVE")){
 
-                    AddPhotoBean img1=new AddPhotoBean( selectedImage);
+                    AddPhotoBean img1=new AddPhotoBean( compressedbitmap);
                     AddPhotoAdapter.productList.add(0,img1);
                     ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 

@@ -473,7 +473,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
                 selectedFragment = NotificationFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.replace(R.id.first_full_frame, selectedFragment);
                 transaction.addToBackStack("home");
                 transaction.commit();
 

@@ -52,6 +52,7 @@ public class StateApdater1 extends RecyclerView.Adapter<StateApdater1.MyStateHol
 
                     ListYourFarmsThird.state.setText(holder.statename.getText().toString());
                     ListYourFarmsThird.drawer.closeDrawers();
+                    ListYourFarmsThird.search.setText("");
 
 
                 //   Add_New_Address_Fragment.grade_dialog.dismiss();

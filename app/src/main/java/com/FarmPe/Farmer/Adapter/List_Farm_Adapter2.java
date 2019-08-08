@@ -95,6 +95,8 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
         if (!ListYourFarmsSecond.selectedRadio.equals("") && products.getFarm_list_name().equals(ListYourFarmsSecond.selectedRadio)){
             holder.list_farm1.setChecked(true);
 
+
+
         }
 
        else{
@@ -110,6 +112,7 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
                 ListYourFarmsSecond.selectedRadio = holder.list_farm1.getText().toString();
 
+                farm_type_id=products.getFarm_list_id();
 
 
                 ListYourFarmsSecond.selected=true;
@@ -117,7 +120,7 @@ public class List_Farm_Adapter2 extends RecyclerView.Adapter<List_Farm_Adapter2.
 
                 holder.list_farm1.setChecked(selectedval);
                 position_1=position;
-             //  farm_listid = products.getFarm_list_id();
+            //  farm_listid = products.getFarm_list_id();
 
                 for(int i = 0;i<productList.size();i++) {
 

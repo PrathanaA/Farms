@@ -52,7 +52,7 @@ public class AddModelFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.add_first_recy, container, false);
+        View view = inflater.inflate(R.layout.add_first_recy, container, false);
         recyclerView=view.findViewById(R.id.recycler_what_looking);
         toolbar_title=view.findViewById(R.id.toolbar_title);
         back_feed=view.findViewById(R.id.back_feed);
@@ -71,12 +71,11 @@ public class AddModelFragment extends Fragment {
 
 
         view.setFocusableInTouchMode(true);
-        view.requestFocus(View.FOCUS_UP);
+        view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    System.out.println("ghghghhg" +"moni");
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("third", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
