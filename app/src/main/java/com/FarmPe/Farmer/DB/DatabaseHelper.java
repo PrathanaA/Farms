@@ -23,11 +23,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,PHONE_NO TEXT,PASSWORD TEXT,CHECKED INTEGER)");
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
     }
+
 
     public boolean insertData(String name,String pass) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -62,6 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+
  /*   public boolean updateData(String phone,String pass) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -89,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "PHONE_NO = ?",new String[] {id});
     }
+
 
     public boolean isEmailExists(String phone) {
         SQLiteDatabase db = this.getReadableDatabase();

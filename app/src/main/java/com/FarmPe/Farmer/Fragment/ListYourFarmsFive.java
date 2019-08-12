@@ -103,7 +103,7 @@ public class ListYourFarmsFive extends Fragment {
             public void onClick(View v) {
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("fourth_back", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fm.popBackStack("list_four", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 //                selectedFragment = ListYourFarmsFour.newInstance();
 //                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 //                transaction.replace(R.id.frame_layout, selectedFragment);
@@ -123,7 +123,7 @@ public class ListYourFarmsFive extends Fragment {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("fourth_back", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack("list_four", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 //                    selectedFragment = ListYourFarmsFour.newInstance();
 //                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

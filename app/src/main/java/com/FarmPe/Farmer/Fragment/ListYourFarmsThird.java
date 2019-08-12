@@ -144,7 +144,6 @@ public class ListYourFarmsThird extends Fragment {
 
         }
 
-
         current_adds.setText(address_map);
 
 
@@ -160,6 +159,8 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
+
+
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -168,14 +169,18 @@ public class ListYourFarmsThird extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("RB_S", List_Farm_Adapter2.position_1);
-                    selectedFragment = ListYourFarmsSecond.newInstance();
-                    selectedFragment.setArguments(bundle);
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.addToBackStack("list_farm1");
-                    transaction.commit();
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("list_farm2", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("RB_S", List_Farm_Adapter2.position_1);
+//                    selectedFragment = ListYourFarmsSecond.newInstance();
+//                    selectedFragment.setArguments(bundle);
+//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.frame_layout, selectedFragment);
+//                    transaction.addToBackStack("list_farm1");
+//                    transaction.commit();
 
                     return true;
                 }
@@ -188,14 +193,18 @@ public class ListYourFarmsThird extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("RB_S", -1);
-                selectedFragment = ListYourFarmsSecond.newInstance();
-                selectedFragment.setArguments(bundle);
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("list_farm1");
-                transaction.commit();
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack("list_farm2", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("RB_S", -1);
+//                selectedFragment = ListYourFarmsSecond.newInstance();
+//                selectedFragment.setArguments(bundle);
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("list_farm1");
+//                transaction.commit();
 
             }
         });
@@ -215,18 +224,18 @@ public class ListYourFarmsThird extends Fragment {
         });
 
 
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                street_string = street_add.getText().toString();
-                pincode_string = pincode.getText().toString();
-                selectedFragment = ListYourFarmsFour.newInstance();
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("list_four");
-                transaction.commit();
-            }
-        });
+//        skip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                street_string = street_add.getText().toString();
+//                pincode_string = pincode.getText().toString();
+//                selectedFragment = ListYourFarmsFour.newInstance();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                transaction.replace(R.id.frame_layout, selectedFragment);
+//                transaction.addToBackStack("list_four");
+//                transaction.commit();
+//            }
+//        });
 
 
 
@@ -258,6 +267,7 @@ public class ListYourFarmsThird extends Fragment {
                 // submit.setVisibility(View.GONE);
                 drawer.openDrawer(GravityCompat.END);
                 search_status = "state";
+                search.setText("");
                 //  search.setQueryHint("");
                 //  search.setQuery("",false);
                 stateBeanList.clear();
@@ -286,6 +296,7 @@ public class ListYourFarmsThird extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="district";
+                search.setText("");
                 //  search.setQuery("",false);
                 // search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -319,6 +330,7 @@ public class ListYourFarmsThird extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="taluk";
+                search.setText("");
                 //  search.setQueryHint("");
                 //  search.setQuery("",false);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -344,6 +356,7 @@ public class ListYourFarmsThird extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="block";
+                search.setText("");
                 //search.setQuery("",false);
                 //  search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -428,6 +441,7 @@ public class ListYourFarmsThird extends Fragment {
                         }
                         snackbar.show();
 
+
                     } else if (taluk.getText().toString().equals("")) {
                         Snackbar snackbar = Snackbar
                                 .make(main_layout, "Select Taluk", Snackbar.LENGTH_LONG);
@@ -441,6 +455,7 @@ public class ListYourFarmsThird extends Fragment {
                             tv.setGravity(Gravity.CENTER_HORIZONTAL);
                         }
                         snackbar.show();
+
 
 
                     } else if (block.getText().toString().equals("")) {
@@ -457,6 +472,7 @@ public class ListYourFarmsThird extends Fragment {
                         }
                         snackbar.show();
 
+
                     } else if (pincode.getText().toString().length() < 6) {
                         // Toast.makeText(getActivity(), "Enter a valid Pincode", Toast.LENGTH_SHORT).show();
                         Snackbar snackbar = Snackbar
@@ -471,18 +487,22 @@ public class ListYourFarmsThird extends Fragment {
                             tv.setGravity(Gravity.CENTER_HORIZONTAL);
                         }
                         snackbar.show();
+
+
                     } else {
                         street_string = street_add.getText().toString();
                         pincode_string = pincode.getText().toString();
-                        selectedFragment = ListYourFarmsFour.newInstance();
+                        selectedFragment = ListYourFarmsFive.newInstance();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
                         transaction.addToBackStack("list_four");
                         // transaction.addToBackStack("looking");
                         transaction.commit();
                     }
+
+
                 } else {
-                    selectedFragment = ListYourFarmsFour.newInstance();
+                    selectedFragment = ListYourFarmsFive.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
                     transaction.addToBackStack("list_four");
@@ -875,7 +895,6 @@ public class ListYourFarmsThird extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
-
 
     }
     private void block_list() {

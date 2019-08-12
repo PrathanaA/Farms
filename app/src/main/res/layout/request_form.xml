@@ -57,7 +57,6 @@
         android:layout_marginLeft="10dp"
         android:orientation="vertical"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,7 +71,6 @@
                 android:text="What are you looking for?"
                 android:textSize="20dp"
                 android:textColor="#000"
-                android:textStyle="bold"
                 android:fontFamily="@font/segoeui"
                 android:layout_marginHorizontal="10dp"
                 android:id="@+id/toolbar_title" />
@@ -80,16 +78,63 @@
 
 
 
+
+
+            <!--<RadioGroup-->
+            <!--android:id="@+id/radio_group_time"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:weightSum="100"-->
+            <!--&gt;-->
+
+            <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Irrigated"-->
+
+            <!--/>-->
+
+            <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:text="Livestock"-->
+            <!--/>-->
+
+            <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Non irrigated"-->
+            <!--/>-->
+            <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Organic"-->
+
+            <!--/>-->
+            <!--<RadioButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Plantation"-->
+
+            <!--/>-->
+
+
+            <!--</RadioGroup>-->
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
+            android:layout_height="0dp"
+            android:layout_weight="90"
             android:orientation="vertical"
             android:background="#ffff"
             android:paddingVertical="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:weightSum="100"
             android:layout_marginHorizontal="10dp"
@@ -98,7 +143,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="60"
+                android:layout_weight="52"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="10dp"
                 android:orientation="vertical"
@@ -123,7 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="10dp"
                     android:weightSum="100"
                     >
@@ -175,8 +220,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="27"
-                android:layout_marginTop="5dp"
+                android:layout_weight="22"
+                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="10dp"
                 android:orientation="vertical"
                 android:background="#ffff"
@@ -229,7 +274,7 @@
                 android:id="@+id/address_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="12"
+                android:layout_weight="10"
                 android:layout_marginTop="30dp"
                 android:gravity="center_vertical"
                 android:layout_marginHorizontal="10dp"
@@ -247,6 +292,7 @@
                     android:fontFamily="@font/segoeui"
                     android:textColor="#000"
                     android:drawableLeft="@drawable/ic_location_sign"
+                    android:drawableRight="@drawable/ic_right_angle_arrow"
                     android:drawablePadding="5dp"
                     android:layout_marginHorizontal="10dp"
                     />

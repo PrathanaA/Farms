@@ -27,8 +27,8 @@
 
                 <ImageView
 
-                    android:layout_width="60dp"
-                    android:layout_height="120dp"
+                    android:layout_width="55dp"
+                    android:layout_height="100dp"
                     android:layout_weight="10"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/android_logo_red"/>
@@ -37,36 +37,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
                     <TextView
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000"
                         android:layout_marginTop="10dp"
-                        android:textStyle="bold"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
+                       android:fontFamily="@font/lato_regular"
                         android:text="Welcome,"/>
 
 
                     <TextView
                         android:id="@+id/nameee"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="2dp"
+
+                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000"
                         android:textStyle="bold"
                         android:textSize="16dp"
+                        android:fontFamily="@font/lato_regular"
                         android:text="Jagdish Kumar"/>
                     <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000"
-                        android:textSize="14dp"
+                        android:textSize="12dp"
+                        android:fontFamily="@font/lato_regular"
                         android:text="@string/something"/>
 
 
@@ -74,18 +78,25 @@
 
             </LinearLayout>
 
+            <include
+                layout="@layout/no_farms_layout"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
+                android:id="@+id/farms_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="30"
-                android:weightSum="20"
+                android:layout_weight="25"
+                android:layout_marginBottom="15dp"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/farmlist_count"
                         android:layout_width="match_parent"
@@ -98,7 +109,7 @@
                         android:inputType="number"/>
 
                     <TextView
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Farms Listed"
@@ -109,33 +120,29 @@
                         />
 
                     <TextView
-                        android:layout_marginTop="5dp"
+                        android:id="@+id/farms_sell_all"
+                        android:layout_marginTop="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="See All"
                         android:gravity="center"
                         android:textColor="@color/navy_blue"
                         android:textStyle="bold"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="15">
+                    android:gravity="center">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recylr_1"
                         android:layout_width="wrap_content"
                         android:layout_height="90dp"
-
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_gravity="center_horizontal"
                         android:background="#fff">
                     </android.support.v7.widget.RecyclerView>
@@ -149,6 +156,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/add_list"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
@@ -158,6 +166,8 @@
                     android:background="@drawable/orange_border"
                     android:layout_gravity="center"/>
             </LinearLayout>
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -165,16 +175,23 @@
                 android:layout_marginTop="10dp">
 
             </View>
+
+            <include
+                layout="@layout/no_request_layout"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
+                android:id="@+id/request_made"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="20"
+                android:layout_marginBottom="15dp"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:orientation="vertical">
 
 
@@ -192,7 +209,7 @@
 
 
                     <TextView
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Requests Made"
@@ -203,14 +220,15 @@
                         />
 
                     <TextView
-                        android:layout_marginTop="5dp"
+                        android:id="@+id/request_sell_all"
+                        android:layout_marginTop="2dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="See All"
                         android:gravity="center"
                         android:textColor="@color/navy_blue"
                         android:textStyle="bold"
-                        android:textSize="16dp"
+                        android:textSize="12dp"
                         />
 
                 </LinearLayout>
@@ -218,9 +236,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="15">
+                    android:orientation="horizontal">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recylr_2"
@@ -228,7 +244,7 @@
                         android:layout_height="90dp"
                         android:layout_gravity="left"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:background="#fff">
 
                     </android.support.v7.widget.RecyclerView>
@@ -254,15 +270,17 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/add_request"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textColor="#000"
                     android:text="Make a request"
                     android:padding="10dp"
                     android:textSize="16dp"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center"
                     android:background="@drawable/orange_border"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center"/>
 
             </LinearLayout>

@@ -47,16 +47,14 @@
             android:textColor="@color/dot_dark_screen1"
             android:text="#12 5th main 2nd cross xyz Apartments"/>
 
-<!--
         <TextView
-            android:id="@+id/landmark1"
+            android:id="@+id/districttt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/dot_dark_screen1"
-
-            android:text="Bengaluru, Karnataka"/>-->
+            android:text="Area District"/>
 
         <TextView
             android:id="@+id/city_1"
@@ -65,8 +63,7 @@
             android:textSize="14dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/dot_dark_screen1"
-
-            android:text="Bengaluru, Karnataka"/>
+            android:text="State,Pincode"/>
 
 
         <TextView

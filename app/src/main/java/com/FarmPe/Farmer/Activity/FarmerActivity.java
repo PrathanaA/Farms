@@ -31,6 +31,7 @@ import java.util.List;
 
 public class FarmerActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
+
     public static List<FarmsImageBean> newOrderBeansList = new ArrayList<>();
     public static RecyclerView recyclerView;
     public static AddHpAdapter farmadapter;
@@ -41,6 +42,7 @@ public class FarmerActivity extends AppCompatActivity implements ConnectivityRec
     SessionManager sessionManager;
     LinearLayout back_feed,next_layout,main_layout;
     CheckBox check_box;
+
 
 
     public static boolean connectivity_check;

@@ -12,6 +12,8 @@ import com.FarmPe.Farmer.Bean.AddTractorBean;
 import com.FarmPe.Farmer.Bean.AddTractorBean1;
 import com.FarmPe.Farmer.Bean.AddTractorBean2;
 import com.FarmPe.Farmer.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -54,7 +56,15 @@ public class HomePage_Adapter extends RecyclerView.Adapter<HomePage_Adapter.MyVi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final AddTractorBean2 products = productList.get(position);
-        holder.image.setImageResource(products.getImage());
+        //holder.image.setImageResource(products.getImage());
+
+        Glide.with(activity).load(products.getImage())
+
+                .thumbnail(0.5f)
+                //  .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.avatarmale)
+                .into(holder.image);
 
 
 

@@ -414,7 +414,7 @@ public class RequestFormFragment extends Fragment {
 
                             if (jsonObject1.getBoolean("IsDefaultAddress")){
                                 addId=jsonObject1.getString("Id");
-                                address_text.setText(jsonObject1.getString("LandMark")+","+jsonObject1.getString("State")+","+jsonObject1.getString("City")+","+jsonObject1.getString("Pincode"));
+                                address_text.setText(jsonObject1.getString("Hoblie")+","+jsonObject1.getString("District"));
 
                             }
 

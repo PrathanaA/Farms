@@ -100,12 +100,10 @@ public class ListYourFarmsFour extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("status","default");
-                    selectedFragment = ListYourFarmsThird.newInstance();
+
+                    selectedFragment = HomeMenuFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_layout, selectedFragment);
-                    selectedFragment.setArguments(bundle);
                     transaction.commit();
 
 //                    FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -122,12 +120,9 @@ public class ListYourFarmsFour extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Bundle bundle = new Bundle();
-                bundle.putString("status","default");
-                selectedFragment = ListYourFarmsThird.newInstance();
+                selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                selectedFragment.setArguments(bundle);
                 transaction.commit();
 
 
@@ -535,14 +530,18 @@ public class ListYourFarmsFour extends Fragment {
 
 
                 } else {
-                     farm_name_string = farm_name.getText().toString();
-                     cont_name = cont_person_name.getText().toString();
-                     mob_no = mobile_no.getText().toString();
-                     selectedFragment = ListYourFarmsFive.newInstance();
-                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                     transaction.replace(R.id.frame_layout, selectedFragment);
-                     transaction.addToBackStack("fourth_back");
-                     transaction.commit();
+                      farm_name_string = farm_name.getText().toString();
+                      cont_name = cont_person_name.getText().toString();
+                      mob_no = mobile_no.getText().toString();
+
+                      Bundle bundle = new Bundle();
+                      bundle.putString("status","default");
+                      selectedFragment = ListYourFarmsThird.newInstance();
+                      FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                      transaction.replace(R.id.frame_layout, selectedFragment);
+                      selectedFragment.setArguments(bundle);
+                      transaction.addToBackStack("list_farm2");
+                      transaction.commit();
                 }
             }
         });

@@ -154,16 +154,26 @@
             android:hint="Enter Your Name"
             android:textSize="14dp"
             android:maxLength="30"
+            android:editable="false"
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp"
             android:textColorHint="@color/dot_dark_screen1"
             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:textColor="#000"
+            android:textColor="@color/dot_dark_screen1"
             android:background="@drawable/border_transperent"
             android:layout_marginHorizontal="10dp"
             />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#cccccc"
+        />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -200,7 +210,7 @@
             android:inputType="number"
             android:maxLength="13"
             android:editable="false"
-            android:textColor="#000"
+            android:textColor="@color/dot_dark_screen1"
             android:layout_marginHorizontal="10dp"
             android:paddingHorizontal="10dp"
             android:paddingVertical="10dp"

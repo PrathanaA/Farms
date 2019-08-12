@@ -88,6 +88,7 @@ public class You_Address_Fragment extends Fragment {
         sessionManager = new SessionManager(getActivity());
 
 
+
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -158,7 +159,7 @@ public class You_Address_Fragment extends Fragment {
         });
 
 
-        select_address_type.setText("Home");
+        select_address_type.setText("All");
 
 
         select_address_type.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +193,7 @@ public class You_Address_Fragment extends Fragment {
                         dialog.dismiss();
                     }
                 });
+
 
 
                 home.setOnClickListener(new View.OnClickListener() {
@@ -259,13 +261,13 @@ public class You_Address_Fragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        gettingAddress("Home");
+        gettingAddress(" ");
 
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
             toolbar_titletxt.setText(lngObject.getString("SelectYourAdress"));
             add_new_address.setText(lngObject.getString("AddNewAddress"));
-            select_address_type.setText(lngObject.getString("Home"));
+           // select_address_type.setText(lngObject.getString("Home"));
             //ad_list=(lngObject.getString("addressesareaddedin"));
 
 
@@ -311,16 +313,14 @@ public class You_Address_Fragment extends Fragment {
                         if(new_address_beanArrayList.size()<=1){
 
                             item_list = String.valueOf(new_address_beanArrayList.size());
-                            address_list.setText(item_list+" " + "Address is added" );
+                            address_list.setText(item_list+" " + " Address is added" );
 
                         }else{
 
                             item_list = String.valueOf(new_address_beanArrayList.size());
-                            address_list.setText(item_list+" " + "Addresses are added" );
+                            address_list.setText(item_list+" " + " Addresses are added" );
 
                         }
-
-
 
 
                         mAdapter.notifyDataSetChanged();

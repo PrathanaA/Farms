@@ -284,6 +284,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 final TextView farm = (TextView)dialog.findViewById(R.id.farm) ;
                 final TextView others = (TextView)dialog.findViewById(R.id.othrs) ;
                 final TextView popuptxt = (TextView)dialog.findViewById(R.id.popup_heading) ;
+
                 try {
                     lngObject = new JSONObject(sessionManager.getRegId("language"));
                     popuptxt.setText(lngObject.getString("SelectanAddressType"));
@@ -500,6 +501,8 @@ public class  Add_New_Address_Fragment extends Fragment {
                 // submit.setVisibility(View.GONE);
                 drawer.openDrawer(GravityCompat.END);
                 search_status="state";
+                search.setText("");
+
               //  search.setQueryHint("");
               //  search.setQuery("",false);
                 stateBeanList.clear();
@@ -529,6 +532,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="district";
+                search.setText("");
               //  search.setQuery("",false);
                // search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -562,6 +566,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="taluk";
+                search.setText("");
               //  search.setQueryHint("");
               //  search.setQuery("",false);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -586,6 +591,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 drawer.openDrawer(GravityCompat.END);
                 // stateBeanList.clear();
                 search_status="hobli";
+                search.setText("");
                 //search.setQuery("",false);
               //  search.setQueryHint("");
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -898,7 +904,7 @@ public class  Add_New_Address_Fragment extends Fragment {
             state.setHint(lngObject.getString("State"));
          //   hobli.setHint(lngObject.getString("Hobli"));
             district.setHint(lngObject.getString("District"));
-            taluk.setHint(lngObject.getString("Taluk"));
+           // taluk.setHint(lngObject.getString("Taluk"));
           //  village.setHint(lngObject.getString("Village"));
             add_new_address.setText(lngObject.getString("AddAddress"));
 
@@ -1286,7 +1292,7 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
                                 bundle.putString("add_id",status);
-                                bundle.putString("streetname",street_name.getText().toString());
+                                bundle.putString("streetname",hobli.getText().toString() + district.getText().toString());
                                 bundle.putInt("selected_id2",selected_id);
                                 bundle.putInt("selected_id_time1",selected_id_time);
                                 selectedFragment = RequestFormFragment.newInstance();
@@ -1481,7 +1487,7 @@ public class  Add_New_Address_Fragment extends Fragment {
             recyclerView.setAdapter(talukAdapter);
         }
 
-        else if (search_status.equals("area")){
+        else if (search_status.equals("hobli")){
             searchresultAraaylist.clear();
             for (int i = 0; i < hobliBeanList.size(); i++) {
 

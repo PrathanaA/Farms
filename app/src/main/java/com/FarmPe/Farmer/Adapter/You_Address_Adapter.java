@@ -67,7 +67,7 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name,mobile_no,street_addrss,landmrk,city_1,edit_1,delete_1,default_1,default_add;
+        TextView name,mobile_no,street_addrss,landmrk,city_1,edit_1,delete_1,default_1,default_add,area_district;
         LinearLayout add_new_adress;
         View view1;
 
@@ -85,6 +85,7 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
             default_1 = view.findViewById(R.id.default_1);
             default_add = view.findViewById(R.id.default_add);
             linearLayout = view.findViewById(R.id.bottom_sheet1);
+            area_district = view.findViewById(R.id.districttt);
             //  view1 = view.findViewById(R.id.view1);
 
             add_new_adress = view.findViewById(R.id.linear_frame);
@@ -132,9 +133,10 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
 
 
         holder.name.setText(products.getAdd_name());
-        holder.mobile_no.setText("Phone No - " + products.getAdd_mobile());
         holder.street_addrss.setText(products.getAdd_street());
-        holder.city_1.setText(products.getAdd_pincode());
+        holder.area_district.setText(products.getAdd_hobli()+", "+ products.getAdd_district());
+        holder.city_1.setText(products.getAdd_state()+" - " + products.getAdd_pincode());
+        holder.mobile_no.setText("Phone No - " + products.getAdd_mobile());
         // holder.landmrk.setText(products.getAdd_landmark());
 
 
@@ -270,7 +272,19 @@ public class You_Address_Adapter extends RecyclerView.Adapter<You_Address_Adapte
                                             productList.remove(position);
                                             notifyDataSetChanged();
 
-                                            You_Address_Fragment.address_list.setText(productList.size() + "Addresses are added");
+
+                                            if(productList.size()<=1){
+                                                You_Address_Fragment.address_list.setText(productList.size() + " Address is added");
+
+
+
+                                            }else{
+
+                                                You_Address_Fragment.address_list.setText(productList.size() + " Addresses are added");
+
+
+                                            }
+
 
                                         }
 

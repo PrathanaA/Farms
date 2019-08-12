@@ -246,6 +246,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
         System.out.println("landiiiiiing");
 
 
+
         Window window = activity.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(activity,R.color.colorPrimaryDark));
         LandingPageActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -349,7 +350,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
     }
 
-
     private void callCloudVision(final Bitmap bitmap) {
         // Switch text to loading
     //    mImageDetails.setText("loading");
@@ -363,8 +363,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
                     e.getMessage());
         }
     }
-
-
 
 
     private Vision.Images.Annotate prepareAnnotationRequest(final Bitmap bitmap) throws IOException {
@@ -434,6 +432,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
         return annotateRequest;
     }
+
 
 
     private class LableDetectionTask extends AsyncTask<Object, Void, String> {

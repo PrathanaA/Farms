@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -43,15 +44,16 @@ public class FarmPe_Logo_Fragment extends Fragment {
     Fragment selectedFragment;
     public static LinearLayout backfeed;
 
-LinearLayout linearLayout;
+LinearLayout linearLayout,no_request,farms_lists,no_farms,requests_made;
     JSONObject lngObject;
-  public static TextView reqst_count,farmlist_count,nameee;
+    public static TextView reqst_count,farmlist_count,nameee;
     SessionManager sessionManager;
     public static String toast_click_back;
     boolean doubleBackToExitPressedOnce = false;
-    JSONArray count_images_array;
+    JSONArray count_images_array,rfq_images_array;
     HomePage_Adapter homePage_adapter;
     HomePage1_Adapter homePage1_adapter;
+    TextView Add_list_ur_farm,Add_make_request,no_make_request,no_list_farm,seeall_farms,seeall_request;
 
 
     RecyclerView recyclerView,recyclerView1;
@@ -72,15 +74,27 @@ LinearLayout linearLayout;
         View view = inflater.inflate(R.layout.farmepe_logo_layout, container, false);
      //   backfeed= view.findViewById(R.id.back_feed1);
 
-
-
         linearLayout= view.findViewById(R.id.layout);
+        no_farms= view.findViewById(R.id.no_farms);
+        no_request= view.findViewById(R.id.no_requests);
+        farms_lists= view.findViewById(R.id.farms_list);
+        requests_made= view.findViewById(R.id.request_made);
         nameee= view.findViewById(R.id.nameee);
         sessionManager = new SessionManager(getActivity());
         recyclerView= view.findViewById(R.id.recylr_2);
         recyclerView1= view.findViewById(R.id.recylr_1);
         farmlist_count= view.findViewById(R.id.farmlist_count);
         reqst_count= view.findViewById(R.id.request_count);
+        Add_list_ur_farm= view.findViewById(R.id.add_list);
+        Add_make_request= view.findViewById(R.id.add_request);
+        no_list_farm= view.findViewById(R.id.list_farmmmmm);
+        no_make_request= view.findViewById(R.id.make_requesttttt);
+        seeall_farms= view.findViewById(R.id.farms_sell_all);
+        seeall_request= view.findViewById(R.id.request_sell_all);
+
+        farms_lists.setVisibility(View.GONE);
+        no_request.setVisibility(View.GONE);
+
 
         nameee.setText(sessionManager.getRegId("name"));
 
@@ -113,6 +127,7 @@ LinearLayout linearLayout;
                             getActivity().finish();
                             System.exit(0);
                         }
+
                         doubleBackToExitPressedOnce = true;
                         // Toast.makeText(getActivity().getApplicationContext(), "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
                         Snackbar snackbar = Snackbar
@@ -142,20 +157,21 @@ LinearLayout linearLayout;
             }
         });
 
+
         newOrderBeansList2.clear();
         GridLayoutManager mLayoutManager_farm = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager_farm);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 // recyclerView.addItemDecoration(new ItemDecorator( -80));
-
-        AddTractorBean2 img1=new AddTractorBean2( R.drawable.tractor_red," ","");
-        newOrderBeansList2.add(img1);
-
-        AddTractorBean2 img2=new AddTractorBean2( R.drawable.gyrovator," ","");
-        newOrderBeansList2.add(img2);
-
-        AddTractorBean2 img3=new AddTractorBean2( R.drawable.tractor_green," ","");
-        newOrderBeansList2.add(img3);
+//
+//        AddTractorBean2 img1=new AddTractorBean2( R.drawable.tractor_red," ","");
+//        newOrderBeansList2.add(img1);
+//
+//        AddTractorBean2 img2=new AddTractorBean2( R.drawable.gyrovator," ","");
+//        newOrderBeansList2.add(img2);
+//
+//        AddTractorBean2 img3=new AddTractorBean2( R.drawable.tractor_green," ","");
+//        newOrderBeansList2.add(img3);
 
 
         homePage_adapter=new HomePage_Adapter(getActivity(),newOrderBeansList2);
@@ -186,8 +202,76 @@ LinearLayout linearLayout;
         homePage1_adapter=new HomePage1_Adapter(getActivity(),newOrderBeansList);
         recyclerView1.setAdapter(homePage1_adapter);
 
+                Add_make_request.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selectedFragment = AddFirstFragment.newInstance();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.addToBackStack("farmpe_logo");
+                        transaction.commit();
 
+                    }
+                });
+                no_make_request.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selectedFragment = AddFirstFragment.newInstance();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.addToBackStack("farmpe_logo");
+                        transaction.commit();
+                    }
+                });
+                     Add_list_ur_farm.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+                             Bundle bundle = new Bundle();
+                             bundle.putInt("RB_S", 0);
+                             selectedFragment = ListYourFarms.newInstance();
+                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                             transaction.replace(R.id.frame_layout, selectedFragment);
+                             selectedFragment.setArguments(bundle);
+                             transaction.addToBackStack("farmpe_logo");
+                             transaction.commit();
 
+                         }
+                     });
+                no_list_farm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("RB_S", 0);
+                        selectedFragment = ListYourFarms.newInstance();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        selectedFragment.setArguments(bundle);
+                        transaction.addToBackStack("farmpe_logo");
+                        transaction.commit();
+
+                    }
+                });
+
+                seeall_request.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selectedFragment = LookingForFragment.newInstance();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.first_full_frame, selectedFragment);
+                        transaction.commit();
+
+                    }
+                });
+
+                seeall_farms.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selectedFragment = FarmsHomePageFragment.newInstance();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.first_full_frame, selectedFragment);
+                        transaction.commit();
+                    }
+                });
 
         try{
             final JSONObject jsonObject = new JSONObject();
@@ -204,18 +288,52 @@ LinearLayout linearLayout;
                         String  request_count = String.valueOf(result.getInt("RFQCount"));
 
                         count_images_array = result.getJSONArray("FarmImages");
+                        rfq_images_array = result.getJSONArray("RFQImages");
+
+                        if(request_count.equalsIgnoreCase("0")){
+                            no_request.setVisibility(View.VISIBLE);
+                            requests_made.setVisibility(View.GONE);
+                           /* no_farms.setVisibility(View.VISIBLE);
+                            farms_lists.setVisibility(View.GONE);*/
+                        }else {
+
+                            farms_lists.setVisibility(View.VISIBLE);
+                            no_request.setVisibility(View.GONE);
+                        }
+
+
+
+                        if (farm_count.equalsIgnoreCase("0")){
+
+                            no_farms.setVisibility(View.VISIBLE);
+                            farms_lists.setVisibility(View.GONE);
+
+
+                        }else {
+                            no_farms.setVisibility(View.GONE);
+                            farms_lists.setVisibility(View.VISIBLE);
+                        }
+
+
+
+
                         for(int i = 0;i<count_images_array.length();i++){
+                            AddTractorBean1 img1=new AddTractorBean1( count_images_array.getString(i)," ","");
+                            newOrderBeansList.add(img1);
 
-                            AddTractorBean1 img4=new AddTractorBean1( count_images_array.getString(i)," ","");
-                            newOrderBeansList.add(img4);
-
-                           // if (i <= 3) {
+                         //   if (i <= 3) {
 
 
-                           // }
+                         //   }
 
                         }
 
+                        for(int i = 0;i<rfq_images_array.length();i++) {
+                            AddTractorBean2 img2 = new AddTractorBean2(rfq_images_array.getString(i), " ", "");
+                            newOrderBeansList2.add(img2);
+
+
+                        }
 
                         reqst_count.setText(request_count);
                         farmlist_count.setText(farm_count);
@@ -258,3 +376,4 @@ LinearLayout linearLayout;
 
 }
 
+//8618710945
