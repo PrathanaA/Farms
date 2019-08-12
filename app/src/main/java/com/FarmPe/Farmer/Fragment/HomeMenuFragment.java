@@ -140,6 +140,8 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         list_farm=view.findViewById(R.id.list_farm);
 
 
+ //    farm_count.setText(FarmPe_Logo_Fragment.farmlist_count.getText().toString());
+ //    request_count.setText(FarmPe_Logo_Fragment.reqst_count.getText().toString());
 
         plus_sign_add=view.findViewById(R.id.plus_sign_add);
         user_name_menu=view.findViewById(R.id.user_name_menu);
@@ -172,31 +174,36 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
             }
         });
 
+
         your_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                drawer.closeDrawers();
+
                 selectedFragment = LookingForFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.addToBackStack("home");
                 transaction.commit();
-                drawer.closeDrawers();
 
             }
         });
+
 
 
         your_farms_tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                drawer.closeDrawers();
                 selectedFragment = FarmsHomePageFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.first_full_frame, selectedFragment);
+                transaction.addToBackStack("home");
                 transaction.commit();
-               drawer.closeDrawers();
+
             }
         });
-
 
         your_addrss.setOnClickListener(new View.OnClickListener() {
             @Override

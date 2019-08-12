@@ -143,7 +143,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="52"
+                android:layout_weight="60"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="10dp"
                 android:orientation="vertical"
@@ -174,8 +174,10 @@
                     >
 
                     <RadioButton
+                        android:id="@+id/immidiately"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="25"
                         android:tag="Immediately"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/segoeui"
@@ -184,8 +186,10 @@
                         />
 
                     <RadioButton
+                        android:id="@+id/month1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="25"
                         android:text="1 Month"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/segoeui"
@@ -194,8 +198,10 @@
 
 
                     <RadioButton
+                        android:id="@+id/month3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="25"
                         android:tag="3Months"
                         android:layout_marginTop="10dp"
                       android:fontFamily="@font/segoeui"
@@ -203,8 +209,10 @@
 
                         />
                     <RadioButton
+                        android:id="@+id/after3month"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="25"
                         android:tag="After 3 Months"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/segoeui"
@@ -220,7 +228,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="22"
+                android:layout_weight="24"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="10dp"
                 android:orientation="vertical"
@@ -243,12 +251,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="9dp"
                     android:layout_marginLeft="10dp"
                     android:weightSum="100"
                     >
 
                     <RadioButton
+                        android:id="@+id/genYes"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="30"
@@ -258,6 +267,7 @@
                         />
 
                     <RadioButton
+                        android:id="@+id/genNo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
@@ -269,6 +279,7 @@
                 </RadioGroup>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/address_layout"
@@ -292,7 +303,6 @@
                     android:fontFamily="@font/segoeui"
                     android:textColor="#000"
                     android:drawableLeft="@drawable/ic_location_sign"
-                    android:drawableRight="@drawable/ic_right_angle_arrow"
                     android:drawablePadding="5dp"
                     android:layout_marginHorizontal="10dp"
                     />

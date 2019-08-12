@@ -71,7 +71,7 @@ public class ReferAndEarncopy extends Fragment {
         twitter=view.findViewById(R.id.twitter);
         message=view.findViewById(R.id.msg);
         more = view.findViewById(R.id.more);
-        getscratchtxt=view.findViewById(R.id.getscratch);
+      //  getscratchtxt=view.findViewById(R.id.getscratch);
        // winuptxt=view.findViewById(R.id.winup);
       //  wallet_blnctxtt=view.findViewById(R.id.wallet_blnctxt);
         referearntxt=view.findViewById(R.id.toolbar_title);
@@ -336,7 +336,7 @@ public class ReferAndEarncopy extends Fragment {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
            // referearntxt.setText(lngObject.getString("Refer_Earn"));
            // winuptxt.setText(lngObject.getString("Winupto1000"));
-            getscratchtxt.setText(lngObject.getString("Getascratchcardmin100cashbackonyourfriendsfirstappsharing"));
+           // getscratchtxt.setText(lngObject.getString("Getascratchcardmin100cashbackonyourfriendsfirstappsharing"));
             //copyhereurltxt.setText(lngObject.getString("ClickHeretoCopyURL"));
            // wallet_blnctxtt.setText(lngObject.getString("WalletBalance"));
         } catch (JSONException e) {

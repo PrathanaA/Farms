@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -78,7 +79,10 @@ public class FarmsHomePageFragment extends Fragment {
 
         recyclerView.setNestedScrollingEnabled(false);
         sessionManager=new SessionManager(getActivity());
-        FarmsList();
+
+
+
+
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -88,15 +92,23 @@ public class FarmsHomePageFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    HomeMenuFragment.drawer.openDrawer(Gravity.START);
-                    /*FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("list_farm1", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-*/
+
+
+//                    selectedFragment = HomeMenuFragment.newInstance();
+//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.frame_layout, selectedFragment);
+//                    transaction.commit();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     return true;
                 }
                 return false;
             }
         });
+
+
+
+        FarmsList();
 
 
 
