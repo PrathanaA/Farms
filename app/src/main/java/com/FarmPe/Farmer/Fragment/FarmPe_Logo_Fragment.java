@@ -286,6 +286,7 @@ LinearLayout linearLayout,no_request,farms_lists,no_farms,requests_made;
 
                         String farm_count = String.valueOf(result.getInt("FarmsCount"));
                         String  request_count = String.valueOf(result.getInt("RFQCount"));
+                        String  notificatn_count = String.valueOf(result.getInt("NotificationCount"));
 
                         count_images_array = result.getJSONArray("FarmImages");
                         rfq_images_array = result.getJSONArray("RFQImages");
@@ -339,8 +340,11 @@ LinearLayout linearLayout,no_request,farms_lists,no_farms,requests_made;
                         farmlist_count.setText(farm_count);
                         HomeMenuFragment.farm_count.setText(farm_count);
                         HomeMenuFragment.request_count.setText(request_count);
+                        HomeMenuFragment.notifictn_count.setText(notificatn_count);
+
 
                         homePage1_adapter.notifyDataSetChanged();
+                        homePage_adapter.notifyDataSetChanged();
 
 
                     }catch (Exception e){

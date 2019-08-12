@@ -87,7 +87,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
     String mob_no;
     String userid;
     Bitmap bitmap;
-  public static  TextView home,settings,list_farm,farm_count,request_count,your_addrss;
+  public static  TextView home,settings,list_farm,farm_count,request_count,your_addrss,notifictn_count;
     public static TextView your_farms,user_name_menu,phone_no;
     View looking_view,farms_view,farmer_view;
     RelativeLayout notification_bell;
@@ -122,6 +122,7 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         farmer_title = view.findViewById(R.id.farmer_title);
         update_acc_layout=view.findViewById(R.id.update_acc_layout);
         notification_bell=view.findViewById(R.id.notification_bell);
+        notifictn_count=view.findViewById(R.id.notifictn_count);
         settings=view.findViewById(R.id.settings);
         prod_img=view.findViewById(R.id.prod_img);
         prod_img1=view.findViewById(R.id.prod_img1);

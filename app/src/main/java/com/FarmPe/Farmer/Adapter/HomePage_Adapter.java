@@ -58,6 +58,8 @@ public class HomePage_Adapter extends RecyclerView.Adapter<HomePage_Adapter.MyVi
         final AddTractorBean2 products = productList.get(position);
         //holder.image.setImageResource(products.getImage());
 
+        System.out.println("dddiiiijgh" + products.getImage());
+
         Glide.with(activity).load(products.getImage())
 
                 .thumbnail(0.5f)
