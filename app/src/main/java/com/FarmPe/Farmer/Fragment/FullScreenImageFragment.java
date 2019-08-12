@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.FarmPe.Farmer.G_Vision_Controller;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
@@ -54,9 +55,10 @@ public class FullScreenImageFragment extends Fragment {
     CircleImageView imgFullImage,cam;
 LinearLayout back_feed;
     Fragment selectedFragment;
-    Bitmap bitmap;
+    Bitmap bitmap,scaled_bitmap;
     EditText profile_name,profile_phone;
     SessionManager sessionManager;
+    G_Vision_Controller g_vision_controller;
     public static FullScreenImageFragment newInstance() {
         FullScreenImageFragment fragment = new FullScreenImageFragment();
         return fragment;
@@ -214,9 +216,12 @@ LinearLayout back_feed;
             //  bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                imgFullImage.setImageBitmap(bitmap);
+                g_vision_controller = G_Vision_Controller.getInstance( );
+
+               scaled_bitmap=g_vision_controller.callCloudVision(bitmap,getActivity(),"Profile");
+                imgFullImage.setImageBitmap(scaled_bitmap);
              //   prod_img.setImageBitmap(bitmap);
-                uploadImage(getResizedBitmap(bitmap, 100, 100));
+               // uploadImage(getResizedBitmap(scaled_bitmap, 100, 100));
                 Toast.makeText(getActivity(), "Your Changed Your Profile Photo", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();

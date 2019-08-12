@@ -41,6 +41,7 @@ import com.FarmPe.Farmer.Adapter.AddPhotoAdapter;
 import com.FarmPe.Farmer.Bean.AddPhotoBean;
 import com.FarmPe.Farmer.Fragment.HomeMenuFragment;
 import com.FarmPe.Farmer.Fragment.ListYourFarmsFive;
+import com.FarmPe.Farmer.G_Vision_Controller;
 import com.FarmPe.Farmer.GpsService;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
@@ -96,7 +97,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
     SafeSearchAnnotation annotation;
 
-
+    G_Vision_Controller g_vision_controller;
     Bitmap compressedbitmap;
     private static final String CLOUD_VISION_API_KEY = "AIzaSyASLfdH5Tr931zKrsdH2alWHPxMg6NzD-A";
     public static final String FILE_NAME = "temp.jpg";
@@ -192,6 +193,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
         System.out.println("priyanka"+requestCode);
         System.out.println("priyanka"+resultCode);
+        g_vision_controller = G_Vision_Controller.getInstance( );
 
 
 
@@ -203,10 +205,10 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
                 //profile_image.setImageBitmap(selectedImage);
                 AddPhotoBean img1=new AddPhotoBean( selectedImage);
                 if (!(selectedImage==null)){
+                    g_vision_controller.callCloudVision(selectedImage,this,"farm");
 
 
-
-                     callCloudVision(  scaleBitmapDown(selectedImage,MAX_DIMENSION));
+                   //  callCloudVision(  scaleBitmapDown(selectedImage,MAX_DIMENSION));
                   //  AddPhotoAdapter.productList.add(0,img1);
                    // ListYourFarmsFive.farmadapter.notifyDataSetChanged();
 
@@ -244,7 +246,6 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
         activity= this;
 
         System.out.println("landiiiiiing");
-
 
 
         Window window = activity.getWindow();
@@ -350,221 +351,19 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
 
     }
 
-    private void callCloudVision(final Bitmap bitmap) {
-        // Switch text to loading
-    //    mImageDetails.setText("loading");
-
-        // Do the real work in an async task, because we need to use the network anyway
-        try {
-            AsyncTask<Object, Void, String> labelDetectionTask = new LableDetectionTask(this, prepareAnnotationRequest(bitmap));
-            labelDetectionTask.execute();
-        } catch (IOException e) {
-            Log.d(TAG, "failed to make API request because of other IOException " +
-                    e.getMessage());
-        }
-    }
-
-
-    private Vision.Images.Annotate prepareAnnotationRequest(final Bitmap bitmap) throws IOException {
-        HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
-        JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
-
-        VisionRequestInitializer requestInitializer =
-                new VisionRequestInitializer(CLOUD_VISION_API_KEY) {
-                    /**
-                     * We override this so we can inject important identifying fields into the HTTP
-                     * headers. This enables use of a restricted cloud platform API key.
-                     */
-                    @Override
-                    protected void initializeVisionRequest(VisionRequest<?> visionRequest)
-                            throws IOException {
-                        super.initializeVisionRequest(visionRequest);
-
-                        String packageName = getPackageName();
-                        visionRequest.getRequestHeaders().set(ANDROID_PACKAGE_HEADER, packageName);
-
-                        String sig = PackageManagerUtils.getSignature(getPackageManager(), packageName);
-
-                        visionRequest.getRequestHeaders().set(ANDROID_CERT_HEADER, sig);
-                    }
-                };
-
-        Vision.Builder builder = new Vision.Builder(httpTransport, jsonFactory, null);
-        builder.setVisionRequestInitializer(requestInitializer);
-
-        Vision vision = builder.build();
-
-        BatchAnnotateImagesRequest batchAnnotateImagesRequest =
-                new BatchAnnotateImagesRequest();
-        batchAnnotateImagesRequest.setRequests(new ArrayList<AnnotateImageRequest>() {{
-            AnnotateImageRequest annotateImageRequest = new AnnotateImageRequest();
-
-            // Add the image
-            Image base64EncodedImage = new Image();
-            // Convert the bitmap to a JPEG
-            // Just in case it's a format that Android understands but Cloud Vision
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
-            byte[] imageBytes = byteArrayOutputStream.toByteArray();
-
-             compressedbitmap=bitmap;
-            // Base64 encode the JPEG
-            base64EncodedImage.encodeContent(imageBytes);
-            annotateImageRequest.setImage(base64EncodedImage);
-
-            // add the features we want
-            annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
-                Feature labelDetection = new Feature();
-                labelDetection.setType("SAFE_SEARCH_DETECTION");
-                labelDetection.setMaxResults(MAX_LABEL_RESULTS);
-                add(labelDetection);
-            }});
-
-            // Add the list of one thing to the request
-            add(annotateImageRequest);
-        }});
-
-        Vision.Images.Annotate annotateRequest =
-                vision.images().annotate(batchAnnotateImagesRequest);
-        // Due to a bug: requests to Vision API containing large images fail when GZipped.
-        annotateRequest.setDisableGZipContent(true);
-        Log.d(TAG, "created Cloud Vision request object, sending request");
-
-        return annotateRequest;
-    }
-
-
-
-    private class LableDetectionTask extends AsyncTask<Object, Void, String> {
-        private final WeakReference<LandingPageActivity> mActivityWeakReference;
-        private Vision.Images.Annotate mRequest;
-        ProgressDialog progressDialog ;
-        Activity activity2;
-
-        LableDetectionTask(LandingPageActivity activity1, Vision.Images.Annotate annotate) {
-            mActivityWeakReference = new WeakReference<>(activity1);
-            mRequest = annotate;
-            progressDialog  = new ProgressDialog(activity1 ,R.style.MyAlertDialogStyle);
-            this.activity2=activity1;
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            progressDialog.setMessage("Please wait");
-            progressDialog.show();
-            super.onPreExecute();
-        }
-
-//        progressDialog.setMessage(" Loading....Please wait");
-//        progressDialog.show();
-
-        @Override
-        protected String doInBackground(Object... params) {
-            try {
-
-                Log.d(TAG, "created Cloud Vision request object, sending request");
-                BatchAnnotateImagesResponse response = mRequest.execute();
-                return convertResponseToString(response);
-
-            } catch (GoogleJsonResponseException e) {
-                Log.d(TAG, "failed to make API request because " + e.getContent());
-            } catch (IOException e) {
-                Log.d(TAG, "failed to make API request because of other IOException " +
-                        e.getMessage());
-            }
-            return "Cloud Vision API request failed. Check logs for details.";
-        }
-
-        protected void onPostExecute(String result) {
-            System.out.println("lllllllllllllllllllllll"+result);
-
-            LandingPageActivity activity = mActivityWeakReference.get();
-            if (activity != null && !activity.isFinishing()) {
-progressDialog.dismiss();
-
-                if (result.equals("APPROVE")){
-
-                    AddPhotoBean img1=new AddPhotoBean( compressedbitmap);
-                    AddPhotoAdapter.productList.add(0,img1);
-                    ListYourFarmsFive.farmadapter.notifyDataSetChanged();
-
-
-                   /* Toast.makeText(LandingPageActivity.this,"Image contain below details"+annotation.getViolence()+"\n"
-                            +annotation.getSpoof()+"\n"+annotation.getMedical()+"\n"+annotation.getAdult(),Toast.LENGTH_LONG).show();*/
-
-
-                }else {
-                    Toast.makeText(LandingPageActivity.this,"Image is inappropriate, choose related image.",Toast.LENGTH_LONG).show();
-
-                }
 
 
 
 
-            }
-        }
-    }
-
-
-    private String convertResponseToString(BatchAnnotateImagesResponse response) {
-        StringBuilder message = new StringBuilder("");
-
-        System.out.println("kkkkkkkkkkkkkkkkkkk"+response);
-         annotation = response.getResponses().get(0).getSafeSearchAnnotation();
-        if (annotation != null) {
-            if (annotation.getAdult().equals("LIKELY")||annotation.getSpoof().equals("LIKELY")||annotation.getMedical().equals("LIKELY")||annotation.getViolence().equals("LIKELY")){
-                message.append("DECLINE");
 
 
 
 
-            }
-         else  if (annotation.getAdult().equals("POSSIBLE")||annotation.getSpoof().equals("POSSIBLE")||annotation.getMedical().equals("POSSIBLE")||annotation.getViolence().equals("POSSIBLE")){
-                message.append("DECLINE");
-
-            }
-            else  if (annotation.getAdult().equals("VERY_LIKELY")||annotation.getSpoof().equals("VERY_LIKELY")||annotation.getMedical().equals("VERY_LIKELY")||annotation.getViolence().equals("VERY_LIKELY")){
-                message.append("DECLINE");
-
-            }
-            else {
-                message.append("APPROVE");
-
-            }
-
-
-
-        } else {
-            message.append("nothing");
-        }
-
-        return message.toString();
-    }
 
 
 
 
-    private Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
 
-        int originalWidth = bitmap.getWidth();
-        int originalHeight = bitmap.getHeight();
-        int resizedWidth = maxDimension;
-        int resizedHeight = maxDimension;
-
-        if (originalHeight > originalWidth) {
-            resizedHeight = maxDimension;
-            resizedWidth = (int) (resizedHeight * (float) originalWidth / (float) originalHeight);
-        } else if (originalWidth > originalHeight) {
-            resizedWidth = maxDimension;
-            resizedHeight = (int) (resizedWidth * (float) originalHeight / (float) originalWidth);
-        } else if (originalHeight == originalWidth) {
-            resizedHeight = maxDimension;
-            resizedWidth = maxDimension;
-        }
-        return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
-    }
 
 
 
