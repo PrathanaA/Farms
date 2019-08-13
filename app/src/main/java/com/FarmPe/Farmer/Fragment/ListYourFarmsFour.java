@@ -91,13 +91,14 @@ public class ListYourFarmsFour extends Fragment {
 
 
 
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
+            view.setFocusableInTouchMode(true);
+            view.requestFocus();
+            view.setOnKeyListener(new View.OnKeyListener() {
 
 
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
 
 
@@ -108,12 +109,12 @@ public class ListYourFarmsFour extends Fragment {
 
 //                    FragmentManager fm = getActivity().getSupportFragmentManager();
 //                    fm.popBackStack("list_four", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
                     return true;
                 }
                 return false;
             }
         });
-
 
 
         back_feed.setOnClickListener(new View.OnClickListener() {

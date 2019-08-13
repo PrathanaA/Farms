@@ -146,6 +146,7 @@ System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.ge
         int height_set=(int)(height_px*0.4);
         System.out.println("height&Width"+width_px+","+height_px);
 
+
         LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width_px,height_set);
             holder.linear_looking_main.setLayoutParams(parms);
 

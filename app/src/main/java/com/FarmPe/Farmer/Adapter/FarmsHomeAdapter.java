@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.FarmPe.Farmer.Fragment.Farm_Edit_Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
@@ -48,9 +49,9 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
+        public ImageView image,edit;
         public TextView prod_price,prod_name,duration,farmer_name,location,connect;
-       public LinearLayout edit,linear_looking_main;
+       public LinearLayout linear_looking_main;
 
 
 
@@ -106,14 +107,13 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
         holder.linear_looking_main.setLayoutParams(parms);
 
 
-
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
 
-                selectedFragment = ComingSoonFragment.newInstance();
+                selectedFragment = Farm_Edit_Fragment.newInstance();
                 FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.addToBackStack("your_farm");

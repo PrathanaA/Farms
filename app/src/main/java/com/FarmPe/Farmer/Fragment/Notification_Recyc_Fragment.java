@@ -68,6 +68,7 @@ public class Notification_Recyc_Fragment extends Fragment {
         switchCompat=view.findViewById(R.id.switch1);
         enable_all=view.findViewById(R.id.enable);
 
+
         sessionManager = new SessionManager(getActivity());
         try {
             lngObject = new JSONObject(sessionManager.getRegId("language"));
@@ -140,8 +141,6 @@ public class Notification_Recyc_Fragment extends Fragment {
          // enable_all();
 
           enable_all.setVisibility(View.GONE);
-
-
 
 
 
