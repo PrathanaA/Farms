@@ -37,7 +37,7 @@ public class No_Request_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.no_requst_new, container, false);
 
-       // make_request = view.findViewById(R.id.make_requesttttt);
+        make_request = view.findViewById(R.id.make_requesttttt);
         back_feed1 = view.findViewById(R.id.back_feed1);
 
 
@@ -84,9 +84,10 @@ public class No_Request_Fragment extends Fragment {
 
 
 
-     /*   make_request.setOnClickListener(new View.OnClickListener() {
+        make_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 AddFirstAdapter.looinkgId = null;
                 selectedFragment = AddFirstFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -94,18 +95,10 @@ public class No_Request_Fragment extends Fragment {
                 transaction.addToBackStack("home");
                 transaction.commit();
 
-
             }
         });
 
-
-*/
-
-
-
         return view;
     }
-
-
 
 }

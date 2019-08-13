@@ -126,9 +126,9 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
         settings=view.findViewById(R.id.settings);
         prod_img=view.findViewById(R.id.prod_img);
         prod_img1=view.findViewById(R.id.prod_img1);
-
         farm_count=view.findViewById(R.id.farm_count);
         request_count=view.findViewById(R.id.request_count);
+
 
         looking_view=view.findViewById(R.id.looking_view);
         farms_view=view.findViewById(R.id.farms_view);
