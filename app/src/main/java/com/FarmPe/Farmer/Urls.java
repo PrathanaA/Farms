@@ -58,7 +58,7 @@ package com.FarmPe.Farmer;
    //Notification
    public static final String GET_NOTIFICATION= ROOT_URL + "MasterTable/GetNotificationMaster";
    public static final String GET_NOTIFICATIONLIST= ROOT_URL + "MasterTable/GetNotifications";
-   public static final String UPDATEUSERNOTIFICATIONSETTING= ROOT_URL + "UpdateUserNotificationSettings";
+   public static final String UPDATEUSERNOTIFICATIONSETTING= ROOT_URL + "Auth/UpdateUserNotificationSettings";
 
    // http://3.17.6.57:8686/api/Auth/UpdateUserNotificationSettings
 
@@ -94,7 +94,6 @@ package com.FarmPe.Farmer;
     //Request Quoatation
     public static final String Get_Edit_Request = ROOT_URL + "MasterTable/GetLookingForListsById";
     public static final String Delete_Request = ROOT_URL + "MasterTable/DeleteRequestForQuotation";
-    public static final String Edit_Request = ROOT_URL + "MasterTable/AddUpdateRequestForQuotation";
 
 
   //Connections

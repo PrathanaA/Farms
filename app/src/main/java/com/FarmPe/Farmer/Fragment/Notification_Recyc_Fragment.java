@@ -137,7 +137,7 @@ public class Notification_Recyc_Fragment extends Fragment {
 
         notification_status();
 
-          enable_all();
+         // enable_all();
 
           enable_all.setVisibility(View.GONE);
 
@@ -215,7 +215,7 @@ public class Notification_Recyc_Fragment extends Fragment {
 
                         JSONObject jsonObject1 = result.getJSONObject("user");
                         String ProfileName1 = jsonObject1.getString("NotificationTypeId");
-                        System.out.println("notification_status" + ProfileName1);
+                        System.out.println("notification_statusnnnnnnnnnnnnnnnnnnnnnnnnnnnn" + ProfileName1);
 
 
                         list = new ArrayList<String>(Arrays.asList(ProfileName1.split(",")));

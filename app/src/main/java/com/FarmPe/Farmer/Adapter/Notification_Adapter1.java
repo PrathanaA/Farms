@@ -18,6 +18,7 @@ import com.FarmPe.Farmer.Bean.Notification_recy_bean;
 
 import com.FarmPe.Farmer.Fragment.Notification_Recyc_Fragment;
 import com.FarmPe.Farmer.R;
+import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
 import com.FarmPe.Farmer.Volly_class.Crop_Post;
 import com.FarmPe.Farmer.Volly_class.VoleyJsonObjectCallback;
@@ -37,10 +38,11 @@ public class Notification_Adapter1 extends RecyclerView.Adapter<Notification_Ada
     public static String first;
     public static CardView cardView;
     Boolean isTouched = false;
+    SessionManager sessionManager;
     public Notification_Adapter1(Activity activity, List<Notification_recy_bean> moviesList) {
         this.productList = moviesList;
         this.activity=activity;
-//        session=new SessionManager(activity);
+       sessionManager=new SessionManager(activity);
 
     }
 
@@ -111,8 +113,8 @@ public class Notification_Adapter1 extends RecyclerView.Adapter<Notification_Ada
             public void onClick(View view) {
 
 
-                FirebaseMessaging.getInstance().subscribeToTopic("one");
                 if (holder.switch1.isChecked()){
+                    enable_switch(products.getNoti_id());
                     FirebaseMessaging.getInstance().subscribeToTopic(products.getNoti_code());// to register in topic(subcribe)
 
 
@@ -180,35 +182,29 @@ public class Notification_Adapter1 extends RecyclerView.Adapter<Notification_Ada
 
 
 
-/*
-    private void enable_all() {
+    private void enable_switch(String not_typeId) {
 
         try{
 
             JSONObject jsonObject1 = new JSONObject();
             JSONObject post_object1 = new JSONObject();
 
-            jsonObject1.put("NotificationTypeId"," ");
+            jsonObject1.put("NotificationTypeId",not_typeId);
             jsonObject1.put("Id",sessionManager.getRegId("userId"));
             post_object1.put("objUser",jsonObject1);
 
 
-            Crop_Post.crop_posting(getActivity(), Urls.UPDATEUSERNOTIFICATIONSETTING, post_object1, new VoleyJsonObjectCallback() {
+            Crop_Post.crop_posting(activity, Urls.UPDATEUSERNOTIFICATIONSETTING, post_object1, new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
                     System.out.println("notification_status" + result);
 
                     try{
 
-                       */
-/* JSONObject jsonObject1 = result.getJSONObject("user");
+ JSONObject jsonObject1 = result.getJSONObject("user");
                         String ProfileName1 = jsonObject1.getString("NotificationTypeId");
                         System.out.println("notification_status" + ProfileName1);
 
-
-                        list = new ArrayList<String>(Arrays.asList(ProfileName1.split(",")));
-                        getnot();
-*//*
 
 
 
@@ -226,7 +222,6 @@ public class Notification_Adapter1 extends RecyclerView.Adapter<Notification_Ada
         }
 
     }
-*/
 
 
 }

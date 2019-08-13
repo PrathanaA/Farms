@@ -37,7 +37,7 @@ public class No_Request_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.no_request_layout, container, false);
 
-        make_request = view.findViewById(R.id.make_requesttttt);
+       // make_request = view.findViewById(R.id.make_requesttttt);
         back_feed1 = view.findViewById(R.id.back_feed1);
 
 
@@ -84,7 +84,7 @@ public class No_Request_Fragment extends Fragment {
 
 
 
-        make_request.setOnClickListener(new View.OnClickListener() {
+     /*   make_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AddFirstAdapter.looinkgId = null;
@@ -99,7 +99,7 @@ public class No_Request_Fragment extends Fragment {
         });
 
 
-
+*/
 
 
 

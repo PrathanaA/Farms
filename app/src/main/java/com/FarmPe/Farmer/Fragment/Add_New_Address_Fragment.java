@@ -214,7 +214,10 @@ public class  Add_New_Address_Fragment extends Fragment {
                     transaction.replace(R.id.frame_layout, selectedFragment);
                     transaction.commit();
 
-                } else{
+                } else if(getArguments().getString("navigation_from").equals("edit_lokng_frg")){
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack("edit", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }else{
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack("request", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }
@@ -258,6 +261,9 @@ public class  Add_New_Address_Fragment extends Fragment {
                         transaction.commit();
 
 
+                    }else if(getArguments().getString("navigation_from").equals("edit_lokng_frg")){
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.popBackStack("edit", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     } else{
                        FragmentManager fm = getActivity().getSupportFragmentManager();
                        fm.popBackStack("request", FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -1199,7 +1205,7 @@ public class  Add_New_Address_Fragment extends Fragment {
                 public void onSuccessResponse(JSONObject result) {
                     Bundle bundle=new Bundle();
 
-                    System.out.println("Add_New_Addresssssssssssssssss"+result);
+                    System.out.println("Add_New_Addressssssssssssssssslllllllllllllllllllllll"+result);
                     try{
 
                         status= result.getString("Status");
@@ -1234,7 +1240,8 @@ public class  Add_New_Address_Fragment extends Fragment {
 
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 fm.popBackStack("yu_ads_frg", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                            }else if (getArguments().getString("navigation_from").equals("SETTING_FRAG")) {
+                            }
+                            else if (getArguments().getString("navigation_from").equals("SETTING_FRAG")) {
 
                                 Snackbar snackbar = Snackbar
                                         .make(linearLayout, newaddressadded, Snackbar.LENGTH_LONG);
@@ -1255,7 +1262,8 @@ public class  Add_New_Address_Fragment extends Fragment {
                                 transaction.commit();
 
 
-                            }else if(getArguments().getString("navigation_from").equals("your_add")){
+                            }
+                            else if(getArguments().getString("navigation_from").equals("your_add")){
 
                                 Snackbar snackbar1 = Snackbar
                                         .make(linearLayout, "Address updated Successfully", Snackbar.LENGTH_LONG);
@@ -1274,7 +1282,34 @@ public class  Add_New_Address_Fragment extends Fragment {
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 fm.popBackStack("your_add", FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-                            } else {
+                            }
+                            else if(getArguments().getString("navigation_from").equals("edit_lokng_frg")){
+                                Snackbar snackbar1 = Snackbar
+                                        .make(linearLayout, "Address updated Successfully", Snackbar.LENGTH_LONG);
+                                View snackbarView1 = snackbar1.getView();
+                                TextView tv1 = (TextView) snackbarView1.findViewById(android.support.design.R.id.snackbar_text);
+                                tv1.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                                tv1.setTextColor(Color.WHITE);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                    tv1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                } else {
+                                    tv1.setGravity(Gravity.CENTER_HORIZONTAL);
+                                }
+                                snackbar1.show();
+                                System.out.println("Add_New_Addressssssssssssssssslllllllllllllllllllllllhhhhhhhhhhhhh"+status);
+                                Bundle bundle1=new Bundle();
+                                bundle1.putString("add_id",status);
+                                bundle1.putString("streetname",hobli.getText().toString() + district.getText().toString());
+                                bundle1.putString("looking_forId",getArguments().getString("looking_forId"));
+                                bundle1.putString("modelId",getArguments().getString("modelId"));
+                                selectedFragment = Edit_Looking_For_Fragment.newInstance();
+                                selectedFragment.setArguments(bundle1);
+
+                                FragmentTransaction transaction = (getActivity()).getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.frame_layout, selectedFragment);
+                                transaction.commit();
+
+                            }else {
 
                                 Snackbar snackbar = Snackbar
                                         .make(linearLayout, newaddressadded, Snackbar.LENGTH_LONG);

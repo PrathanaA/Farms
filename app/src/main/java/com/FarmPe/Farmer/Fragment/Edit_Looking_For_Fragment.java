@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.FarmPe.Farmer.Activity.EnterOTP;
 import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Adapter.AddModelAdapter;
+import com.FarmPe.Farmer.Adapter.You_Address_Adapter;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -93,7 +94,8 @@ public class Edit_Looking_For_Fragment extends Fragment {
     JSONObject lngObject;
     JSONArray edit_req_array;
     String toast_name,toast_mobile,toast_passwrd,toast_new_mobile,toast_minimum_toast,  toast_update,toast_image;
-    LinearLayout update_btn,linearLayout;
+    String addressID=null;
+    LinearLayout update_btn,linearLayout,address;
     private static int RESULT_LOAD_IMG = 1;
     Bitmap selectedImage,imageB;
     EditText profile_name,profile_phone,profile_mail,profile_passwrd;
@@ -145,6 +147,28 @@ public class Edit_Looking_For_Fragment extends Fragment {
         request=view.findViewById(R.id.request);
         radio_group_time=view.findViewById(R.id.radio_group_time);
         radioGroup_finance=view.findViewById(R.id.radioGroup_finance);
+        address=view.findViewById(R.id.address_layout);
+
+        try {
+            addressID=getArguments().getString("add_id");
+        }catch (Exception e){
+
+        }
+
+
+        if (addressID==null){
+            getting_edit();
+        }else{
+
+            String stret_name=getArguments().getString("streetname");
+            addressID=getArguments().getString("add_id");
+            lookingfordetails_id=getArguments().getString("looking_forId");
+            modelid=getArguments().getString("modelId");
+            System.out.print("wwwwwefsdwwwwwefsdddddddwwwwwefsdwwwwwefsdddddddvvvvvvvvvvvvvvvvvv" + stret_name);
+
+            address_text.setText(stret_name);
+
+        }
 
 
         back_feed.setOnClickListener(new View.OnClickListener() {
@@ -188,9 +212,31 @@ public class Edit_Looking_For_Fragment extends Fragment {
 
 
 
+request.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        update_profile_details();
+    }
+});
 
 
 
+
+address.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString("navigation_from", "edit_lokng_frg");
+        bundle.putString("looking_forId",lookingfordetails_id);
+        bundle.putString("modelId", modelid);
+        selectedFragment = Add_New_Address_Fragment.newInstance();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, selectedFragment);
+        selectedFragment.setArguments(bundle);
+        transaction.addToBackStack("edit");
+        transaction.commit();
+    }
+});
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -212,102 +258,6 @@ public class Edit_Looking_For_Fragment extends Fragment {
             }
         });
 
-        try{
-
-            final JSONObject jsonObject = new JSONObject();
-            jsonObject.put("UserId",sessionManager.getRegId("userId"));
-
-            Crop_Post.crop_posting(getActivity(), Urls.Get_Edit_Request, jsonObject, new VoleyJsonObjectCallback() {
-                @Override
-                public void onSuccessResponse(JSONObject result) {
-                    System.out.println("dfdsfsf" + result);
-                    try{
-
-                        edit_req_array = result.getJSONArray("LookingForList");
-                        for(int i=0;i<edit_req_array.length();i++){
-
-                            JSONObject jsonObject1 = edit_req_array.getJSONObject(i);
-                            JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
-
-                            id = jsonObject1.getString("Id");
-                            String purchasetimeline = jsonObject1.getString("PurchaseTimeline");
-                            Boolean lookin_true = jsonObject1.getBoolean("LookingForFinance");
-                            String brand_name = jsonObject1.getString("BrandName");
-                            String model_name = jsonObject1.getString("Model");
-                            String model_image = jsonObject1.getString("ModelImage");
-                            String horse_range = jsonObject1.getString("HorsePowerRange");
-                            String addrss_id = jsonObject2.getString("Id");
-                            String addrss_name = jsonObject2.getString("Name");
-                            String mobile_no = jsonObject2.getString("MobileNo");
-                            String street_address = jsonObject2.getString("StreeAddress1");
-                            String pincode = jsonObject2.getString("Pincode");
-                            String state = jsonObject2.getString("State");
-                            String district = jsonObject2.getString("District");
-                            String taluk = jsonObject2.getString("Taluk");
-                             lookingfordetails_id = jsonObject1.getString("LookingForDetailsId");
-                             modelid = jsonObject1.getString("ModelId");
-
-
-                            brand.setText("Brand - " + brand_name);
-                            hp_power.setText("HP - " + horse_range);
-                            hp_power.setText("Model - " + model_name);
-                            address_text.setText(street_address + " , " + state + " , " + pincode);
-
-
-
-                            if(lookin_true){
-                                finance_yes.setChecked(true);
-
-                            }else{
-
-                                finance_no.setChecked(true);
-                            }
-
-
-                            if(purchasetimeline.equals("Immediately")){
-
-                                month_1.setChecked(true);
-
-                            }else if(purchasetimeline.equals("1 Month")){
-
-                                month_2.setChecked(true);
-
-
-                            }else if(purchasetimeline.equals("3 Months")){
-
-                                month_3.setChecked(true);
-
-
-                            }else if(purchasetimeline.equals("After 3 Months")){
-                                month_4.setChecked(true);
-
-
-                            }
-
-//
-//                            Glide.with(getActivity()).load(model_image)
-//
-//                                    .thumbnail(0.5f)
-//                                    .crossFade()
-//                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                                    .into(tractor_img);
-//
-
-
-                        }
-
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-                }
-            });
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
 
 
@@ -426,6 +376,108 @@ public class Edit_Looking_For_Fragment extends Fragment {
         prod_img.setImageBitmap(imageB);
 */
         return view;
+    }
+
+    private void getting_edit() {
+
+        try{
+
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId",sessionManager.getRegId("userId"));
+
+            Crop_Post.crop_posting(getActivity(), Urls.Get_Edit_Request, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.println("dfdsfsf" + result);
+                    try{
+
+                        edit_req_array = result.getJSONArray("LookingForList");
+                        for(int i=0;i<edit_req_array.length();i++){
+
+                            JSONObject jsonObject1 = edit_req_array.getJSONObject(i);
+                            JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
+
+                            id = jsonObject1.getString("Id");
+                            String purchasetimeline = jsonObject1.getString("PurchaseTimeline");
+                            Boolean lookin_true = jsonObject1.getBoolean("LookingForFinance");
+                            String brand_name = jsonObject1.getString("BrandName");
+                            String model_name = jsonObject1.getString("Model");
+                            String model_image = jsonObject1.getString("ModelImage");
+                            String horse_range = jsonObject1.getString("HorsePowerRange");
+                            String addrss_id = jsonObject2.getString("Id");
+                            String addrss_name = jsonObject2.getString("Name");
+                            String mobile_no = jsonObject2.getString("MobileNo");
+                            String street_address = jsonObject2.getString("StreeAddress1");
+                            String pincode = jsonObject2.getString("Pincode");
+                            String state = jsonObject2.getString("State");
+                            String district = jsonObject2.getString("District");
+                            String taluk = jsonObject2.getString("Taluk");
+                            lookingfordetails_id = jsonObject1.getString("LookingForDetailsId");
+                            addrss_id = jsonObject1.getString("AddressId");
+                            modelid = jsonObject1.getString("ModelId");
+
+
+                            brand.setText("Brand - " + brand_name);
+                            hp_power.setText("HP - " + horse_range);
+                            hp_power.setText("Model - " + model_name);
+                            address_text.setText(street_address + " , " + state + " , " + pincode);
+
+
+
+                            if(lookin_true){
+                                finance_yes.setChecked(true);
+
+                            }else{
+
+                                finance_no.setChecked(true);
+                            }
+
+
+                            if(purchasetimeline.equals("Immediately")){
+
+                                month_1.setChecked(true);
+
+                            }else if(purchasetimeline.equals("1 Month")){
+
+                                month_2.setChecked(true);
+
+
+                            }else if(purchasetimeline.equals("3 Months")){
+
+                                month_3.setChecked(true);
+
+
+                            }else if(purchasetimeline.equals("After 3 Months")){
+                                month_4.setChecked(true);
+
+
+                            }
+
+//
+//                            Glide.with(getActivity()).load(model_image)
+//
+//                                    .thumbnail(0.5f)
+//                                    .crossFade()
+//                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                                    .into(tractor_img);
+//
+
+
+                        }
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private void delete_request() {
@@ -657,92 +709,96 @@ public class Edit_Looking_For_Fragment extends Fragment {
 
     private void update_profile_details() {
 
+
+        /*{
+            "Id":2,
+                "UserId":1,
+                "ModelId":2,
+                "PurchaseTimeline":"Immediately",
+                "LookingForFinance":"True",
+                "AddressId":1,
+                "IsAgreed":"True",
+                "LookingForDetailsId":1
+        }*/
+
+
         try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("UserId",sessionManager.getRegId("userId"));
+            jsonObject.put("Id",FarmsImageAdapter.looking_forId);
+            jsonObject.put("PurchaseTimeline",time_period);
+            jsonObject.put("ModelId",modelid);
 
-            StringRequest postRequest = new StringRequest(Request.Method.POST, "http://3.17.6.57:8686/api/Auth/UpdateUserProfile",
+            jsonObject.put("LookingForFinance",finance);
+            jsonObject.put("AddressId", addressID);
+            jsonObject.put("IsAgreed","True");
+            jsonObject.put("LookingForDetailsId",lookingfordetails_id);
 
-                    new Response.Listener<String>()
+            System.out.print("wwwwwefsdwwwwwefsdddddddwwwwwefsdwwwwwefsdddddddjjjjjjjjjjjjjjjjjjjjjjjjjjjj" + jsonObject);
 
-                    {
-                        @Override
-                        public void onResponse(String response) {
+            Crop_Post.crop_posting(getActivity(), Urls.AddRequestForQuotation, jsonObject, new VoleyJsonObjectCallback() {
+                @Override
+                public void onSuccessResponse(JSONObject result) {
+                    System.out.print("wwwwwefsdddd" + result);
 
-                            final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "",
-                                    null, true);
-                            progressDialog.setContentView(R.layout.small_progress_bar);
-                            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    try{
 
-                            Log.d("Response", response);
-
-                            try{
-                                //progressDialog.cancel();
-
-                                JSONObject jsonObject = new JSONObject(response);
-
-                                JSONObject jsonObject1 = jsonObject.getJSONObject("Response");
-                                String status = jsonObject1.getString("Status");
-
-                                if(status.equals("2")){
-
-                                    Toast.makeText(getActivity(), "Your Details Updated Successfully", Toast.LENGTH_SHORT).show();
-                                    selectedFragment = SettingFragment.newInstance();
-                                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                    ft.replace(R.id.frame_layout,selectedFragment);
-                                    ft.commit();
-
-                                }else{
-
-                                    Toast.makeText(getActivity(), "Your Details Not Updated Successfully", Toast.LENGTH_SHORT).show();
-
-                                }
+                        String status = result.getString("Status");
+                        String message = result.getString("Message");
 
 
-                            }catch (Exception e){
-                                e.printStackTrace();
+                        if(!(status.equals("0"))){
+
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayout,message, Snackbar.LENGTH_LONG);
+                            View snackbarView = snackbar.getView();
+                            TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                            tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));
+                            tv.setTextColor(Color.WHITE);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            } else {
+                                tv.setGravity(Gravity.CENTER_HORIZONTAL);
                             }
 
+
+                            snackbar.show();
+
+
+                            selectedFragment = LookingForFragment.newInstance();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.frame_layout, selectedFragment);
+                            transaction.commit();
+
+
+                        }else{
+
+                            Toast.makeText(getActivity(), "Request Quotation not updated", Toast.LENGTH_SHORT).show();
                         }
-                    },
-                    new Response.ErrorListener()
-                    {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            progressDialog.cancel();
-                            // error
-                        }
+
+
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
-            ) {
-                @Override
-                protected Map<String, String> getParams()
-                {
-                    Map<String, String>  params = new HashMap<String, String>();
 
-                    params.put("UserId",sessionManager.getRegId("userId"));
-                    params.put("FullName",profile_name.getText().toString());
-                    params.put("PhoneNo",profile_phone.getText().toString());
-                    params.put("EmailId",profile_mail.getText().toString());
-                    params.put("Password",profile_passwrd.getText().toString());
-
-                    return params;
                 }
-            };
-
-            VolleySingletonQuee.getInstance(getActivity()).addToRequestQueue(postRequest);
-
-//            StringRequest stringRequest=new StringRequest(new VoleyJsonObjectCallback() {
-//                @Override
-//                public void onSuccessResponse(JSONObject result) {
-//
-//                }
-//            })
+            });
 
 
 
-        }catch (Exception e){
+
+        }catch(Exception e){
             e.printStackTrace();
         }
 
-    }
+
+
+
+
+
+
+
+}
 
 
 

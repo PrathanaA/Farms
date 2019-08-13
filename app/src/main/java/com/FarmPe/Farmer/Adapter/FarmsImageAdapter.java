@@ -180,7 +180,7 @@ System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.ge
         }
     }
 
-    private void edit_request() {
+   /* private void edit_request() {
         try{
 
             JSONObject jsonObject = new JSONObject();
@@ -208,7 +208,7 @@ System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+products.ge
 
 
     }
-
+*/
     @Override
     public int getItemCount() {
         System.out.println("lengthhhhhhh"+productList.size());
