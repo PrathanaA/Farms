@@ -82,6 +82,8 @@ import static android.app.Activity.RESULT_OK;
 import static com.android.volley.VolleyLog.TAG;
 import static com.FarmPe.Farmer.Volly_class.Crop_Post.progressDialog;
 
+
+
 public class Edit_Looking_For_Fragment extends Fragment {
 
     public static List<FarmsImageBean> newOrderBeansList = new ArrayList<>();
@@ -110,7 +112,7 @@ public class Edit_Looking_For_Fragment extends Fragment {
     boolean finance;
     public static int selectedId_time_recent;
 
-    String id;
+
     public static Edit_Looking_For_Fragment newInstance() {
         Edit_Looking_For_Fragment fragment = new Edit_Looking_For_Fragment();
         return fragment;
@@ -397,7 +399,7 @@ address.setOnClickListener(new View.OnClickListener() {
                             JSONObject jsonObject1 = edit_req_array.getJSONObject(i);
                             JSONObject jsonObject2 = jsonObject1.getJSONObject("Address");
 
-                            id = jsonObject1.getString("Id");
+                            String id = jsonObject1.getString("Id");
                             String purchasetimeline = jsonObject1.getString("PurchaseTimeline");
                             Boolean lookin_true = jsonObject1.getBoolean("LookingForFinance");
                             String brand_name = jsonObject1.getString("BrandName");

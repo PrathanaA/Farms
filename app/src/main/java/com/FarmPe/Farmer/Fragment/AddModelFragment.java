@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.FarmPe.Farmer.Adapter.AddBrandAdapter;
+import com.FarmPe.Farmer.Adapter.AddFirstAdapter;
 import com.FarmPe.Farmer.Adapter.AddHpAdapter;
 import com.FarmPe.Farmer.Adapter.AddModelAdapter;
 import com.FarmPe.Farmer.Bean.AddTractorBean;
@@ -162,10 +163,7 @@ public class AddModelFragment extends Fragment {
              userRequestjsonObject.put("HPId", hpId);
 
 
-          /*  JSONObject postjsonObject = new JSONObject();
-            postjsonObject.put("objCropDetails", userRequestjsonObject);
 
-*/
 
             Login_post.login_posting(getActivity(), Urls.ModelList,userRequestjsonObject,new VoleyJsonObjectCallback() {
                 @Override

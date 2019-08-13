@@ -106,6 +106,7 @@ public class LandingPageActivity extends AppCompatActivity implements Connectivi
     private static final int MAX_LABEL_RESULTS = 10;
     @Override
     protected void onStop()
+
     {
         unregisterReceiver(connectivityReceiver);
         super.onStop();

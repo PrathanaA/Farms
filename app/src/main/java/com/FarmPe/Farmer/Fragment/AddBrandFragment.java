@@ -163,8 +163,9 @@ public class AddBrandFragment extends Fragment {
             newOrderBeansList.clear();
 
             JSONObject userRequestjsonObject = new JSONObject();
-             userRequestjsonObject.put("LookingForDetailsId", AddFirstAdapter.looinkgId);
 
+             userRequestjsonObject.put("LookingForDetailsId", AddFirstAdapter.looinkgId);
+            System.out.println("sdfsdfsdf" + AddFirstAdapter.looinkgId );
 
             JSONObject postjsonObject = new JSONObject();
             // postjsonObject.put("objCropDetails", userRequestjsonObject);

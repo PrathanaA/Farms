@@ -1,6 +1,8 @@
 package com.FarmPe.Farmer.Fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,13 +26,17 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.FarmPe.Farmer.Activity.LoginActivity;
 import com.FarmPe.Farmer.Adapter.AddFirstListYourFramsAdapter;
 import com.FarmPe.Farmer.Adapter.DistrictAdapter;
 import com.FarmPe.Farmer.Adapter.DistrictAdapter1;
@@ -131,12 +137,13 @@ public class ListYourFarmsThird extends Fragment {
 
         street_add.setFilters(new InputFilter[]{EMOJI_FILTER, new InputFilter.LengthFilter(30)});
 
+
+        setupUI(main_layout);
         address_map = getArguments().getString("status");
 
         if (address_map.equals("default")) {
 
             current_loc.setVisibility(View.VISIBLE);
-
 
         } else {
             current_adds.setText(address_map);
@@ -513,6 +520,57 @@ public class ListYourFarmsThird extends Fragment {
 
         return view;
     }
+
+
+
+    public void setupUI(View view) {
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if(!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(getActivity());
+                    return false;
+                }
+
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                setupUI(innerView);
+            }
+        }
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        /*InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);*/
+
+        InputMethodManager inputManager = (InputMethodManager)
+                activity.getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+        View focusedView = activity.getCurrentFocus();
+
+        if (focusedView != null) {
+
+            try{
+                assert inputManager != null;
+                inputManager.hideSoftInputFromWindow(focusedView.getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+            }catch(AssertionError e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 
     private void prepareStateData() {

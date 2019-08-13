@@ -38,11 +38,9 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     }
 
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView agri_text;
         public ImageView sub_category_img;
-
 
 
 

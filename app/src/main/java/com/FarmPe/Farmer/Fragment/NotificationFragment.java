@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.FarmPe.Farmer.Adapter.NotificationAdapter;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
+import com.FarmPe.Farmer.Bean.Notification_Home_Bean;
 import com.FarmPe.Farmer.R;
 import com.FarmPe.Farmer.SessionManager;
 import com.FarmPe.Farmer.Urls;
@@ -33,14 +34,16 @@ import java.util.List;
 
 public class NotificationFragment extends Fragment {
 
-    public static List<FarmsImageBean> newOrderBeansList = new ArrayList<>();
+    public static List<Notification_Home_Bean> newOrderBeansList = new ArrayList<>();
     public static RecyclerView recyclerView;
     public static NotificationAdapter farmadapter;
     TextView toolbar_title;
     LinearLayout back_feed;
+    Notification_Home_Bean notification_home_bean;
     Fragment selectedFragment;
     SessionManager sessionManager;
     JSONObject lngObject;
+    JSONArray notifn_array;
     String location;
 
     public static NotificationFragment newInstance() {
@@ -81,6 +84,8 @@ public class NotificationFragment extends Fragment {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     fm.popBackStack ("home", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+
                  /* else if(getArguments().getString("navigation_from").equals("setting")){
                         FragmentManager fm = getActivity().getSupportFragmentManager();
                         fm.popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -127,70 +132,113 @@ public class NotificationFragment extends Fragment {
         }
 
 
-        try{
-            final JSONObject jsonObject = new JSONObject();
-            jsonObject.put("UserId",sessionManager.getRegId("userId"));
-            System.out.println("aaaaaaaaaaaaadddd" + sessionManager.getRegId("userId"));
 
-            Crop_Post.crop_posting(getActivity(), Urls.YourRequest, jsonObject, new VoleyJsonObjectCallback() {
+        try{
+
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put("ToUserId",sessionManager.getRegId("userId"));
+
+
+            Crop_Post.crop_posting(getActivity(), Urls.Notification_HomePage, jsonObject, new VoleyJsonObjectCallback() {
                 @Override
                 public void onSuccessResponse(JSONObject result) {
-                    System.out.println("YourRequestttttttttttttttttt"+result);
-                    JSONArray cropsListArray=null;
+                    System.out.println("sdffdffds" + result);
 
-                    try {
-                        cropsListArray=result.getJSONArray("LookingForList");
-                        System.out.println("e     e e ddd"+cropsListArray.length());
-                        for (int i=0;i<cropsListArray.length();i++){
-                            JSONObject jsonObject1=cropsListArray.getJSONObject(i);
-                            JSONObject jsonObject2=jsonObject1.getJSONObject("Address");
+                    try{
 
-                            String model=jsonObject1.getString("Model");
-                            String purchaseTimeline=jsonObject1.getString("PurchaseTimeline");
-                            String image=jsonObject1.getString("ModelImage");
-                            String id=jsonObject1.getString("CreatedBy");
-                            String name=jsonObject2.getString("Name");
-                            String city=jsonObject2.getString("City");
-                            String state=jsonObject2.getString("State");
-                            String hp_range=jsonObject1.getString("HorsePowerRange");
-                            location=city+", "+state;
+                        notifn_array = result.getJSONArray("NotificationList");
 
-                         /*   if (city.equals("")){
-                                location="Bangalore"+", "+state;
-                            }else{
-                                location=city+", "+state;
-                            }
-*/
+                            for(int i=0;i<notifn_array.length();i++){
+                            JSONObject jsonObject1 = notifn_array.getJSONObject(i);
+                            notification_home_bean = new Notification_Home_Bean(jsonObject1.getString("NotificationText"),jsonObject1.getString("Id"));
+                            newOrderBeansList.add(notification_home_bean);
 
-
-                            System.out.println("madelslistt"+newOrderBeansList.size());
-
-                            FarmsImageBean crops = new FarmsImageBean(image,"Tractor Price",model,hp_range,purchaseTimeline,name,location,id);
-                            newOrderBeansList.add(crops);
-
-
-
-                          /*  if(!latts.equals("") | !langgs.equals("")) {
-
-                                CropListBean crops = new CropListBean(cropName, crop_variety, location, crop_grade,
-                                        crop_quantity, crop_uom, crop_price, id, farmerId,
-                                        UserName,latts,langgs,CropImg,category);
-                                newOrderBeansList.add(crops);
-                            }*/
                         }
-                        farmadapter=new NotificationAdapter(getActivity(),newOrderBeansList);
-                        recyclerView.setAdapter(farmadapter);
 
-                    } catch (JSONException e) {
+                            farmadapter.notifyDataSetChanged();
+
+
+
+                    }catch (Exception e){
                         e.printStackTrace();
                     }
+
                 }
             });
+
+
 
 
         }catch (Exception e){
             e.printStackTrace();
         }
+
+
+
+//        try{
+//            final JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("UserId",sessionManager.getRegId("userId"));
+//            System.out.println("aaaaaaaaaaaaadddd" + sessionManager.getRegId("userId"));
+//
+//            Crop_Post.crop_posting(getActivity(), Urls.YourRequest, jsonObject, new VoleyJsonObjectCallback() {
+//                @Override
+//                public void onSuccessResponse(JSONObject result) {
+//                    System.out.println("YourRequestttttttttttttttttt"+result);
+//                    JSONArray cropsListArray=null;
+//
+//                    try {
+//                        cropsListArray=result.getJSONArray("LookingForList");
+//                        System.out.println("e     e e ddd"+cropsListArray.length());
+//                        for (int i=0;i<cropsListArray.length();i++){
+//                            JSONObject jsonObject1=cropsListArray.getJSONObject(i);
+//                            JSONObject jsonObject2=jsonObject1.getJSONObject("Address");
+//
+//                            String model=jsonObject1.getString("Model");
+//                            String purchaseTimeline=jsonObject1.getString("PurchaseTimeline");
+//                            String image=jsonObject1.getString("ModelImage");
+//                            String id=jsonObject1.getString("CreatedBy");
+//                            String name=jsonObject2.getString("Name");
+//                            String city=jsonObject2.getString("City");
+//                            String state=jsonObject2.getString("State");
+//                            String hp_range=jsonObject1.getString("HorsePowerRange");
+//                            location=city+", "+state;
+//
+//                         /*   if (city.equals("")){
+//                                location="Bangalore"+", "+state;
+//                            }else{
+//                                location=city+", "+state;
+//                            }
+//*/
+//
+//
+//                            System.out.println("madelslistt"+newOrderBeansList.size());
+//
+//                            FarmsImageBean crops = new FarmsImageBean(image,"Tractor Price",model,hp_range,purchaseTimeline,name,location,id);
+//                            newOrderBeansList.add(crops);
+//
+//
+//
+//                          /*  if(!latts.equals("") | !langgs.equals("")) {
+//
+//                                CropListBean crops = new CropListBean(cropName, crop_variety, location, crop_grade,
+//                                        crop_quantity, crop_uom, crop_price, id, farmerId,
+//                                        UserName,latts,langgs,CropImg,category);
+//                                newOrderBeansList.add(crops);
+//                            }*/
+//                        }
+//                        farmadapter=new NotificationAdapter(getActivity(),newOrderBeansList);
+//                        recyclerView.setAdapter(farmadapter);
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
 
 

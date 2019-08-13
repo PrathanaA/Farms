@@ -244,7 +244,6 @@ public class HomeMenuFragment extends Fragment implements  View.OnClickListener,
 
                                 }
 
-
                             }catch (Exception e){
                                 e.printStackTrace();
                             }

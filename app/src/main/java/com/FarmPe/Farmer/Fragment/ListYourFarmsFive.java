@@ -102,12 +102,9 @@ public class ListYourFarmsFive extends Fragment {
             @Override
             public void onClick(View v) {
 
+
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.popBackStack("list_four", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//                selectedFragment = ListYourFarmsFour.newInstance();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, selectedFragment);
-//                transaction.commit();
             }
         });
 

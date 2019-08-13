@@ -154,7 +154,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 //                address_txt = resutText.getText().toString();
 //                Bundle bundle = new Bundle();
 //                bundle.putString("status",address_txt);
-                selectedFragment = ListYourFarmsFour.newInstance();
+                selectedFragment = ListYourFarmsFive.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();

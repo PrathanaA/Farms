@@ -169,12 +169,13 @@ public class You_Address_Fragment extends Fragment {
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.select_address_popup);
                 final TextView home = (TextView) dialog.findViewById(R.id.home_1);
-               // final TextView barn = (TextView) dialog.findViewById(R.id.barn);
+
                 final TextView ware_house = (TextView)dialog.findViewById(R.id.ware_hus) ;
                 final TextView farm = (TextView)dialog.findViewById(R.id.farm) ;
                 final TextView others = (TextView)dialog.findViewById(R.id.othrs) ;
 
                 final TextView popuptxt = (TextView)dialog.findViewById(R.id.popup_heading) ;
+
                 try {
                     lngObject = new JSONObject(sessionManager.getRegId("language"));
                     popuptxt.setText(lngObject.getString("SelectanAddressType"));

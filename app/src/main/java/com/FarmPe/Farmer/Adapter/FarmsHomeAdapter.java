@@ -116,7 +116,7 @@ public class FarmsHomeAdapter extends RecyclerView.Adapter<FarmsHomeAdapter.MyVi
                 selectedFragment = Farm_Edit_Fragment.newInstance();
                 FragmentTransaction transaction = ((FragmentActivity)activity).getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.addToBackStack("your_farm");
+                transaction.addToBackStack("edit_farm");
                 transaction.commit();
 
 //                Bundle bundle=new Bundle();

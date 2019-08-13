@@ -319,7 +319,6 @@ LinearLayout linearLayout,no_request,farms_lists,no_farms,requests_made;
 
 
 
-
                         for(int i = 0;i<count_images_array.length();i++){
                             AddTractorBean1 img1=new AddTractorBean1( count_images_array.getString(i)," ","");
                             newOrderBeansList.add(img1);

@@ -66,12 +66,14 @@ public class AddFirstFragment extends Fragment {
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 selectedFragment = HomeMenuFragment.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.add(R.id.frame_layout, selectedFragment);
                 transaction.commit();
             }
         });
+
 
         continue_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +99,7 @@ public class AddFirstFragment extends Fragment {
                 //    Toast.makeText(getActivity(),"Please Select any option",Toast.LENGTH_LONG).show();
 
                 }else {
+
                     AddBrandAdapter.brandId = null;
                     selectedFragment = AddBrandFragment.newInstance();
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

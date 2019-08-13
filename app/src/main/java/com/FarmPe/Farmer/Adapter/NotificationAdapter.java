@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.FarmPe.Farmer.Bean.Notification_Home_Bean;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.FarmPe.Farmer.Bean.FarmsImageBean;
@@ -19,7 +20,7 @@ import com.FarmPe.Farmer.R;
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder>  {
-    private List<FarmsImageBean> productList;
+    private List<Notification_Home_Bean> productList;
     Activity activity;
     Fragment selectedFragment;
 
@@ -27,7 +28,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
    public static LinearLayout next_arw;
     public static String first;
     public static CardView cardView;
-    public NotificationAdapter(Activity activity, List<FarmsImageBean> moviesList) {
+    public NotificationAdapter(Activity activity, List<Notification_Home_Bean> moviesList) {
         this.productList = moviesList;
         this.activity=activity;
 //        session=new SessionManager(activity);
@@ -55,6 +56,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     }
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -65,18 +67,20 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        final FarmsImageBean products = productList.get(position);
-        holder.prod_price.setText(products.getProd_price());
-        holder.prod_name.setText(products.getModelname()+" "+products.getHp());
-        holder.duration.setText(products.getDuration());
+        final Notification_Home_Bean products = productList.get(position);
 
+        holder.prod_name.setText(products.getNotiftn_mess());
+//        holder.prod_price.setText(products.getProd_price());
+//        holder.prod_name.setText(products.getModelname()+" "+products.getHp());
+//        holder.duration.setText(products.getDuration());
 
-        Glide.with(activity).load(products.getImage())
-
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.image);
+//
+//        Glide.with(activity).load(products.getImage())
+//
+//                .thumbnail(0.5f)
+//                .crossFade()
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into(holder.image);
 
 
     }

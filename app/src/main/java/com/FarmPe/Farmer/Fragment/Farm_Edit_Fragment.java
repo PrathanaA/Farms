@@ -55,21 +55,31 @@ public class Farm_Edit_Fragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+
+                    HomeMenuFragment.onBack_status = "farms";
+
                     FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fm.popBackStack("your_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fm.popBackStack("edit_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
                     return true;
                 }
                 return false;
             }
         });
 
+
         back_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                HomeMenuFragment.onBack_status = "farms";
+
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack("your_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+                fm.popBackStack("edit_farm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
+
 
 
 //        Bundle b = getArguments();

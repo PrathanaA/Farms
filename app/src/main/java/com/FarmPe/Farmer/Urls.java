@@ -103,6 +103,8 @@ package com.FarmPe.Farmer;
    //Homepage_Count
    public static final String Home_Page_Count = ROOT_URL + "MasterTable/GetCountForFarmer";
 
+ //Notification
 
+   public static final String Notification_HomePage = ROOT_URL + "MasterTable/GetNotifications";
 
 }
