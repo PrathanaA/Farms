@@ -667,8 +667,10 @@ public class  Add_New_Address_Fragment extends Fragment {
 
 
                 if(select_address.getText().toString().equals("")){
+
+                    int duration = 1000;
                     Snackbar snackbar = Snackbar
-                            .make(linearLayout, s_addtype, Snackbar.LENGTH_LONG);
+                            .make(linearLayout, s_addtype,duration);
                     View snackbarView = snackbar.getView();
                     TextView tv = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                     tv.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.orange));

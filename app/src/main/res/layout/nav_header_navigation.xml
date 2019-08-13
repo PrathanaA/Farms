@@ -28,7 +28,6 @@
        android:background="#000"
        >
 
-
          <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
              android:id="@+id/prod_img1"
              android:layout_width="wrap_content"
@@ -95,7 +94,7 @@
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        android:weightSum="100"
-       android:layout_marginBottom="25dp"
+       android:layout_marginBottom="5dp"
        android:gravity="center_vertical"
        android:layout_weight="20"
        android:background="#000"
@@ -127,6 +126,7 @@
              android:layout_height="wrap_content"
              android:text="Requests"
              android:textSize="14dp"
+             android:layout_marginTop="2dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
              android:textColor="#fff"
@@ -171,6 +171,7 @@
              android:layout_height="wrap_content"
              android:text="Farms"
              android:textSize="14dp"
+             android:layout_marginTop="2dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
              android:textColor="#fff"
@@ -202,6 +203,7 @@
              android:layout_height="wrap_content"
              android:text="Make a Request"
              android:textSize="14dp"
+             android:layout_marginTop="2dp"
              android:gravity="center"
              android:fontFamily="@font/segoeui"
              android:textColor="#fff"
