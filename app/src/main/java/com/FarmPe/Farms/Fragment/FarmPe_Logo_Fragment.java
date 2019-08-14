@@ -262,7 +262,7 @@ LinearLayout linearLayout,farms_lists,no_farms;
                         HomeMenuFragment.notifictn_count.setText(notificatn_count);
 
                         homePage1_adapter.notifyDataSetChanged();
-                        homePage_adapter.notifyDataSetChanged();
+
 
 
                     }catch (Exception e){

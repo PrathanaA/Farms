@@ -228,8 +228,8 @@ public class ListYourFarmsFive extends Fragment {
         JSONObject jsonObject_address=new JSONObject();
 
         try {
-//            jsonObject.put("FarmCategoryId", List_Farm_Ad);
-//            jsonObject.put("FarmTypeId", List_Farm_Adapter2.farm_type_id);
+            jsonObject.put("FarmCategoryId", "2");
+            jsonObject.put("FarmTypeId", "2");
             jsonObject.put("FarmName",ListYourFarmsFour.farm_name_string);
             jsonObject.put("ContactPersonName",ListYourFarmsFour.cont_name);
             jsonObject.put("MobileNumber",ListYourFarmsFour.mob_no);

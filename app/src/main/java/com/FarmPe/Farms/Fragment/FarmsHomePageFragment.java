@@ -187,6 +187,7 @@ public class FarmsHomePageFragment extends Fragment {
             userRequestjsonObject.put("UserId",sessionManager.getRegId("userId"));
 
 
+            System.out.println("cropsresult" + userRequestjsonObject);
 
 
 
@@ -225,9 +226,12 @@ public class FarmsHomePageFragment extends Fragment {
 
 
                                 }
-                            }
 
-                            if (newOrderBeansList.size() < 6) {
+
+                            }
+                            farmadapter = new FarmsHomeAdapter(getActivity(), pagination_list);
+                            recyclerView.setAdapter(farmadapter);
+                           /* if (newOrderBeansList.size() < 6) {
                                 pagination_list = newOrderBeansList.subList(0, newOrderBeansList.size());
                                 farmadapter = new FarmsHomeAdapter(getActivity(), pagination_list);
                                 recyclerView.setAdapter(farmadapter);
@@ -238,7 +242,7 @@ public class FarmsHomePageFragment extends Fragment {
                                 farmadapter = new FarmsHomeAdapter(getActivity(), pagination_list);
                                 recyclerView.setAdapter(farmadapter);
 
-                            }
+                            }*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
