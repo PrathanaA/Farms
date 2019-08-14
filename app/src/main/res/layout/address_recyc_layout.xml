@@ -14,30 +14,6 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:minHeight="?attr/actionBarSize"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:titleTextColor="@android:color/white"-->
-            <!--android:background="?attr/colorPrimary">-->
-
-            <!--<LinearLayout-->
-                <!--android:id="@+id/back_feed"-->
-                <!--android:layout_width="40dp"-->
-                <!--android:layout_height="40dp"-->
-                <!--&gt;-->
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/b_arrow"-->
-                    <!--android:layout_width="20dp"-->
-                    <!--android:layout_height="20dp"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:src="@drawable/ic_left__black_arrow"-->
-
-                    <!--/>-->
-            <!--</LinearLayout>-->
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,22 +57,7 @@
                         />
                 </LinearLayout>
 
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/back_feed"-->
-                    <!--android:layout_width="50dp"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:background="@drawable/ripple_effect"-->
-                    <!--&gt;-->
-                    <!--<ImageView-->
-                        <!--android:layout_width="20dp"-->
-                        <!--android:layout_height="20dp"-->
-                        <!--android:layout_gravity="center_vertical"-->
-                        <!--android:src="@drawable/ic_left_arrow_white"-->
-                        <!--style="@style/SelectableItemBackground"-->
-                        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
-                        <!--/>-->
-                <!--</LinearLayout>-->
-             <!---->
+
 
                <TextView
                     android:layout_width="wrap_content"
@@ -112,18 +73,6 @@
         </LinearLayout>
 
 
-        <!--<TextView-->
-            <!--android:id="@+id/selling_item_name"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="#fff"-->
-            <!--android:fontFamily="@font/segoeui"-->
-            <!--android:text="Select Your Address"-->
-            <!--android:textSize="18dp"-->
-            <!--android:padding="10dp"-->
-            <!--android:gravity="start"-->
-            <!--android:textColor="#181818 "-->
-            <!--/>-->
 
 
     </LinearLayout>
@@ -137,21 +86,6 @@
         android:background="#fff">
 
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/plus_sym"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:background="@color/white">-->
-
-
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:paddingLeft="230dp"-->
-                <!--android:src="@drawable/plus_math"/>-->
 
 
 

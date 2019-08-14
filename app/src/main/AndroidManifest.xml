@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.FarmPe.Farmer">
+    package="com.FarmPe.Farms">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -71,26 +71,8 @@
             android:screenOrientation="portrait" />
 
 
-
-        <activity
-            android:name=".Activity.FarmerUser"
-            android:screenOrientation="portrait" />
-
-
-
-        <activity
-            android:name=".Activity.FarmerActivity"
-            android:screenOrientation="portrait" />
-
-
-
         <activity
             android:name=".Activity.SignUpActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name=".Activity.FarmerActivityNext"
             android:screenOrientation="portrait" />
 
 

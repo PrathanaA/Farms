@@ -1,4 +1,4 @@
-package com.FarmPe.Farmer;
+package com.FarmPe.Farms;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

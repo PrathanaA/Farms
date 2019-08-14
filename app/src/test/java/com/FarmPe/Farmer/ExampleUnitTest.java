@@ -1,4 +1,4 @@
-package com.FarmPe.Farmer;
+package com.FarmPe.Farms;
 
 import org.junit.Test;
 

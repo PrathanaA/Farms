@@ -60,8 +60,6 @@
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical"
         android:weightSum="100">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -135,6 +133,7 @@
 
                 />
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,26 +150,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address line"
-                android:textSize="12dp"
-                android:paddingRight="10dp"
-                android:fontFamily="@font/segoeui"
+                android:paddingVertical="2dp"
                 android:layout_marginTop="20dp"
+                android:textSize="12dp"
+                android:background="@android:color/transparent"
+                android:maxLength="30"
+                android:layout_marginLeft="6dp"
+                android:paddingRight="10dp"
+                android:backgroundTint="#d3d3d3"
+                android:fontFamily="@font/segoeui"
                 android:textColor="#000"
                 />
 
-            <TextView
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dcdcdc"
+                android:layout_marginHorizontal="5dp"/>
+
+            <EditText
                 android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="State*"
+                android:background="@android:color/transparent"
+                android:focusable="false"
                 android:drawableRight="@drawable/ic_drop_down_arrow"
                 android:textSize="12dp"
-                android:layout_marginHorizontal="5dp"
-                android:paddingRight="10dp"
+                android:paddingVertical="2dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="6dp"
+                android:longClickable="false"
                 android:fontFamily="@font/segoeui"
                 android:editable="false"
+                android:backgroundTint="#dcdcdc"
 
-                android:layout_marginTop="10dp"
                 android:textColor="#000"
                 />
 
@@ -181,18 +195,22 @@
                 android:layout_marginHorizontal="5dp"/>
 
 
-            <TextView
+            <EditText
                 android:id="@+id/district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="District*"
                 android:drawableRight="@drawable/ic_drop_down_arrow"
                 android:textSize="12dp"
-                android:paddingRight="10dp"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:paddingVertical="2dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="6dp"
                 android:fontFamily="@font/segoeui"
                 android:editable="false"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="20dp"
+                android:backgroundTint="#dcdcdc"
+
                 android:textColor="#000"
                 />
 
@@ -201,89 +219,105 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="5dp"
             android:background="#dcdcdc"/>
-            <TextView
+
+            <EditText
                 android:id="@+id/taluk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Tasil*"
+                android:hint="Taluk*"
                 android:drawableRight="@drawable/ic_drop_down_arrow"
                 android:textSize="12dp"
-                android:paddingRight="10dp"
                 android:editable="false"
+                android:focusable="false"
+                android:background="@android:color/transparent"
+                android:paddingVertical="2dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="5dp"
+                android:layout_marginLeft="6dp"
+                android:backgroundTint="#dcdcdc"
+                android:longClickable="false"
                 android:fontFamily="@font/segoeui"
                 android:textColor="#000"
                 />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dcdcdc"
-                android:layout_marginHorizontal="5dp"/>
-            />
+                android:layout_marginHorizontal="5dp"
+                android:background="#dcdcdc"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Area*"
+                android:focusable="false"
+                android:paddingVertical="2dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="6dp"
                 android:drawableRight="@drawable/ic_drop_down_arrow"
                 android:textSize="12dp"
-                android:paddingRight="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="5dp"
                 android:editable="false"
+                android:backgroundTint="#dcdcdc"
                 android:fontFamily="@font/segoeui"
                 android:textColor="#000"
 
                 />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dcdcdc"
-                android:layout_marginHorizontal="5dp"/>
-            />
-
-            <TextView
-                android:id="@+id/village"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Village"
-                android:drawableRight="@drawable/ic_drop_down_arrow"
-                android:textSize="12dp"
-                android:paddingRight="10dp"
-                android:editable="false"
-                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="5dp"
-                android:fontFamily="@font/segoeui"
-                android:textColor="#000"
-                />
+                android:background="#dcdcdc"/>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#dcdcdc"
-                android:layout_marginHorizontal="5dp"/>
-            />
+            <!--<TextView-->
+                <!--android:id="@+id/village"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Select Village"-->
+                <!--android:drawableRight="@drawable/ic_drop_down_arrow"-->
+                <!--android:textSize="12dp"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:editable="false"-->
+                <!--android:paddingVertical="2dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_marginHorizontal="5dp"-->
+                <!--android:fontFamily="@font/segoeui"-->
+                <!--android:textColor="#000"-->
+                <!--/>-->
 
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginHorizontal="5dp"-->
+                <!--android:background="#dcdcdc"/>-->
 
             <EditText
                 android:id="@+id/pincode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Pincode"
-                android:paddingVertical="10dp"
+                android:hint="Enter Pincode"
+                android:paddingVertical="2dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="6dp"
                 android:inputType="number"
                 android:textSize="12dp"
                 android:maxLength="6"
-                android:paddingRight="10dp"
-                android:layout_marginTop="10dp"
+                android:backgroundTint="#dcdcdc"
                 android:fontFamily="@font/segoeui"
                 android:textColor="#000"
                 />
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="5dp"
+                android:background="#dcdcdc"/>
 
         </LinearLayout>
 
@@ -310,6 +344,7 @@
         android:layout_height="wrap_content"
         android:background="#fff"
         android:gravity="right|bottom"
+        android:layout_marginBottom="5dp"
         android:paddingVertical="5dp"
         android:orientation="horizontal"
         >
@@ -333,6 +368,7 @@
             android:layout_gravity="right"
             android:layout_marginRight="15dp"
             android:textColor="#fff"
+
             android:background="@drawable/border_filled_red"
             android:paddingVertical="10dp"
             android:paddingHorizontal="20dp"

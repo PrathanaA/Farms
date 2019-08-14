@@ -82,106 +82,27 @@
    </LinearLayout>
 
 
+
+
    <View
        android:layout_width="match_parent"
        android:layout_height="0.5dp"
        android:background="#cccccc"
        />
 
-
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:weightSum="100"
-       android:layout_marginBottom="5dp"
+       android:layout_marginBottom="4dp"
        android:gravity="center_vertical"
        android:layout_weight="20"
        android:background="#000"
        >
 
-      <LinearLayout
-          android:id="@+id/your_request"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:layout_weight="30"
-          android:background="#000"
-          >
-
-         <TextView
-             android:id="@+id/request_count"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text=""
-             android:textSize="16dp"
-             android:gravity="center"
-             android:paddingBottom="5dp"
-             android:textColor="#fff"
-             />
-
-         <TextView
-             android:id="@+id/your_request1"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="Requests"
-             android:textSize="14dp"
-             android:layout_marginTop="2dp"
-             android:gravity="center"
-             android:fontFamily="@font/segoeui"
-             android:textColor="#fff"
-             />
-
-      </LinearLayout>
-
 
       <LinearLayout
-          android:id="@+id/your_farms_tab"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:layout_weight="30"
-          android:gravity="center"
-          android:background="#000"
-          >
-
-
-         <TextView
-             android:id="@+id/farm_count"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text=""
-             android:textSize="16dp"
-             android:gravity="center"
-             android:paddingBottom="5dp"
-             android:textColor="#fff"
-             />
-
-         <!--<ImageView-->
-             <!--android:layout_width="25dp"-->
-             <!--android:layout_height="25dp"-->
-             <!--android:paddingBottom="5dp"-->
-
-             <!--android:src="@drawable/target"-->
-             <!--/>-->
-
-         <TextView
-             android:id="@+id/your_farms_tab1"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="Farms"
-             android:textSize="14dp"
-             android:layout_marginTop="2dp"
-             android:gravity="center"
-             android:fontFamily="@font/segoeui"
-             android:textColor="#fff"
-             />
-
-      </LinearLayout>
-
-
-      <LinearLayout
-          android:id="@+id/nw_request"
+          android:id="@+id/your_farms_tab1"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
@@ -190,18 +111,22 @@
           android:background="#000"
           >
 
-         <ImageView
-             android:layout_width="25dp"
-             android:layout_height="25dp"
-             android:paddingBottom="5dp"
-             android:src="@drawable/plus_sign_add"
-             />
+         <TextView
+             android:id="@+id/farm_count"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="0"
+         android:textSize="16dp"
+         android:gravity="center"
+         android:paddingBottom="5dp"
+         android:textColor="#fff"
+         />
 
          <TextView
-             android:id="@+id/nw_request1"
+
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="Make a Request"
+             android:text="Your Farms"
              android:textSize="14dp"
              android:layout_marginTop="2dp"
              android:gravity="center"
@@ -215,113 +140,6 @@
 
    </LinearLayout>
 
-   <!--<LinearLayout-->
-       <!--android:layout_width="match_parent"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:orientation="horizontal"-->
-       <!--android:weightSum="100"-->
-       <!--android:gravity="center_vertical"-->
-       <!--android:layout_weight="20"-->
-
-       <!--android:background="#000"-->
-       <!--&gt;-->
-      <!--<LinearLayout-->
-          <!--android:id="@+id/linear_connection"-->
-          <!--android:layout_width="0dp"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:orientation="vertical"-->
-          <!--android:layout_weight="33"-->
-          <!--android:background="#000"-->
-          <!--&gt;-->
-
-         <!--<TextView-->
-             <!--android:layout_width="match_parent"-->
-             <!--android:layout_height="wrap_content"-->
-             <!--android:text="0"-->
-             <!--android:textSize="16dp"-->
-             <!--android:gravity="center"-->
-             <!--android:paddingBottom="5dp"-->
-             <!--android:textColor="#fff"-->
-             <!--/>-->
-
-         <!--<TextView-->
-             <!--android:id="@+id/connections"-->
-             <!--android:layout_width="match_parent"-->
-             <!--android:layout_height="wrap_content"-->
-             <!--android:text="Connections"-->
-             <!--android:textSize="14dp"-->
-             <!--android:gravity="center"-->
-             <!--android:fontFamily="@font/segoeui"-->
-             <!--android:textColor="#fff"-->
-             <!--/>-->
-
-      <!--</LinearLayout>-->
-
-
-      <!--<LinearLayout-->
-          <!--android:id="@+id/near_by"-->
-          <!--android:layout_width="0dp"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:orientation="vertical"-->
-          <!--android:layout_weight="33"-->
-          <!--android:gravity="center"-->
-          <!--android:background="#000"-->
-          <!--&gt;-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="25dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:paddingBottom="5dp"-->
-
-            <!--android:src="@drawable/target"-->
-            <!--/>-->
-
-         <!--<TextView-->
-             <!--android:id="@+id/nearby"-->
-             <!--android:layout_width="match_parent"-->
-             <!--android:layout_height="wrap_content"-->
-             <!--android:text="Near by"-->
-             <!--android:textSize="14dp"-->
-             <!--android:gravity="center"-->
-             <!--android:fontFamily="@font/segoeui"-->
-             <!--android:textColor="#fff"-->
-             <!--/>-->
-
-      <!--</LinearLayout>-->
-
-
-      <!--<LinearLayout-->
-          <!--android:layout_width="0dp"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:orientation="vertical"-->
-          <!--android:layout_weight="33"-->
-          <!--android:gravity="center"-->
-          <!--android:background="#000"-->
-          <!--&gt;-->
-
-         <!--<ImageView-->
-             <!--android:layout_width="25dp"-->
-             <!--android:layout_height="25dp"-->
-             <!--android:paddingBottom="5dp"-->
-             <!--android:src="@drawable/plus_sign_add"-->
-             <!--/>-->
-
-         <!--<TextView-->
-             <!--android:id="@+id/nw_request"-->
-             <!--android:layout_width="match_parent"-->
-             <!--android:layout_height="wrap_content"-->
-             <!--android:text="New Request"-->
-             <!--android:textSize="14dp"-->
-             <!--android:gravity="center"-->
-             <!--android:fontFamily="@font/segoeui"-->
-             <!--android:textColor="#fff"-->
-             <!--/>-->
-
-      <!--</LinearLayout>-->
-
-
-
-   <!--</LinearLayout>-->
 
 
 </LinearLayout>
@@ -344,66 +162,13 @@
 
 
 
-      <!--<TextView-->
-       <!--android:id="@+id/home"-->
-       <!--android:layout_width="match_parent"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:text="Create New Request"-->
-          <!--android:drawableLeft="@drawable/ic_plus"-->
-          <!--android:drawablePadding="10dp"-->
-       <!--android:layout_marginTop="15dp"-->
-       <!--android:textSize="16dp"-->
-       <!--android:fontFamily="@font/segoeui"-->
-       <!--android:textColor="#000"-->
-       <!--/>-->
-
-
-      <!--<TextView-->
-          <!--android:id="@+id/your_requests"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:text="Your Requests"-->
-          <!--android:layout_marginTop="20dp"-->
-          <!--android:textSize="16dp"-->
-          <!--android:drawableLeft="@drawable/ic_quote"-->
-          <!--android:drawablePadding="10dp"-->
-          <!--android:fontFamily="@font/segoeui"-->
-          <!--android:textColor="#000"-->
-          <!--/>-->
-
-
-      <!--<TextView-->
-          <!--android:id="@+id/connections"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:text="Connections"-->
-          <!--android:layout_marginTop="20dp"-->
-          <!--android:textSize="16dp"-->
-          <!--android:drawableLeft="@drawable/ic_network"-->
-          <!--android:drawablePadding="10dp"-->
-          <!--android:fontFamily="@font/segoeui"-->
-          <!--android:textColor="#000"-->
-          <!--/>-->
-
-      <!--<TextView-->
-          <!--android:id="@+id/invitation"-->
-          <!--android:layout_width="match_parent"-->
-          <!--android:layout_height="wrap_content"-->
-          <!--android:text="Invitations"-->
-          <!--android:layout_marginTop="20dp"-->
-          <!--android:textSize="16dp"-->
-          <!--android:drawableLeft="@drawable/ic_invitation"-->
-          <!--android:drawablePadding="10dp"-->
-          <!--android:fontFamily="@font/segoeui"-->
-          <!--android:textColor="#000"-->
-          <!--/>-->
 
 
       <TextView
           android:id="@+id/list_farm"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="List Your Farm"
+          android:text="List Your Farms"
           android:layout_marginTop="30dp"
           android:textSize="17dp"
           android:drawableLeft="@drawable/ic_field"
